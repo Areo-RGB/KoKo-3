@@ -8,12 +8,12 @@ This page features an interactive anatomical diagram that allows users to explor
 
 - **`MuscleDiagramPage` (`page.tsx`)**: The main client component (`'use client'`) that manages the state for hovered and selected muscles and orchestrates the UI.
 - **`Carousel` (`components/ui/carousel.tsx`)**: A shadcn/ui component used to switch between the front and back view of the muscle diagram.
-- **`InteractiveMuscleSVG` (`_components/interactive-muscle-svg.tsx`)**: A key component that fetches and renders an SVG file. It attaches event listeners (`mouseenter`, `mouseleave`, `click`) to the paths within the SVG to detect user interaction with specific muscle groups.
+- **`InteractiveMuscleSVG` (`_components/interactive-muscle-svg.tsx`)**: A key component that fetches SVG content from `public/assets/svg/front.svg` or `public/assets/svg/back.svg`.
 - **`ExerciseFullscreenOverlay` (`_components/exercise-fullscreen-overlay.tsx`)**: A modal component that displays exercise and stretching videos in a fullscreen view when a user selects a muscle and chooses an exercise type.
 
 ## Data Flow
 
-1.  The `InteractiveMuscleSVG` component fetches SVG content from `public/images/front.svg` or `public/images/back.svg`.
+1.  The `InteractiveMuscleSVG` component fetches SVG content from `public/assets/svg/front.svg` or `public/assets/svg/back.svg`.
 2.  When a user interacts with a muscle in the SVG, its ID is extracted (e.g., "gluteus-maximus").
 3.  This SVG ID is mapped to a data key (e.g., "glutes") using the `muscleToExerciseDataMap` in `util/muscle-name-helper.ts`.
 4.  The `getExerciseDataKey` function resolves the final key, which is then used by `loadMuscleData` from `_lib/exercise-data-loader.ts` to asynchronously fetch the relevant exercise data from a corresponding JSON file (e.g., `public/data/exercises/glutes.json`).

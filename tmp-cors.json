@@ -1,1 +1,0 @@
-{"Bucket":"data-h03","CORSConfiguration":{"CORSRules":[{"AllowedOrigins":["*"],"AllowedMethods":["GET","HEAD","OPTIONS"],"AllowedHeaders":["*"],"ExposeHeaders":["ETag","Content-Length","Accept-Ranges","Content-Range","Content-Type"],"MaxAgeSeconds":3000}]}}

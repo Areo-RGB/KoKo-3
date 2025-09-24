@@ -28,29 +28,6 @@ export interface CacheProgress extends CacheResult {
 
 const TRAINING_CACHE_PREFIX = 'koko-training-';
 
-export async function registerServiceWorker(): Promise<boolean> {
-  if (typeof window === 'undefined') return false;
-  if (!('serviceWorker' in navigator)) return false;
-
-  // Check if service worker is already registered
-  if (navigator.serviceWorker.controller) {
-    console.log('Service Worker already registered and controlling this page');
-    return true;
-  }
-
-  try {
-    const registration = await navigator.serviceWorker.register('/sw.js', {
-      scope: '/',
-    });
-    await navigator.serviceWorker.ready;
-    console.log('Service Worker registered:', registration);
-    return true;
-  } catch (error) {
-    console.error('Service Worker registration failed:', error);
-    return false;
-  }
-}
-
 export async function cacheTrainingMaterials(
   ageGroup: string,
   sessions: unknown[],

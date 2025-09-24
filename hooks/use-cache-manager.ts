@@ -6,7 +6,6 @@ import {
   getAllCaches as getAllCachesAPI,
   getCacheStatus as getCacheStatusAPI,
   getCacheStorageEstimate as getCacheStorageEstimateAPI,
-  registerServiceWorker,
 } from '@/lib/cache-manager';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -36,18 +35,13 @@ export function useCacheManager(): UseCacheManagerReturn {
     useState<StorageEstimate | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // Initialize service worker
+  // Initialize cache manager (no Service Worker required)
   useEffect(() => {
-    const initializeServiceWorker = async () => {
+    const initialize = async () => {
       try {
-        const initialized = await registerServiceWorker();
-        setIsInitialized(initialized);
-
-        if (initialized) {
-          // Get initial storage estimate
-          const estimate = await getCacheStorageEstimateAPI();
-          setStorageEstimate(estimate);
-        }
+        setIsInitialized(true);
+        const estimate = await getCacheStorageEstimateAPI();
+        setStorageEstimate(estimate);
       } catch (err) {
         console.error('Failed to initialize cache manager:', err);
         setError(
@@ -58,7 +52,7 @@ export function useCacheManager(): UseCacheManagerReturn {
       }
     };
 
-    initializeServiceWorker();
+    initialize();
   }, []);
 
   // Monitor online status

@@ -3,7 +3,6 @@ import { Maximize } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import PWAUpdateButton from '../pwa-update-button';
 import { ThemeToggle } from '../theme/theme-toggle';
 import {
   Sidebar,
@@ -176,7 +175,6 @@ export default function AppSidebar({ ...props }: AppSidebarProps) {
       <SidebarFooter>
         <div className="flex items-center justify-between p-2">
           <div className="flex items-center gap-1">
-            <PWAUpdateButton />
             {state === 'expanded' && (
               <span className="text-sidebar-foreground/60 text-xs whitespace-pre ml-2">
                 Hertha 03 Training

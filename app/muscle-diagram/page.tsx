@@ -117,7 +117,7 @@ export default function MuscleDiagramPage() {
               <CarouselItem>
                 <div className="flex items-center justify-center p-4 sm:p-6 lg:p-8">
                   <InteractiveMuscleSVG
-                    svgPath="/images/front.svg"
+                    svgPath="/assets/svg/front.svg"
                     title="Vorderansicht"
                     selectedMuscleId={selectedMuscle.id}
                     onMuscleHover={handleMuscleHover}
@@ -129,7 +129,7 @@ export default function MuscleDiagramPage() {
               <CarouselItem>
                 <div className="flex items-center justify-center p-4 sm:p-6 lg:p-8">
                   <InteractiveMuscleSVG
-                    svgPath="/images/back.svg"
+                    svgPath="/assets/svg/back.svg"
                     title="Rückansicht"
                     selectedMuscleId={selectedMuscle.id}
                     onMuscleHover={handleMuscleHover}
@@ -247,7 +247,7 @@ export default function MuscleDiagramPage() {
         visible={overlay.show}
         muscle={
           muscleToExerciseDataMap[
-            selectedMuscle.id ?? hoveredMuscle.id ?? ''
+          selectedMuscle.id ?? hoveredMuscle.id ?? ''
           ] ?? null
         }
         exerciseType={overlay.exerciseType}
