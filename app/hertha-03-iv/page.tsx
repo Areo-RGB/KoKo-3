@@ -6,13 +6,13 @@ export const metadata: Metadata = {
     'Aktuelle Spiele und Informationen zur Mannschaft FC Hertha 03 IV via fussball.de.',
 };
 
-const HomePage = () => {
+const FCHertha03IVPage = () => {
   return (
     <div className="flex h-screen flex-col">
       <iframe
         title="FC Hertha 03 IV Mannschaft auf fussball.de"
         src="https://next.fussball.de/mannschaft/-/011MIC3SQK000000VTVG0001VTR8C1K7#spiele"
-        className="h-full w-full flex-1 border-0"
+        className="flex-1 h-full w-full border-0"
         loading="lazy"
         allowFullScreen
       />
@@ -20,4 +20,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default FCHertha03IVPage;
