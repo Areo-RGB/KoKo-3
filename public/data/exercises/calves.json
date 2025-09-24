@@ -1,0 +1,35 @@
+{
+  "exerciseData": {
+    "title": "Waden Kraftübungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401500/male-bodyweight-calves-exercise-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401502/male-bodyweight-calves-exercise-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401504/male-bodyweight-calves-exercise-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401506/male-bodyweight-calves-exercise-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401508/male-bodyweight-calves-exercise-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401509/male-bodyweight-calves-exercise-6.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401511/male-bodyweight-calves-exercise-7.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401513/male-bodyweight-calves-exercise-8.mp4'"
+    ]
+  },
+  "stretchingData": {
+    "title": "Waden Stretching Übungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399822/male-calves-stretch-variation-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399827/male-calves-stretch-variation-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399835/male-calves-stretch-variation-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399836/male-calves-stretch-variation-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399838/male-calves-stretch-variation-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399839/male-calves-stretch-variation-6.mp4'"
+    ]
+  },
+  "muscleInfo": {
+    "name": "Waden",
+    "description": "Die Wadenmuskulatur besteht aus dem Musculus gastrocnemius (Zwillingswadenmuskel) und dem Musculus soleus (Schollenmuskel). Sie sind wichtig für das Gehen, Laufen und Springen.",
+    "details": [
+      "Musculus gastrocnemius (Caput mediale et laterale)",
+      "Musculus soleus",
+      "Musculus plantaris'"
+    ]
+  }
+}

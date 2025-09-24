@@ -1,0 +1,118 @@
+'use client';
+
+import { Card, CardContent } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import React, { useMemo, useRef, useState } from 'react';
+import PlaylistView from './_components/playlist-view';
+import VideoPlayer from './_components/video-player';
+import {
+  MAIN_VIDEO_URL,
+  PLAYLIST,
+  WS_PLAYLIST,
+  WS_VIDEO_URL,
+} from './_lib/data';
+import type { Playlist, Video } from './_lib/types';
+
+interface FifaProgramViewProps {
+  playlist: Playlist;
+  videoUrl: string;
+}
+
+const FifaProgramView: React.FC<FifaProgramViewProps> = ({
+  playlist,
+  videoUrl,
+}) => {
+  const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
+  const videoPlayerContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleVideoSelect = (video: Video) => {
+    setCurrentVideo(video);
+    videoPlayerContainerRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
+
+  const currentVideoId = useMemo(() => currentVideo?.id ?? '', [currentVideo]);
+
+  return (
+    <div className="space-y-6">
+      <div ref={videoPlayerContainerRef} className="w-full scroll-mt-20">
+        {currentVideo ? (
+          <VideoPlayer
+            key={currentVideo.id}
+            videoUrl={videoUrl}
+            startTime={currentVideo.startTime}
+          />
+        ) : (
+          <div className="aspect-video bg-muted flex items-center justify-center rounded-lg">
+            <div className="text-center p-4">
+              <img
+                src="/assets/svg/FIFA_Logo.svg"
+                alt="FIFA Logo"
+                className="w-48 h-auto mx-auto mb-4 opacity-80"
+              />
+              <p className="text-muted-foreground">
+                Wählen Sie ein Video-Kapitel zum Abspielen.
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+      <Card>
+        <CardContent className="p-4 md:p-6">
+          <PlaylistView
+            playlist={playlist}
+            currentVideoId={currentVideoId}
+            onVideoSelect={handleVideoSelect}
+          />
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+export default function Fifa11PlusPage() {
+  const tabs = [
+    {
+      id: 'fifa11-original',
+      label: 'FIFA 11+ Original',
+      content: (
+        <FifaProgramView playlist={PLAYLIST} videoUrl={MAIN_VIDEO_URL} />
+      ),
+    },
+    {
+      id: 'fifa11-ws',
+      label: 'FIFA 11+ World Soccer',
+      content: (
+        <FifaProgramView playlist={WS_PLAYLIST} videoUrl={WS_VIDEO_URL} />
+      ),
+    },
+  ];
+
+  return (
+    <div className="container mx-auto max-w-4xl py-8 px-4">
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-bold tracking-tight">FIFA 11+ Programm</h1>
+        <p className="text-muted-foreground mt-2">
+          Interaktiver Video-Player für die FIFA 11+
+          Verletzungspräventionsprogramme.
+        </p>
+      </div>
+      <Tabs defaultValue={tabs[0].id} className="w-full">
+        <TabsList className="grid w-full grid-cols-2">
+          {tabs.map((tab) => (
+            <TabsTrigger key={tab.id} value={tab.id}>
+              {tab.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {tabs.map((tab) => (
+          <TabsContent key={tab.id} value={tab.id} className="mt-6">
+            {tab.content}
+          </TabsContent>
+        ))}
+      </Tabs>
+    </div>
+  );
+}

@@ -1,0 +1,858 @@
+{
+  "players": [
+    {
+      "id": "anton",
+      "name": "Anton",
+      "aliases": [],
+      "team": "U12",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "arvid",
+      "name": "Arvid",
+      "aliases": [],
+      "team": "U12",
+      "videos": {
+        "Antritt (10m)": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Antritt/Arvid/01_Antritt_10m_Arvid.mp4",
+        "Dribbling": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Arvid/01_Dribbling_Arvid.mp4"
+      },
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 400,
+            "unit": "m"
+          }
+        ],
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 18,
+            "unit": "x"
+          }
+        ],
+        "Schnelligkeit (20m)": [
+          {
+            "date": null,
+            "value": 3.82,
+            "unit": "s"
+          }
+        ],
+        "Antritt (10m)": [
+          {
+            "date": null,
+            "value": 2.17,
+            "unit": "s"
+          }
+        ],
+        "Gewandtheit": [
+          {
+            "date": null,
+            "value": 8.52,
+            "unit": "s"
+          }
+        ],
+        "Dribbling": [
+          {
+            "date": null,
+            "value": 11.04,
+            "unit": "s"
+          }
+        ],
+        "Balljonglieren": [
+          {
+            "date": null,
+            "value": 0,
+            "unit": "P."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ben",
+      "name": "Ben",
+      "aliases": [],
+      "team": "U11",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "bent",
+      "name": "Bent",
+      "aliases": [],
+      "team": "U12",
+      "videos": {
+        "Antritt (10m)": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Antritt/Bent/02_Antritt_10m_Bent.mov",
+        "Gewandtheit": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Gewandtheit/Bent/02_Gewandtheit_Bent.mp4",
+        "Dribbling": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Bent/Timeline 1_web.mp4",
+        "Balljonglieren": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Balljonglieren/Bent/01_Standweitsprung_Berat_web.mp4"
+      },
+      "results": {
+        "Schnelligkeit (20m)": [
+          {
+            "date": null,
+            "value": 3.8,
+            "unit": "s"
+          }
+        ],
+        "Antritt (10m)": [
+          {
+            "date": null,
+            "value": 2.14,
+            "unit": "s"
+          }
+        ],
+        "Gewandtheit": [
+          {
+            "date": null,
+            "value": 7.85,
+            "unit": "s"
+          }
+        ],
+        "Dribbling": [
+          {
+            "date": null,
+            "value": 10.5,
+            "unit": "s"
+          }
+        ],
+        "Balljonglieren": [
+          {
+            "date": null,
+            "value": 11,
+            "unit": "P."
+          }
+        ]
+      }
+    },
+    {
+      "id": "berat",
+      "name": "Berat",
+      "aliases": ["Behrat"],
+      "team": "U12",
+      "videos": {
+        "Antritt (10m)": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Antritt/Berat/01_Antritt_10m_Berat.mp4",
+        "Gewandtheit": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Gewandtheit/Berat/01_Gewandtheit_Berat.mp4"
+      },
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 360,
+            "unit": "m"
+          }
+        ],
+        "Schnelligkeit (20m)": [
+          {
+            "date": null,
+            "value": 3.58,
+            "unit": "s"
+          }
+        ],
+        "Antritt (10m)": [
+          {
+            "date": null,
+            "value": 2.04,
+            "unit": "s"
+          }
+        ],
+        "Gewandtheit": [
+          {
+            "date": null,
+            "value": 8.17,
+            "unit": "s"
+          }
+        ],
+        "Dribbling": [
+          {
+            "date": null,
+            "value": 11.05,
+            "unit": "s"
+          }
+        ],
+        "Balljonglieren": [
+          {
+            "date": null,
+            "value": 2,
+            "unit": "P."
+          }
+        ]
+      }
+    },
+    {
+      "id": "carl",
+      "name": "Carl",
+      "aliases": [],
+      "team": "U13",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "david",
+      "name": "David",
+      "aliases": [],
+      "team": "U12",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "elias",
+      "name": "Elias",
+      "aliases": [],
+      "team": "U11",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "emil",
+      "name": "Emil",
+      "aliases": [],
+      "team": "U12",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "eray",
+      "name": "Eray",
+      "aliases": [],
+      "team": null,
+      "videos": {},
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 160,
+            "unit": "m"
+          }
+        ],
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 13,
+            "unit": "x"
+          }
+        ]
+      }
+    },
+    {
+      "id": "erik",
+      "name": "Erik",
+      "aliases": [],
+      "team": null,
+      "videos": {},
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 920,
+            "unit": "m"
+          }
+        ],
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 96,
+            "unit": "x"
+          }
+        ]
+      }
+    },
+    {
+      "id": "felix",
+      "name": "Felix",
+      "aliases": [],
+      "team": "U11",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "finley",
+      "name": "Finley",
+      "aliases": [],
+      "team": "U12",
+      "videos": {
+        "Schnelligkeit (20m)": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Schnelligkeit/Finley/01_Schnelligkeit_20m_Finley.mp4",
+        "Gewandtheit": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Gewandtheit/Finley/01_Gewandtheit_Finley.mp4",
+        "Dribbling": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Finley/01_Dribbling_Finley.mp4"
+      },
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 840,
+            "unit": "m"
+          }
+        ],
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 15,
+            "unit": "x"
+          }
+        ],
+        "Schnelligkeit (20m)": [
+          {
+            "date": null,
+            "value": 3.68,
+            "unit": "s"
+          }
+        ],
+        "Antritt (10m)": [
+          {
+            "date": null,
+            "value": 1.94,
+            "unit": "s"
+          }
+        ],
+        "Gewandtheit": [
+          {
+            "date": null,
+            "value": 7.82,
+            "unit": "s"
+          }
+        ],
+        "Dribbling": [
+          {
+            "date": null,
+            "value": 11.81,
+            "unit": "s"
+          }
+        ],
+        "Balljonglieren": [
+          {
+            "date": null,
+            "value": 0,
+            "unit": "P."
+          }
+        ]
+      }
+    },
+    {
+      "id": "finn",
+      "name": "Finn",
+      "aliases": [],
+      "team": "U11",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "hannes",
+      "name": "Hannes",
+      "aliases": [],
+      "team": "U14",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "henry",
+      "name": "Henry",
+      "aliases": [],
+      "team": "U13",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "jakob",
+      "name": "Jakob",
+      "aliases": [],
+      "team": "U12",
+      "videos": {
+        "Dribbling": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Jakob/01_Dribbling_Jakob.mp4"
+      },
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 400,
+            "unit": "m"
+          }
+        ],
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 26,
+            "unit": "x"
+          }
+        ],
+        "Schnelligkeit (20m)": [
+          {
+            "date": null,
+            "value": 3.77,
+            "unit": "s"
+          }
+        ],
+        "Antritt (10m)": [
+          {
+            "date": null,
+            "value": 2.19,
+            "unit": "s"
+          }
+        ],
+        "Gewandtheit": [
+          {
+            "date": null,
+            "value": 8.37,
+            "unit": "s"
+          }
+        ],
+        "Dribbling": [
+          {
+            "date": null,
+            "value": 10.76,
+            "unit": "s"
+          }
+        ],
+        "Balljonglieren": [
+          {
+            "date": null,
+            "value": 1,
+            "unit": "P."
+          }
+        ]
+      }
+    },
+    {
+      "id": "jonas",
+      "name": "Jonas",
+      "aliases": [],
+      "team": "U11",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "julian",
+      "name": "Julian",
+      "aliases": [],
+      "team": "U12",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "lasse",
+      "name": "Lasse",
+      "aliases": [],
+      "team": null,
+      "videos": {},
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 280,
+            "unit": "m"
+          }
+        ],
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 6,
+            "unit": "x"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lennox",
+      "name": "Lennox",
+      "aliases": [],
+      "team": null,
+      "videos": {},
+      "results": {
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 16,
+            "unit": "x"
+          }
+        ]
+      }
+    },
+    {
+      "id": "leo",
+      "name": "Leo",
+      "aliases": [],
+      "team": "U12",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "leon",
+      "name": "Leon",
+      "aliases": [],
+      "team": "U11",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "levi",
+      "name": "Levi",
+      "aliases": [],
+      "team": "U13",
+      "videos": {
+        "Dribbling": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Levi/01_Dribbling_Levi.mp4"
+      },
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 600,
+            "unit": "m"
+          }
+        ],
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 5,
+            "unit": "x"
+          }
+        ],
+        "Schnelligkeit (20m)": [
+          {
+            "date": null,
+            "value": 3.88,
+            "unit": "s"
+          }
+        ],
+        "Antritt (10m)": [
+          {
+            "date": null,
+            "value": 2.44,
+            "unit": "s"
+          }
+        ],
+        "Gewandtheit": [
+          {
+            "date": null,
+            "value": 8.43,
+            "unit": "s"
+          }
+        ],
+        "Dribbling": [
+          {
+            "date": null,
+            "value": 11.79,
+            "unit": "s"
+          }
+        ],
+        "Balljonglieren": [
+          {
+            "date": null,
+            "value": 0,
+            "unit": "P."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liam",
+      "name": "Liam",
+      "aliases": [],
+      "team": "U13",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "lio",
+      "name": "Lio",
+      "aliases": [],
+      "team": "U13",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "lion",
+      "name": "Lion",
+      "aliases": [],
+      "team": "U12",
+      "videos": {},
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 200,
+            "unit": "m"
+          }
+        ],
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 100,
+            "unit": "x"
+          }
+        ],
+        "Schnelligkeit (20m)": [
+          {
+            "date": null,
+            "value": 3.9,
+            "unit": "s"
+          }
+        ],
+        "Antritt (10m)": [
+          {
+            "date": null,
+            "value": 2.25,
+            "unit": "s"
+          }
+        ],
+        "Gewandtheit": [
+          {
+            "date": null,
+            "value": 8.59,
+            "unit": "s"
+          }
+        ],
+        "Dribbling": [
+          {
+            "date": null,
+            "value": 11.07,
+            "unit": "s"
+          }
+        ],
+        "Balljonglieren": [
+          {
+            "date": null,
+            "value": 6,
+            "unit": "P."
+          }
+        ]
+      }
+    },
+    {
+      "id": "louis",
+      "name": "Louis",
+      "aliases": [],
+      "team": "U14",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "luca",
+      "name": "Luca",
+      "aliases": [],
+      "team": "U14",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "luis",
+      "name": "Luis",
+      "aliases": [],
+      "team": "U12",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "luka",
+      "name": "Luka",
+      "aliases": [],
+      "team": "U11",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "malik",
+      "name": "Malik",
+      "aliases": [],
+      "team": null,
+      "videos": {},
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 200,
+            "unit": "m"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mats",
+      "name": "Mats",
+      "aliases": [],
+      "team": "U12",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "matteo",
+      "name": "Matteo",
+      "aliases": [],
+      "team": "U13",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "max",
+      "name": "Max",
+      "aliases": [],
+      "team": "U11",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "maximilian",
+      "name": "Maximilian",
+      "aliases": [],
+      "team": "U15",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "metin",
+      "name": "Metin",
+      "aliases": [],
+      "team": "U12",
+      "videos": {
+        "Schnelligkeit (20m)": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Schnelligkeit/Metin/01_Schnelligkeit_20m_Metin.mp4",
+        "Gewandtheit": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Gewandtheit/Metin/01_Gewandtheit_Metin.mp4",
+        "Dribbling": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Metin/01_Dribbling_Metin.mp4"
+      },
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 280,
+            "unit": "m"
+          }
+        ],
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 25,
+            "unit": "x"
+          }
+        ],
+        "Schnelligkeit (20m)": [
+          {
+            "date": null,
+            "value": 3.72,
+            "unit": "s"
+          }
+        ],
+        "Antritt (10m)": [
+          {
+            "date": null,
+            "value": 2.42,
+            "unit": "s"
+          }
+        ],
+        "Gewandtheit": [
+          {
+            "date": null,
+            "value": 8.54,
+            "unit": "s"
+          }
+        ],
+        "Dribbling": [
+          {
+            "date": null,
+            "value": 10.44,
+            "unit": "s"
+          }
+        ],
+        "Balljonglieren": [
+          {
+            "date": null,
+            "value": 0,
+            "unit": "P."
+          }
+        ]
+      }
+    },
+    {
+      "id": "milan",
+      "name": "Milan",
+      "aliases": [],
+      "team": "U12",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "moritz",
+      "name": "Moritz",
+      "aliases": [],
+      "team": "U14",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "noah",
+      "name": "Noah",
+      "aliases": [],
+      "team": "U11",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "oskar",
+      "name": "Oskar",
+      "aliases": [],
+      "team": "U12",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "paul",
+      "name": "Paul",
+      "aliases": [],
+      "team": "U11",
+      "videos": {},
+      "results": {
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 13,
+            "unit": "x"
+          }
+        ]
+      }
+    },
+    {
+      "id": "samuel",
+      "name": "Samuel",
+      "aliases": [],
+      "team": "U12",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "silas",
+      "name": "Silas",
+      "aliases": [],
+      "team": null,
+      "videos": {},
+      "results": {
+        "yoyoIr1": [
+          {
+            "date": "2025-09-12",
+            "value": 360,
+            "unit": "m"
+          }
+        ],
+        "jonglieren": [
+          {
+            "date": "2025-09-15",
+            "value": 24,
+            "unit": "x"
+          }
+        ]
+      }
+    },
+    {
+      "id": "theo",
+      "name": "Theo",
+      "aliases": [],
+      "team": "U13",
+      "videos": {},
+      "results": {}
+    },
+    {
+      "id": "tom",
+      "name": "Tom",
+      "aliases": [],
+      "team": "U11",
+      "videos": {},
+      "results": {}
+    }
+  ]
+}

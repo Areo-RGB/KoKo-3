@@ -1,0 +1,78 @@
+{
+  "U11": [
+    "Elias",
+    "Finn",
+    "Noah",
+    "Tom",
+    "Felix",
+    "Max",
+    "Leon",
+    "Luka",
+    "Ben",
+    "Paul",
+    "Jonas"
+  ],
+  "U12": [
+    "Leo",
+    "David",
+    "Julian",
+    "Emil",
+    "Anton",
+    "Oskar",
+    "Luis",
+    "Jakob",
+    "Samuel",
+    "Mats",
+    "Milan"
+  ],
+  "U13": [
+    "Theo",
+    "Carl",
+    "Henry",
+    "Liam",
+    "Lio",
+    "Matteo",
+    "Levi",
+    "Anton",
+    "Noah",
+    "Emil",
+    "Finn"
+  ],
+  "U14": [
+    "Paul",
+    "Elias",
+    "Ben",
+    "Felix",
+    "Jonas",
+    "Louis",
+    "Hannes",
+    "Luca",
+    "Moritz",
+    "David",
+    "Oskar"
+  ],
+  "U15": [
+    "Leon",
+    "Maximilian",
+    "Tom",
+    "Jakob",
+    "Noah",
+    "Elias",
+    "Finn",
+    "Ben",
+    "Paul",
+    "Felix",
+    "Jonas"
+  ],
+  "realU12": [
+    { "name": "Berat", "speed20m": 3.58, "speed10m": 2.04, "agility": 8.17, "dribbling": 11.05, "ballJuggling": 2 },
+    { "name": "Finley", "speed20m": 3.68, "speed10m": 1.94, "agility": 7.82, "dribbling": 11.81, "ballJuggling": 0 },
+    { "name": "Metin", "speed20m": 3.72, "speed10m": 2.42, "agility": 8.54, "dribbling": 10.44, "ballJuggling": 0 },
+    { "name": "Jakob", "speed20m": 3.77, "speed10m": 2.19, "agility": 8.37, "dribbling": 10.76, "ballJuggling": 1 },
+    { "name": "Bent", "speed20m": 3.8, "speed10m": 2.14, "agility": 7.85, "dribbling": 10.5, "ballJuggling": 11 },
+    { "name": "Arvid", "speed20m": 3.82, "speed10m": 2.17, "agility": 8.52, "dribbling": 11.04, "ballJuggling": 0 },
+    { "name": "Levi", "speed20m": 3.88, "speed10m": 2.44, "agility": 8.43, "dribbling": 11.79, "ballJuggling": 0 },
+    { "name": "Lion", "speed20m": 3.9, "speed10m": 2.25, "agility": 8.59, "dribbling": 11.07, "ballJuggling": 6 }
+  ]
+}
+

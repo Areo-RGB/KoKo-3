@@ -1,0 +1,36 @@
+{
+  "exerciseData": {
+    "title": "Trizeps Kraftübungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754402288/male-bodyweight-triceps-exercise-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754402291/male-bodyweight-triceps-exercise-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754402294/male-bodyweight-triceps-exercise-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754402297/male-bodyweight-triceps-exercise-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754402301/male-bodyweight-triceps-exercise-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754402303/male-bodyweight-triceps-exercise-6.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754402308/male-bodyweight-triceps-exercise-7.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754402314/male-bodyweight-triceps-exercise-8.mp4'"
+    ]
+  },
+  "stretchingData": {
+    "title": "Trizeps Stretching Übungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400601/male-triceps-stretch-variation-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400603/male-triceps-stretch-variation-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400604/male-triceps-stretch-variation-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400606/male-triceps-stretch-variation-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400613/male-triceps-stretch-variation-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400615/male-triceps-stretch-variation-6.mp4'"
+    ]
+  },
+  "muscleInfo": {
+    "name": "Trizeps",
+    "description": "Streckung im Ellbogengelenk.",
+    "details": [
+      "Musculus triceps brachii (Caput longum)",
+      "Musculus triceps brachii (Caput laterale)",
+      "Musculus triceps brachii (Caput mediale)",
+      "Musculus anconeus (funktionell assoziiert)'"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "rewrites": [
+    {
+      "source": "/a-junior/:slug/:file([^.]+).html",
+      "destination": "/A-Junior/:slug/"
+    },
+    {
+      "source": "/b-junior/:slug/:file([^.]+).html",
+      "destination": "/B-Junior/:slug/"
+    },
+    {
+      "source": "/c-junior/:slug/:file([^.]+).html",
+      "destination": "/C-Junior/:slug/"
+    },
+    {
+      "source": "/d-junior/:slug/:file([^.]+).html",
+      "destination": "/D-Junior/:slug/"
+    },
+    {
+      "source": "/e-junior/:slug/:file([^.]+).html",
+      "destination": "/E-Junior/:slug/"
+    },
+    { "source": "/a-junior/:slug", "destination": "/A-Junior/:slug/" },
+    { "source": "/b-junior/:slug", "destination": "/B-Junior/:slug/" },
+    { "source": "/c-junior/:slug", "destination": "/C-Junior/:slug/" },
+    { "source": "/d-junior/:slug", "destination": "/D-Junior/:slug/" },
+    { "source": "/e-junior/:slug", "destination": "/E-Junior/:slug/" },
+    { "source": "/a-junior/:slug/", "destination": "/A-Junior/:slug/" },
+    { "source": "/b-junior/:slug/", "destination": "/B-Junior/:slug/" },
+    { "source": "/c-junior/:slug/", "destination": "/C-Junior/:slug/" },
+    { "source": "/d-junior/:slug/", "destination": "/D-Junior/:slug/" },
+    { "source": "/e-junior/:slug/", "destination": "/E-Junior/:slug/" },
+    {
+      "source": "/E-Junior/:slug/:file([^.]+).html",
+      "destination": "/E-Junior/:slug/"
+    },
+    {
+      "source": "/:section(A-Junior|B-Junior|C-Junior|D-Junior|E-Junior)/:slug/:slug.html",
+      "destination": "/:section/:slug/"
+    },
+    {
+      "source": "/:path(.+)/index.html",
+      "destination": "/:path/"
+    }
+  ]
+}

@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Icon Generator</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <h1>Icon Generator</h1>
+    <p>This page generates PNG icons from SVG. Click each button to generate the icon.</p>
+
+    <div id="icons-container">
+        
+            <div style="margin: 20px; text-align: center;">
+                <div id="svg-container-72" style="display: inline-block; margin: 10px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#0f172a" stroke="#1e293b" stroke-width="16"/>
+  
+  <!-- Inner circle -->
+  <circle cx="256" cy="256" r="180" fill="#1e293b" stroke="#334155" stroke-width="4"/>
+  
+  <!-- Soccer ball pattern -->
+  <g fill="#f8fafc" stroke="#94a3b8" stroke-width="2">
+    <!-- Pentagon in center -->
+    <polygon points="256,176 294,202 282,248 230,248 218,202" fill="#f8fafc"/>
+    
+    <!-- Hexagons around -->
+    <polygon points="218,202 256,176 294,202 306,160 268,134 230,134" fill="#e2e8f0"/>
+    <polygon points="294,202 332,228 344,186 306,160" fill="#e2e8f0"/>
+    <polygon points="332,228 370,254 358,308 320,282 294,202" fill="#e2e8f0"/>
+    <polygon points="282,248 320,282 308,328 260,302 230,248" fill="#e2e8f0"/>
+    <polygon points="230,248 192,282 180,228 218,202" fill="#e2e8f0"/>
+    <polygon points="192,282 154,308 166,254 204,228 180,228" fill="#e2e8f0"/>
+  </g>
+  
+  <!-- Q.V text -->
+  <g fill="#f8fafc" font-family="Arial, sans-serif" font-weight="bold">
+    <text x="256" y="380" text-anchor="middle" font-size="48">Q.V</text>
+    <text x="256" y="420" text-anchor="middle" font-size="20" fill="#94a3b8">Sports</text>
+  </g>
+  
+  <!-- Highlight/shine effect -->
+  <ellipse cx="200" cy="200" rx="60" ry="80" fill="url(#shine)" opacity="0.3" transform="rotate(-20 200 200)"/>
+  
+  <defs>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:white;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+</svg>
+                </div>
+                <br>
+                <button onclick="generateIcon(72, 'icon-72x72.png')">72x72 - icon-72x72.png</button>
+            </div>
+        
+            <div style="margin: 20px; text-align: center;">
+                <div id="svg-container-96" style="display: inline-block; margin: 10px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#0f172a" stroke="#1e293b" stroke-width="16"/>
+  
+  <!-- Inner circle -->
+  <circle cx="256" cy="256" r="180" fill="#1e293b" stroke="#334155" stroke-width="4"/>
+  
+  <!-- Soccer ball pattern -->
+  <g fill="#f8fafc" stroke="#94a3b8" stroke-width="2">
+    <!-- Pentagon in center -->
+    <polygon points="256,176 294,202 282,248 230,248 218,202" fill="#f8fafc"/>
+    
+    <!-- Hexagons around -->
+    <polygon points="218,202 256,176 294,202 306,160 268,134 230,134" fill="#e2e8f0"/>
+    <polygon points="294,202 332,228 344,186 306,160" fill="#e2e8f0"/>
+    <polygon points="332,228 370,254 358,308 320,282 294,202" fill="#e2e8f0"/>
+    <polygon points="282,248 320,282 308,328 260,302 230,248" fill="#e2e8f0"/>
+    <polygon points="230,248 192,282 180,228 218,202" fill="#e2e8f0"/>
+    <polygon points="192,282 154,308 166,254 204,228 180,228" fill="#e2e8f0"/>
+  </g>
+  
+  <!-- Q.V text -->
+  <g fill="#f8fafc" font-family="Arial, sans-serif" font-weight="bold">
+    <text x="256" y="380" text-anchor="middle" font-size="48">Q.V</text>
+    <text x="256" y="420" text-anchor="middle" font-size="20" fill="#94a3b8">Sports</text>
+  </g>
+  
+  <!-- Highlight/shine effect -->
+  <ellipse cx="200" cy="200" rx="60" ry="80" fill="url(#shine)" opacity="0.3" transform="rotate(-20 200 200)"/>
+  
+  <defs>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:white;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+</svg>
+                </div>
+                <br>
+                <button onclick="generateIcon(96, 'icon-96x96.png')">96x96 - icon-96x96.png</button>
+            </div>
+        
+            <div style="margin: 20px; text-align: center;">
+                <div id="svg-container-128" style="display: inline-block; margin: 10px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#0f172a" stroke="#1e293b" stroke-width="16"/>
+  
+  <!-- Inner circle -->
+  <circle cx="256" cy="256" r="180" fill="#1e293b" stroke="#334155" stroke-width="4"/>
+  
+  <!-- Soccer ball pattern -->
+  <g fill="#f8fafc" stroke="#94a3b8" stroke-width="2">
+    <!-- Pentagon in center -->
+    <polygon points="256,176 294,202 282,248 230,248 218,202" fill="#f8fafc"/>
+    
+    <!-- Hexagons around -->
+    <polygon points="218,202 256,176 294,202 306,160 268,134 230,134" fill="#e2e8f0"/>
+    <polygon points="294,202 332,228 344,186 306,160" fill="#e2e8f0"/>
+    <polygon points="332,228 370,254 358,308 320,282 294,202" fill="#e2e8f0"/>
+    <polygon points="282,248 320,282 308,328 260,302 230,248" fill="#e2e8f0"/>
+    <polygon points="230,248 192,282 180,228 218,202" fill="#e2e8f0"/>
+    <polygon points="192,282 154,308 166,254 204,228 180,228" fill="#e2e8f0"/>
+  </g>
+  
+  <!-- Q.V text -->
+  <g fill="#f8fafc" font-family="Arial, sans-serif" font-weight="bold">
+    <text x="256" y="380" text-anchor="middle" font-size="48">Q.V</text>
+    <text x="256" y="420" text-anchor="middle" font-size="20" fill="#94a3b8">Sports</text>
+  </g>
+  
+  <!-- Highlight/shine effect -->
+  <ellipse cx="200" cy="200" rx="60" ry="80" fill="url(#shine)" opacity="0.3" transform="rotate(-20 200 200)"/>
+  
+  <defs>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:white;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+</svg>
+                </div>
+                <br>
+                <button onclick="generateIcon(128, 'icon-128x128.png')">128x128 - icon-128x128.png</button>
+            </div>
+        
+            <div style="margin: 20px; text-align: center;">
+                <div id="svg-container-144" style="display: inline-block; margin: 10px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144" width="144" height="144">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#0f172a" stroke="#1e293b" stroke-width="16"/>
+  
+  <!-- Inner circle -->
+  <circle cx="256" cy="256" r="180" fill="#1e293b" stroke="#334155" stroke-width="4"/>
+  
+  <!-- Soccer ball pattern -->
+  <g fill="#f8fafc" stroke="#94a3b8" stroke-width="2">
+    <!-- Pentagon in center -->
+    <polygon points="256,176 294,202 282,248 230,248 218,202" fill="#f8fafc"/>
+    
+    <!-- Hexagons around -->
+    <polygon points="218,202 256,176 294,202 306,160 268,134 230,134" fill="#e2e8f0"/>
+    <polygon points="294,202 332,228 344,186 306,160" fill="#e2e8f0"/>
+    <polygon points="332,228 370,254 358,308 320,282 294,202" fill="#e2e8f0"/>
+    <polygon points="282,248 320,282 308,328 260,302 230,248" fill="#e2e8f0"/>
+    <polygon points="230,248 192,282 180,228 218,202" fill="#e2e8f0"/>
+    <polygon points="192,282 154,308 166,254 204,228 180,228" fill="#e2e8f0"/>
+  </g>
+  
+  <!-- Q.V text -->
+  <g fill="#f8fafc" font-family="Arial, sans-serif" font-weight="bold">
+    <text x="256" y="380" text-anchor="middle" font-size="48">Q.V</text>
+    <text x="256" y="420" text-anchor="middle" font-size="20" fill="#94a3b8">Sports</text>
+  </g>
+  
+  <!-- Highlight/shine effect -->
+  <ellipse cx="200" cy="200" rx="60" ry="80" fill="url(#shine)" opacity="0.3" transform="rotate(-20 200 200)"/>
+  
+  <defs>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:white;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+</svg>
+                </div>
+                <br>
+                <button onclick="generateIcon(144, 'icon-144x144.png')">144x144 - icon-144x144.png</button>
+            </div>
+        
+            <div style="margin: 20px; text-align: center;">
+                <div id="svg-container-152" style="display: inline-block; margin: 10px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152 152" width="152" height="152">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#0f172a" stroke="#1e293b" stroke-width="16"/>
+  
+  <!-- Inner circle -->
+  <circle cx="256" cy="256" r="180" fill="#1e293b" stroke="#334155" stroke-width="4"/>
+  
+  <!-- Soccer ball pattern -->
+  <g fill="#f8fafc" stroke="#94a3b8" stroke-width="2">
+    <!-- Pentagon in center -->
+    <polygon points="256,176 294,202 282,248 230,248 218,202" fill="#f8fafc"/>
+    
+    <!-- Hexagons around -->
+    <polygon points="218,202 256,176 294,202 306,160 268,134 230,134" fill="#e2e8f0"/>
+    <polygon points="294,202 332,228 344,186 306,160" fill="#e2e8f0"/>
+    <polygon points="332,228 370,254 358,308 320,282 294,202" fill="#e2e8f0"/>
+    <polygon points="282,248 320,282 308,328 260,302 230,248" fill="#e2e8f0"/>
+    <polygon points="230,248 192,282 180,228 218,202" fill="#e2e8f0"/>
+    <polygon points="192,282 154,308 166,254 204,228 180,228" fill="#e2e8f0"/>
+  </g>
+  
+  <!-- Q.V text -->
+  <g fill="#f8fafc" font-family="Arial, sans-serif" font-weight="bold">
+    <text x="256" y="380" text-anchor="middle" font-size="48">Q.V</text>
+    <text x="256" y="420" text-anchor="middle" font-size="20" fill="#94a3b8">Sports</text>
+  </g>
+  
+  <!-- Highlight/shine effect -->
+  <ellipse cx="200" cy="200" rx="60" ry="80" fill="url(#shine)" opacity="0.3" transform="rotate(-20 200 200)"/>
+  
+  <defs>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:white;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+</svg>
+                </div>
+                <br>
+                <button onclick="generateIcon(152, 'icon-152x152.png')">152x152 - icon-152x152.png</button>
+            </div>
+        
+            <div style="margin: 20px; text-align: center;">
+                <div id="svg-container-384" style="display: inline-block; margin: 10px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 384" width="384" height="384">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#0f172a" stroke="#1e293b" stroke-width="16"/>
+  
+  <!-- Inner circle -->
+  <circle cx="256" cy="256" r="180" fill="#1e293b" stroke="#334155" stroke-width="4"/>
+  
+  <!-- Soccer ball pattern -->
+  <g fill="#f8fafc" stroke="#94a3b8" stroke-width="2">
+    <!-- Pentagon in center -->
+    <polygon points="256,176 294,202 282,248 230,248 218,202" fill="#f8fafc"/>
+    
+    <!-- Hexagons around -->
+    <polygon points="218,202 256,176 294,202 306,160 268,134 230,134" fill="#e2e8f0"/>
+    <polygon points="294,202 332,228 344,186 306,160" fill="#e2e8f0"/>
+    <polygon points="332,228 370,254 358,308 320,282 294,202" fill="#e2e8f0"/>
+    <polygon points="282,248 320,282 308,328 260,302 230,248" fill="#e2e8f0"/>
+    <polygon points="230,248 192,282 180,228 218,202" fill="#e2e8f0"/>
+    <polygon points="192,282 154,308 166,254 204,228 180,228" fill="#e2e8f0"/>
+  </g>
+  
+  <!-- Q.V text -->
+  <g fill="#f8fafc" font-family="Arial, sans-serif" font-weight="bold">
+    <text x="256" y="380" text-anchor="middle" font-size="48">Q.V</text>
+    <text x="256" y="420" text-anchor="middle" font-size="20" fill="#94a3b8">Sports</text>
+  </g>
+  
+  <!-- Highlight/shine effect -->
+  <ellipse cx="200" cy="200" rx="60" ry="80" fill="url(#shine)" opacity="0.3" transform="rotate(-20 200 200)"/>
+  
+  <defs>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:white;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+</svg>
+                </div>
+                <br>
+                <button onclick="generateIcon(384, 'icon-384x384.png')">384x384 - icon-384x384.png</button>
+            </div>
+        
+    </div>
+
+    <script>
+        async function generateIcon(size, filename) {
+            const container = document.getElementById('svg-container-' + size);
+
+            try {
+                const canvas = await html2canvas(container, {
+                    width: size,
+                    height: size,
+                    scale: 1,
+                    useCORS: true,
+                    allowTaint: false,
+                    backgroundColor: null
+                });
+
+                // Create download link
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                console.log('Generated: ' + filename);
+            } catch (error) {
+                console.error('Error generating icon:', error);
+                alert('Error generating icon: ' + error.message);
+            }
+        }
+
+        // Auto-generate all icons after page load
+        window.addEventListener('load', function() {
+            console.log('Page loaded. Starting auto-generation...');
+
+            let index = 0;
+            function generateNext() {
+                if (index < 6) {
+                    const { size, name } = [{"size":72,"name":"icon-72x72.png"},{"size":96,"name":"icon-96x96.png"},{"size":128,"name":"icon-128x128.png"},{"size":144,"name":"icon-144x144.png"},{"size":152,"name":"icon-152x152.png"},{"size":384,"name":"icon-384x384.png"}][index];
+                    console.log('Generating ' + name + '...');
+                    generateIcon(size, name).then(() => {
+                        index++;
+                        if (index < 6) {
+                            setTimeout(generateNext, 1000); // Wait 1 second between generations
+                        }
+                    });
+                } else {
+                    console.log('All icons generated!');
+                }
+            }
+
+            setTimeout(generateNext, 1000); // Start after 1 second
+        });
+    </script>
+</body>
+</html>

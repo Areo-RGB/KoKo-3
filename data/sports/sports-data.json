@@ -1,0 +1,131 @@
+[
+  {
+    "name": "Schnelligkeit (20m)",
+    "data": [
+      { "name": "Berat", "score": "3,58s" },
+      {
+        "name": "Finley",
+        "score": "3,68s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Schnelligkeit/Finley/01_Schnelligkeit_20m_Finley.mp4"
+      },
+      {
+        "name": "Metin",
+        "score": "3,72s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Schnelligkeit/Metin/01_Schnelligkeit_20m_Metin.mp4"
+      },
+      { "name": "Jakob", "score": "3,77s" },
+      { "name": "Bent", "score": "3,80s" },
+      { "name": "Arvid", "score": "3,82s" },
+      { "name": "Levi", "score": "3,88s" },
+      { "name": "Lion", "score": "3,90s" }
+    ]
+  },
+  {
+    "name": "Antritt (10m)",
+    "data": [
+      { "name": "Finley", "score": "1,94s" },
+      {
+        "name": "Berat",
+        "score": "2,04s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Antritt/Berat/01_Antritt_10m_Berat.mp4"
+      },
+      {
+        "name": "Bent",
+        "score": "2,14s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Antritt/Bent/02_Antritt_10m_Bent.mov"
+      },
+      {
+        "name": "Arvid",
+        "score": "2,17s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Antritt/Arvid/01_Antritt_10m_Arvid.mp4"
+      },
+      { "name": "Jakob", "score": "2,19s" },
+      { "name": "Lion", "score": "2,25s" },
+      { "name": "Metin", "score": "2,42s" },
+      { "name": "Levi", "score": "2,44s" }
+    ]
+  },
+  {
+    "name": "Gewandtheit",
+    "data": [
+      {
+        "name": "Finley",
+        "score": "7,82s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Gewandtheit/Finley/01_Gewandtheit_Finley.mp4"
+      },
+      {
+        "name": "Bent",
+        "score": "7,85s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Gewandtheit/Bent/02_Gewandtheit_Bent.mp4"
+      },
+      {
+        "name": "Berat",
+        "score": "8,17s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Gewandtheit/Berat/01_Gewandtheit_Berat.mp4"
+      },
+      { "name": "Jakob", "score": "8,37s" },
+      { "name": "Levi", "score": "8,43s" },
+      { "name": "Arvid", "score": "8,52s" },
+      {
+        "name": "Metin",
+        "score": "8,54s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Gewandtheit/Metin/01_Gewandtheit_Metin.mp4"
+      },
+      { "name": "Lion", "score": "8,59s" }
+    ]
+  },
+  {
+    "name": "Dribbling",
+    "data": [
+      {
+        "name": "Metin",
+        "score": "10,44s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Metin/01_Dribbling_Metin.mp4"
+      },
+      {
+        "name": "Bent",
+        "score": "10,50s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Bent/Timeline 1_web.mp4"
+      },
+      {
+        "name": "Jakob",
+        "score": "10,76s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Jakob/01_Dribbling_Jakob.mp4"
+      },
+      {
+        "name": "Arvid",
+        "score": "11,04s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Arvid/01_Dribbling_Arvid.mp4"
+      },
+      { "name": "Berat", "score": "11,05s" },
+      { "name": "Lion", "score": "11,07s" },
+      {
+        "name": "Levi",
+        "score": "11,79s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Levi/01_Dribbling_Levi.mp4"
+      },
+      {
+        "name": "Finley",
+        "score": "11,81s",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Dribbling/Finley/01_Dribbling_Finley.mp4"
+      }
+    ]
+  },
+  {
+    "name": "Balljonglieren",
+    "data": [
+      {
+        "name": "Bent",
+        "score": "11 P.",
+        "videoUrl": "https://data-h03.fra1.cdn.digitaloceanspaces.com/dfb-performance-videos/Balljonglieren/Bent/01_Standweitsprung_Berat_web.mp4"
+      },
+      { "name": "Lion", "score": "6 P." },
+      { "name": "Berat", "score": "2 P." },
+      { "name": "Jakob", "score": "1 P." },
+      { "name": "Arvid", "score": "0 P." },
+      { "name": "Levi", "score": "0 P." },
+      { "name": "Metin", "score": "0 P." },
+      { "name": "Finley", "score": "0 P." }
+    ]
+  }
+]

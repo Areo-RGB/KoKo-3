@@ -1,0 +1,126 @@
+{
+  "jonglieren": [
+    {
+      "name": "Lion",
+      "repetitions": 100,
+      "date": "15.09.2025"
+    },
+    {
+      "name": "Erik",
+      "repetitions": 96,
+      "date": "15.09.2025"
+    },
+    {
+      "name": "Jakob",
+      "repetitions": 26,
+      "date": "15.09.2025"
+    },
+    {
+      "name": "Metin",
+      "repetitions": 25,
+      "date": "15.09.2025"
+    },
+    {
+      "name": "Silas",
+      "repetitions": 24,
+      "date": "15.09.2025"
+    },
+    {
+      "name": "Arvid",
+      "repetitions": 18,
+      "date": "15.09.2025"
+    },
+    {
+      "name": "Lennox",
+      "repetitions": 16,
+      "date": "15.09.2025"
+    },
+    {
+      "name": "Finley",
+      "repetitions": 15,
+      "date": "15.09.2025"
+    },
+    {
+      "name": "Eray",
+      "repetitions": 13,
+      "date": "15.09.2025"
+    },
+    {
+      "name": "Paul",
+      "repetitions": 13,
+      "date": "15.09.2025"
+    },
+    {
+      "name": "Lasse",
+      "repetitions": 6,
+      "date": "15.09.2025"
+    },
+    {
+      "name": "Levi",
+      "repetitions": 5,
+      "date": "15.09.2025"
+    }
+  ],
+  "yoyoIr1": [
+    {
+      "name": "Erik",
+      "distance": 920,
+      "date": "12.09.2025"
+    },
+    {
+      "name": "Finley",
+      "distance": 840,
+      "date": "12.09.2025"
+    },
+    {
+      "name": "Levi",
+      "distance": 600,
+      "date": "12.09.2025"
+    },
+    {
+      "name": "Jakob",
+      "distance": 400,
+      "date": "12.09.2025"
+    },
+    {
+      "name": "Arvid",
+      "distance": 400,
+      "date": "12.09.2025"
+    },
+    {
+      "name": "Silas",
+      "distance": 360,
+      "date": "12.09.2025"
+    },
+    {
+      "name": "Behrat",
+      "distance": 360,
+      "date": "12.09.2025"
+    },
+    {
+      "name": "Lasse",
+      "distance": 280,
+      "date": "12.09.2025"
+    },
+    {
+      "name": "Metin",
+      "distance": 280,
+      "date": "12.09.2025"
+    },
+    {
+      "name": "Lion",
+      "distance": 200,
+      "date": "12.09.2025"
+    },
+    {
+      "name": "Malik",
+      "distance": 200,
+      "date": "12.09.2025"
+    },
+    {
+      "name": "Eray",
+      "distance": 160,
+      "date": "12.09.2025"
+    }
+  ]
+}

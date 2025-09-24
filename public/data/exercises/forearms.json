@@ -1,0 +1,37 @@
+{
+  "exerciseData": {
+    "title": "Unterarm Kraftübungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401530/male-bodyweight-forearms-exercise-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401532/male-bodyweight-forearms-exercise-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401534/male-bodyweight-forearms-exercise-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401536/male-bodyweight-forearms-exercise-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401538/male-bodyweight-forearms-exercise-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401540/male-bodyweight-forearms-exercise-6.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401541/male-bodyweight-forearms-exercise-7.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401543/male-bodyweight-forearms-exercise-8.mp4'"
+    ]
+  },
+  "stretchingData": {
+    "title": "Unterarm Stretching Übungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399945/male-forearms-stretch-variation-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399947/male-forearms-stretch-variation-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400005/male-forearms-stretch-variation-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400065/male-forearms-stretch-variation-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400163/male-forearms-stretch-variation-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400365/male-forearms-stretch-variation-6.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400366/male-forearms-stretch-variation-7.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400368/male-forearms-stretch-variation-8.mp4'"
+    ]
+  },
+  "muscleInfo": {
+    "name": "Unterarme",
+    "description": "Flexoren/Extensoren – Griffkraft sowie Hand-/Fingerbewegung.",
+    "details": [
+      "Musculi flexores antebrachii (z. B. m. flexor carpi radialis/ulnaris, m. flexor digitorum superficialis/profundus)",
+      "Musculi extensores antebrachii (z. B. m. extensor carpi radialis longus/brevis, m. extensor digitorum)",
+      "Musculus brachioradialis'"
+    ]
+  }
+}

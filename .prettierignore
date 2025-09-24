@@ -1,0 +1,22 @@
+# Ignore large video files and virtualenv
+videos/
+videos/**
+videos/**/yt-uploader-env/
+node_modules/
+.next/
+public/A-Junior/
+public/B-Junior/
+public/C-Junior/
+public/D-Junior/
+public/E-Junior/
+.archive
+.claude
+.cursor
+.github
+.next
+.roo
+.serena
+.vscode
+.workflows
+.*
+public

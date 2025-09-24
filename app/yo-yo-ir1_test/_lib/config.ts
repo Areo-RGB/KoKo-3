@@ -1,0 +1,16 @@
+export const PLAYERS: string[] = [
+  'Erik',
+  'Arvid',
+  'Berat',
+  'Eray',
+  'Finley',
+  'Jakob',
+  'Kayden',
+  'Lasse',
+  'Lennox',
+  'Levi',
+  'Lion',
+  'Metin',
+  'Paul',
+  'Silas',
+];

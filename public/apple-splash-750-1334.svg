@@ -1,0 +1,7 @@
+<svg width="750" height="1334" xmlns="http://www.w3.org/2000/svg">
+  <rect width="750" height="1334" fill="#ffffff"/>
+  <rect x="0" y="0" width="750" height="1334" fill="#0f172a" opacity="0.9"/>
+  <text x="375" y="667" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="48" font-weight="bold">Q.V</text>
+  <text x="375" y="719" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24">Sports Training</text>
+  <text x="375" y="779" text-anchor="middle" fill="#64748b" font-family="Arial, sans-serif" font-size="16">Loading...</text>
+</svg>

@@ -1,0 +1,24 @@
+{
+  "workspaces": {
+    ".": {
+      "entry": [
+        "app/**/*.tsx",
+        "app/**/*.ts",
+        "components/**/*.tsx",
+        "lib/**/*.ts",
+        "scripts/**/*.js"
+      ],
+      "project": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+      "ignore": ["public/**", ".next/**", "out/**", "node_modules/**"],
+      "ignoreDependencies": ["postcss-load-config"]
+    }
+  },
+  "rules": {
+    "files": "error",
+    "dependencies": "error",
+    "unlisted": "warn",
+    "exports": "error",
+    "types": "error",
+    "duplicates": "error"
+  }
+}

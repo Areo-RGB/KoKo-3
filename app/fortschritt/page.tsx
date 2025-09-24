@@ -1,0 +1,179 @@
+'use client';
+
+import type { ReactElement } from 'react';
+
+import {
+  AvatarGroup,
+  AvatarGroupTooltip,
+} from '@/components/animate-ui/components/animate/avatar-group';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  Timeline,
+  TimelineContent,
+  TimelineHeader,
+  TimelineIndicator,
+  TimelineItem,
+  TimelineSeparator,
+  TimelineTitle,
+} from '@/components/ui/timeline';
+import { VideoAvatar } from '@/components/ui/video-avatar';
+
+type Player = {
+  name: string;
+  image: string;
+  videoAvatar?: string;
+};
+
+const players = [
+  { name: 'Behrat', image: '/images/Spieler/behrat.png' },
+  { name: 'Eray', image: '/images/Spieler/eray.png' },
+  { name: 'Erik', image: '/images/Spieler/erik.png' },
+  { name: 'Finley', image: '/images/Spieler/finley.png' },
+  { name: 'Jakob', image: '/images/Spieler/jakob.png' },
+  { name: 'Kayden', image: '/images/Spieler/kayden.png' },
+  { name: 'Lasse', image: '/images/Spieler/lasse.png' },
+  { name: 'Lennox', image: '/images/Spieler/lennox.png' },
+  { name: 'Levi', image: '/images/Spieler/levi.png' },
+  { name: 'Lion', image: '/images/Spieler/lion.png' },
+  { name: 'Metin', image: '/images/Spieler/metin.png' },
+  { name: 'Paul', image: '/images/Spieler/paul.png' },
+  { name: 'Silas', image: '/images/Spieler/silas.png' },
+  {
+    name: 'Video Player',
+    image: '/images/Spieler/silas.png',
+    videoAvatar: '/images/Spieler/avatars/render_me_4_avatar.webm',
+  },
+] as const satisfies readonly Player[];
+
+const getInitials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part[0]?.toUpperCase() ?? '')
+    .join('')
+    .slice(0, 2);
+
+const AvatarStacks = ({ data }: { data: readonly Player[] }) => (
+  <div className="overflow-x-auto py-2">
+    <AvatarGroup
+      className="h-16 -space-x-6 px-1"
+      invertOverlap={false}
+      sideOffset={16}
+      tooltipTransition={{ type: 'spring', stiffness: 260, damping: 22 }}
+    >
+      {data.map((player) => (
+        <Avatar
+          key={player.name}
+          className="h-16 w-16 border border-neutral-200 shadow-sm transition hover:z-10 hover:scale-105 hover:border-primary dark:border-neutral-800"
+        >
+          {player.videoAvatar ? (
+            <VideoAvatar
+              src={player.videoAvatar}
+              alt={player.name}
+              className="h-16 w-16"
+            />
+          ) : (
+            <AvatarImage src={player.image} alt={player.name} />
+          )}
+          <AvatarFallback>{getInitials(player.name)}</AvatarFallback>
+          <AvatarGroupTooltip className="font-medium">
+            {player.name}
+          </AvatarGroupTooltip>
+        </Avatar>
+      ))}
+    </AvatarGroup>
+  </div>
+);
+
+export default function FortschrittPage(): ReactElement {
+  return (
+    <div className="min-h-screen bg-background px-4 py-12">
+      <div className="mx-auto w-full max-w-5xl">
+        <Timeline defaultValue={1}>
+          <TimelineItem
+            step={1}
+            className="group-data-[orientation=vertical]/timeline:ms-10"
+          >
+            <TimelineHeader>
+              <TimelineSeparator className="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-6.5" />
+              <TimelineTitle className="text-xl font-semibold text-foreground">
+                Level 0
+              </TimelineTitle>
+              <TimelineIndicator className="group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground flex size-6 items-center justify-center group-data-completed/timeline-item:border-none group-data-[orientation=vertical]/timeline:-left-7">
+                1
+              </TimelineIndicator>
+            </TimelineHeader>
+            <TimelineContent>
+              <p className="text-muted-foreground mb-4 text-sm">
+                Gesamter Spielerkader als Avatar-Galerie. Inhalte lassen sich
+                direkt durchscrollen.
+              </p>
+              <AvatarStacks data={players} />
+            </TimelineContent>
+          </TimelineItem>
+
+          <TimelineItem
+            step={2}
+            className="group-data-[orientation=vertical]/timeline:ms-10"
+          >
+            <TimelineHeader>
+              <TimelineSeparator className="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-6.5" />
+              <TimelineTitle className="text-xl font-semibold text-foreground">
+                Level 1
+              </TimelineTitle>
+              <TimelineIndicator className="group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground flex size-6 items-center justify-center group-data-completed/timeline-item:border-none group-data-[orientation=vertical]/timeline:-left-7">
+                2
+              </TimelineIndicator>
+            </TimelineHeader>
+            <TimelineContent>
+              <p className="text-muted-foreground mb-4 text-sm">
+                Yo-Yo 600m | Jonglieren 60x | Springseil 60x | Prellwand 13/15s
+              </p>
+            </TimelineContent>
+          </TimelineItem>
+
+          <TimelineItem
+            step={3}
+            className="group-data-[orientation=vertical]/timeline:ms-10"
+          >
+            <TimelineHeader>
+              <TimelineSeparator className="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-6.5" />
+              <TimelineTitle className="text-xl font-semibold text-foreground">
+                Level 2
+              </TimelineTitle>
+              <TimelineIndicator className="group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground flex size-6 items-center justify-center group-data-completed/timeline-item:border-none group-data-[orientation=vertical]/timeline:-left-7">
+                3
+              </TimelineIndicator>
+            </TimelineHeader>
+            <TimelineContent>
+              <p className="text-muted-foreground mb-4 text-sm">
+                Yo-Yo 800m | Jonglieren 80x | Springseil 80x | Prellwand 14/15s
+              </p>
+            </TimelineContent>
+          </TimelineItem>
+
+          <TimelineItem
+            step={4}
+            className="group-data-[orientation=vertical]/timeline:ms-10"
+          >
+            <TimelineHeader>
+              <TimelineSeparator className="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-6.5" />
+              <TimelineTitle className="text-xl font-semibold text-foreground">
+                Level 3
+              </TimelineTitle>
+              <TimelineIndicator className="group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground flex size-6 items-center justify-center group-data-completed/timeline-item:border-none group-data-[orientation=vertical]/timeline:-left-7">
+                4
+              </TimelineIndicator>
+            </TimelineHeader>
+            <TimelineContent>
+              <p className="text-muted-foreground mb-4 text-sm">
+                Yo-Yo 1000m | Jonglieren 100x | Springseil 100x | Prellwand
+                15/15s
+              </p>
+            </TimelineContent>
+          </TimelineItem>
+        </Timeline>
+      </div>
+    </div>
+  );
+}

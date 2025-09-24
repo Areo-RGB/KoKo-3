@@ -1,0 +1,1743 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2025-09-13",
+  "metricDefinitions": {
+    "anthropometric": {
+      "height": {
+        "name": "Körpergröße",
+        "unit": "cm",
+        "description": "Standing height"
+      },
+      "weight": {
+        "name": "Körpergewicht",
+        "unit": "kg",
+        "description": "Body mass"
+      },
+      "sittingHeight": {
+        "name": "Sitzhöhe",
+        "unit": "cm",
+        "description": "Sitting height"
+      },
+      "age": {
+        "name": "Alter",
+        "unit": "years",
+        "description": "Chronological age"
+      },
+      "biologicalAge": {
+        "name": "Biologisches Alter",
+        "unit": "years",
+        "description": "Biological maturation age"
+      }
+    },
+    "physicalPerformance": {
+      "sprint30m": {
+        "name": "30m Sprint",
+        "unit": "s",
+        "description": "30-meter sprint time"
+      },
+      "sprint20m": {
+        "name": "20m Sprint",
+        "unit": "s",
+        "description": "20-meter sprint time"
+      },
+      "sprint10m": {
+        "name": "10m Antritt",
+        "unit": "s",
+        "description": "10-meter acceleration sprint"
+      },
+      "speed20m": {
+        "name": "20m Geschwindigkeit",
+        "unit": "m/s",
+        "description": "20-meter speed"
+      },
+      "counterMovementJump": {
+        "name": "Countermovement Jump",
+        "unit": "cm",
+        "description": "Vertical jump height"
+      },
+      "slalomAgility": {
+        "name": "Slalom Agilität",
+        "unit": "s",
+        "description": "Slalom agility test"
+      },
+      "agility": {
+        "name": "Gewandtheit",
+        "unit": "s",
+        "description": "Agility test time"
+      }
+    },
+    "soccerSkills": {
+      "dribbling": {
+        "name": "Dribbling",
+        "unit": "s",
+        "description": "Dribbling test time"
+      },
+      "ballControl": {
+        "name": "Ballkontrolle",
+        "unit": "s",
+        "description": "Ball control test"
+      },
+      "shuttleDribble": {
+        "name": "Shuttle Dribbling",
+        "unit": "s",
+        "description": "Shuttle dribbling test"
+      },
+      "slalomDribble": {
+        "name": "Slalom Dribbling",
+        "unit": "s",
+        "description": "Slalom dribbling test"
+      },
+      "juggling": {
+        "name": "Jonglieren",
+        "unit": "count",
+        "description": "Ball juggling count"
+      },
+      "kickingSkills": {
+        "name": "Schusstechnik",
+        "unit": "rating",
+        "description": "Kicking skills rating"
+      },
+      "tacticalSkills": {
+        "name": "Taktische Fähigkeiten",
+        "unit": "rating",
+        "description": "Tactical skills rating"
+      },
+      "psychosocialSkills": {
+        "name": "Psychosoziale Fähigkeiten",
+        "unit": "rating",
+        "description": "Psychosocial skills rating"
+      }
+    },
+    "endurance": {
+      "yoyoIR1": {
+        "name": "Yo-Yo IR1",
+        "unit": "m",
+        "description": "Yo-Yo Intermittent Recovery Test Level 1 distance"
+      },
+      "enduranceRating": {
+        "name": "Ausdauerbewertung",
+        "unit": "rating",
+        "description": "Endurance performance rating"
+      }
+    },
+    "overallPerformance": {
+      "overallRating": {
+        "name": "Gesamtleistung",
+        "unit": "P.",
+        "description": "Overall performance rating"
+      }
+    }
+  },
+  "ageGroups": {
+    "U9": { "minAge": 8, "maxAge": 9, "category": "youth" },
+    "U10": { "minAge": 9, "maxAge": 10, "category": "youth" },
+    "U11": { "minAge": 10, "maxAge": 11, "category": "youth" },
+    "U12": { "minAge": 11, "maxAge": 12, "category": "youth" },
+    "U13": { "minAge": 12, "maxAge": 13, "category": "youth" },
+    "U14": { "minAge": 13, "maxAge": 14, "category": "youth" },
+    "U15": { "minAge": 14, "maxAge": 15, "category": "junior" },
+    "U16": { "minAge": 15, "maxAge": 16, "category": "junior" },
+    "U17": { "minAge": 16, "maxAge": 17, "category": "junior" },
+    "U18": { "minAge": 17, "maxAge": 18, "category": "junior" },
+    "U19": { "minAge": 18, "maxAge": 19, "category": "junior" }
+  },
+  "studies": [
+    {
+      "id": "fortin-guichard-2022",
+      "study": {
+        "authors": "Fortin-Guichard et al.",
+        "year": 2022,
+        "title": "Physical characteristics and performance in Dutch elite youth soccer players",
+        "doi": null
+      },
+      "sport": "soccer",
+      "population": {
+        "description": "Dutch elite youth males",
+        "ageRange": "8-12 years",
+        "country": "Netherlands",
+        "level": "elite"
+      },
+      "data": [
+        {
+          "ageGroup": "U13",
+          "selectionLevel": "selected",
+          "sampleSize": 47,
+          "metrics": {
+            "anthropometric": {
+              "age": { "mean": 11.8, "sd": 0.4 },
+              "height": { "mean": 148.9, "sd": 6.4 },
+              "sittingHeight": { "mean": 76.0, "sd": 3.6 },
+              "weight": { "mean": 38.3, "sd": 5.1 },
+              "biologicalAge": { "mean": 11.41, "sd": 0.5 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U13",
+          "selectionLevel": "deselected",
+          "sampleSize": 63,
+          "metrics": {
+            "anthropometric": {
+              "age": { "mean": 11.8, "sd": 0.3 },
+              "height": { "mean": 144.9, "sd": 6.2 },
+              "sittingHeight": { "mean": 74.6, "sd": 4.4 },
+              "weight": { "mean": 35.2, "sd": 4.0 },
+              "biologicalAge": { "mean": 11.17, "sd": 0.5 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "saward-2020",
+      "study": {
+        "authors": "Saward et al.",
+        "year": 2020,
+        "title": "Longitudinal development of match-running performance in elite male youth soccer players",
+        "doi": null
+      },
+      "sport": "soccer",
+      "population": {
+        "description": "English elite youth males",
+        "ageRange": "8-19 years",
+        "country": "England",
+        "level": "elite"
+      },
+      "data": [
+        {
+          "ageGroup": "U9",
+          "selectionLevel": "nonProfessional",
+          "sampleSize": 2875,
+          "metrics": {
+            "anthropometric": {
+              "height": { "mean": 135.0, "sd": 5.5 },
+              "weight": { "mean": 30.6, "sd": 3.9 }
+            },
+            "physicalPerformance": {
+              "speed20m": { "mean": 5.39, "sd": 0.24 },
+              "counterMovementJump": { "mean": 27.5, "sd": 4.0 },
+              "slalomAgility": { "mean": 4.13, "sd": 0.25 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U9",
+          "selectionLevel": "professional",
+          "sampleSize": 2875,
+          "metrics": {
+            "anthropometric": {
+              "height": { "mean": 135.0, "sd": 5.3 },
+              "weight": { "mean": 30.5, "sd": 3.8 }
+            },
+            "physicalPerformance": {
+              "speed20m": { "mean": 5.46, "sd": 0.21 },
+              "counterMovementJump": { "mean": 28.0, "sd": 4.1 },
+              "slalomAgility": { "mean": 4.21, "sd": 0.26 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U10",
+          "selectionLevel": "nonProfessional",
+          "sampleSize": 2875,
+          "metrics": {
+            "anthropometric": {
+              "height": { "mean": 140.0, "sd": 5.7 },
+              "weight": { "mean": 33.9, "sd": 4.7 }
+            },
+            "physicalPerformance": {
+              "speed20m": { "mean": 5.52, "sd": 0.25 },
+              "counterMovementJump": { "mean": 29.1, "sd": 4.4 },
+              "slalomAgility": { "mean": 4.28, "sd": 0.25 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U10",
+          "selectionLevel": "professional",
+          "sampleSize": 2875,
+          "metrics": {
+            "anthropometric": {
+              "height": { "mean": 140.9, "sd": 5.6 },
+              "weight": { "mean": 34.5, "sd": 4.4 }
+            },
+            "physicalPerformance": {
+              "speed20m": { "mean": 5.61, "sd": 0.25 },
+              "counterMovementJump": { "mean": 30.1, "sd": 4.4 },
+              "slalomAgility": { "mean": 4.31, "sd": 0.24 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U15",
+          "selectionLevel": "nonProfessional",
+          "sampleSize": 2875,
+          "metrics": {
+            "anthropometric": {
+              "height": { "mean": 173.0, "sd": 7.6 },
+              "weight": { "mean": 63.4, "sd": 9.1 }
+            },
+            "physicalPerformance": {
+              "speed20m": { "mean": 6.5, "sd": 0.34 },
+              "counterMovementJump": { "mean": 42.4, "sd": 5.4 },
+              "slalomAgility": { "mean": 4.87, "sd": 0.27 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U15",
+          "selectionLevel": "professional",
+          "sampleSize": 2875,
+          "metrics": {
+            "anthropometric": {
+              "height": { "mean": 173.5, "sd": 8.8 },
+              "weight": { "mean": 62.8, "sd": 9.7 }
+            },
+            "physicalPerformance": {
+              "speed20m": { "mean": 6.55, "sd": 0.3 },
+              "counterMovementJump": { "mean": 43.0, "sd": 5.8 },
+              "slalomAgility": { "mean": 4.98, "sd": 0.27 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U17",
+          "selectionLevel": "nonProfessional",
+          "sampleSize": 2875,
+          "metrics": {
+            "anthropometric": {
+              "height": { "mean": 178.4, "sd": 6.5 },
+              "weight": { "mean": 71.9, "sd": 7.6 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U17",
+          "selectionLevel": "professional",
+          "sampleSize": 2875,
+          "metrics": {
+            "anthropometric": {
+              "height": { "mean": 179.8, "sd": 6.1 },
+              "weight": { "mean": 72.5, "sd": 6.7 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "huijgen-2010",
+      "study": {
+        "authors": "Huijgen et al.",
+        "year": 2010,
+        "title": "Soccer skill development in talented players",
+        "doi": null
+      },
+      "sport": "soccer",
+      "population": {
+        "description": "Dutch talented youth",
+        "ageRange": "12-19 years",
+        "country": "Netherlands",
+        "level": "talented"
+      },
+      "data": [
+        {
+          "ageGroup": "U12",
+          "selectionLevel": "talented",
+          "sampleSize": 24,
+          "metrics": {
+            "soccerSkills": {
+              "shuttleDribble": { "mean": 10.4, "sd": 0.6 },
+              "slalomDribble": { "mean": 22.98, "sd": 2.29 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U13",
+          "selectionLevel": "talented",
+          "sampleSize": 47,
+          "metrics": {
+            "soccerSkills": {
+              "shuttleDribble": { "mean": 10.03, "sd": 0.51 },
+              "slalomDribble": { "mean": 21.84, "sd": 1.96 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U15",
+          "selectionLevel": "talented",
+          "sampleSize": 99,
+          "metrics": {
+            "soccerSkills": {
+              "shuttleDribble": { "mean": 9.85, "sd": 0.48 },
+              "slalomDribble": { "mean": 21.4, "sd": 1.81 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U17",
+          "selectionLevel": "talented",
+          "sampleSize": 84,
+          "metrics": {
+            "soccerSkills": {
+              "shuttleDribble": { "mean": 9.49, "sd": 0.43 },
+              "slalomDribble": { "mean": 20.81, "sd": 1.72 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "honer-2021",
+      "study": {
+        "authors": "Höner et al.",
+        "year": 2021,
+        "title": "German football talent identification and development programme",
+        "doi": null
+      },
+      "sport": "soccer",
+      "population": {
+        "description": "German elite youth males",
+        "ageRange": "U12-U15",
+        "country": "Germany",
+        "level": "elite"
+      },
+      "data": [
+        {
+          "ageGroup": "U12",
+          "selectionLevel": "selected",
+          "sampleSize": 582,
+          "metrics": {
+            "soccerSkills": {
+              "kickingSkills": { "mean": 1.71, "sd": 0.53 },
+              "tacticalSkills": { "mean": 1.89, "sd": 0.57 },
+              "psychosocialSkills": { "mean": 2.01, "sd": 0.67 },
+              "dribbling": { "mean": 10.69, "sd": 0.69 },
+              "ballControl": { "mean": 9.74, "sd": 1.25 },
+              "juggling": { "mean": 4.12, "sd": 4.24 }
+            },
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.54, "sd": 0.15 }
+            },
+            "endurance": {
+              "enduranceRating": { "mean": 2.05, "sd": 0.72 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U12",
+          "selectionLevel": "nonSelected",
+          "sampleSize": 6077,
+          "metrics": {
+            "soccerSkills": {
+              "kickingSkills": { "mean": 1.33, "sd": 0.56 },
+              "tacticalSkills": { "mean": 1.46, "sd": 0.58 },
+              "psychosocialSkills": { "mean": 1.71, "sd": 0.66 },
+              "dribbling": { "mean": 11.06, "sd": 0.74 },
+              "ballControl": { "mean": 10.27, "sd": 1.33 },
+              "juggling": { "mean": 2.5, "sd": 3.01 }
+            },
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.64, "sd": 0.16 }
+            },
+            "endurance": {
+              "enduranceRating": { "mean": 1.7, "sd": 0.75 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U15",
+          "selectionLevel": "selected",
+          "sampleSize": 58,
+          "metrics": {
+            "soccerSkills": {
+              "kickingSkills": { "mean": 1.88, "sd": 0.42 },
+              "tacticalSkills": { "mean": 2.05, "sd": 0.51 },
+              "psychosocialSkills": { "mean": 2.02, "sd": 0.54 },
+              "dribbling": { "mean": 10.1, "sd": 0.65 },
+              "ballControl": { "mean": 8.61, "sd": 1.21 },
+              "juggling": { "mean": 9.76, "sd": 6.4 }
+            },
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.23, "sd": 0.14 }
+            },
+            "endurance": {
+              "enduranceRating": { "mean": 2.19, "sd": 0.61 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "goto-2012",
+      "study": {
+        "authors": "Goto (2012) & EPL Academy",
+        "year": 2012,
+        "title": "English Premier League Academy Yo-Yo Test Data",
+        "doi": null
+      },
+      "sport": "soccer",
+      "population": {
+        "description": "English Premier League Academy players",
+        "ageRange": "U9-U18",
+        "country": "England",
+        "level": "elite"
+      },
+      "data": [
+        {
+          "ageGroup": "U9",
+          "selectionLevel": "elite",
+          "sampleSize": null,
+          "metrics": {
+            "endurance": {
+              "yoyoIR1": { "mean": 787, "sd": null }
+            }
+          }
+        },
+        {
+          "ageGroup": "U10",
+          "selectionLevel": "elite",
+          "sampleSize": null,
+          "metrics": {
+            "endurance": {
+              "yoyoIR1": { "mean": 950, "sd": null }
+            }
+          }
+        },
+        {
+          "ageGroup": "U13",
+          "selectionLevel": "elite",
+          "sampleSize": null,
+          "metrics": {
+            "endurance": {
+              "yoyoIR1": { "mean": 1600, "sd": null }
+            }
+          }
+        },
+        {
+          "ageGroup": "U15",
+          "selectionLevel": "elite",
+          "sampleSize": null,
+          "metrics": {
+            "endurance": {
+              "yoyoIR1": { "mean": 2200, "sd": null }
+            }
+          }
+        },
+        {
+          "ageGroup": "U17",
+          "selectionLevel": "elite",
+          "sampleSize": null,
+          "metrics": {
+            "endurance": {
+              "yoyoIR1": { "mean": 2617, "sd": null }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "deprez-2015",
+      "study": {
+        "authors": "Deprez et al.",
+        "year": 2015,
+        "title": "High-level Belgian youth soccer players",
+        "doi": null
+      },
+      "sport": "soccer",
+      "population": {
+        "description": "High-level Belgian youth soccer players",
+        "ageRange": "U15-U19",
+        "country": "Belgium",
+        "level": "highlevel"
+      },
+      "data": [
+        {
+          "ageGroup": "U15",
+          "selectionLevel": "highlevel",
+          "sampleSize": null,
+          "metrics": {
+            "endurance": {
+              "yoyoIR1": { "mean": 2024, "sd": 470 }
+            }
+          }
+        },
+        {
+          "ageGroup": "U17",
+          "selectionLevel": "highlevel",
+          "sampleSize": null,
+          "metrics": {
+            "endurance": {
+              "yoyoIR1": { "mean": 2404, "sd": 347 }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "dfb-2015-2019",
+      "study": {
+        "authors": "DFB",
+        "year": 2019,
+        "title": "NORMWERTTABELLEN MÄNNLICH - Herbsttestung",
+        "doi": null
+      },
+      "sport": "soccer",
+      "population": {
+        "description": "German male youth soccer players",
+        "ageRange": "U11-U15",
+        "country": "Germany",
+        "level": "youth"
+      },
+      "data": [
+        {
+          "ageGroup": "U11",
+          "selectionLevel": "youth",
+          "sampleSize": 6203,
+          "metrics": {
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.79, "sd": 0.18 },
+              "sprint10m": { "mean": 2.19, "sd": 0.11 }
+            },
+            "soccerSkills": {
+              "agility": { "mean": 8.69, "sd": 0.47 },
+              "dribbling": { "mean": 12.04, "sd": 1.05 },
+              "ballControl": { "mean": 11.59, "sd": 1.68 },
+              "juggling": { "mean": 1.37, "sd": 1.86 }
+            },
+            "overallPerformance": {
+              "overallRating": { "mean": 99.26, "sd": 1.93 }
+            }
+          },
+          "percentiles": {
+            "sprint20m": {
+              "3": 4.14,
+              "10": 4.01,
+              "20": 3.93,
+              "30": 3.87,
+              "40": 3.82,
+              "50": 3.78,
+              "60": 3.74,
+              "70": 3.69,
+              "80": 3.64,
+              "90": 3.57,
+              "97": 3.47
+            },
+            "sprint10m": {
+              "3": 2.39,
+              "10": 2.33,
+              "20": 2.28,
+              "30": 2.24,
+              "40": 2.21,
+              "50": 2.18,
+              "60": 2.16,
+              "70": 2.13,
+              "80": 2.1,
+              "90": 2.05,
+              "97": 1.99
+            },
+            "agility": {
+              "3": 9.6,
+              "10": 9.33,
+              "20": 9.07,
+              "30": 8.9,
+              "40": 8.77,
+              "50": 8.66,
+              "60": 8.54,
+              "70": 8.42,
+              "80": 8.28,
+              "90": 8.11,
+              "97": 7.91
+            },
+            "dribbling": {
+              "3": 14.37,
+              "10": 13.42,
+              "20": 12.84,
+              "30": 12.46,
+              "40": 12.15,
+              "50": 11.9,
+              "60": 11.68,
+              "70": 11.44,
+              "80": 11.16,
+              "90": 10.84,
+              "97": 10.43
+            },
+            "ballControl": {
+              "3": 15.29,
+              "10": 13.81,
+              "20": 12.86,
+              "30": 12.28,
+              "40": 11.78,
+              "50": 11.36,
+              "60": 10.99,
+              "70": 10.59,
+              "80": 10.18,
+              "90": 9.66,
+              "97": 9.0
+            },
+            "juggling": {
+              "3": 0.0,
+              "10": 0.0,
+              "20": 0.0,
+              "30": 0.0,
+              "40": 1.0,
+              "50": 1.0,
+              "60": 1.0,
+              "70": 1.0,
+              "80": 2.0,
+              "90": 3.0,
+              "97": 6.0
+            },
+            "overallPerformance": {
+              "3": 95.53,
+              "10": 96.78,
+              "20": 97.65,
+              "30": 98.29,
+              "40": 98.8,
+              "50": 99.3,
+              "60": 99.81,
+              "70": 100.3,
+              "80": 100.9,
+              "90": 101.66,
+              "97": 102.84
+            }
+          }
+        },
+        {
+          "ageGroup": "U12",
+          "selectionLevel": "youth",
+          "sampleSize": 24929,
+          "metrics": {
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.69, "sd": 0.17 },
+              "sprint10m": { "mean": 2.14, "sd": 0.11 }
+            },
+            "soccerSkills": {
+              "agility": { "mean": 8.51, "sd": 0.45 },
+              "dribbling": { "mean": 11.45, "sd": 0.92 },
+              "ballControl": { "mean": 10.96, "sd": 1.56 },
+              "juggling": { "mean": 1.78, "sd": 2.54 }
+            },
+            "overallPerformance": {
+              "overallRating": { "mean": 100.48, "sd": 1.76 }
+            }
+          },
+          "percentiles": {
+            "sprint20m": {
+              "3": 4.02,
+              "10": 3.91,
+              "20": 3.82,
+              "30": 3.77,
+              "40": 3.72,
+              "50": 3.68,
+              "60": 3.64,
+              "70": 3.6,
+              "80": 3.55,
+              "90": 3.48,
+              "97": 3.39
+            },
+            "sprint10m": {
+              "3": 2.34,
+              "10": 2.28,
+              "20": 2.22,
+              "30": 2.19,
+              "40": 2.16,
+              "50": 2.13,
+              "60": 2.11,
+              "70": 2.08,
+              "80": 2.05,
+              "90": 2.0,
+              "97": 1.94
+            },
+            "agility": {
+              "3": 9.47,
+              "10": 9.1,
+              "20": 8.87,
+              "30": 8.72,
+              "40": 8.59,
+              "50": 8.48,
+              "60": 8.38,
+              "70": 8.26,
+              "80": 8.14,
+              "90": 7.98,
+              "97": 7.76
+            },
+            "dribbling": {
+              "3": 13.49,
+              "10": 12.62,
+              "20": 12.11,
+              "30": 11.79,
+              "40": 11.53,
+              "50": 11.32,
+              "60": 11.12,
+              "70": 10.92,
+              "80": 10.7,
+              "90": 10.42,
+              "97": 10.07
+            },
+            "ballControl": {
+              "3": 14.39,
+              "10": 12.95,
+              "20": 12.09,
+              "30": 11.56,
+              "40": 11.12,
+              "50": 10.75,
+              "60": 10.4,
+              "70": 10.04,
+              "80": 9.69,
+              "90": 9.21,
+              "97": 8.6
+            },
+            "juggling": {
+              "3": 0.0,
+              "10": 0.0,
+              "20": 0.0,
+              "30": 1.0,
+              "40": 1.0,
+              "50": 1.0,
+              "60": 1.0,
+              "70": 2.0,
+              "80": 3.0,
+              "90": 4.0,
+              "97": 9.0
+            },
+            "overallPerformance": {
+              "3": 97.0,
+              "10": 98.2,
+              "20": 99.02,
+              "30": 99.6,
+              "40": 100.07,
+              "50": 100.51,
+              "60": 100.93,
+              "70": 101.4,
+              "80": 101.95,
+              "90": 102.73,
+              "97": 103.83
+            }
+          }
+        },
+        {
+          "ageGroup": "U13",
+          "selectionLevel": "youth",
+          "sampleSize": 21257,
+          "metrics": {
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.59, "sd": 0.17 },
+              "sprint10m": { "mean": 2.08, "sd": 0.1 }
+            },
+            "soccerSkills": {
+              "agility": { "mean": 8.33, "sd": 0.43 },
+              "dribbling": { "mean": 10.99, "sd": 0.82 },
+              "ballControl": { "mean": 10.09, "sd": 1.37 },
+              "juggling": { "mean": 3.46, "sd": 3.92 }
+            },
+            "overallPerformance": {
+              "overallRating": { "mean": 102.08, "sd": 1.79 }
+            }
+          },
+          "percentiles": {
+            "sprint20m": {
+              "3": 3.92,
+              "10": 3.8,
+              "20": 3.72,
+              "30": 3.68,
+              "40": 3.62,
+              "50": 3.58,
+              "60": 3.54,
+              "70": 3.5,
+              "80": 3.46,
+              "90": 3.38,
+              "97": 3.29
+            },
+            "sprint10m": {
+              "3": 2.29,
+              "10": 2.22,
+              "20": 2.17,
+              "30": 2.13,
+              "40": 2.11,
+              "50": 2.08,
+              "60": 2.06,
+              "70": 2.03,
+              "80": 2.0,
+              "90": 1.96,
+              "97": 1.89
+            },
+            "agility": {
+              "3": 9.23,
+              "10": 8.89,
+              "20": 8.66,
+              "30": 8.51,
+              "40": 8.39,
+              "50": 8.29,
+              "60": 8.19,
+              "70": 8.08,
+              "80": 7.97,
+              "90": 7.81,
+              "97": 7.62
+            },
+            "dribbling": {
+              "3": 12.81,
+              "10": 12.01,
+              "20": 1.57,
+              "30": 11.28,
+              "40": 11.06,
+              "50": 10.88,
+              "60": 10.7,
+              "70": 10.52,
+              "80": 10.33,
+              "90": 10.09,
+              "97": 9.78
+            },
+            "ballControl": {
+              "3": 13.07,
+              "10": 11.86,
+              "20": 1.06,
+              "30": 10.58,
+              "40": 10.2,
+              "50": 9.89,
+              "60": 9.6,
+              "70": 9.3,
+              "80": 8.98,
+              "90": 8.57,
+              "97": 8.07
+            },
+            "juggling": {
+              "3": 0.0,
+              "10": 0.0,
+              "20": 1.0,
+              "30": 1.0,
+              "40": 1.0,
+              "50": 2.0,
+              "60": 3.0,
+              "70": 4.0,
+              "80": 6.0,
+              "90": 9.0,
+              "97": 14.0
+            },
+            "overallPerformance": {
+              "3": 98.62,
+              "10": 99.79,
+              "20": 100.59,
+              "30": 101.15,
+              "40": 101.65,
+              "50": 102.09,
+              "60": 102.55,
+              "70": 103.03,
+              "80": 103.6,
+              "90": 104.35,
+              "97": 105.34
+            }
+          }
+        },
+        {
+          "ageGroup": "U14",
+          "selectionLevel": "youth",
+          "sampleSize": 14676,
+          "metrics": {
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.46, "sd": 0.17 },
+              "sprint10m": { "mean": 2.02, "sd": 0.11 }
+            },
+            "soccerSkills": {
+              "agility": { "mean": 8.18, "sd": 0.41 },
+              "dribbling": { "mean": 10.69, "sd": 0.76 },
+              "ballControl": { "mean": 9.64, "sd": 1.27 },
+              "juggling": { "mean": 5.47, "sd": 5.14 }
+            },
+            "overallPerformance": {
+              "overallRating": { "mean": 103.5, "sd": 1.74 }
+            }
+          },
+          "percentiles": {
+            "sprint20m": {
+              "3": 3.8,
+              "10": 3.68,
+              "20": 3.6,
+              "30": 3.55,
+              "40": 3.5,
+              "50": 3.46,
+              "60": 3.42,
+              "70": 3.38,
+              "80": 3.32,
+              "90": 3.25,
+              "97": 3.16
+            },
+            "sprint10m": {
+              "3": 2.22,
+              "10": 2.16,
+              "20": 2.11,
+              "30": 2.07,
+              "40": 2.04,
+              "50": 2.02,
+              "60": 1.99,
+              "70": 1.97,
+              "80": 1.93,
+              "90": 1.89,
+              "97": 1.82
+            },
+            "agility": {
+              "3": 9.05,
+              "10": 8.71,
+              "20": 8.5,
+              "30": 8.37,
+              "40": 8.25,
+              "50": 8.15,
+              "60": 8.06,
+              "70": 7.96,
+              "80": 7.85,
+              "90": 7.7,
+              "97": 7.5
+            },
+            "dribbling": {
+              "3": 12.33,
+              "10": 1.61,
+              "20": 1.22,
+              "30": 10.97,
+              "40": 10.76,
+              "50": 10.59,
+              "60": 10.43,
+              "70": 10.27,
+              "80": 10.09,
+              "90": 9.85,
+              "97": 9.57
+            },
+            "ballControl": {
+              "3": 12.49,
+              "10": 11.2,
+              "20": 10.5,
+              "30": 10.09,
+              "40": 9.78,
+              "50": 9.47,
+              "60": 9.19,
+              "70": 8.91,
+              "80": 8.6,
+              "90": 8.23,
+              "97": 7.78
+            },
+            "juggling": {
+              "3": 0.0,
+              "10": 1.0,
+              "20": 1.0,
+              "30": 2.0,
+              "40": 3.0,
+              "50": 4.0,
+              "60": 5.0,
+              "70": 7.0,
+              "80": 9.0,
+              "90": 13.0,
+              "97": 18.0
+            },
+            "overallPerformance": {
+              "3": 100.07,
+              "10": 101.25,
+              "20": 102.04,
+              "30": 102.63,
+              "40": 103.12,
+              "50": 103.56,
+              "60": 104.01,
+              "70": 104.48,
+              "80": 105.01,
+              "90": 105.71,
+              "97": 106.55
+            }
+          }
+        },
+        {
+          "ageGroup": "U15",
+          "selectionLevel": "youth",
+          "sampleSize": 8937,
+          "metrics": {
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.33, "sd": 0.17 },
+              "sprint10m": { "mean": 1.96, "sd": 0.1 }
+            },
+            "soccerSkills": {
+              "agility": { "mean": 8.08, "sd": 0.41 },
+              "dribbling": { "mean": 10.51, "sd": 0.74 },
+              "ballControl": { "mean": 8.26, "sd": 1.26 },
+              "juggling": { "mean": 7.05, "sd": 5.83 }
+            },
+            "overallPerformance": {
+              "overallRating": { "mean": 104.66, "sd": 1.68 }
+            }
+          },
+          "percentiles": {
+            "sprint20m": {
+              "3": 3.67,
+              "10": 3.56,
+              "20": 3.47,
+              "30": 3.42,
+              "40": 3.37,
+              "50": 3.32,
+              "60": 3.28,
+              "70": 3.24,
+              "80": 3.19,
+              "90": 3.13,
+              "97": 3.05
+            },
+            "sprint10m": {
+              "3": 2.16,
+              "10": 2.09,
+              "20": 2.04,
+              "30": 2.01,
+              "40": 1.98,
+              "50": 1.96,
+              "60": 1.93,
+              "70": 1.9,
+              "80": 1.87,
+              "90": 1.83,
+              "97": 1.78
+            },
+            "agility": {
+              "3": 8.93,
+              "10": 8.6,
+              "20": 8.39,
+              "30": 8.26,
+              "40": 8.15,
+              "50": 8.05,
+              "60": 7.96,
+              "70": 7.85,
+              "80": 7.74,
+              "90": 7.6,
+              "97": 7.41
+            },
+            "dribbling": {
+              "3": 12.12,
+              "10": 11.43,
+              "20": 1.02,
+              "30": 10.78,
+              "40": 10.58,
+              "50": 10.41,
+              "60": 10.25,
+              "70": 10.1,
+              "80": 9.93,
+              "90": 9.71,
+              "97": 9.4
+            },
+            "ballControl": {
+              "3": 12.1,
+              "10": 10.86,
+              "20": 10.1,
+              "30": 9.67,
+              "40": 9.35,
+              "50": 9.07,
+              "60": 8.8,
+              "70": 8.53,
+              "80": 8.26,
+              "90": 7.91,
+              "97": 7.48
+            },
+            "juggling": {
+              "3": 0.0,
+              "10": 1.0,
+              "20": 2.0,
+              "30": 3.0,
+              "40": 4.0,
+              "50": 5.0,
+              "60": 7.0,
+              "70": 9.0,
+              "80": 12.0,
+              "90": 16.0,
+              "97": 20.0
+            },
+            "overallPerformance": {
+              "3": 101.31,
+              "10": 102.45,
+              "20": 103.25,
+              "30": 103.82,
+              "40": 104.33,
+              "50": 104.79,
+              "60": 105.23,
+              "70": 105.65,
+              "80": 106.12,
+              "90": 106.74,
+              "97": 107.5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "dfb-2015-2019",
+      "study": {
+        "authors": "DFB Leistungszentren",
+        "year": 2019,
+        "title": "Normwerttabellen der DFB-Talentförderung 2015-2019",
+        "doi": null
+      },
+      "sport": "soccer",
+      "population": {
+        "description": "Deutsche Nachwuchsspieler aus DFB-Leistungszentren",
+        "ageRange": "U11-U15",
+        "country": "Deutschland",
+        "level": "elite"
+      },
+      "data": [
+        {
+          "ageGroup": "U11",
+          "selectionLevel": "elite",
+          "sampleSize": 6203,
+          "metrics": {
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.79, "sd": 0.18 },
+              "sprint10m": { "mean": 2.19, "sd": 0.11 },
+              "agility": { "mean": 8.69, "sd": 0.47 }
+            },
+            "soccerSkills": {
+              "dribbling": { "mean": 12.04, "sd": 1.05 },
+              "ballControl": { "mean": 11.59, "sd": 1.68 },
+              "juggling": { "mean": 1.37, "sd": 1.86 }
+            },
+            "overallPerformance": {
+              "overallRating": { "mean": 99.26, "sd": 1.93 }
+            }
+          },
+          "percentiles": {
+            "sprint20m": {
+              "3": 4.14,
+              "10": 4.01,
+              "20": 3.93,
+              "30": 3.87,
+              "40": 3.82,
+              "50": 3.78,
+              "60": 3.74,
+              "70": 3.69,
+              "80": 3.64,
+              "90": 3.57,
+              "97": 3.47
+            },
+            "sprint10m": {
+              "3": 2.39,
+              "10": 2.33,
+              "20": 2.28,
+              "30": 2.24,
+              "40": 2.21,
+              "50": 2.18,
+              "60": 2.16,
+              "70": 2.13,
+              "80": 2.1,
+              "90": 2.05,
+              "97": 1.99
+            },
+            "agility": {
+              "3": 9.66,
+              "10": 9.33,
+              "20": 9.07,
+              "30": 8.9,
+              "40": 8.77,
+              "50": 8.66,
+              "60": 8.54,
+              "70": 8.42,
+              "80": 8.28,
+              "90": 8.11,
+              "97": 7.91
+            },
+            "dribbling": {
+              "3": 14.37,
+              "10": 13.42,
+              "20": 12.84,
+              "30": 12.46,
+              "40": 12.15,
+              "50": 11.9,
+              "60": 11.68,
+              "70": 11.44,
+              "80": 11.16,
+              "90": 10.84,
+              "97": 10.43
+            },
+            "ballControl": {
+              "3": 15.29,
+              "10": 13.81,
+              "20": 12.86,
+              "30": 12.28,
+              "40": 11.78,
+              "50": 11.36,
+              "60": 10.99,
+              "70": 10.59,
+              "80": 10.18,
+              "90": 9.66,
+              "97": 9.0
+            },
+            "juggling": {
+              "3": 0.0,
+              "10": 0.0,
+              "20": 0.0,
+              "30": 0.0,
+              "40": 1.0,
+              "50": 1.0,
+              "60": 1.0,
+              "70": 1.0,
+              "80": 2.0,
+              "90": 3.0,
+              "97": 6.0
+            },
+            "overallRating": {
+              "3": 95.53,
+              "10": 96.78,
+              "20": 97.65,
+              "30": 98.29,
+              "40": 98.8,
+              "50": 99.3,
+              "60": 99.81,
+              "70": 100.3,
+              "80": 100.9,
+              "90": 101.66,
+              "97": 102.84
+            }
+          }
+        },
+        {
+          "ageGroup": "U12",
+          "selectionLevel": "elite",
+          "sampleSize": 24929,
+          "metrics": {
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.69, "sd": 0.17 },
+              "sprint10m": { "mean": 2.14, "sd": 0.11 },
+              "agility": { "mean": 8.51, "sd": 0.45 }
+            },
+            "soccerSkills": {
+              "dribbling": { "mean": 11.45, "sd": 0.92 },
+              "ballControl": { "mean": 10.96, "sd": 1.56 },
+              "juggling": { "mean": 1.78, "sd": 2.54 }
+            },
+            "overallPerformance": {
+              "overallRating": { "mean": 100.48, "sd": 1.76 }
+            }
+          },
+          "percentiles": {
+            "sprint20m": {
+              "3": 4.02,
+              "10": 3.91,
+              "20": 3.82,
+              "30": 3.77,
+              "40": 3.72,
+              "50": 3.68,
+              "60": 3.64,
+              "70": 3.6,
+              "80": 3.55,
+              "90": 3.48,
+              "97": 3.39
+            },
+            "sprint10m": {
+              "3": 2.34,
+              "10": 2.28,
+              "20": 2.22,
+              "30": 2.19,
+              "40": 2.16,
+              "50": 2.13,
+              "60": 2.11,
+              "70": 2.08,
+              "80": 2.05,
+              "90": 2.0,
+              "97": 1.94
+            },
+            "agility": {
+              "3": 9.47,
+              "10": 9.1,
+              "20": 8.87,
+              "30": 8.72,
+              "40": 8.59,
+              "50": 8.48,
+              "60": 8.38,
+              "70": 8.26,
+              "80": 8.14,
+              "90": 7.98,
+              "97": 7.76
+            },
+            "dribbling": {
+              "3": 13.49,
+              "10": 12.62,
+              "20": 12.11,
+              "30": 11.79,
+              "40": 11.53,
+              "50": 11.32,
+              "60": 11.12,
+              "70": 10.92,
+              "80": 10.7,
+              "90": 10.42,
+              "97": 10.07
+            },
+            "ballControl": {
+              "3": 14.39,
+              "10": 12.95,
+              "20": 12.09,
+              "30": 11.56,
+              "40": 11.12,
+              "50": 10.75,
+              "60": 10.4,
+              "70": 10.04,
+              "80": 9.69,
+              "90": 9.21,
+              "97": 8.6
+            },
+            "juggling": {
+              "3": 0.0,
+              "10": 0.0,
+              "20": 0.0,
+              "30": 1.0,
+              "40": 1.0,
+              "50": 1.0,
+              "60": 1.0,
+              "70": 2.0,
+              "80": 3.0,
+              "90": 4.0,
+              "97": 9.0
+            },
+            "overallRating": {
+              "3": 97.0,
+              "10": 98.2,
+              "20": 99.02,
+              "30": 99.6,
+              "40": 100.07,
+              "50": 100.51,
+              "60": 100.93,
+              "70": 101.4,
+              "80": 101.95,
+              "90": 102.73,
+              "97": 103.83
+            }
+          }
+        },
+        {
+          "ageGroup": "U13",
+          "selectionLevel": "elite",
+          "sampleSize": 21257,
+          "metrics": {
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.59, "sd": 0.17 },
+              "sprint10m": { "mean": 2.08, "sd": 0.1 },
+              "agility": { "mean": 8.33, "sd": 0.43 }
+            },
+            "soccerSkills": {
+              "dribbling": { "mean": 10.99, "sd": 0.82 },
+              "ballControl": { "mean": 10.09, "sd": 1.37 },
+              "juggling": { "mean": 3.46, "sd": 3.92 }
+            },
+            "overallPerformance": {
+              "overallRating": { "mean": 102.08, "sd": 1.79 }
+            }
+          },
+          "percentiles": {
+            "sprint20m": {
+              "3": 3.92,
+              "10": 3.8,
+              "20": 3.72,
+              "30": 3.68,
+              "40": 3.62,
+              "50": 3.58,
+              "60": 3.54,
+              "70": 3.5,
+              "80": 3.46,
+              "90": 3.38,
+              "97": 3.29
+            },
+            "sprint10m": {
+              "3": 2.29,
+              "10": 2.22,
+              "20": 2.17,
+              "30": 2.13,
+              "40": 2.11,
+              "50": 2.08,
+              "60": 2.06,
+              "70": 2.03,
+              "80": 2.0,
+              "90": 1.96,
+              "97": 1.89
+            },
+            "agility": {
+              "3": 9.23,
+              "10": 8.89,
+              "20": 8.66,
+              "30": 8.51,
+              "40": 8.39,
+              "50": 8.29,
+              "60": 8.19,
+              "70": 8.08,
+              "80": 7.97,
+              "90": 7.81,
+              "97": 7.62
+            },
+            "dribbling": {
+              "3": 12.81,
+              "10": 12.01,
+              "20": 11.57,
+              "30": 11.28,
+              "40": 11.06,
+              "50": 10.88,
+              "60": 10.7,
+              "70": 10.52,
+              "80": 10.33,
+              "90": 10.09,
+              "97": 9.78
+            },
+            "ballControl": {
+              "3": 13.07,
+              "10": 11.86,
+              "20": 11.06,
+              "30": 10.58,
+              "40": 10.2,
+              "50": 9.89,
+              "60": 9.6,
+              "70": 9.3,
+              "80": 8.98,
+              "90": 8.57,
+              "97": 8.07
+            },
+            "juggling": {
+              "3": 0.0,
+              "10": 0.0,
+              "20": 1.0,
+              "30": 1.0,
+              "40": 1.0,
+              "50": 2.0,
+              "60": 3.0,
+              "70": 4.0,
+              "80": 6.0,
+              "90": 9.0,
+              "97": 14.0
+            },
+            "overallRating": {
+              "3": 98.62,
+              "10": 99.79,
+              "20": 100.59,
+              "30": 101.15,
+              "40": 101.65,
+              "50": 102.09,
+              "60": 102.55,
+              "70": 103.03,
+              "80": 103.6,
+              "90": 104.35,
+              "97": 105.34
+            }
+          }
+        },
+        {
+          "ageGroup": "U14",
+          "selectionLevel": "elite",
+          "sampleSize": 14676,
+          "metrics": {
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.46, "sd": 0.17 },
+              "sprint10m": { "mean": 2.02, "sd": 0.11 },
+              "agility": { "mean": 8.18, "sd": 0.41 }
+            },
+            "soccerSkills": {
+              "dribbling": { "mean": 10.69, "sd": 0.76 },
+              "ballControl": { "mean": 9.64, "sd": 1.27 },
+              "juggling": { "mean": 5.47, "sd": 5.14 }
+            },
+            "overallPerformance": {
+              "overallRating": { "mean": 103.5, "sd": 1.74 }
+            }
+          },
+          "percentiles": {
+            "sprint20m": {
+              "3": 3.8,
+              "10": 3.68,
+              "20": 3.6,
+              "30": 3.55,
+              "40": 3.5,
+              "50": 3.46,
+              "60": 3.42,
+              "70": 3.38,
+              "80": 3.32,
+              "90": 3.25,
+              "97": 3.16
+            },
+            "sprint10m": {
+              "3": 2.22,
+              "10": 2.16,
+              "20": 2.11,
+              "30": 2.07,
+              "40": 2.04,
+              "50": 2.02,
+              "60": 1.99,
+              "70": 1.97,
+              "80": 1.93,
+              "90": 1.89,
+              "97": 1.82
+            },
+            "agility": {
+              "3": 9.05,
+              "10": 8.71,
+              "20": 8.5,
+              "30": 8.37,
+              "40": 8.25,
+              "50": 8.15,
+              "60": 8.06,
+              "70": 7.96,
+              "80": 7.85,
+              "90": 7.7,
+              "97": 7.5
+            },
+            "dribbling": {
+              "3": 12.33,
+              "10": 11.61,
+              "20": 11.22,
+              "30": 10.97,
+              "40": 10.76,
+              "50": 10.59,
+              "60": 10.43,
+              "70": 10.27,
+              "80": 10.09,
+              "90": 9.85,
+              "97": 9.57
+            },
+            "ballControl": {
+              "3": 12.49,
+              "10": 11.2,
+              "20": 10.5,
+              "30": 10.09,
+              "40": 9.78,
+              "50": 9.47,
+              "60": 9.19,
+              "70": 8.91,
+              "80": 8.6,
+              "90": 8.23,
+              "97": 7.78
+            },
+            "juggling": {
+              "3": 0.0,
+              "10": 1.0,
+              "20": 1.0,
+              "30": 2.0,
+              "40": 3.0,
+              "50": 4.0,
+              "60": 5.0,
+              "70": 7.0,
+              "80": 9.0,
+              "90": 13.0,
+              "97": 18.0
+            },
+            "overallRating": {
+              "3": 100.07,
+              "10": 101.25,
+              "20": 102.04,
+              "30": 102.63,
+              "40": 103.12,
+              "50": 103.56,
+              "60": 104.01,
+              "70": 104.48,
+              "80": 105.01,
+              "90": 105.71,
+              "97": 106.55
+            }
+          }
+        },
+        {
+          "ageGroup": "U15",
+          "selectionLevel": "elite",
+          "sampleSize": 8937,
+          "metrics": {
+            "physicalPerformance": {
+              "sprint20m": { "mean": 3.33, "sd": 0.17 },
+              "sprint10m": { "mean": 1.96, "sd": 0.1 },
+              "agility": { "mean": 8.08, "sd": 0.41 }
+            },
+            "soccerSkills": {
+              "dribbling": { "mean": 10.51, "sd": 0.74 },
+              "ballControl": { "mean": 8.26, "sd": 1.26 },
+              "juggling": { "mean": 7.05, "sd": 5.83 }
+            },
+            "overallPerformance": {
+              "overallRating": { "mean": 104.66, "sd": 1.68 }
+            }
+          },
+          "percentiles": {
+            "sprint20m": {
+              "3": 3.67,
+              "10": 3.56,
+              "20": 3.47,
+              "30": 3.42,
+              "40": 3.37,
+              "50": 3.32,
+              "60": 3.28,
+              "70": 3.24,
+              "80": 3.19,
+              "90": 3.13,
+              "97": 3.05
+            },
+            "sprint10m": {
+              "3": 2.16,
+              "10": 2.09,
+              "20": 2.04,
+              "30": 2.01,
+              "40": 1.98,
+              "50": 1.96,
+              "60": 1.93,
+              "70": 1.9,
+              "80": 1.87,
+              "90": 1.83,
+              "97": 1.78
+            },
+            "agility": {
+              "3": 8.93,
+              "10": 8.6,
+              "20": 8.39,
+              "30": 8.26,
+              "40": 8.15,
+              "50": 8.05,
+              "60": 7.96,
+              "70": 7.85,
+              "80": 7.74,
+              "90": 7.6,
+              "97": 7.41
+            },
+            "dribbling": {
+              "3": 12.12,
+              "10": 11.43,
+              "20": 11.02,
+              "30": 10.78,
+              "40": 10.58,
+              "50": 10.41,
+              "60": 10.25,
+              "70": 10.1,
+              "80": 9.93,
+              "90": 9.71,
+              "97": 9.4
+            },
+            "ballControl": {
+              "3": 12.1,
+              "10": 10.86,
+              "20": 10.1,
+              "30": 9.67,
+              "40": 9.35,
+              "50": 9.07,
+              "60": 8.8,
+              "70": 8.53,
+              "80": 8.26,
+              "90": 7.91,
+              "97": 7.48
+            },
+            "juggling": {
+              "3": 0.0,
+              "10": 1.0,
+              "20": 2.0,
+              "30": 3.0,
+              "40": 4.0,
+              "50": 5.0,
+              "60": 7.0,
+              "70": 9.0,
+              "80": 12.0,
+              "90": 16.0,
+              "97": 20.0
+            },
+            "overallRating": {
+              "3": 101.31,
+              "10": 102.45,
+              "20": 103.25,
+              "30": 103.82,
+              "40": 104.33,
+              "50": 104.79,
+              "60": 105.23,
+              "70": 105.65,
+              "80": 106.12,
+              "90": 106.74,
+              "97": 107.5
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

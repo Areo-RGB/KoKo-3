@@ -1,0 +1,49 @@
+{
+  "playlists": [
+    {
+      "name": "Ernährung",
+      "items": [
+        {
+          "key": "Ernährung/Kraftstoff_für_das_Spiel.mp4",
+          "title": "Kraftstoff_für_das_Spiel.mp4",
+          "url": "https://pub-273e3011dd234191b8967a5611f77d24.r2.dev/Ern%C3%A4hrung/Kraftstoff_f%C3%BCr_das_Spiel.mp4"
+        },
+        {
+          "key": "Ernährung/Leistung_steigern.mp4",
+          "title": "Leistung_steigern.mp4",
+          "url": "https://pub-273e3011dd234191b8967a5611f77d24.r2.dev/Ern%C3%A4hrung/Leistung_steigern.mp4"
+        },
+        {
+          "key": "Ernährung/Schokomilch_vs.mp4",
+          "title": "Schokomilch_vs.mp4",
+          "url": "https://pub-273e3011dd234191b8967a5611f77d24.r2.dev/Ern%C3%A4hrung/Schokomilch_vs.mp4"
+        }
+      ]
+    },
+    {
+      "name": "Prävention",
+      "items": [
+        {
+          "key": "Prävention/Der_Preis_des_Spiels.mp4",
+          "title": "Der_Preis_des_Spiels.mp4",
+          "url": "https://pub-273e3011dd234191b8967a5611f77d24.r2.dev/Pr%C3%A4vention/Der_Preis_des_Spiels.mp4"
+        }
+      ]
+    },
+    {
+      "name": "Talent",
+      "items": [
+        {
+          "key": "Talent/Die_Wissenschaft_der_Talentsuche.mp4",
+          "title": "Die_Wissenschaft_der_Talentsuche.mp4",
+          "url": "https://pub-273e3011dd234191b8967a5611f77d24.r2.dev/Talent/Die_Wissenschaft_der_Talentsuche.mp4"
+        },
+        {
+          "key": "Talent/How_to_Spot_a_Soccer_Superstar.mp4",
+          "title": "How_to_Spot_a_Soccer_Superstar.mp4",
+          "url": "https://pub-273e3011dd234191b8967a5611f77d24.r2.dev/Talent/How_to_Spot_a_Soccer_Superstar.mp4"
+        }
+      ]
+    }
+  ]
+}

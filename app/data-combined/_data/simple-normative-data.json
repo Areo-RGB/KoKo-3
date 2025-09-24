@@ -1,0 +1,222 @@
+{
+  "version": "1.0-simple",
+  "lastUpdated": "2025-09-13",
+  "study": {
+    "name": "DFB Leistungszentren 2015-2019",
+    "description": "Deutsche Nachwuchsspieler aus DFB-Leistungszentren"
+  },
+  "categories": [
+    {
+      "name": "Anthropometrie",
+      "description": "Körpermaße und physische Entwicklung",
+      "metrics": ["Körpergröße", "Körpermasse"]
+    },
+    {
+      "name": "Sprint Tests",
+      "description": "Sprintleistung über verschiedene Distanzen",
+      "metrics": ["5m Sprint", "10m Sprint", "20m Sprint", "30m Sprint"]
+    },
+    {
+      "name": "DFB Tests",
+      "description": "Offizielle DFB-Leistungsdiagnostik",
+      "metrics": [
+        "Schnelligkeit",
+        "Antritt",
+        "Gewandtheit",
+        "Dribbling",
+        "Ballkontrolle",
+        "Jonglieren",
+        "Gesamtleistung"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "Schnelligkeit",
+      "unit": "s",
+      "lowerIsBetter": true,
+      "data": [
+        { "age": "U11", "lowest": 3.47, "highest": 4.14 },
+        { "age": "U12", "lowest": 3.39, "highest": 4.02 },
+        { "age": "U13", "lowest": 3.29, "highest": 3.92 },
+        { "age": "U14", "lowest": 3.16, "highest": 3.8 },
+        { "age": "U15", "lowest": 3.05, "highest": 3.67 }
+      ]
+    },
+    {
+      "name": "Antritt",
+      "unit": "s",
+      "lowerIsBetter": true,
+      "data": [
+        { "age": "U11", "lowest": 1.99, "highest": 2.39 },
+        { "age": "U12", "lowest": 1.94, "highest": 2.34 },
+        { "age": "U13", "lowest": 1.89, "highest": 2.29 },
+        { "age": "U14", "lowest": 1.82, "highest": 2.22 },
+        { "age": "U15", "lowest": 1.78, "highest": 2.16 }
+      ]
+    },
+    {
+      "name": "Gewandtheit",
+      "unit": "s",
+      "lowerIsBetter": true,
+      "data": [
+        { "age": "U11", "lowest": 7.91, "highest": 9.66 },
+        { "age": "U12", "lowest": 7.76, "highest": 9.47 },
+        { "age": "U13", "lowest": 7.62, "highest": 9.23 },
+        { "age": "U14", "lowest": 7.5, "highest": 9.05 },
+        { "age": "U15", "lowest": 7.41, "highest": 8.93 }
+      ]
+    },
+    {
+      "name": "Dribbling",
+      "unit": "s",
+      "lowerIsBetter": true,
+      "data": [
+        { "age": "U11", "lowest": 10.43, "highest": 14.37 },
+        { "age": "U12", "lowest": 10.07, "highest": 13.49 },
+        { "age": "U13", "lowest": 9.78, "highest": 12.81 },
+        { "age": "U14", "lowest": 9.57, "highest": 12.33 },
+        { "age": "U15", "lowest": 9.4, "highest": 12.12 }
+      ]
+    },
+    {
+      "name": "Ballkontrolle",
+      "unit": "s",
+      "lowerIsBetter": true,
+      "data": [
+        { "age": "U11", "lowest": 9.0, "highest": 15.29 },
+        { "age": "U12", "lowest": 8.6, "highest": 14.39 },
+        { "age": "U13", "lowest": 8.07, "highest": 13.07 },
+        { "age": "U14", "lowest": 7.78, "highest": 12.49 },
+        { "age": "U15", "lowest": 7.48, "highest": 12.1 }
+      ]
+    },
+    {
+      "name": "Jonglieren",
+      "unit": "Anzahl",
+      "lowerIsBetter": false,
+      "data": [
+        { "age": "U11", "lowest": 0, "highest": 6 },
+        { "age": "U12", "lowest": 0, "highest": 9 },
+        { "age": "U13", "lowest": 0, "highest": 14 },
+        { "age": "U14", "lowest": 0, "highest": 18 },
+        { "age": "U15", "lowest": 0, "highest": 20 }
+      ]
+    },
+    {
+      "name": "Gesamtleistung",
+      "unit": "Punkte",
+      "lowerIsBetter": false,
+      "data": [
+        { "age": "U11", "lowest": 95.53, "highest": 102.84 },
+        { "age": "U12", "lowest": 97.0, "highest": 103.83 },
+        { "age": "U13", "lowest": 98.62, "highest": 105.34 },
+        { "age": "U14", "lowest": 100.07, "highest": 106.55 },
+        { "age": "U15", "lowest": 101.31, "highest": 107.5 }
+      ]
+    },
+    {
+      "name": "Körpergröße",
+      "unit": "cm",
+      "lowerIsBetter": false,
+      "data": [
+        { "age": "U9", "lowest": 132.2, "highest": 144.2 },
+        { "age": "U10", "lowest": 137.2, "highest": 148.7 },
+        { "age": "U11", "lowest": 139.5, "highest": 154.7 },
+        { "age": "U12", "lowest": 138.7, "highest": 161.2 },
+        { "age": "U13", "lowest": 147.3, "highest": 174.4 },
+        { "age": "U14", "lowest": 152.0, "highest": 179.0 },
+        { "age": "U15", "lowest": 149.9, "highest": 182.7 },
+        { "age": "U16", "lowest": 171.6, "highest": 184.4 },
+        { "age": "U17", "lowest": 166.8, "highest": 186.9 },
+        { "age": "U18", "lowest": 168.0, "highest": 185.1 },
+        { "age": "U19", "lowest": 169.3, "highest": 183.5 }
+      ]
+    },
+    {
+      "name": "Körpermasse",
+      "unit": "kg",
+      "lowerIsBetter": false,
+      "data": [
+        { "age": "U9", "lowest": 26.4, "highest": 37.5 },
+        { "age": "U10", "lowest": 28.8, "highest": 42.2 },
+        { "age": "U11", "lowest": 30.8, "highest": 45.7 },
+        { "age": "U12", "lowest": 31.2, "highest": 50.7 },
+        { "age": "U13", "lowest": 35.2, "highest": 60.2 },
+        { "age": "U14", "lowest": 37.6, "highest": 75.1 },
+        { "age": "U15", "lowest": 39.2, "highest": 75.1 },
+        { "age": "U16", "lowest": 63.6, "highest": 76.6 },
+        { "age": "U17", "lowest": 52.8, "highest": 79.4 },
+        { "age": "U18", "lowest": 58.3, "highest": 80.0 },
+        { "age": "U19", "lowest": 61.9, "highest": 72.9 }
+      ]
+    },
+    {
+      "name": "5m Sprint",
+      "unit": "s",
+      "lowerIsBetter": true,
+      "data": [
+        { "age": "U9", "lowest": 1.11, "highest": 1.19 },
+        { "age": "U13", "lowest": 1.03, "highest": 1.32 },
+        { "age": "U14", "lowest": 1.03, "highest": 1.37 },
+        { "age": "U15", "lowest": 0.97, "highest": 1.25 },
+        { "age": "U16", "lowest": 0.96, "highest": 1.25 },
+        { "age": "U17", "lowest": 0.94, "highest": 1.2 },
+        { "age": "U19", "lowest": 1.19, "highest": 1.35 }
+      ]
+    },
+    {
+      "name": "10m Sprint",
+      "unit": "s",
+      "lowerIsBetter": true,
+      "data": [
+        { "age": "U9", "lowest": 1.93, "highest": 2.15 },
+        { "age": "U10", "lowest": 1.91, "highest": 2.09 },
+        { "age": "U11", "lowest": 1.86, "highest": 2.04 },
+        { "age": "U12", "lowest": 1.85, "highest": 2.03 },
+        { "age": "U13", "lowest": 1.78, "highest": 2.15 },
+        { "age": "U14", "lowest": 1.77, "highest": 2.19 },
+        { "age": "U15", "lowest": 1.72, "highest": 2.04 },
+        { "age": "U16", "lowest": 1.67, "highest": 1.96 },
+        { "age": "U17", "lowest": 1.64, "highest": 2.02 },
+        { "age": "U18", "lowest": 1.62, "highest": 1.97 },
+        { "age": "U19", "lowest": 1.62, "highest": 1.92 }
+      ]
+    },
+    {
+      "name": "20m Sprint",
+      "unit": "s",
+      "lowerIsBetter": true,
+      "data": [
+        { "age": "U9", "lowest": 3.53, "highest": 3.87 },
+        { "age": "U10", "lowest": 3.43, "highest": 3.77 },
+        { "age": "U11", "lowest": 3.35, "highest": 3.67 },
+        { "age": "U12", "lowest": 3.29, "highest": 3.88 },
+        { "age": "U13", "lowest": 3.16, "highest": 3.7 },
+        { "age": "U14", "lowest": 3.18, "highest": 3.57 },
+        { "age": "U15", "lowest": 3.03, "highest": 3.51 },
+        { "age": "U16", "lowest": 2.9, "highest": 3.42 },
+        { "age": "U17", "lowest": 2.88, "highest": 3.16 },
+        { "age": "U18", "lowest": 2.84, "highest": 3.1 },
+        { "age": "U19", "lowest": 2.86, "highest": 3.4 }
+      ]
+    },
+    {
+      "name": "30m Sprint",
+      "unit": "s",
+      "lowerIsBetter": true,
+      "data": [
+        { "age": "U10", "lowest": 4.98, "highest": 5.39 },
+        { "age": "U11", "lowest": 4.93, "highest": 5.17 },
+        { "age": "U12", "lowest": 4.75, "highest": 5.04 },
+        { "age": "U13", "lowest": 4.4, "highest": 5.29 },
+        { "age": "U14", "lowest": 4.21, "highest": 4.92 },
+        { "age": "U15", "lowest": 4.13, "highest": 4.92 },
+        { "age": "U16", "lowest": 4.09, "highest": 4.62 },
+        { "age": "U17", "lowest": 3.96, "highest": 4.68 },
+        { "age": "U18", "lowest": 4.2, "highest": 4.56 },
+        { "age": "U19", "lowest": 4.33, "highest": 4.63 }
+      ]
+    }
+  ]
+}

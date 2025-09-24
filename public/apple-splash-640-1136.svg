@@ -1,0 +1,7 @@
+<svg width="640" height="1136" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="1136" fill="#ffffff"/>
+  <rect x="0" y="0" width="640" height="1136" fill="#0f172a" opacity="0.9"/>
+  <text x="320" y="568" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="48" font-weight="bold">Q.V</text>
+  <text x="320" y="620" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24">Sports Training</text>
+  <text x="320" y="680" text-anchor="middle" fill="#64748b" font-family="Arial, sans-serif" font-size="16">Loading...</text>
+</svg>

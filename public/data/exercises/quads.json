@@ -1,0 +1,38 @@
+{
+  "exerciseData": {
+    "title": "Quadrizeps Kraftübungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401883/male-bodyweight-quads-exercise-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401884/male-bodyweight-quads-exercise-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401886/male-bodyweight-quads-exercise-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401887/male-bodyweight-quads-exercise-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401889/male-bodyweight-quads-exercise-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401890/male-bodyweight-quads-exercise-6.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401891/male-bodyweight-quads-exercise-7.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401893/male-bodyweight-quads-exercise-8.mp4'"
+    ]
+  },
+  "stretchingData": {
+    "title": "Quadrizeps Stretching Übungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400452/male-quads-stretch-variation-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400453/male-quads-stretch-variation-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400455/male-quads-stretch-variation-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400456/male-quads-stretch-variation-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400558/male-quads-stretch-variation-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400561/male-quads-stretch-variation-6.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400562/male-quads-stretch-variation-7.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400564/male-quads-stretch-variation-8.mp4'"
+    ]
+  },
+  "muscleInfo": {
+    "name": "Oberschenkel (Vorderseite)",
+    "description": "Quadrizeps femoris – vier Muskelköpfe: Musculus rectus femoris, Musculus vastus lateralis, Musculus vastus medialis, Musculus vastus intermedius. Wichtig für die Kniestreckung und Stabilität des Kniegelenks.",
+    "details": [
+      "Musculus rectus femoris",
+      "Musculus vastus lateralis",
+      "Musculus vastus medialis",
+      "Musculus vastus intermedius'"
+    ]
+  }
+}

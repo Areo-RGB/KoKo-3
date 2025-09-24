@@ -1,0 +1,36 @@
+{
+  "exerciseData": {
+    "title": "Gesäß Kraftübungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401545/male-bodyweight-glutes-exercise-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401547/male-bodyweight-glutes-exercise-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401549/male-bodyweight-glutes-exercise-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401551/male-bodyweight-glutes-exercise-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401553/male-bodyweight-glutes-exercise-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401555/male-bodyweight-glutes-exercise-6.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401557/male-bodyweight-glutes-exercise-7.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401559/male-bodyweight-glutes-exercise-8.mp4'"
+    ]
+  },
+  "stretchingData": {
+    "title": "Gesäßmuskel Stretching Übungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400376/male-glutes-stretch-variation-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400377/male-glutes-stretch-variation-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400379/male-glutes-stretch-variation-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400380/male-glutes-stretch-variation-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400389/male-glutes-stretch-variation-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754400390/male-glutes-stretch-variation-6.mp4'"
+    ]
+  },
+  "muscleInfo": {
+    "name": "Gesäßmuskulatur",
+    "description": "Glutealmuskeln – wichtig für Hüftstreckung, Abduktion und -stabilität.",
+    "details": [
+      "Musculus gluteus maximus",
+      "Musculus gluteus medius",
+      "Musculus gluteus minimus",
+      "Musculus tensor fasciae latae'"
+    ]
+  }
+}

@@ -1,0 +1,477 @@
+{
+  "anthropometric": [
+    {
+      "id": "soccer-elite-fortin-guichard",
+      "study": "Fortin-Guichard et al. (2022)",
+      "sport": "Soccer",
+      "population": "Dutch elite youth males (8-12 years)",
+      "ageGroup": "U13 Selection",
+      "sampleSize": 110,
+      "data": [
+        {
+          "metric": "Age",
+          "unit": "years",
+          "selected": { "mean": 11.8, "sd": 0.4, "n": 47 },
+          "deselected": { "mean": 11.8, "sd": 0.3, "n": 63 }
+        },
+        {
+          "metric": "Height",
+          "unit": "cm",
+          "selected": { "mean": 148.9, "sd": 6.4, "n": 47 },
+          "deselected": { "mean": 144.9, "sd": 6.2, "n": 63 }
+        },
+        {
+          "metric": "Sitting Height",
+          "unit": "cm",
+          "selected": { "mean": 76.0, "sd": 3.6, "n": 47 },
+          "deselected": { "mean": 74.6, "sd": 4.4, "n": 63 }
+        },
+        {
+          "metric": "Weight",
+          "unit": "kg",
+          "selected": { "mean": 38.3, "sd": 5.1, "n": 47 },
+          "deselected": { "mean": 35.2, "sd": 4.0, "n": 63 }
+        },
+        {
+          "metric": "Biological Age",
+          "unit": "years",
+          "selected": { "mean": 11.41, "sd": 0.5, "n": 47 },
+          "deselected": { "mean": 11.17, "sd": 0.5, "n": 63 }
+        }
+      ]
+    },
+    {
+      "id": "soccer-longitudinal-saward",
+      "study": "Saward et al. (2020)",
+      "sport": "Soccer",
+      "population": "English elite youth males (8-19 years)",
+      "ageGroup": "U9-U19",
+      "sampleSize": 2875,
+      "data": [
+        {
+          "ageGroup": "U9",
+          "statureNonProf": { "mean": 135.0, "sd": 5.5 },
+          "statureProf": { "mean": 135.0, "sd": 5.3 },
+          "bodyMassNonProf": { "mean": 30.6, "sd": 3.9 },
+          "bodyMassProf": { "mean": 30.5, "sd": 3.8 }
+        },
+        {
+          "ageGroup": "U10",
+          "statureNonProf": { "mean": 140.0, "sd": 5.7 },
+          "statureProf": { "mean": 140.9, "sd": 5.6 },
+          "bodyMassNonProf": { "mean": 33.9, "sd": 4.7 },
+          "bodyMassProf": { "mean": 34.5, "sd": 4.4 }
+        },
+        {
+          "ageGroup": "U11",
+          "statureNonProf": { "mean": 144.6, "sd": 6.4 },
+          "statureProf": { "mean": 146.6, "sd": 6.1 },
+          "bodyMassNonProf": { "mean": 37.0, "sd": 5.6 },
+          "bodyMassProf": { "mean": 38.5, "sd": 5.3 }
+        },
+        {
+          "ageGroup": "U12",
+          "statureNonProf": { "mean": 151.6, "sd": 7.4 },
+          "statureProf": { "mean": 152.0, "sd": 7.1 },
+          "bodyMassNonProf": { "mean": 41.9, "sd": 7.0 },
+          "bodyMassProf": { "mean": 42.0, "sd": 5.6 }
+        },
+        {
+          "ageGroup": "U13",
+          "statureNonProf": { "mean": 158.3, "sd": 9.1 },
+          "statureProf": { "mean": 158.5, "sd": 8.6 },
+          "bodyMassNonProf": { "mean": 47.5, "sd": 8.9 },
+          "bodyMassProf": { "mean": 47.5, "sd": 8.0 }
+        },
+        {
+          "ageGroup": "U14",
+          "statureNonProf": { "mean": 167.5, "sd": 8.7 },
+          "statureProf": { "mean": 166.3, "sd": 9.4 },
+          "bodyMassNonProf": { "mean": 56.5, "sd": 9.6 },
+          "bodyMassProf": { "mean": 54.9, "sd": 9.6 }
+        },
+        {
+          "ageGroup": "U15",
+          "statureNonProf": { "mean": 173.0, "sd": 7.6 },
+          "statureProf": { "mean": 173.5, "sd": 8.8 },
+          "bodyMassNonProf": { "mean": 63.4, "sd": 9.1 },
+          "bodyMassProf": { "mean": 62.8, "sd": 9.7 }
+        },
+        {
+          "ageGroup": "U16",
+          "statureNonProf": { "mean": 177.0, "sd": 6.4 },
+          "statureProf": { "mean": 177.2, "sd": 6.8 },
+          "bodyMassNonProf": { "mean": 68.7, "sd": 7.8 },
+          "bodyMassProf": { "mean": 68.3, "sd": 8.2 }
+        },
+        {
+          "ageGroup": "U17",
+          "statureNonProf": { "mean": 178.4, "sd": 6.5 },
+          "statureProf": { "mean": 179.8, "sd": 6.1 },
+          "bodyMassNonProf": { "mean": 71.9, "sd": 7.6 },
+          "bodyMassProf": { "mean": 72.5, "sd": 6.7 }
+        },
+        {
+          "ageGroup": "U18",
+          "statureNonProf": { "mean": 178.5, "sd": 6.2 },
+          "statureProf": { "mean": 180.2, "sd": 5.8 },
+          "bodyMassNonProf": { "mean": 72.5, "sd": 7.5 },
+          "bodyMassProf": { "mean": 74.2, "sd": 7.0 }
+        },
+        {
+          "ageGroup": "U19",
+          "statureNonProf": { "mean": 178.9, "sd": 5.7 },
+          "statureProf": { "mean": 179.7, "sd": 5.1 },
+          "bodyMassNonProf": { "mean": 74.6, "sd": 6.4 },
+          "bodyMassProf": { "mean": 75.7, "sd": 7.6 }
+        }
+      ]
+    }
+  ],
+  "physicalPerformance": [
+    {
+      "id": "soccer-sprint-benchmarks-fortin-guichard",
+      "study": "Fortin-Guichard et al. (2022)",
+      "sport": "Soccer",
+      "population": "Dutch elite youth males",
+      "data": [
+        {
+          "ageGroup": "U10",
+          "test": "30m Sprint",
+          "unit": "seconds",
+          "fastSprinters": { "threshold": "≤4.980", "selectionRate": 87.5 },
+          "averageSprinters": {
+            "threshold": ">4.980 – <5.388",
+            "selectionRate": 55.6
+          },
+          "slowSprinters": { "threshold": "≥5.388", "selectionRate": 14.3 }
+        },
+        {
+          "ageGroup": "U11",
+          "test": "30m Sprint",
+          "unit": "seconds",
+          "fastSprinters": { "threshold": "≤4.927", "selectionRate": 88.2 },
+          "averageSprinters": {
+            "threshold": ">4.927 – <5.169",
+            "selectionRate": 47.2
+          },
+          "slowSprinters": { "threshold": "≥5.169", "selectionRate": 4.3 }
+        },
+        {
+          "ageGroup": "U12",
+          "test": "30m Sprint",
+          "unit": "seconds",
+          "fastSprinters": { "threshold": "≤4.845", "selectionRate": 82.4 },
+          "averageSprinters": {
+            "threshold": ">4.845 – <5.035",
+            "selectionRate": 51.4
+          },
+          "slowSprinters": { "threshold": "≥5.035", "selectionRate": 16.6 }
+        }
+      ]
+    },
+    {
+      "id": "soccer-longitudinal-performance-saward",
+      "study": "Saward et al. (2020)",
+      "sport": "Soccer",
+      "population": "English elite youth males",
+      "data": [
+        {
+          "ageGroup": "U9",
+          "speed20m": {
+            "nonProf": { "mean": 5.39, "sd": 0.24 },
+            "prof": { "mean": 5.46, "sd": 0.21 }
+          },
+          "slalomAgility": {
+            "nonProf": { "mean": 4.13, "sd": 0.25 },
+            "prof": { "mean": 4.21, "sd": 0.26 }
+          },
+          "cmja": {
+            "nonProf": { "mean": 27.5, "sd": 4.0 },
+            "prof": { "mean": 28.0, "sd": 4.1 }
+          },
+          "msftDistance": {
+            "nonProf": { "mean": 1288, "sd": 275 },
+            "prof": { "mean": 880, "sd": 57 }
+          }
+        },
+        {
+          "ageGroup": "U10",
+          "speed20m": {
+            "nonProf": { "mean": 5.52, "sd": 0.25 },
+            "prof": { "mean": 5.61, "sd": 0.25 }
+          },
+          "slalomAgility": {
+            "nonProf": { "mean": 4.28, "sd": 0.25 },
+            "prof": { "mean": 4.31, "sd": 0.24 }
+          },
+          "cmja": {
+            "nonProf": { "mean": 29.1, "sd": 4.4 },
+            "prof": { "mean": 30.1, "sd": 4.4 }
+          },
+          "msftDistance": {
+            "nonProf": { "mean": 1431, "sd": 282 },
+            "prof": { "mean": 1238, "sd": 286 }
+          }
+        },
+        {
+          "ageGroup": "U15",
+          "speed20m": {
+            "nonProf": { "mean": 6.5, "sd": 0.34 },
+            "prof": { "mean": 6.55, "sd": 0.3 }
+          },
+          "slalomAgility": {
+            "nonProf": { "mean": 4.87, "sd": 0.27 },
+            "prof": { "mean": 4.98, "sd": 0.27 }
+          },
+          "cmja": {
+            "nonProf": { "mean": 42.4, "sd": 5.4 },
+            "prof": { "mean": 43.0, "sd": 5.8 }
+          },
+          "msftDistance": {
+            "nonProf": { "mean": 2085, "sd": 250 },
+            "prof": { "mean": 2149, "sd": 263 }
+          }
+        }
+      ]
+    }
+  ],
+  "soccerSkills": [
+    {
+      "id": "soccer-dribbling-huijgen",
+      "study": "Huijgen et al. (2010)",
+      "sport": "Soccer",
+      "population": "Dutch talented youth (12-19 years)",
+      "sampleSize": 267,
+      "data": [
+        {
+          "ageGroup": "U12",
+          "n": 24,
+          "shuttleSprint": { "mean": 8.69, "sd": 0.37 },
+          "shuttleDribble": { "mean": 10.4, "sd": 0.6 },
+          "slalomSprint": { "mean": 15.18, "sd": 0.8 },
+          "slalomDribble": { "mean": 22.98, "sd": 2.29 }
+        },
+        {
+          "ageGroup": "U13",
+          "n": 47,
+          "shuttleSprint": { "mean": 8.48, "sd": 0.33 },
+          "shuttleDribble": { "mean": 10.03, "sd": 0.51 },
+          "slalomSprint": { "mean": 14.67, "sd": 0.68 },
+          "slalomDribble": { "mean": 21.84, "sd": 1.96 }
+        },
+        {
+          "ageGroup": "U15",
+          "n": 99,
+          "shuttleSprint": { "mean": 8.27, "sd": 0.32 },
+          "shuttleDribble": { "mean": 9.85, "sd": 0.48 },
+          "slalomSprint": { "mean": 14.14, "sd": 0.75 },
+          "slalomDribble": { "mean": 21.4, "sd": 1.81 }
+        },
+        {
+          "ageGroup": "U17",
+          "n": 84,
+          "shuttleSprint": { "mean": 8.03, "sd": 0.3 },
+          "shuttleDribble": { "mean": 9.49, "sd": 0.43 },
+          "slalomSprint": { "mean": 13.86, "sd": 0.76 },
+          "slalomDribble": { "mean": 20.81, "sd": 1.72 }
+        }
+      ]
+    },
+    {
+      "id": "soccer-german-talent-honer",
+      "study": "Höner et al. (2021)",
+      "sport": "Soccer",
+      "population": "German elite youth males (U12-U15)",
+      "sampleSize": 13869,
+      "data": [
+        {
+          "ageGroup": "U12",
+          "selected": {
+            "n": 582,
+            "kickingSkills": { "mean": 1.71, "sd": 0.53 },
+            "endurance": { "mean": 2.05, "sd": 0.72 },
+            "tacticalSkills": { "mean": 1.89, "sd": 0.57 },
+            "psychosocialSkills": { "mean": 2.01, "sd": 0.67 },
+            "sprint20m": { "mean": 3.54, "sd": 0.15 },
+            "agilityCODS": { "mean": 8.23, "sd": 0.42 },
+            "dribbling": { "mean": 10.69, "sd": 0.69 },
+            "ballControl": { "mean": 9.74, "sd": 1.25 },
+            "juggling": { "mean": 4.12, "sd": 4.24 }
+          },
+          "nonSelected": {
+            "n": 6077,
+            "kickingSkills": { "mean": 1.33, "sd": 0.56 },
+            "endurance": { "mean": 1.7, "sd": 0.75 },
+            "tacticalSkills": { "mean": 1.46, "sd": 0.58 },
+            "psychosocialSkills": { "mean": 1.71, "sd": 0.66 },
+            "sprint20m": { "mean": 3.64, "sd": 0.16 },
+            "agilityCODS": { "mean": 8.38, "sd": 0.4 },
+            "dribbling": { "mean": 11.06, "sd": 0.74 },
+            "ballControl": { "mean": 10.27, "sd": 1.33 },
+            "juggling": { "mean": 2.5, "sd": 3.01 }
+          }
+        },
+        {
+          "ageGroup": "U13",
+          "selected": {
+            "n": 356,
+            "kickingSkills": { "mean": 1.76, "sd": 0.55 },
+            "endurance": { "mean": 2.03, "sd": 0.74 },
+            "tacticalSkills": { "mean": 1.9, "sd": 0.57 },
+            "psychosocialSkills": { "mean": 2.04, "sd": 0.64 },
+            "sprint20m": { "mean": 3.43, "sd": 0.15 },
+            "agilityCODS": { "mean": 8.14, "sd": 0.39 },
+            "dribbling": { "mean": 10.49, "sd": 0.65 },
+            "ballControl": { "mean": 9.37, "sd": 1.2 },
+            "juggling": { "mean": 6.13, "sd": 5.29 }
+          },
+          "nonSelected": {
+            "n": 3324,
+            "kickingSkills": { "mean": 1.37, "sd": 0.54 },
+            "endurance": { "mean": 1.75, "sd": 0.75 },
+            "tacticalSkills": { "mean": 1.48, "sd": 0.57 },
+            "psychosocialSkills": { "mean": 1.72, "sd": 0.66 },
+            "sprint20m": { "mean": 3.55, "sd": 0.16 },
+            "agilityCODS": { "mean": 8.24, "sd": 0.39 },
+            "dribbling": { "mean": 10.77, "sd": 0.68 },
+            "ballControl": { "mean": 9.73, "sd": 1.26 },
+            "juggling": { "mean": 4.06, "sd": 4.31 }
+          }
+        },
+        {
+          "ageGroup": "U15",
+          "selected": {
+            "n": 58,
+            "kickingSkills": { "mean": 1.88, "sd": 0.42 },
+            "endurance": { "mean": 2.19, "sd": 0.61 },
+            "tacticalSkills": { "mean": 2.05, "sd": 0.51 },
+            "psychosocialSkills": { "mean": 2.02, "sd": 0.54 },
+            "sprint20m": { "mean": 3.23, "sd": 0.14 },
+            "agilityCODS": { "mean": 7.94, "sd": 0.43 },
+            "dribbling": { "mean": 10.1, "sd": 0.65 },
+            "ballControl": { "mean": 8.61, "sd": 1.21 },
+            "juggling": { "mean": 9.76, "sd": 6.4 }
+          },
+          "nonSelected": {
+            "n": 1187,
+            "kickingSkills": { "mean": 1.48, "sd": 0.54 },
+            "endurance": { "mean": 1.9, "sd": 0.73 },
+            "tacticalSkills": { "mean": 1.59, "sd": 0.56 },
+            "psychosocialSkills": { "mean": 1.79, "sd": 0.65 },
+            "sprint20m": { "mean": 3.29, "sd": 0.16 },
+            "agilityCODS": { "mean": 8.06, "sd": 0.39 },
+            "dribbling": { "mean": 10.47, "sd": 0.72 },
+            "ballControl": { "mean": 9.06, "sd": 1.17 },
+            "juggling": { "mean": 7.29, "sd": 5.74 }
+          }
+        }
+      ]
+    }
+  ],
+  "yoyoEndurance": [
+    {
+      "id": "yoyo-goto-epl-academy",
+      "study": "Goto (2012) & EPL Academy Data",
+      "sport": "Soccer",
+      "population": "English Premier League Academy players",
+      "sampleSize": null,
+      "data": [
+        { "ageGroup": "U9", "mean": 787, "sd": null },
+        { "ageGroup": "U10", "mean": 950, "sd": null },
+        { "ageGroup": "U11", "mean": 1200, "sd": null },
+        { "ageGroup": "U12", "mean": 1350, "sd": null },
+        { "ageGroup": "U13", "mean": 1600, "sd": null },
+        { "ageGroup": "U14", "mean": 1887, "sd": null },
+        { "ageGroup": "U15", "mean": 2200, "sd": null },
+        { "ageGroup": "U16", "mean": 2400, "sd": null },
+        { "ageGroup": "U17", "mean": 2617, "sd": null },
+        { "ageGroup": "U18", "mean": 2760, "sd": null }
+      ]
+    },
+    {
+      "id": "yoyo-deprez-2015",
+      "study": "Deprez et al. (2015)",
+      "sport": "Soccer",
+      "population": "High-level Belgian youth soccer players",
+      "sampleSize": null,
+      "data": [
+        { "ageGroup": "U15", "mean": 2024, "sd": 470 },
+        { "ageGroup": "U17", "mean": 2404, "sd": 347 },
+        { "ageGroup": "U19", "mean": 2475, "sd": 347 }
+      ]
+    },
+    {
+      "id": "yoyo-deprez-2014-elite",
+      "study": "Deprez et al. (2014) - Elite",
+      "sport": "Soccer",
+      "population": "Elite Belgian youth soccer players",
+      "sampleSize": null,
+      "data": [
+        { "ageGroup": "U13", "mean": 1270, "sd": 440 },
+        { "ageGroup": "U15", "mean": 1818, "sd": 430 },
+        { "ageGroup": "U17", "mean": 2151, "sd": 373 }
+      ]
+    },
+    {
+      "id": "yoyo-deprez-2014-subelite",
+      "study": "Deprez et al. (2014) - Sub-Elite",
+      "sport": "Soccer",
+      "population": "Sub-elite Belgian youth soccer players",
+      "sampleSize": null,
+      "data": [
+        { "ageGroup": "U13", "mean": 965, "sd": 378 },
+        { "ageGroup": "U15", "mean": 1425, "sd": 366 },
+        { "ageGroup": "U17", "mean": 1640, "sd": 475 }
+      ]
+    },
+    {
+      "id": "yoyo-deprez-2014-pubertal",
+      "study": "Deprez et al. (2014) - Pubertal",
+      "sport": "Soccer",
+      "population": "Elite pubertal Belgian soccer players",
+      "sampleSize": null,
+      "data": [
+        { "ageGroup": "U11", "mean": 1024, "sd": 352 },
+        { "ageGroup": "U12", "mean": 978, "sd": 417 },
+        { "ageGroup": "U13", "mean": 1317, "sd": 343 },
+        { "ageGroup": "U14", "mean": 1549, "sd": 365 }
+      ]
+    },
+    {
+      "id": "yoyo-perroni-2023",
+      "study": "Perroni et al. (2023)",
+      "sport": "Soccer",
+      "population": "Young male soccer players",
+      "sampleSize": 107,
+      "data": [{ "ageGroup": "U14", "mean": 1530, "sd": 623 }]
+    },
+    {
+      "id": "yoyo-bangsbo-2008-by-level",
+      "study": "Bangsbo et al. (2008) - Performance Levels",
+      "sport": "Soccer",
+      "population": "Male soccer players by performance level",
+      "sampleSize": null,
+      "data": [
+        { "level": "Top-Elite", "mean": 2420, "sd": null },
+        { "level": "Moderate-Elite", "mean": 2190, "sd": null },
+        { "level": "Sub-Elite", "mean": 2030, "sd": null },
+        { "level": "Moderately Trained", "mean": 1810, "sd": null }
+      ]
+    },
+    {
+      "id": "yoyo-bangsbo-2008-by-age",
+      "study": "Bangsbo et al. (2008) - Age Groups",
+      "sport": "Soccer",
+      "population": "Male soccer players by age",
+      "sampleSize": null,
+      "data": [
+        { "ageGroup": "U12", "mean": 1100, "sd": null },
+        { "ageGroup": "U14", "mean": 1500, "sd": null },
+        { "ageGroup": "U16", "mean": 1850, "sd": null },
+        { "ageGroup": "U18", "mean": 2100, "sd": null },
+        { "ageGroup": "U19+", "mean": 2200, "sd": null }
+      ]
+    }
+  ]
+}

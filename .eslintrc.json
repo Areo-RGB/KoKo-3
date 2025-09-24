@@ -1,0 +1,50 @@
+{
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    // Site-breaking errors only - these can cause runtime failures
+    "no-undef": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "@next/next/no-html-link-for-pages": "off",
+    "@next/next/no-img-element": "off",
+    
+    // Downgraded to warnings - important but not site-breaking
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/strict-boolean-expressions": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "prefer-const": "warn",
+    "no-var": "warn",
+    
+    // Disabled - code style/preference rules
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "object-shorthand": "off",
+    "prefer-template": "off"
+  },
+  // Prevent client components from importing Node-only or server-only modules
+  "overrides": [
+    {
+      "files": [
+        "components/**/*.{ts,tsx}",
+        "app/**/_components/**/*.{ts,tsx}"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              { "name": "fs" },
+              { "name": "fs/promises" },
+              { "name": "path" },
+              { "name": "child_process" },
+              { "name": "os" },
+              { "name": "@/app/data-table-demo/_lib/data" }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

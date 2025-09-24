@@ -1,0 +1,37 @@
+{
+  "exerciseData": {
+    "title": "Unterer Rücken Kraftübungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401860/male-bodyweight-lowerback-exercise-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401861/male-bodyweight-lowerback-exercise-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401863/male-bodyweight-lowerback-exercise-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401864/male-bodyweight-lowerback-exercise-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401865/male-bodyweight-lowerback-exercise-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401867/male-bodyweight-lowerback-exercise-6.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401869/male-bodyweight-lowerback-exercise-7.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754401871/male-bodyweight-lowerback-exercise-8.mp4'"
+    ]
+  },
+  "stretchingData": {
+    "title": "Unterer Rücken Stretching Übungen",
+    "videos": [
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399739/male-back-stretch-variation-1.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399745/male-back-stretch-variation-2.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399750/male-back-stretch-variation-3.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399755/male-back-stretch-variation-4.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399760/male-back-stretch-variation-5.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399765/male-back-stretch-variation-6.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399771/male-back-stretch-variation-7.mp4",
+      "https://res.cloudinary.com/dds2p6fmc/video/upload/v1754399776/male-back-stretch-variation-8.mp4'"
+    ]
+  },
+  "muscleInfo": {
+    "name": "Unterer Rücken",
+    "description": "Stabilisiert die Wirbelsäule und ermöglicht die aufrechte Haltung.",
+    "details": [
+      "Musculus erector spinae (m. iliocostalis, m. longissimus, m. spinalis)",
+      "Musculus multifidus",
+      "Musculi interspinales/intertransversarii'"
+    ]
+  }
+}

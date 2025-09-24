@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+   <channel>
+      <title>Amazon CLI (V1) User Guide Updates</title>
+      <link>https://docs.aws.amazon.com/cli/v1/userguide/</link>
+      <description>A RSS feed containing the latest updates on https://docs.aws.amazon.com/cli/v1/userguide/.</description>
+      <language>en-us</language>
+      <atom:link href="https://docs.aws.amazon.com/cli/v1/userguide/aws-cli-v1-user-guide-updates.rss"
+                 rel="self"
+                 type="application/rss+xml"/>
+      <lastBuildDate>Mon, 22 Sep 2025 18:47:40 GMT</lastBuildDate>
+      <item>
+         <title>Updated credential and authentication information.</title>
+         <link>https://docs.aws.amazon.com/cli/v1/userguide/document-history.html</link>
+         <description>Updated credential and authentication method instructions and examples. This
+                    includes updating relevant configuration pages. To accommodate this
+                    increase in documentation, relevant credential topics were moved to the new
+                        &lt;a href="https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-authentication.html"&gt;Authentication and access credentials&lt;/a&gt;
+                    section.</description>
+         <pubDate>Fri, 31 Mar 2023 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Updated_credential_and_authentication_information._2023-03-31</guid>
+      </item>
+      <item>
+         <title>Content for the AWS CLI V1 and V2 are now separated into their respective
+                    guides</title>
+         <link>https://docs.aws.amazon.com/cli/v1/userguide/document-history.html</link>
+         <description>For clarity and ease, the AWS CLI version 1 and AWS CLI version 2 content is now separated into
+                    their own guides. 
+                    &lt;span&gt;
+                        For AWS CLI version 2, see the latest &lt;a href="https://docs.aws.amazon.com/cli/latest/userguide/"&gt;AWS Command Line Interface User Guide&lt;/a&gt;&lt;/span&gt;
+                </description>
+         <pubDate>Tue, 2 Nov 2021 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Content_for_the_AWS_CLI_V1_and_V2_are_now_separated_into_their_respective
+____________________guides_2021-11-02</guid>
+      </item>
+      <item>
+         <title>Added AWS CLI alias information</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-alias.html</link>
+         <description>Added AWS CLI alias information. Aliases are shortcuts you can create in the
+                    AWS Command Line Interface (AWS CLI) to shorten commands or scripts that you frequently use.</description>
+         <pubDate>Thu, 11 Mar 2021 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Added_AWS_CLI_alias_information_2021-03-11</guid>
+      </item>
+      <item>
+         <title>Updated filter output information</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html</link>
+         <description>Updated information for filters and moved to their own page.</description>
+         <pubDate>Mon, 1 Feb 2021 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Updated_filter_output_information_2021-02-01</guid>
+      </item>
+      <item>
+         <title>Deprecation announcement for Python 2.7, 3.4, and 3.5</title>
+         <link>https://docs.aws.amazon.com/cli/v1/userguide/document-history.html</link>
+         <description>Python 2.7 was deprecated by the Python Software Foundation on January 1,
+                    2020. Going forward, customers using the AWS CLI version 1 should transition to using
+                    Python 3, with a minimum of Python 3.6. Python 2.7 support is deprecated for new
+                    versions of the AWS CLI version 1 starting 7/19/2021. Python 3.4 and 3.5 is deprecated
+                    starting 2/1/2021.</description>
+         <pubDate>Fri, 29 Jan 2021 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Deprecation_announcement_for_Python_2.7,_3.4,_and_3.5_2021-01-29</guid>
+      </item>
+      <item>
+         <title>Added Amazon S3 scripting example</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-services-s3-lifecycle-example.html</link>
+         <description>Added an Amazon S3 lifecycle scripting example.</description>
+         <pubDate>Thu, 15 Oct 2020 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Added_Amazon_S3_scripting_example_2020-10-15</guid>
+      </item>
+      <item>
+         <title>Added Amazon EC2 scripting example</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2-instance-type-script.html</link>
+         <description>Added an Amazon EC2 instance type scripting example.</description>
+         <pubDate>Thu, 15 Oct 2020 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Added_Amazon_EC2_scripting_example_2020-10-15</guid>
+      </item>
+      <item>
+         <title>Added retries information</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-retries.html</link>
+         <description>Added a retries page for features and behavior of retries in the AWS CLI.</description>
+         <pubDate>Thu, 17 Sep 2020 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Added_retries_information_2020-09-17</guid>
+      </item>
+      <item>
+         <title>Server-side and client-side pagination page</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-pagination.html</link>
+         <description>Updated pagination information and centralized on a single page.</description>
+         <pubDate>Mon, 17 Aug 2020 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Server-side_and_client-side_pagination_page_2020-08-17</guid>
+      </item>
+      <item>
+         <title>Updated s3 commands page</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-services-s3-commands.html</link>
+         <description>Updated the high-level s3 commands page with new examples and
+                    resources.</description>
+         <pubDate>Thu, 30 Jul 2020 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Updated_s3_commands_page_2020-07-30</guid>
+      </item>
+      <item>
+         <title>Updated installation information</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html</link>
+         <description>The install, update, and uninstall information for Linux, macOS, and Windows
+                    are updated.</description>
+         <pubDate>Tue, 19 May 2020 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Updated_installation_information_2020-05-19</guid>
+      </item>
+      <item>
+         <title>Updated to remove support for Python 2.6 and 3.3 from AWS CLI version 1</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/deprecate-old-python-versions.html</link>
+         <description>As of January 10th, 2020, AWS CLI version 1 no longer supports using Python
+                    versions 2.6 or 3.3. You must update to a newer version of Python to use AWS CLI
+                    version 1.17 or later.</description>
+         <pubDate>Fri, 10 Jan 2020 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Updated_to_remove_support_for_Python_2.6_and_3.3_from_AWS_CLI_version_1_2020-01-10</guid>
+      </item>
+      <item>
+         <title>New MFA section</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html#cli-configure-role-mfa</link>
+         <description>Added a new section describing how to access the CLI using multi-factor
+                    authentication and roles.</description>
+         <pubDate>Fri, 3 May 2019 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#New_MFA_section_2019-05-03</guid>
+      </item>
+      <item>
+         <title>Update to "Using the CLI" section</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html</link>
+         <description>Major improvements and additions to the usage instructions and
+                    procedures.</description>
+         <pubDate>Thu, 7 Mar 2019 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Update_to_"Using_the_CLI"_section_2019-03-07</guid>
+      </item>
+      <item>
+         <title>Update to "Installing the CLI" section</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html</link>
+         <description>Major improvements and additions to the AWS CLI installation instructions and
+                    procedures.</description>
+         <pubDate>Thu, 7 Mar 2019 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Update_to_"Installing_the_CLI"_section_2019-03-07</guid>
+      </item>
+      <item>
+         <title>Update to "Configuring the CLI" section</title>
+         <link>https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html</link>
+         <description>Major improvements and additions to the AWS CLI configuration instructions and
+                    procedures.</description>
+         <pubDate>Thu, 7 Mar 2019 19:00:00 GMT</pubDate>
+         <guid isPermaLink="false">https://docs.aws.amazon.com/cli/v1/userguide/#Update_to_"Configuring_the_CLI"_section_2019-03-07</guid>
+      </item>
+   </channel>
+</rss>

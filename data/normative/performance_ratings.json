@@ -1,0 +1,1337 @@
+{
+  "U11": {
+    "overall_categories_description": {
+      "C": "0 – 30 % (Below Average)",
+      "B": "31 – 70 % (Average)",
+      "A": "71 – 100 % (Above Average)"
+    },
+    "exercises": [
+      {
+        "name": "Schnelligkeit (20 m)",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "4.14",
+          "10%": "4.01",
+          "20%": "3.93",
+          "30%": "3.87",
+          "40%": "3.82",
+          "50%": "3.78",
+          "60%": "3.74",
+          "70%": "3.69",
+          "gut (80%)": "3.64",
+          "sehr gut (90%)": "3.57",
+          "ausgezeichnet (Max / 97%)": "3.47"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "3.47 s"
+          },
+          "Very Good": {
+            "min_exclusive": "3.47 s",
+            "max_inclusive": "3.57 s"
+          },
+          "Good": {
+            "min_exclusive": "3.57 s",
+            "max_inclusive": "3.64 s"
+          },
+          "Above Average": {
+            "min_exclusive": "3.64 s",
+            "max_inclusive": "3.69 s"
+          },
+          "Average": {
+            "min_exclusive": "3.69 s",
+            "max_inclusive": "3.87 s"
+          },
+          "Below Average": {
+            "min_exclusive": "3.87 s",
+            "max_inclusive": "4.14 s"
+          }
+        }
+      },
+      {
+        "name": "Antritt (10 m)",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "2.39",
+          "10%": "2.33",
+          "20%": "2.28",
+          "30%": "2.24",
+          "40%": "2.21",
+          "50%": "2.18",
+          "60%": "2.16",
+          "70%": "2.13",
+          "gut (80%)": "2.10",
+          "sehr gut (90%)": "2.05",
+          "ausgezeichnet (Max / 97%)": "1.99"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "1.99 s"
+          },
+          "Very Good": {
+            "min_exclusive": "1.99 s",
+            "max_inclusive": "2.05 s"
+          },
+          "Good": {
+            "min_exclusive": "2.05 s",
+            "max_inclusive": "2.10 s"
+          },
+          "Above Average": {
+            "min_exclusive": "2.10 s",
+            "max_inclusive": "2.13 s"
+          },
+          "Average": {
+            "min_exclusive": "2.13 s",
+            "max_inclusive": "2.24 s"
+          },
+          "Below Average": {
+            "min_exclusive": "2.24 s",
+            "max_inclusive": "2.39 s"
+          }
+        }
+      },
+      {
+        "name": "Gewandtheit",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "9.66",
+          "10%": "9.33",
+          "20%": "9.07",
+          "30%": "8.90",
+          "40%": "8.77",
+          "50%": "8.66",
+          "60%": "8.54",
+          "70%": "8.42",
+          "gut (80%)": "8.28",
+          "sehr gut (90%)": "8.11",
+          "ausgezeichnet (Max / 97%)": "7.91"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "7.91 s"
+          },
+          "Very Good": {
+            "min_exclusive": "7.91 s",
+            "max_inclusive": "8.11 s"
+          },
+          "Good": {
+            "min_exclusive": "8.11 s",
+            "max_inclusive": "8.28 s"
+          },
+          "Above Average": {
+            "min_exclusive": "8.28 s",
+            "max_inclusive": "8.42 s"
+          },
+          "Average": {
+            "min_exclusive": "8.42 s",
+            "max_inclusive": "8.90 s"
+          },
+          "Below Average": {
+            "min_exclusive": "8.90 s",
+            "max_inclusive": "9.66 s"
+          }
+        }
+      },
+      {
+        "name": "Dribbling",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "14.37",
+          "10%": "13.42",
+          "20%": "12.84",
+          "30%": "12.46",
+          "40%": "12.15",
+          "50%": "11.90",
+          "60%": "11.68",
+          "70%": "11.44",
+          "gut (80%)": "11.16",
+          "sehr gut (90%)": "10.84",
+          "ausgezeichnet (Max / 97%)": "10.43"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "10.43 s"
+          },
+          "Very Good": {
+            "min_exclusive": "10.43 s",
+            "max_inclusive": "10.84 s"
+          },
+          "Good": {
+            "min_exclusive": "10.84 s",
+            "max_inclusive": "11.16 s"
+          },
+          "Above Average": {
+            "min_exclusive": "11.16 s",
+            "max_inclusive": "11.44 s"
+          },
+          "Average": {
+            "min_exclusive": "11.44 s",
+            "max_inclusive": "12.46 s"
+          },
+          "Below Average": {
+            "min_exclusive": "12.46 s",
+            "max_inclusive": "14.37 s"
+          }
+        }
+      },
+      {
+        "name": "Ballkontrolle",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "15.29",
+          "10%": "13.81",
+          "20%": "12.86",
+          "30%": "12.28",
+          "40%": "11.78",
+          "50%": "11.36",
+          "60%": "10.99",
+          "70%": "10.59",
+          "gut (80%)": "10.18",
+          "sehr gut (90%)": "9.66",
+          "ausgezeichnet (Max / 97%)": "9.00"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "9.00 s"
+          },
+          "Very Good": {
+            "min_exclusive": "9.00 s",
+            "max_inclusive": "9.66 s"
+          },
+          "Good": {
+            "min_exclusive": "9.66 s",
+            "max_inclusive": "10.18 s"
+          },
+          "Above Average": {
+            "min_exclusive": "10.18 s",
+            "max_inclusive": "10.59 s"
+          },
+          "Average": {
+            "min_exclusive": "10.59 s",
+            "max_inclusive": "12.28 s"
+          },
+          "Below Average": {
+            "min_exclusive": "12.28 s",
+            "max_inclusive": "15.29 s"
+          }
+        }
+      },
+      {
+        "name": "Balljonglieren",
+        "unit": "P.",
+        "type": "higher_is_better",
+        "performance_tiers": {
+          "Min (3%)": "0.00",
+          "10%": "0.00",
+          "20%": "0.00",
+          "30%": "0.00",
+          "40%": "1.00",
+          "50%": "1.00",
+          "60%": "1.00",
+          "70%": "1.00",
+          "gut (80%)": "2.00",
+          "sehr gut (90%)": "3.00",
+          "ausgezeichnet (Max / 97%)": "6.00"
+        },
+        "ranges": {
+          "Excellent": {
+            "min_inclusive": "6.00 P."
+          },
+          "Very Good": {
+            "min_inclusive": "3.00 P.",
+            "max_exclusive": "6.00 P."
+          },
+          "Good": {
+            "min_inclusive": "2.00 P.",
+            "max_exclusive": "3.00 P."
+          },
+          "Above Average": {
+            "min_inclusive": "1.00 P.",
+            "max_exclusive": "2.00 P."
+          },
+          "Average": {
+            "min_inclusive": "0.00 P.",
+            "max_exclusive": "1.00 P."
+          },
+          "Below Average": {
+            "min_inclusive": "0.00 P.",
+            "max_exclusive": "0.00 P."
+          }
+        }
+      }
+    ]
+  },
+  "U12": {
+    "overall_categories_description": {
+      "C": "0 – 30 % (Below Average)",
+      "B": "31 – 70 % (Average)",
+      "A": "71 – 100 % (Above Average)"
+    },
+    "exercises": [
+      {
+        "name": "Schnelligkeit (20 m)",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "4.02",
+          "10%": "3.91",
+          "20%": "3.82",
+          "30%": "3.77",
+          "40%": "3.72",
+          "50%": "3.68",
+          "60%": "3.64",
+          "70%": "3.60",
+          "gut (Good) (80%)": "3.55",
+          "sehr gut (90%)": "3.48",
+          "ausgezeichnet (Max / 97%)": "3.39"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "3.39 s"
+          },
+          "Very Good": {
+            "min_exclusive": "3.39 s",
+            "max_inclusive": "3.48 s"
+          },
+          "Good": {
+            "min_exclusive": "3.48 s",
+            "max_inclusive": "3.55 s"
+          },
+          "Above Average": {
+            "min_exclusive": "3.55 s",
+            "max_inclusive": "3.60 s"
+          },
+          "Average": {
+            "min_exclusive": "3.60 s",
+            "max_inclusive": "3.77 s"
+          },
+          "Below Average": {
+            "min_exclusive": "3.77 s",
+            "max_inclusive": "4.02 s"
+          }
+        }
+      },
+      {
+        "name": "Antritt (10 m)",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "2.34",
+          "10%": "2.28",
+          "20%": "2.22",
+          "30%": "2.19",
+          "40%": "2.16",
+          "50%": "2.13",
+          "60%": "2.11",
+          "70%": "2.08",
+          "gut (Good) (80%)": "2.05",
+          "sehr gut (90%)": "2.00",
+          "ausgezeichnet (Max / 97%)": "1.94"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "1.94 s"
+          },
+          "Very Good": {
+            "min_exclusive": "1.94 s",
+            "max_inclusive": "2.00 s"
+          },
+          "Good": {
+            "min_exclusive": "2.00 s",
+            "max_inclusive": "2.05 s"
+          },
+          "Above Average": {
+            "min_exclusive": "2.05 s",
+            "max_inclusive": "2.08 s"
+          },
+          "Average": {
+            "min_exclusive": "2.08 s",
+            "max_inclusive": "2.19 s"
+          },
+          "Below Average": {
+            "min_exclusive": "2.19 s",
+            "max_inclusive": "2.34 s"
+          }
+        }
+      },
+      {
+        "name": "Gewandtheit",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "9.47",
+          "10%": "9.10",
+          "20%": "8.87",
+          "30%": "8.72",
+          "40%": "8.59",
+          "50%": "8.48",
+          "60%": "8.38",
+          "70%": "8.26",
+          "gut (Good) (80%)": "8.14",
+          "sehr gut (90%)": "7.98",
+          "ausgezeichnet (Max / 97%)": "7.76"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "7.76 s"
+          },
+          "Very Good": {
+            "min_exclusive": "7.76 s",
+            "max_inclusive": "7.98 s"
+          },
+          "Good": {
+            "min_exclusive": "7.98 s",
+            "max_inclusive": "8.14 s"
+          },
+          "Above Average": {
+            "min_exclusive": "8.14 s",
+            "max_inclusive": "8.26 s"
+          },
+          "Average": {
+            "min_exclusive": "8.26 s",
+            "max_inclusive": "8.72 s"
+          },
+          "Below Average": {
+            "min_exclusive": "8.72 s",
+            "max_inclusive": "9.47 s"
+          }
+        }
+      },
+      {
+        "name": "Dribbling",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "13.49",
+          "10%": "12.62",
+          "20%": "12.11",
+          "30%": "11.79",
+          "40%": "11.53",
+          "50%": "11.32",
+          "60%": "11.12",
+          "70%": "10.92",
+          "gut (Good) (80%)": "10.70",
+          "sehr gut (90%)": "10.42",
+          "ausgezeichnet (Max / 97%)": "10.07"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "10.07 s"
+          },
+          "Very Good": {
+            "min_exclusive": "10.07 s",
+            "max_inclusive": "10.42 s"
+          },
+          "Good": {
+            "min_exclusive": "10.42 s",
+            "max_inclusive": "10.70 s"
+          },
+          "Above Average": {
+            "min_exclusive": "10.70 s",
+            "max_inclusive": "10.92 s"
+          },
+          "Average": {
+            "min_exclusive": "10.92 s",
+            "max_inclusive": "11.79 s"
+          },
+          "Below Average": {
+            "min_exclusive": "11.79 s",
+            "max_inclusive": "13.49 s"
+          }
+        }
+      },
+      {
+        "name": "Ballkontrolle",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "14.39",
+          "10%": "12.95",
+          "20%": "12.09",
+          "30%": "11.56",
+          "40%": "11.12",
+          "50%": "10.75",
+          "60%": "10.40",
+          "70%": "10.04",
+          "gut (Good) (80%)": "9.69",
+          "sehr gut (90%)": "9.21",
+          "ausgezeichnet (Max / 97%)": "8.60"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "8.60 s"
+          },
+          "Very Good": {
+            "min_exclusive": "8.60 s",
+            "max_inclusive": "9.21 s"
+          },
+          "Good": {
+            "min_exclusive": "9.21 s",
+            "max_inclusive": "9.69 s"
+          },
+          "Above Average": {
+            "min_exclusive": "9.69 s",
+            "max_inclusive": "10.04 s"
+          },
+          "Average": {
+            "min_exclusive": "10.04 s",
+            "max_inclusive": "11.56 s"
+          },
+          "Below Average": {
+            "min_exclusive": "11.56 s",
+            "max_inclusive": "14.39 s"
+          }
+        }
+      },
+      {
+        "name": "Balljonglieren",
+        "unit": "P.",
+        "type": "higher_is_better",
+        "performance_tiers": {
+          "Min (3%)": "0.00",
+          "10%": "0.00",
+          "20%": "0.00",
+          "30%": "1.00",
+          "40%": "1.00",
+          "50%": "1.00",
+          "60%": "1.00",
+          "70%": "2.00",
+          "gut (Good) (80%)": "3.00",
+          "sehr gut (90%)": "4.00",
+          "ausgezeichnet (Max / 97%)": "9.00"
+        },
+        "ranges": {
+          "Excellent": {
+            "min_inclusive": "9.00 P."
+          },
+          "Very Good": {
+            "min_inclusive": "4.00 P.",
+            "max_exclusive": "9.00 P."
+          },
+          "Good": {
+            "min_inclusive": "3.00 P.",
+            "max_exclusive": "4.00 P."
+          },
+          "Above Average": {
+            "min_inclusive": "2.00 P.",
+            "max_exclusive": "3.00 P."
+          },
+          "Average": {
+            "min_inclusive": "1.00 P.",
+            "max_exclusive": "2.00 P."
+          },
+          "Below Average": {
+            "min_inclusive": "0.00 P.",
+            "max_exclusive": "1.00 P."
+          }
+        }
+      }
+    ]
+  },
+  "U13": {
+    "overall_categories_description": {
+      "C": "0 – 30 % (Below Average)",
+      "B": "31 – 70 % (Average)",
+      "A": "71 – 100 % (Above Average)"
+    },
+    "exercises": [
+      {
+        "name": "Schnelligkeit (20 m)",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "3.92",
+          "10%": "3.80",
+          "20%": "3.72",
+          "30%": "3.68",
+          "40%": "3.62",
+          "50%": "3.58",
+          "60%": "3.54",
+          "70%": "3.50",
+          "gut (Good) (80%)": "3.46",
+          "sehr gut (Very good) (90%)": "3.38",
+          "ausgezeichnet (Excellent) (Max / 97%)": "3.29"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "3.29 s"
+          },
+          "Very Good": {
+            "min_exclusive": "3.29 s",
+            "max_inclusive": "3.38 s"
+          },
+          "Good": {
+            "min_exclusive": "3.38 s",
+            "max_inclusive": "3.46 s"
+          },
+          "Above Average": {
+            "min_exclusive": "3.46 s",
+            "max_inclusive": "3.50 s"
+          },
+          "Average": {
+            "min_exclusive": "3.50 s",
+            "max_inclusive": "3.68 s"
+          },
+          "Below Average": {
+            "min_exclusive": "3.68 s",
+            "max_inclusive": "3.92 s"
+          }
+        }
+      },
+      {
+        "name": "Antritt (10 m)",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "2.29",
+          "10%": "2.22",
+          "20%": "2.17",
+          "30%": "2.13",
+          "40%": "2.11",
+          "50%": "2.08",
+          "60%": "2.06",
+          "70%": "2.03",
+          "gut (Good) (80%)": "2.00",
+          "sehr gut (Very good) (90%)": "1.96",
+          "ausgezeichnet (Excellent) (Max / 97%)": "1.89"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "1.89 s"
+          },
+          "Very Good": {
+            "min_exclusive": "1.89 s",
+            "max_inclusive": "1.96 s"
+          },
+          "Good": {
+            "min_exclusive": "1.96 s",
+            "max_inclusive": "2.00 s"
+          },
+          "Above Average": {
+            "min_exclusive": "2.00 s",
+            "max_inclusive": "2.03 s"
+          },
+          "Average": {
+            "min_exclusive": "2.03 s",
+            "max_inclusive": "2.13 s"
+          },
+          "Below Average": {
+            "min_exclusive": "2.13 s",
+            "max_inclusive": "2.29 s"
+          }
+        }
+      },
+      {
+        "name": "Gewandtheit",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "9.23",
+          "10%": "8.89",
+          "20%": "8.66",
+          "30%": "8.51",
+          "40%": "8.39",
+          "50%": "8.29",
+          "60%": "8.19",
+          "70%": "8.08",
+          "gut (Good) (80%)": "7.97",
+          "sehr gut (Very good) (90%)": "7.81",
+          "ausgezeichnet (Excellent) (Max / 97%)": "7.62"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "7.62 s"
+          },
+          "Very Good": {
+            "min_exclusive": "7.62 s",
+            "max_inclusive": "7.81 s"
+          },
+          "Good": {
+            "min_exclusive": "7.81 s",
+            "max_inclusive": "7.97 s"
+          },
+          "Above Average": {
+            "min_exclusive": "7.97 s",
+            "max_inclusive": "8.08 s"
+          },
+          "Average": {
+            "min_exclusive": "8.08 s",
+            "max_inclusive": "8.51 s"
+          },
+          "Below Average": {
+            "min_exclusive": "8.51 s",
+            "max_inclusive": "9.23 s"
+          }
+        }
+      },
+      {
+        "name": "Dribbling",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "12.81",
+          "10%": "12.01",
+          "20%": "11.57",
+          "30%": "11.28",
+          "40%": "11.06",
+          "50%": "10.88",
+          "60%": "10.70",
+          "70%": "10.52",
+          "gut (Good) (80%)": "10.33",
+          "sehr gut (Very good) (90%)": "10.09",
+          "ausgezeichnet (Excellent) (Max / 97%)": "9.78"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "9.78 s"
+          },
+          "Very Good": {
+            "min_exclusive": "9.78 s",
+            "max_inclusive": "10.09 s"
+          },
+          "Good": {
+            "min_exclusive": "10.09 s",
+            "max_inclusive": "10.33 s"
+          },
+          "Above Average": {
+            "min_exclusive": "10.33 s",
+            "max_inclusive": "10.52 s"
+          },
+          "Average": {
+            "min_exclusive": "10.52 s",
+            "max_inclusive": "11.28 s"
+          },
+          "Below Average": {
+            "min_exclusive": "11.28 s",
+            "max_inclusive": "12.81 s"
+          }
+        }
+      },
+      {
+        "name": "Ballkontrolle",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "13.07",
+          "10%": "11.86",
+          "20%": "11.06",
+          "30%": "10.58",
+          "40%": "10.20",
+          "50%": "9.89",
+          "60%": "9.60",
+          "70%": "9.30",
+          "gut (Good) (80%)": "8.98",
+          "sehr gut (Very good) (90%)": "8.57",
+          "ausgezeichnet (Excellent) (Max / 97%)": "8.07"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "8.07 s"
+          },
+          "Very Good": {
+            "min_exclusive": "8.07 s",
+            "max_inclusive": "8.57 s"
+          },
+          "Good": {
+            "min_exclusive": "8.57 s",
+            "max_inclusive": "8.98 s"
+          },
+          "Above Average": {
+            "min_exclusive": "8.98 s",
+            "max_inclusive": "9.30 s"
+          },
+          "Average": {
+            "min_exclusive": "9.30 s",
+            "max_inclusive": "10.58 s"
+          },
+          "Below Average": {
+            "min_exclusive": "10.58 s",
+            "max_inclusive": "13.07 s"
+          }
+        }
+      },
+      {
+        "name": "Balljonglieren",
+        "unit": "P.",
+        "type": "higher_is_better",
+        "performance_tiers": {
+          "Min (3%)": "0.00",
+          "10%": "0.00",
+          "20%": "1.00",
+          "30%": "1.00",
+          "40%": "1.00",
+          "50%": "2.00",
+          "60%": "3.00",
+          "70%": "4.00",
+          "gut (Good) (80%)": "6.00",
+          "sehr gut (Very good) (90%)": "9.00",
+          "ausgezeichnet (Excellent) (Max / 97%)": "14.00"
+        },
+        "ranges": {
+          "Excellent": {
+            "min_inclusive": "14.00 P."
+          },
+          "Very Good": {
+            "min_inclusive": "9.00 P.",
+            "max_exclusive": "14.00 P."
+          },
+          "Good": {
+            "min_inclusive": "6.00 P.",
+            "max_exclusive": "9.00 P."
+          },
+          "Above Average": {
+            "min_inclusive": "4.00 P.",
+            "max_exclusive": "6.00 P."
+          },
+          "Average": {
+            "min_inclusive": "1.00 P.",
+            "max_exclusive": "4.00 P."
+          },
+          "Below Average": {
+            "min_inclusive": "0.00 P.",
+            "max_exclusive": "1.00 P."
+          }
+        }
+      }
+    ]
+  },
+  "U14": {
+    "overall_categories_description": {
+      "C": "0 – 30 % (Below Average)",
+      "B": "31 – 70 % (Average)",
+      "A": "71 – 100 % (Above Average)"
+    },
+    "exercises": [
+      {
+        "name": "Schnelligkeit (20 m)",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "3.80",
+          "10%": "3.68",
+          "20%": "3.60",
+          "30%": "3.55",
+          "40%": "3.50",
+          "50%": "3.46",
+          "60%": "3.42",
+          "70%": "3.38",
+          "gut (Good) (80%)": "3.32",
+          "sehr gut (Very good) (90%)": "3.25",
+          "ausgezeichnet (Excellent) (Max / 97%)": "3.16"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "3.16 s"
+          },
+          "Very Good": {
+            "min_exclusive": "3.16 s",
+            "max_inclusive": "3.25 s"
+          },
+          "Good": {
+            "min_exclusive": "3.25 s",
+            "max_inclusive": "3.32 s"
+          },
+          "Above Average": {
+            "min_exclusive": "3.32 s",
+            "max_inclusive": "3.38 s"
+          },
+          "Average": {
+            "min_exclusive": "3.38 s",
+            "max_inclusive": "3.55 s"
+          },
+          "Below Average": {
+            "min_exclusive": "3.55 s",
+            "max_inclusive": "3.80 s"
+          }
+        }
+      },
+      {
+        "name": "Antritt (10 m)",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "2.22",
+          "10%": "2.16",
+          "20%": "2.11",
+          "30%": "2.07",
+          "40%": "2.04",
+          "50%": "2.02",
+          "60%": "1.99",
+          "70%": "1.97",
+          "gut (Good) (80%)": "1.93",
+          "sehr gut (Very good) (90%)": "1.89",
+          "ausgezeichnet (Excellent) (Max / 97%)": "1.82"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "1.82 s"
+          },
+          "Very Good": {
+            "min_exclusive": "1.82 s",
+            "max_inclusive": "1.89 s"
+          },
+          "Good": {
+            "min_exclusive": "1.89 s",
+            "max_inclusive": "1.93 s"
+          },
+          "Above Average": {
+            "min_exclusive": "1.93 s",
+            "max_inclusive": "1.97 s"
+          },
+          "Average": {
+            "min_exclusive": "1.97 s",
+            "max_inclusive": "2.07 s"
+          },
+          "Below Average": {
+            "min_exclusive": "2.07 s",
+            "max_inclusive": "2.22 s"
+          }
+        }
+      },
+      {
+        "name": "Gewandtheit",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "9.05",
+          "10%": "8.71",
+          "20%": "8.50",
+          "30%": "8.37",
+          "40%": "8.25",
+          "50%": "8.15",
+          "60%": "8.06",
+          "70%": "7.96",
+          "gut (Good) (80%)": "7.85",
+          "sehr gut (Very good) (90%)": "7.70",
+          "ausgezeichnet (Excellent) (Max / 97%)": "7.50"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "7.50 s"
+          },
+          "Very Good": {
+            "min_exclusive": "7.50 s",
+            "max_inclusive": "7.70 s"
+          },
+          "Good": {
+            "min_exclusive": "7.70 s",
+            "max_inclusive": "7.85 s"
+          },
+          "Above Average": {
+            "min_exclusive": "7.85 s",
+            "max_inclusive": "7.96 s"
+          },
+          "Average": {
+            "min_exclusive": "7.96 s",
+            "max_inclusive": "8.37 s"
+          },
+          "Below Average": {
+            "min_exclusive": "8.37 s",
+            "max_inclusive": "9.05 s"
+          }
+        }
+      },
+      {
+        "name": "Dribbling",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "12.33",
+          "10%": "11.61",
+          "20%": "11.22",
+          "30%": "10.97",
+          "40%": "10.76",
+          "50%": "10.59",
+          "60%": "10.43",
+          "70%": "10.27",
+          "gut (Good) (80%)": "10.09",
+          "sehr gut (Very good) (90%)": "9.85",
+          "ausgezeichnet (Excellent) (Max / 97%)": "9.57"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "9.57 s"
+          },
+          "Very Good": {
+            "min_exclusive": "9.57 s",
+            "max_inclusive": "9.85 s"
+          },
+          "Good": {
+            "min_exclusive": "9.85 s",
+            "max_inclusive": "10.09 s"
+          },
+          "Above Average": {
+            "min_exclusive": "10.09 s",
+            "max_inclusive": "10.27 s"
+          },
+          "Average": {
+            "min_exclusive": "10.27 s",
+            "max_inclusive": "10.97 s"
+          },
+          "Below Average": {
+            "min_exclusive": "10.97 s",
+            "max_inclusive": "12.33 s"
+          }
+        }
+      },
+      {
+        "name": "Ballkontrolle",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "12.49",
+          "10%": "11.20",
+          "20%": "10.50",
+          "30%": "10.09",
+          "40%": "9.78",
+          "50%": "9.47",
+          "60%": "9.19",
+          "70%": "8.91",
+          "gut (Good) (80%)": "8.60",
+          "sehr gut (Very good) (90%)": "8.23",
+          "ausgezeichnet (Excellent) (Max / 97%)": "7.78"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "7.78 s"
+          },
+          "Very Good": {
+            "min_exclusive": "7.78 s",
+            "max_inclusive": "8.23 s"
+          },
+          "Good": {
+            "min_exclusive": "8.23 s",
+            "max_inclusive": "8.60 s"
+          },
+          "Above Average": {
+            "min_exclusive": "8.60 s",
+            "max_inclusive": "8.91 s"
+          },
+          "Average": {
+            "min_exclusive": "8.91 s",
+            "max_inclusive": "10.09 s"
+          },
+          "Below Average": {
+            "min_exclusive": "10.09 s",
+            "max_inclusive": "12.49 s"
+          }
+        }
+      },
+      {
+        "name": "Balljonglieren",
+        "unit": "P.",
+        "type": "higher_is_better",
+        "performance_tiers": {
+          "Min (3%)": "0.00",
+          "10%": "1.00",
+          "20%": "1.00",
+          "30%": "2.00",
+          "40%": "3.00",
+          "50%": "4.00",
+          "60%": "5.00",
+          "70%": "7.00",
+          "gut (Good) (80%)": "9.00",
+          "sehr gut (Very good) (90%)": "13.00",
+          "ausgezeichnet (Excellent) (Max / 97%)": "18.00"
+        },
+        "ranges": {
+          "Excellent": {
+            "min_inclusive": "18.00 P."
+          },
+          "Very Good": {
+            "min_inclusive": "13.00 P.",
+            "max_exclusive": "18.00 P."
+          },
+          "Good": {
+            "min_inclusive": "9.00 P.",
+            "max_exclusive": "13.00 P."
+          },
+          "Above Average": {
+            "min_inclusive": "7.00 P.",
+            "max_exclusive": "9.00 P."
+          },
+          "Average": {
+            "min_inclusive": "2.00 P.",
+            "max_exclusive": "7.00 P."
+          },
+          "Below Average": {
+            "min_inclusive": "0.00 P.",
+            "max_exclusive": "2.00 P."
+          }
+        }
+      }
+    ]
+  },
+  "U15": {
+    "overall_categories_description": {
+      "C": "0 – 30 % (Below Average)",
+      "B": "31 – 70 % (Average)",
+      "A": "71 – 100 % (Above Average)"
+    },
+    "exercises": [
+      {
+        "name": "Schnelligkeit (20 m)",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "3.67",
+          "10%": "3.56",
+          "20%": "3.47",
+          "30%": "3.42",
+          "40%": "3.37",
+          "50%": "3.32",
+          "60%": "3.28",
+          "70%": "3.24",
+          "gut (Good) (80%)": "3.19",
+          "sehr gut (Very good) (90%)": "3.13",
+          "ausgezeichnet (Excellent) (Max / 97%)": "3.05"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "3.05 s"
+          },
+          "Very Good": {
+            "min_exclusive": "3.05 s",
+            "max_inclusive": "3.13 s"
+          },
+          "Good": {
+            "min_exclusive": "3.13 s",
+            "max_inclusive": "3.19 s"
+          },
+          "Above Average": {
+            "min_exclusive": "3.19 s",
+            "max_inclusive": "3.24 s"
+          },
+          "Average": {
+            "min_exclusive": "3.24 s",
+            "max_inclusive": "3.42 s"
+          },
+          "Below Average": {
+            "min_exclusive": "3.42 s",
+            "max_inclusive": "3.67 s"
+          }
+        }
+      },
+      {
+        "name": "Antritt (10 m)",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "2.16",
+          "10%": "2.09",
+          "20%": "2.04",
+          "30%": "2.01",
+          "40%": "1.98",
+          "50%": "1.96",
+          "60%": "1.93",
+          "70%": "1.90",
+          "gut (Good) (80%)": "1.87",
+          "sehr gut (Very good) (90%)": "1.83",
+          "ausgezeichnet (Excellent) (Max / 97%)": "1.78"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "1.78 s"
+          },
+          "Very Good": {
+            "min_exclusive": "1.78 s",
+            "max_inclusive": "1.83 s"
+          },
+          "Good": {
+            "min_exclusive": "1.83 s",
+            "max_inclusive": "1.87 s"
+          },
+          "Above Average": {
+            "min_exclusive": "1.87 s",
+            "max_inclusive": "1.90 s"
+          },
+          "Average": {
+            "min_exclusive": "1.90 s",
+            "max_inclusive": "2.01 s"
+          },
+          "Below Average": {
+            "min_exclusive": "2.01 s",
+            "max_inclusive": "2.16 s"
+          }
+        }
+      },
+      {
+        "name": "Gewandtheit",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "8.93",
+          "10%": "8.60",
+          "20%": "8.39",
+          "30%": "8.26",
+          "40%": "8.15",
+          "50%": "8.05",
+          "60%": "7.96",
+          "70%": "7.85",
+          "gut (Good) (80%)": "7.74",
+          "sehr gut (Very good) (90%)": "7.60",
+          "ausgezeichnet (Excellent) (Max / 97%)": "7.41"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "7.41 s"
+          },
+          "Very Good": {
+            "min_exclusive": "7.41 s",
+            "max_inclusive": "7.60 s"
+          },
+          "Good": {
+            "min_exclusive": "7.60 s",
+            "max_inclusive": "7.74 s"
+          },
+          "Above Average": {
+            "min_exclusive": "7.74 s",
+            "max_inclusive": "7.85 s"
+          },
+          "Average": {
+            "min_exclusive": "7.85 s",
+            "max_inclusive": "8.26 s"
+          },
+          "Below Average": {
+            "min_exclusive": "8.26 s",
+            "max_inclusive": "8.93 s"
+          }
+        }
+      },
+      {
+        "name": "Dribbling",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "12.12",
+          "10%": "11.43",
+          "20%": "11.02",
+          "30%": "10.78",
+          "40%": "10.58",
+          "50%": "10.41",
+          "60%": "10.25",
+          "70%": "10.10",
+          "gut (Good) (80%)": "9.93",
+          "sehr gut (Very good) (90%)": "9.71",
+          "ausgezeichnet (Excellent) (Max / 97%)": "9.40"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "9.40 s"
+          },
+          "Very Good": {
+            "min_exclusive": "9.40 s",
+            "max_inclusive": "9.71 s"
+          },
+          "Good": {
+            "min_exclusive": "9.71 s",
+            "max_inclusive": "9.93 s"
+          },
+          "Above Average": {
+            "min_exclusive": "9.93 s",
+            "max_inclusive": "10.10 s"
+          },
+          "Average": {
+            "min_exclusive": "10.10 s",
+            "max_inclusive": "10.78 s"
+          },
+          "Below Average": {
+            "min_exclusive": "10.78 s",
+            "max_inclusive": "12.12 s"
+          }
+        }
+      },
+      {
+        "name": "Ballkontrolle",
+        "unit": "s",
+        "type": "lower_is_better",
+        "performance_tiers": {
+          "Min (3%)": "12.10",
+          "10%": "10.86",
+          "20%": "10.10",
+          "30%": "9.67",
+          "40%": "9.35",
+          "50%": "9.07",
+          "60%": "8.80",
+          "70%": "8.53",
+          "gut (Good) (80%)": "8.26",
+          "sehr gut (Very good) (90%)": "7.91",
+          "ausgezeichnet (Excellent) (Max / 97%)": "7.48"
+        },
+        "ranges": {
+          "Excellent": {
+            "max_inclusive": "7.48 s"
+          },
+          "Very Good": {
+            "min_exclusive": "7.48 s",
+            "max_inclusive": "7.91 s"
+          },
+          "Good": {
+            "min_exclusive": "7.91 s",
+            "max_inclusive": "8.26 s"
+          },
+          "Above Average": {
+            "min_exclusive": "8.26 s",
+            "max_inclusive": "8.53 s"
+          },
+          "Average": {
+            "min_exclusive": "8.53 s",
+            "max_inclusive": "9.67 s"
+          },
+          "Below Average": {
+            "min_exclusive": "9.67 s",
+            "max_inclusive": "12.10 s"
+          }
+        }
+      },
+      {
+        "name": "Balljonglieren",
+        "unit": "P.",
+        "type": "higher_is_better",
+        "performance_tiers": {
+          "Min (3%)": "0.00",
+          "10%": "1.00",
+          "20%": "2.00",
+          "30%": "3.00",
+          "40%": "4.00",
+          "50%": "5.00",
+          "60%": "7.00",
+          "70%": "9.00",
+          "gut (Good) (80%)": "12.00",
+          "sehr gut (Very good) (90%)": "16.00",
+          "ausgezeichnet (Excellent) (Max / 97%)": "20.00"
+        },
+        "ranges": {
+          "Excellent": {
+            "min_inclusive": "20.00 P."
+          },
+          "Very Good": {
+            "min_inclusive": "16.00 P.",
+            "max_exclusive": "20.00 P."
+          },
+          "Good": {
+            "min_inclusive": "12.00 P.",
+            "max_exclusive": "16.00 P."
+          },
+          "Above Average": {
+            "min_inclusive": "9.00 P.",
+            "max_exclusive": "12.00 P."
+          },
+          "Average": {
+            "min_inclusive": "3.00 P.",
+            "max_exclusive": "9.00 P."
+          },
+          "Below Average": {
+            "min_inclusive": "0.00 P.",
+            "max_exclusive": "3.00 P."
+          }
+        }
+      }
+    ]
+  }
+}
