@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import playersData from '@/data/players/players.json';
+import performanceData from './data/performance.json';
 import { useState } from 'react';
 import ChartDataTable from './_components/chart-data-table';
 import VerticalBarChart from './_components/vertical-bar-chart';
@@ -40,30 +40,16 @@ export default function PerformanceChartsPage() {
         </TabsList>
 
         {TABS.map((item) => {
-          const rows = (playersData.players as any[])
-            .map((p) => {
-              const r = (p.results?.[item.key] || []) as {
-                date?: string | null;
-                value?: number;
-                unit?: string;
-              }[];
-              if (!r.length) return null;
-              const latest = [...r].sort((a, b) => {
-                if (!a.date && !b.date) return 0;
-                if (!a.date) return 1;
-                if (!b.date) return -1;
-                return String(a.date).localeCompare(String(b.date));
-              })[r.length - 1];
-              return {
-                name: p.name,
-                value: latest?.value ?? 0,
-                date: latest?.date ?? null,
-              };
-            })
-            .filter(Boolean) as any[];
-          const sorted = sortDescending(rows as any[], 'value' as any);
-          const labels = sorted.map((entry: any) => entry.name);
-          const values = sorted.map((entry: any) => Number(entry.value ?? 0));
+          const rows = (performanceData[item.key as keyof typeof performanceData] || []) as {
+            name: string;
+            value: number;
+            date: string;
+            team: string | null;
+          }[];
+
+          const sorted = sortDescending(rows, 'value');
+          const labels = sorted.map((entry) => entry.name);
+          const values = sorted.map((entry) => entry.value);
           const sampleDate = sorted[0]?.date ?? null;
 
           if (labels.length === 0) {
@@ -107,7 +93,7 @@ export default function PerformanceChartsPage() {
                   <ChartDataTable
                     rows={sorted}
                     valueKey={'value'}
-                    title={item.title}
+                    title={item.key === 'jonglieren' ? '' : item.title}
                     unit={item.unit}
                   />
                 </CardContent>

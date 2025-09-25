@@ -5,7 +5,7 @@ export const TABS: readonly TabConfig[] = [
     key: 'jonglieren',
     title: 'Jonglieren',
     valueKey: 'repetitions',
-    unit: 'Wiederholungen',
+    unit: 'Wdh.',
     description: 'Balljonglage-Bestwerte pro Spieler',
     variant: 'orange',
   },
