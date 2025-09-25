@@ -143,6 +143,13 @@
             "unit": "m"
           }
         ],
+        "jonglieren": [
+          {
+            "date": "2025-09-25",
+            "value": 54,
+            "unit": "x"
+          }
+        ],
         "Schnelligkeit (20m)": [
           {
             "date": null,

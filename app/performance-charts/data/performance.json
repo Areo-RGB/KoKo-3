@@ -1,0 +1,156 @@
+{
+  "jonglieren": [
+    {
+      "name": "Lion",
+      "value": 100,
+      "date": "2025-09-15",
+      "team": "U12"
+    },
+    {
+      "name": "Erik",
+      "value": 96,
+      "date": "2025-09-15",
+      "team": null
+    },
+    {
+      "name": "Berat",
+      "value": 54,
+      "date": "2025-09-24",
+      "team": "U12"
+    },
+    {
+      "name": "Jakob",
+      "value": 26,
+      "date": "2025-09-15",
+      "team": "U12"
+    },
+    {
+      "name": "Metin",
+      "value": 25,
+      "date": "2025-09-15",
+      "team": "U12"
+    },
+    {
+      "name": "Silas",
+      "value": 24,
+      "date": "2025-09-15",
+      "team": null
+    },
+    {
+      "name": "Arvid",
+      "value": 18,
+      "date": "2025-09-15",
+      "team": "U12"
+    },
+    {
+      "name": "Lennox",
+      "value": 16,
+      "date": "2025-09-15",
+      "team": null
+    },
+    {
+      "name": "Finley",
+      "value": 15,
+      "date": "2025-09-15",
+      "team": "U12"
+    },
+    {
+      "name": "Eray",
+      "value": 13,
+      "date": "2025-09-15",
+      "team": null
+    },
+    {
+      "name": "Paul",
+      "value": 13,
+      "date": "2025-09-15",
+      "team": "U11"
+    },
+    {
+      "name": "Lasse",
+      "value": 6,
+      "date": "2025-09-15",
+      "team": null
+    },
+    {
+      "name": "Levi",
+      "value": 5,
+      "date": "2025-09-15",
+      "team": "U13"
+    }
+  ],
+  "yoyoIr1": [
+    {
+      "name": "Erik",
+      "value": 920,
+      "date": "2025-09-12",
+      "team": null
+    },
+    {
+      "name": "Finley",
+      "value": 840,
+      "date": "2025-09-12",
+      "team": "U12"
+    },
+    {
+      "name": "Levi",
+      "value": 600,
+      "date": "2025-09-12",
+      "team": "U13"
+    },
+    {
+      "name": "Jakob",
+      "value": 400,
+      "date": "2025-09-12",
+      "team": "U12"
+    },
+    {
+      "name": "Arvid",
+      "value": 400,
+      "date": "2025-09-12",
+      "team": "U12"
+    },
+    {
+      "name": "Silas",
+      "value": 360,
+      "date": "2025-09-12",
+      "team": null
+    },
+    {
+      "name": "Berat",
+      "value": 360,
+      "date": "2025-09-12",
+      "team": "U12"
+    },
+    {
+      "name": "Lasse",
+      "value": 280,
+      "date": "2025-09-12",
+      "team": null
+    },
+    {
+      "name": "Metin",
+      "value": 280,
+      "date": "2025-09-12",
+      "team": "U12"
+    },
+    {
+      "name": "Lion",
+      "value": 200,
+      "date": "2025-09-12",
+      "team": "U12"
+    },
+    {
+      "name": "Malik",
+      "value": 200,
+      "date": "2025-09-12",
+      "team": null
+    },
+    {
+      "name": "Eray",
+      "value": 160,
+      "date": "2025-09-12",
+      "team": null
+    }
+  ]
+}
