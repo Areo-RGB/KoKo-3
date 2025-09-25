@@ -2,17 +2,20 @@ import type { LucideIcon } from 'lucide-react';
 import {
   Database,
   Dumbbell,
-  FileText,
+  GraduationCap,
   Home,
   LineChart,
-  ListOrdered,
   PlayCircle,
+  Trophy,
+  Users,
 } from 'lucide-react';
 
 export type SidebarLink = {
   title: string;
   url: string;
   icon: LucideIcon;
+  mobileLabel?: string;
+  showOnMobile?: boolean;
 };
 
 export type SidebarSection = {
@@ -26,6 +29,8 @@ export const navigationLinks: SidebarLink[] = [
     title: 'Startseite',
     url: '/',
     icon: Home,
+    mobileLabel: 'Home',
+    showOnMobile: true,
   },
   {
     title: 'Fortschritt',
@@ -38,7 +43,9 @@ export const datenLinks: SidebarLink[] = [
   {
     title: 'Video DFB Tests',
     url: '/ranking',
-    icon: ListOrdered,
+    icon: Trophy,
+    mobileLabel: 'Ranking',
+    showOnMobile: true,
   },
   {
     title: 'Daten & Normwerte',
@@ -53,7 +60,9 @@ export const datenLinks: SidebarLink[] = [
   {
     title: 'Spieler',
     url: '/spieler',
-    icon: FileText,
+    icon: Users,
+    mobileLabel: 'Spieler',
+    showOnMobile: true,
   },
 ];
 
@@ -64,6 +73,8 @@ export const trainingToolsLinks: SidebarLink[] = [
     title: 'Trainingsvideos',
     url: '/video-player',
     icon: PlayCircle,
+    mobileLabel: 'Videos',
+    showOnMobile: true,
   },
   {
     title: 'FIFA 11+',
@@ -86,7 +97,9 @@ export const juniorLinks: SidebarLink[] = [
   {
     title: 'Junioren \u00dcbersicht',
     url: '/junioren',
-    icon: FileText,
+    icon: GraduationCap,
+    mobileLabel: 'Junioren',
+    showOnMobile: true,
   },
 ];
 
@@ -109,6 +122,6 @@ export const sidebarSections: SidebarSection[] = [
   {
     id: 'tools',
     label: 'Werkzeuge & Funktionen',
-    links: toolsLinks,
+    links: [...trainingToolsLinks, ...toolsLinks],
   },
 ];
