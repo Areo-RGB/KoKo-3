@@ -5,6 +5,7 @@ import { Button as MovingBorderButton } from '@/components/ui/moving-border';
 import { SelectNative } from '@/components/ui/select-native';
 import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
 import { sportsData } from '@/lib/data';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   getSportsDataWithRanks,
   getVideoForPlayer,
@@ -56,6 +57,38 @@ export default function HomePage() {
       setPlayingVideo({ playerName, videoUrl, exerciseName });
     }
   };
+
+  // Avatar image URLs mirrored from the Fortschritt page
+  const nameToAvatarUrl: Record<string, string> = {
+    Behrat: '/assets/images/spieler-avatars/avatars-256/behrat.webp',
+    Eray: '/assets/images/spieler-avatars/avatars-256/eray.webp',
+    Erik: '/assets/images/spieler-avatars/avatars-256/erik.webp',
+    Finley: '/assets/images/spieler-avatars/avatars-256/finley.webp',
+    Jakob: '/assets/images/spieler-avatars/avatars-256/jakob.webp',
+    Kayden: '/assets/images/spieler-avatars/avatars-256/kayden.webp',
+    Lasse: '/assets/images/spieler-avatars/avatars-256/lasse.webp',
+    Lennox: '/assets/images/spieler-avatars/avatars-256/lennox.webp',
+    Levi: '/assets/images/spieler-avatars/avatars-256/levi.webp',
+    Lion: '/assets/images/spieler-avatars/avatars-256/lion.webp',
+    Metin: '/assets/images/spieler-avatars/avatars-256/metin.webp',
+    Paul: '/assets/images/spieler-avatars/avatars-256/paul.webp',
+    Silas: '/assets/images/spieler-avatars/avatars-256/silas.webp',
+  };
+
+  function getAvatarForName(name: string): string | undefined {
+    if (nameToAvatarUrl[name]) return nameToAvatarUrl[name];
+    const base = name.trim().toLowerCase().replace(/\s+/g, '-');
+    return `/assets/images/spieler-avatars/avatars-256/${base}.webp`;
+  }
+
+  function getInitials(name: string): string {
+    return name
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((part) => part[0]?.toUpperCase() ?? '')
+      .join('')
+      .slice(0, 2);
+  }
 
   const playerHasVideo = (
     playerName: string,
@@ -255,14 +288,12 @@ export default function HomePage() {
                       onClick={() =>
                         handlePlayerClick(participant.name, selectedSport.name)
                       }
-                      containerClassName={`w-full h-auto ${
-                        videoAvailable ? 'cursor-pointer' : ''
-                      }`}
-                      className={`flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-200 ${
-                        videoAvailable
-                          ? 'bg-muted hover:bg-accent cursor-pointer'
-                          : 'bg-muted hover:bg-accent'
-                      }`}
+                      containerClassName={`w-full h-auto ${videoAvailable ? 'cursor-pointer' : ''
+                        }`}
+                      className={`flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-200 ${videoAvailable
+                        ? 'bg-muted hover:bg-accent cursor-pointer'
+                        : 'bg-muted hover:bg-accent'
+                        }`}
                       borderRadius="var(--radius)"
                       duration={3000}
                       borderClassName="bg-[radial-gradient(hsl(var(--primary))_40%,transparent_60%)] opacity-[0.8]"
@@ -271,6 +302,10 @@ export default function HomePage() {
                         <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold">
                           {participant.rank}
                         </div>
+                        <Avatar className="h-8 w-8">
+                          <AvatarImage src={getAvatarForName(participant.name)} alt={participant.name} />
+                          <AvatarFallback>{getInitials(participant.name)}</AvatarFallback>
+                        </Avatar>
                         <span className="text-foreground font-medium">
                           {participant.name}
                         </span>
@@ -296,16 +331,19 @@ export default function HomePage() {
                       onClick={() =>
                         handlePlayerClick(participant.name, selectedSport.name)
                       }
-                      className={`flex items-center justify-between rounded-lg border px-4 py-3 transition-all duration-200 ${
-                        videoAvailable
-                          ? 'border-border bg-muted hover:border-primary hover:bg-accent cursor-pointer'
-                          : 'border-border bg-muted hover:border-primary hover:bg-accent'
-                      }`}
+                      className={`flex items-center justify-between rounded-lg border px-4 py-3 transition-all duration-200 ${videoAvailable
+                        ? 'border-border bg-muted hover:border-primary hover:bg-accent cursor-pointer'
+                        : 'border-border bg-muted hover:border-primary hover:bg-accent'
+                        }`}
                     >
                       <div className="flex items-center gap-4">
                         <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold">
                           {participant.rank}
                         </div>
+                        <Avatar className="h-8 w-8">
+                          <AvatarImage src={getAvatarForName(participant.name)} alt={participant.name} />
+                          <AvatarFallback>{getInitials(participant.name)}</AvatarFallback>
+                        </Avatar>
                         <span className="text-foreground font-medium">
                           {participant.name}
                         </span>
