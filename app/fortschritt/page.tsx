@@ -32,17 +32,13 @@ const players = [
   { name: 'Jakob', image: 'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780493/spieler-avatars/jakob.png' },
   { name: 'Kayden', image: 'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780498/spieler-avatars/kayden.png' },
   { name: 'Lasse', image: 'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780503/spieler-avatars/lasse.png' },
+  { name: 'LB', image: '/assets/images/spieler-avatars/lb.png' },
   { name: 'Lennox', image: 'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780507/spieler-avatars/lennox.png' },
   { name: 'Levi', image: 'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780512/spieler-avatars/levi.png' },
   { name: 'Lion', image: 'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780516/spieler-avatars/lion.png' },
   { name: 'Metin', image: 'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780521/spieler-avatars/metin.png' },
   { name: 'Paul', image: 'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780525/spieler-avatars/paul.png' },
   { name: 'Silas', image: 'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780530/spieler-avatars/silas.png' },
-  {
-    name: 'Video Player',
-    image: 'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780530/spieler-avatars/silas.png',
-    videoAvatar: '/images/Spieler/avatars/render_me_4_avatar.webm',
-  },
 ] as const satisfies readonly Player[];
 
 const getInitials = (name: string) =>
@@ -129,6 +125,12 @@ export default function FortschrittPage(): ReactElement {
               <p className="text-muted-foreground mb-4 text-sm">
                 Yo-Yo 600m | Jonglieren 60x | Springseil 60x | Prellwand 13/15s
               </p>
+              <div className="overflow-x-auto py-2">
+                <Avatar className="h-16 w-16 border border-neutral-200 shadow-sm transition hover:scale-105 hover:border-primary dark:border-neutral-800">
+                  <AvatarImage src="/assets/images/spieler-avatars/lb.png" alt="LB" />
+                  <AvatarFallback>LB</AvatarFallback>
+                </Avatar>
+              </div>
             </TimelineContent>
           </TimelineItem>
 
@@ -149,6 +151,12 @@ export default function FortschrittPage(): ReactElement {
               <p className="text-muted-foreground mb-4 text-sm">
                 Yo-Yo 800m | Jonglieren 80x | Springseil 80x | Prellwand 14/15s
               </p>
+              <div className="overflow-x-auto py-2">
+                <Avatar className="h-16 w-16 border border-neutral-200 shadow-sm transition hover:scale-105 hover:border-primary dark:border-neutral-800">
+                  <AvatarImage src="/assets/images/spieler-avatars/lb.png" alt="LB" />
+                  <AvatarFallback>LB</AvatarFallback>
+                </Avatar>
+              </div>
             </TimelineContent>
           </TimelineItem>
 
@@ -170,6 +178,12 @@ export default function FortschrittPage(): ReactElement {
                 Yo-Yo 1000m | Jonglieren 100x | Springseil 100x | Prellwand
                 15/15s
               </p>
+              <div className="overflow-x-auto py-2">
+                <Avatar className="h-16 w-16 border border-neutral-200 shadow-sm transition hover:scale-105 hover:border-primary dark:border-neutral-800">
+                  <AvatarImage src="/assets/images/spieler-avatars/lb.png" alt="LB" />
+                  <AvatarFallback>LB</AvatarFallback>
+                </Avatar>
+              </div>
             </TimelineContent>
           </TimelineItem>
         </Timeline>
