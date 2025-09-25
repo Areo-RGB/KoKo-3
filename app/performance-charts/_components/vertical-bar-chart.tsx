@@ -128,8 +128,8 @@ export default function VerticalBarChart({
         ctx.save();
         ctx.font = '700 12px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial';
         // Use dark text for orange bars, white text for blue bars
-        ctx.fillStyle = variant === 'orange' 
-          ? 'rgba(0, 0, 0, 0.9)' 
+        ctx.fillStyle = variant === 'orange'
+          ? 'rgba(0, 0, 0, 0.9)'
           : 'rgba(255, 255, 255, 0.95)';
         ctx.textBaseline = 'middle';
 
