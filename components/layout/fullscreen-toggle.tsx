@@ -1,26 +1,72 @@
 'use client';
 
-import { Maximize } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Maximize, Minimize } from 'lucide-react';
 import * as React from 'react';
 
-export function FullscreenToggle(): React.ReactElement {
-  const handleClick = (_: React.MouseEvent<HTMLButtonElement>): void => {
-    if (document.fullscreenElement == null) {
-      void document.documentElement.requestFullscreen();
-    } else {
-      void document.exitFullscreen();
+/**
+ * A hook to manage browser fullscreen state and provide a toggle function.
+ */
+function useFullscreen() {
+  const [isFullscreen, setIsFullscreen] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement != null);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    // Set initial state in case the page loads in fullscreen mode
+    handleFullscreenChange();
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+
+  const toggleFullscreen = React.useCallback(async () => {
+    try {
+      if (document.fullscreenElement == null) {
+        await document.documentElement.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (error) {
+      console.error('Failed to toggle fullscreen:', error);
     }
-  };
+  }, []);
+
+  return { isFullscreen, toggleFullscreen };
+}
+
+interface FullscreenToggleProps
+  extends React.ComponentPropsWithoutRef<'button'> {
+  iconClassName?: string;
+}
+
+export function FullscreenToggle({
+  className,
+  iconClassName,
+  ...props
+}: FullscreenToggleProps): React.ReactElement {
+  const { isFullscreen, toggleFullscreen } = useFullscreen();
+
+  const label = isFullscreen ? 'Vollbild beenden' : 'Vollbild aktivieren';
+  const Icon = isFullscreen ? Minimize : Maximize;
 
   return (
     <button
       type="button"
-      aria-label="Vollbild umschalten"
-      onClick={handleClick}
-      className="rounded-full p-2 transition-colors hover:bg-gray-100 dark:hover:bg-[#1F1F23]"
+      aria-label={label}
+      onClick={toggleFullscreen}
+      className={cn(
+        'rounded-full p-2 transition-colors hover:bg-muted',
+        className,
+      )}
+      {...props}
     >
-      <Maximize className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-      <span className="sr-only">Vollbild umschalten</span>
+      <Icon className={cn('h-5 w-5 text-muted-foreground', iconClassName)} />
+      <span className="sr-only">{label}</span>
     </button>
   );
 }
