@@ -50,6 +50,11 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
+import { TwentyFirstToolbar } from '@21st-extension/toolbar-next';
+import { ReactPlugin } from '@21st-extension/react';
+
+import { MobileFooterNav } from '@/components/layout/mobile-footer-nav';
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="de" suppressHydrationWarning>
@@ -93,7 +98,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
           </MainLayout>
           <Toaster />
+          <TwentyFirstToolbar config={{ plugins: [ReactPlugin] }} />
         </ThemeProvider>
+        {/* Mobile footer navigation */}
+        <MobileFooterNav />
       </body>
     </html>
   );
