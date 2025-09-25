@@ -20,7 +20,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
         <SidebarInset className="min-w-0">
           {/* Use theme tokens for background to match timeline design */}
           <div className="bg-background flex w-full min-w-0 flex-1 flex-col gap-2 p-0">
-            <main className="w-full flex-1 overflow-auto">{children}</main>
+            <div className="w-full flex-1 overflow-auto">{children}</div>
           </div>
         </SidebarInset>
       </div>

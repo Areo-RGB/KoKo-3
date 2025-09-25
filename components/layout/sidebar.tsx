@@ -48,7 +48,7 @@ export default function AppSidebar({ ...props }: AppSidebarProps) {
         className="text-sidebar-foreground relative z-20 flex items-center space-x-2 py-1 text-sm font-normal"
       >
         <Image
-          src="/assets/images/logos/h03-logo.png"
+          src="/assets/images/logo.png"
           alt="H03"
           width={24}
           height={24}
