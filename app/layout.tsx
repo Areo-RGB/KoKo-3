@@ -1,5 +1,6 @@
 import { FullscreenToggle } from '@/components/layout/fullscreen-toggle';
 import MainLayout from '@/components/layout/main-layout';
+import { ServiceWorkerRegister } from '@/components/pwa/service-worker-register';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
   title: 'Q.V - QuoVadis Sports Training',
   description:
     'Professional sports training platform with offline access to training materials, exercises, and performance tracking',
+  manifest: '/manifest.webmanifest',
   formatDetection: {
     telephone: false,
   },
@@ -33,6 +35,21 @@ export const metadata: Metadata = {
   creator: 'QuoVadis Sports',
   publisher: 'QuoVadis Sports',
   category: 'sports',
+  icons: {
+    icon: [
+      { url: '/assets/icons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/assets/icons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/assets/icons/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+    ],
+    shortcut: ['/assets/icons/favicon.ico'],
+    apple: [
+      {
+        url: '/assets/icons/ios/apple-touch-icon.png',
+        sizes: '180x180',
+        type: 'image/png',
+      },
+    ],
+  },
 };
 
 export const viewport: Viewport = {
@@ -60,18 +77,24 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="de" suppressHydrationWarning>
       <head>
         {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <link rel="icon" href="/assets/icons/favicon.ico" />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/icons/icon-32x32.png"
+          href="/assets/icons/favicon-32x32.png"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/icons/icon-16x16.png"
+          href="/assets/icons/favicon-16x16.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/assets/icons/ios/apple-touch-icon.png"
         />
       </head>
       <body>
@@ -102,6 +125,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </ThemeProvider>
         {/* Mobile footer navigation */}
         <MobileFooterNav />
+        <ServiceWorkerRegister />
       </body>
     </html>
   );
