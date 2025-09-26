@@ -74,7 +74,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           href="/icons/icon-16x16.png"
         />
       </head>
-      <body>
+      <body className="body-surface">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -83,17 +83,22 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <MainLayout>
             <div className="flex min-h-screen w-full overflow-x-hidden">
-              <div className="flex-1 min-w-0">
-                <header className="flex h-16 items-center justify-between border-b py-3 pr-4 pl-0">
-                  <div className="flex items-center gap-2">
-                    <SidebarTrigger className="ml-2" />
+              <div className="app-content">
+                <header className="app-header relative flex h-20 items-center justify-between rounded-bl-3xl rounded-tl-none border-b px-6 py-4">
+                  <div className="flex items-center gap-3 text-sm font-medium uppercase tracking-[0.35em] text-primary-foreground/80">
+                    <SidebarTrigger className="sidebar-button bg-transparent text-primary-foreground/60" />
+                    <span className="hidden text-xs font-semibold md:inline-flex">
+                      QuoVadis Performance Hub
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <FullscreenToggle />
-                    <ThemeToggle />
+                  <div className="flex items-center gap-3">
+                    <FullscreenToggle className="sidebar-button bg-primary/10 px-3 py-2 text-primary-foreground transition-transform hover:-translate-y-0.5" />
+                    <ThemeToggle className="sidebar-button bg-secondary/10 px-3 py-2 text-primary-foreground transition-transform hover:-translate-y-0.5" />
                   </div>
                 </header>
-                {children}
+                <div className="app-main-surface flex-1">
+                  {children}
+                </div>
               </div>
             </div>
           </MainLayout>

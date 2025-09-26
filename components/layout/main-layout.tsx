@@ -14,10 +14,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="flex h-screen w-full overflow-x-hidden">
-        <AppSidebar />
-        <SidebarInset className="min-w-0">
-          <div className="bg-background flex w-full min-w-0 flex-1 flex-col">
+      <div className="app-shell">
+        <div aria-hidden className="app-shell__backdrop" />
+        <AppSidebar className="sidebar-surface" />
+        <SidebarInset className="relative z-10 min-w-0">
+          <div className="flex w-full min-h-screen min-w-0 flex-1 flex-col">
             <main className="w-full flex-1 overflow-auto">{children}</main>
           </div>
         </SidebarInset>
