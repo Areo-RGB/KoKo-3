@@ -6,7 +6,7 @@
     },
     "serena": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--project", "C:\\Users\\Anwender\\Koko"]
+      "args": ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--project", "/home/nwender/Koko-3"]
     },
     "smithery-github": {
       "url": "https://server.smithery.ai/@smithery-ai/github/mcp?api_key=febeb247-1ac6-4f48-b9ba-6ac901468ab1&profile=imaginative-cat-SNCI7n"
