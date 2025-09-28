@@ -69,7 +69,11 @@ function mapVideoToPlaylist(video: Video): PlaylistItem[] {
     id: `${video.id}-c-${i}`,
     title: chapter.title || `${video.title} — Kapitel ${i + 1}`,
     description: chapter.description || video.description,
-    duration: chapter.duration || (chapter.end && chapter.start ? chapter.end - chapter.start : video.duration),
+    duration:
+      chapter.duration ||
+      (chapter.end && chapter.start
+        ? chapter.end - chapter.start
+        : video.duration),
     // Provide the same video source but include optional start/end metadata if your player supports it
     sources: [{ src: video.url, type: 'video/mp4' }],
     // optional metadata used by some players
