@@ -1,9 +1,3 @@
-import { FullscreenToggle } from '@/components/layout/fullscreen-toggle';
-import MainLayout from '@/components/layout/main-layout';
-import { ThemeProvider } from '@/components/theme/theme-provider';
-import { ThemeToggle } from '@/components/theme/theme-toggle';
-import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Toaster } from '@/components/ui/toaster';
 import type { Metadata, Viewport } from 'next';
 // Removed Google Fonts to avoid build-time network fetch
 import 'plyr/dist/plyr.css';
@@ -46,14 +40,13 @@ export const viewport: Viewport = {
   ],
 };
 
+import ClientAppShell from '@/components/layout/client-app-shell';
+
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-import { TwentyFirstToolbar } from '@21st-extension/toolbar-next';
-import { ReactPlugin } from '@21st-extension/react';
-
-import { MobileFooterNav } from '@/components/layout/mobile-footer-nav';
+// Client-only shell is imported directly; it renders nothing on server
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
@@ -75,33 +68,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <MainLayout>
-            <div className="flex min-h-screen w-full overflow-x-hidden">
-              <div className="flex-1 min-w-0">
-                <header className="flex h-16 items-center justify-between border-b py-3 pr-4 pl-0">
-                  <div className="flex items-center gap-2">
-                    <SidebarTrigger className="ml-2" />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <FullscreenToggle />
-                    <ThemeToggle />
-                  </div>
-                </header>
-                {children}
-              </div>
-            </div>
-          </MainLayout>
-          <Toaster />
-          <TwentyFirstToolbar config={{ plugins: [ReactPlugin] }} />
-        </ThemeProvider>
-        {/* Mobile footer navigation */}
-        <MobileFooterNav />
+        <ClientAppShell>{children}</ClientAppShell>
       </body>
     </html>
   );
