@@ -77,6 +77,13 @@ export const trainingToolsLinks: SidebarLink[] = [
     showOnMobile: true,
   },
   {
+    title: 'Soundboard',
+    url: '/soundboard',
+    icon: PlayCircle,
+    mobileLabel: 'Sounds',
+    showOnMobile: false,
+  },
+  {
     title: 'FIFA 11+',
     url: '/fifa-11-plus',
     icon: PlayCircle,

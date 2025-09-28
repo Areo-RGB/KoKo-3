@@ -1,0 +1,54 @@
+# Additional files to ignore for Roo codebase indexing (beyond .gitignore)
+
+# Build outputs
+.next/
+dist/
+out/
+build/
+
+# Node modules
+node_modules/
+
+# Database files
+*.db
+*.sqlite
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+.DS_Store
+
+# Large data files that don't need semantic indexing
+*.pdf
+*.zip
+*.tar
+*.gz
+
+# Large JSON data files (codebase search is for code, not data)
+data/**/*.json
+public/data/**/*.json
+
+# Video and image files
+*.mp4
+*.avi
+*.mov
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+*.webp
+
+# Binary files
+*.exe
+*.bin
+*.o
+*.a
+*.so
+
+# Large files over 1MB (handled automatically but being explicit)
+# Files larger than 1MB will be skipped automatically by the indexer

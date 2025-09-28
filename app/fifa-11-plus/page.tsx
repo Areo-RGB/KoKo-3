@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import React, { useMemo, useRef, useState } from 'react';
 import PlaylistView from './_components/playlist-view';
 import VideoPlayer from './_components/video-player';
+import { VideoCacheButton } from './_components/video-cache-button';
 import {
   MAIN_VIDEO_URL,
   PLAYLIST,
@@ -61,6 +62,13 @@ const FifaProgramView: React.FC<FifaProgramViewProps> = ({
       </div>
       <Card>
         <CardContent className="p-4 md:p-6">
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold mb-2">FIFA 11+ Komplettes Programm</h3>
+            <p className="text-muted-foreground text-sm mb-4">
+              Das komplette FIFA 11+ Verletzungspräventionsprogramm mit Laufen, Kraft, Plyometrie und Gleichgewichtsübungen.
+            </p>
+            <VideoCacheButton playlist={playlist} videoUrl={videoUrl} />
+          </div>
           <PlaylistView
             playlist={playlist}
             currentVideoId={currentVideoId}

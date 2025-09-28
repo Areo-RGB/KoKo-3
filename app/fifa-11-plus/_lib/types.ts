@@ -1,3 +1,10 @@
+export interface TimerConfig {
+  workSeconds: number;
+  sets: number;
+  restSeconds?: number;
+  note?: string;
+}
+
 export interface Video {
   id: string;
   title: string;
@@ -5,6 +12,7 @@ export interface Video {
   timestamp: string;
   startTime?: number;
   isHeader?: boolean;
+  timer?: TimerConfig;
 }
 
 export interface Playlist {

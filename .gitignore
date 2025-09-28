@@ -1,0 +1,53 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+.roo
+# Dependencies
+node_modules/
+.pnpm-store/
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Output
+dist/
+build/
+out/
+.output/
+.next/
+# Logs
+*.log
+
+# Cache
+.nyc_output/
+coverage/
+.git_coverage/
+.next/
+.vercel/
+.svelte-kit/
+.output/
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docs
+.hugodir/
+
+# Python
+.python/
+
+# Specify and GitHub
+.specify/
+.github/
+C:UsersAnwenderAppDataLocalpnpmstorev10/

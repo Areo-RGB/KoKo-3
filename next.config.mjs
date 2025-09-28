@@ -14,9 +14,32 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     // Disable filesystem cache temporarily to avoid webpack build issues
     config.cache = false;
+
+    // Prevent bundling Node.js core modules into client builds
+    // This avoids common webpack errors when some libs reference server-only APIs.
+    if (!isServer) {
+      config.resolve = config.resolve || {};
+      config.resolve.fallback = {
+        ...(config.resolve.fallback || {}),
+        fs: false,
+        path: false,
+        os: false,
+        stream: false,
+        buffer: false,
+        util: false,
+        crypto: false,
+        http: false,
+        https: false,
+        zlib: false,
+        child_process: false,
+        net: false,
+        tls: false,
+      };
+    }
+
     return config;
   },
   experimental: {
