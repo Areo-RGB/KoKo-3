@@ -19,8 +19,17 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Play } from 'lucide-react';
+import { Play, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+
+const playlistTitleForVideo = (video: Video) => {
+  const candidate = video.playlistTitle;
+  if (typeof candidate === 'string' && candidate.trim().length > 0) {
+    return candidate;
+  }
+
+  return video.title;
+};
 
 export default function VideoPlayerPage() {
   const [videoData] = useState<HierarchicalVideoData>(hierarchicalVideoData);
@@ -31,28 +40,27 @@ export default function VideoPlayerPage() {
 
   // Set default category and subcategory on mount
   useEffect(() => {
-    if (videoData && videoData.categories.length > 0) {
-      const firstCategory = videoData.categories[0];
+    const [firstCategory] = videoData.categories;
+    if (firstCategory !== undefined) {
       setSelectedCategory(firstCategory.name);
-      if (firstCategory.subcategories.length > 0) {
-        setSelectedSubcategory(firstCategory.subcategories[0].name);
-      }
+      const [firstSubcategory] = firstCategory.subcategories;
+      setSelectedSubcategory(
+        firstSubcategory !== undefined ? firstSubcategory.name : '',
+      );
     }
   }, [videoData]);
 
   // Get filtered videos based on selected category and subcategory
   const getFilteredVideos = () => {
-    if (!videoData) return [];
-
-    if (selectedCategory && selectedSubcategory) {
+    if (selectedCategory.length > 0 && selectedSubcategory.length > 0) {
       const category = videoData.categories.find(
         (cat) => cat.name === selectedCategory,
       );
-      if (category) {
+      if (category !== undefined) {
         const subcategory = category.subcategories.find(
           (sub) => sub.name === selectedSubcategory,
         );
-        if (subcategory) {
+        if (subcategory !== undefined) {
           return subcategory.videos;
         }
       }
@@ -78,40 +86,37 @@ export default function VideoPlayerPage() {
     setSelectedCategory(categoryName);
 
     // Reset subcategory to first one in the selected category
-    if (videoData) {
-      const category = videoData.categories.find(
-        (cat) => cat.name === categoryName,
-      );
-      if (category && category.subcategories.length > 0) {
-        setSelectedSubcategory(category.subcategories[0].name);
-      } else {
-        setSelectedSubcategory('');
-      }
+    const category = videoData.categories.find((cat) => cat.name === categoryName);
+    if (category !== undefined && category.subcategories.length > 0) {
+      setSelectedSubcategory(category.subcategories[0].name);
+    } else {
+      setSelectedSubcategory('');
     }
   };
 
   // Get subcategories for the selected category
   const getSubcategories = () => {
-    if (!videoData || !selectedCategory) return [];
+    if (selectedCategory.length === 0) return [];
 
     const category = videoData.categories.find(
       (cat) => cat.name === selectedCategory,
     );
-    return category ? category.subcategories : [];
+    return category !== undefined ? category.subcategories : [];
   };
 
   const subcategories = getSubcategories();
 
-  // Prepare data for the VideoPlayer component, ensuring it matches the VideoData type
-  const videoDataForPlayer: VideoData | null = selectedVideo
-    ? {
-        ...selectedVideo,
-        category: selectedCategory,
-        playlistTitle: selectedVideo.playlistTitle || selectedVideo.title,
-      }
-    : null;
+  // Prepare data for the VideoPlayer component
+  const videoDataForPlayer: VideoData | null =
+    selectedVideo !== null
+      ? {
+          ...selectedVideo,
+          category: selectedCategory,
+          playlistTitle: playlistTitleForVideo(selectedVideo),
+        }
+      : null;
 
-  if (!videoData) {
+  if (videoData.categories.length === 0) {
     return (
       <div className="container max-w-7xl px-4 py-6 sm:p-6">
         <div className="py-12 text-center">
@@ -143,23 +148,18 @@ export default function VideoPlayerPage() {
         {/* Category Dropdown */}
         <div className="mb-4 flex flex-col items-stretch gap-3 sm:mb-6 sm:flex-row sm:items-center sm:gap-4">
           <div className="flex-1">
-            {videoData && (
-              <Select
-                value={selectedCategory}
-                onValueChange={handleCategoryChange}
-              >
-                <SelectTrigger className="w-full sm:w-64">
-                  <SelectValue placeholder="Kategorie auswählen" />
-                </SelectTrigger>
-                <SelectContent>
-                  {videoData.categories.map((category) => (
-                    <SelectItem key={category.name} value={category.name}>
-                      {category.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
+            <Select value={selectedCategory} onValueChange={handleCategoryChange}>
+              <SelectTrigger className="w-full sm:w-64">
+                <SelectValue placeholder="Kategorie auswählen" />
+              </SelectTrigger>
+              <SelectContent>
+                {videoData.categories.map((category) => (
+                  <SelectItem key={category.name} value={category.name}>
+                    {category.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <Badge variant="outline" className="self-start sm:ml-auto">
             {filteredVideos.length} Videos
@@ -190,7 +190,7 @@ export default function VideoPlayerPage() {
             const videoForThumbnail: VideoData = {
               ...video,
               category: selectedCategory,
-              playlistTitle: video.playlistTitle || video.title,
+              playlistTitle: playlistTitleForVideo(video),
             };
             return (
               <Card
@@ -235,7 +235,7 @@ export default function VideoPlayerPage() {
         </div>
 
         {/* Empty State */}
-        {videoData && filteredVideos.length === 0 && (
+        {filteredVideos.length === 0 && (
           <div className="py-12 text-center">
             <div className="text-muted-foreground mb-4">
               <Play className="mx-auto h-16 w-16 opacity-50" />
