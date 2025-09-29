@@ -100,6 +100,7 @@ export function buildFifaTimerConfig(): TrainingTimerConfigInput {
           label: 'Pause',
           seconds: 10,
           kind: 'pause',
+          videoId: undefined,
         });
       }
 

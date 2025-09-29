@@ -41,7 +41,7 @@ export function FifaPlaylistViewForFinley() {
         title: string;
         description: string;
         startTime: number;
-        timestamp?: string;
+        timestamp: string;
       } => item.isHeader !== true && typeof item.startTime === 'number',
     );
 

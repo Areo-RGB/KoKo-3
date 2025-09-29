@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { TrainingTimerConfigInput } from '.';
 
 const useTimerTick = (callback: () => void, delay: number | null) => {
-  const savedCallback = useRef<() => void>();
+  const savedCallback = useRef(callback);
 
   useEffect(() => {
     savedCallback.current = callback;
@@ -103,7 +103,7 @@ export const useTrainingTimer = (config: TrainingTimerConfigInput) => {
       setTimeRemainingInInterval(timePerInterval[prevIndex] ?? 0);
     }
   }, [currentIndex, timePerInterval]);
-  
+
   // Effect to reset state when config changes
   useEffect(() => {
     reset();
@@ -122,4 +122,4 @@ export const useTrainingTimer = (config: TrainingTimerConfigInput) => {
     next,
     prev,
   };
-};
+};
