@@ -6,6 +6,7 @@ import {
   Home,
   LineChart,
   PlayCircle,
+  Timer,
   Trophy,
   Users,
 } from 'lucide-react';
@@ -97,6 +98,13 @@ export const trainingToolsLinks: SidebarLink[] = [
     title: 'YoYo-IR1',
     url: '/yo-yo-ir1_test',
     icon: PlayCircle,
+  },
+  {
+    title: 'Interval Timer',
+    url: '/interval-timer',
+    icon: Timer,
+    mobileLabel: 'Timer',
+    showOnMobile: true,
   },
 ];
 

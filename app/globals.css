@@ -1,5 +1,6 @@
 /* app/globals.css */
 @import 'tailwindcss';
+@import './theme.css';
 
 @plugin 'tailwindcss-animate';
 

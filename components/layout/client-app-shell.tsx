@@ -7,8 +7,6 @@ import { ThemeToggle } from '@/components/theme/theme-toggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Toaster } from '@/components/ui/toaster';
 import { FullscreenToggle } from '@/components/layout/fullscreen-toggle';
-import { TwentyFirstToolbar } from '@21st-extension/toolbar-next';
-import { ReactPlugin } from '@21st-extension/react';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
@@ -48,8 +46,6 @@ export default function ClientAppShell({ children }: Props) {
         </div>
       </MainLayout>
       <Toaster />
-      <TwentyFirstToolbar config={{ plugins: [ReactPlugin] }} />
-
       {/* Mobile footer navigation */}
       <MobileFooterNav />
     </ThemeProvider>

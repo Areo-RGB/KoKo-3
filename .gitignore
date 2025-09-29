@@ -62,3 +62,8 @@ serena/
 .github/
 C:UsersAnwenderAppDataLocalpnpmstorev10/
 .env copy
+.claude
+.cursor
+.serena
+.trash
+.workflows

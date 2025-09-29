@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="55%" stop-color="#e5e7eb"/>
+      <stop offset="100%" stop-color="#cbd5f5"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#9ca3af"/>
+      <stop offset="100%" stop-color="#4b5563"/>
+    </linearGradient>
+    <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect y="620" width="1200" height="180" fill="url(#floor)"/>
+
+  <!-- shadow for crouch figure -->
+  <ellipse cx="275" cy="640" rx="120" ry="32" fill="rgba(15,23,42,0.18)"/>
+
+  <!-- crouch / loading phase -->
+  <g>
+    <circle cx="260" cy="360" r="34" fill="#1f2937"/>
+    <path d="M238 392 Q222 438 248 468 L290 468 Q312 430 282 392 Z" fill="#111827"/>
+    <path d="M226 430 Q190 420 170 460" stroke="#111827" stroke-width="18" stroke-linecap="round" fill="none"/>
+    <path d="M298 430 Q330 424 360 450" stroke="#111827" stroke-width="18" stroke-linecap="round" fill="none"/>
+    <path d="M256 468 Q228 520 220 580" stroke="#111827" stroke-width="20" stroke-linecap="round" fill="none"/>
+    <path d="M292 468 Q320 520 328 600" stroke="#111827" stroke-width="20" stroke-linecap="round" fill="none"/>
+    <path d="M212 596 L248 596" stroke="#111827" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <path d="M320 612 L356 600" stroke="#111827" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <circle cx="216" cy="522" r="12" fill="#3b82f6"/>
+    <circle cx="336" cy="546" r="12" fill="#3b82f6"/>
+  </g>
+
+  <!-- takeoff / airborne phase -->
+  <ellipse cx="920" cy="646" rx="110" ry="28" fill="rgba(15,23,42,0.12)"/>
+  <g>
+    <circle cx="900" cy="240" r="34" fill="#111827"/>
+    <path d="M878 268 Q858 320 884 356 L912 356 Q936 308 908 268 Z" fill="#1f2937"/>
+    <path d="M886 292 Q848 248 824 204" stroke="#1d4ed8" stroke-width="18" stroke-linecap="round" fill="none"/>
+    <path d="M914 288 Q942 228 966 174" stroke="#1d4ed8" stroke-width="18" stroke-linecap="round" fill="none"/>
+    <path d="M896 358 Q860 414 848 470" stroke="#111827" stroke-width="20" stroke-linecap="round" fill="none"/>
+    <path d="M918 358 Q950 412 962 480" stroke="#111827" stroke-width="20" stroke-linecap="round" fill="none"/>
+    <path d="M850 470 Q884 502 900 556" stroke="#111827" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <path d="M962 480 Q938 520 910 572" stroke="#111827" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <circle cx="824" cy="204" r="11" fill="#60a5fa"/>
+    <circle cx="966" cy="174" r="11" fill="#60a5fa"/>
+  </g>
+
+  <!-- upward arrow -->
+  <path d="M420 440 C540 320 660 220 780 200" stroke="url(#arrowGradient)" stroke-width="22" stroke-linecap="round" fill="none"/>
+  <polygon points="780,200 744,186 756,174 792,180 798,216 786,204" fill="#2563eb"/>
+
+  <!-- landing cue -->
+  <path d="M912 356 C928 438 932 520 928 596" stroke="#fbbf24" stroke-width="10" stroke-dasharray="18 16" stroke-linecap="round" fill="none"/>
+  <rect x="890" y="596" width="80" height="12" rx="6" fill="#fbbf24"/>
+
+  <!-- instructional text -->
+  <text x="120" y="120" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="700" fill="#1f2937">
+    Vertical Jumps
+  </text>
+  <text x="120" y="170" font-family="Inter, Arial, sans-serif" font-size="26" fill="#334155">
+    Explode upward from a loaded stance and absorb the landing softly.
+  </text>
+
+  <g font-family="Inter, Arial, sans-serif" fill="#1e293b">
+    <text x="140" y="700" font-size="22">1. Start in an athletic stance, hips back and chest proud.</text>
+    <text x="140" y="738" font-size="22">2. Drive through the floor, reaching tall with both arms.</text>
+    <text x="140" y="776" font-size="22">3. Land quietly with knees tracking over toes and reset.</text>
+  </g>
+</svg>
