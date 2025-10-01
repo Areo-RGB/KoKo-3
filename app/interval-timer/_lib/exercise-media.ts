@@ -43,7 +43,6 @@ export interface ExerciseMedia {
 export type MediaMapping = Record<string, ExerciseMedia>;
 
 const MEDIA_BASE_PATH = '/assets/images/drills';
-const VIDEO_BASE_PATH = '/assets/videos';
 
 /**
  * Centralized media lookup for interval timer exercises. This ensures that new
@@ -51,36 +50,46 @@ const VIDEO_BASE_PATH = '/assets/videos';
  * assets for each exercise definition.
  */
 export const EXERCISE_MEDIA_MAP: MediaMapping = {
-  // Existing Exercises
+  // Stability & Core Exercises (Updated with new videos)
   'Forearm Plank': {
     imageSrc: `${MEDIA_BASE_PATH}/forearm-plank.jpg`,
     imageAlt: 'Person holding a forearm plank with a straight body line.',
-    videoSrc: `${VIDEO_BASE_PATH}/forearm-plank.mp4`,
-    posterSrc: `${MEDIA_BASE_PATH}/forearm-plank.jpg`,
+    videoSrc:
+      'https://res.cloudinary.com/dwedvwkzw/video/upload/v1759086842/claudia-clips/qgvxfvwaqgq12zfbi6yi.mp4', // UNTERARMSTUETZ_LEVEL_1
   },
   'Side Forearm Plank': {
     imageSrc: `${MEDIA_BASE_PATH}/side-forearm-plank.jpg`,
     imageAlt: 'Athlete performing a side forearm plank with hips lifted.',
+    videoSrc:
+      'https://res.cloudinary.com/dwedvwkzw/video/upload/v1759086825/claudia-clips/n5qazf23sigd3zs9xsea.mp4', // SEITLICHER_UNTERARMSTUETZ_LEVEL_1
   },
   'Hamstrings Beginner': {
     imageSrc: `${MEDIA_BASE_PATH}/hamstrings-beginner.jpg`,
     imageAlt:
       'Individual stretching hamstrings using a controlled assisted movement.',
+    videoSrc:
+      'https://res.cloudinary.com/dwedvwkzw/video/upload/v1759086815/claudia-clips/e2xdjieiefchenyze3j7.mp4', // OBERSCHENKELRUECKSEITE_LEVEL_1
   },
   'Single Leg Stance': {
     imageSrc: `${MEDIA_BASE_PATH}/single-leg-stance.jpg`,
     imageAlt: 'Person balancing on one leg while engaging core muscles.',
+    videoSrc:
+      'https://res.cloudinary.com/dwedvwkzw/video/upload/v1759086742/claudia-clips/vevdji7xiznq1ttxrrlc.mp4', // EINBEINSTAND_LEVEL_1
   },
   'Squats on Toes': {
     imageSrc: `${MEDIA_BASE_PATH}/squats-on-toes.jpg`,
     imageAlt: 'Athlete executing a squat while balanced on toes.',
+    videoSrc:
+      'https://res.cloudinary.com/dwedvwkzw/video/upload/v1759086751/claudia-clips/snveganqjzbuqlcqp001.mp4', // KNIEBEUGEN_LEVEL_1
   },
   'Vertical Jumps': {
     imageSrc: `${MEDIA_BASE_PATH}/vertical-jumps.jpg`,
     imageAlt: 'Athlete reaching upward during a vertical jump.',
+    videoSrc:
+      'https://res.cloudinary.com/dwedvwkzw/video/upload/v1759086832/claudia-clips/e8i4nzveblb9jtld1zbs.mp4', // SPRINGEN_LEVEL_1
   },
 
-  // New Stretch Exercises
+  // Stretch Exercises (Unchanged)
   "Child's Pose": {
     videoSrc:
       'https://res.cloudinary.com/dwedvwkzw/video/upload/v1759149953/Stretch/c8sdairlonfzjadqigxx.mp4',

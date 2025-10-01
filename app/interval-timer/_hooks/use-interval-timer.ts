@@ -82,7 +82,6 @@ function reducer(state: TimerState, action: TimerAction): TimerState {
       };
     }
     case 'STOP':
-    case 'RESET':
       return {
         ...initialState,
         selectedPreset: state.selectedPreset,
@@ -91,6 +90,37 @@ function reducer(state: TimerState, action: TimerAction): TimerState {
         phaseTimeRemaining: state.phases[0]?.duration ?? 0,
         totalTime: state.totalTime,
       };
+    case 'RESET': {
+      if (!state.activePhase || state.phases.length === 0) {
+        return state;
+      }
+
+      let targetIndex = state.activePhase.phaseIndex;
+      while (targetIndex > 0) {
+        const current = state.phases[targetIndex];
+        const previous = state.phases[targetIndex - 1];
+        if (
+          previous.exerciseIndex !== current.exerciseIndex ||
+          previous.setNumber !== current.setNumber
+        ) {
+          break;
+        }
+        targetIndex -= 1;
+      }
+
+      const targetPhase = state.phases[targetIndex];
+      const phaseStartTime = state.phases
+        .slice(0, targetIndex)
+        .reduce((sum, phase) => sum + phase.duration, 0);
+
+      return {
+        ...state,
+        status: 'ready',
+        currentTime: phaseStartTime,
+        activePhase: targetPhase,
+        phaseTimeRemaining: targetPhase.duration,
+      };
+    }
     case 'SKIP': {
       if (!state.activePhase) return state;
       const currentPhaseEndTime = state.phases
