@@ -70,3 +70,7 @@ C:UsersAnwenderAppDataLocalpnpmstorev10/
 scripts/setup-wsl-auth.sh
 docs/wsl-browser-auth-fix.md
 docs/wsl-auth-analysis.md
+.unused-json-report.txt
+.rooignore
+.prettierignore
+prettier.config.js
