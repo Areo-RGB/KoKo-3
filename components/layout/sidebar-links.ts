@@ -109,6 +109,13 @@ export const trainingToolsLinks: SidebarLink[] = [
     mobileLabel: 'Yo-Yo',
     showOnMobile: true,
   },
+  {
+    title: 'Yo-Yo Ranking',
+    url: '/yo-yo',
+    icon: Trophy,
+    mobileLabel: 'Ranking',
+    showOnMobile: true,
+  },
 ];
 
 export const juniorLinks: SidebarLink[] = [
