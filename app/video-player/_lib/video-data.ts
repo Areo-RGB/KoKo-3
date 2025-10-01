@@ -1310,6 +1310,364 @@ const allVideoData: HierarchicalVideoData = {
         },
       ],
     },
+    {
+      name: 'Routines',
+      subcategories: [
+        {
+          name: 'FIFA 11+',
+          videos: [
+            {
+              id: 'fifa-11-plus-original',
+              title: 'FIFA 11+ Original Programm',
+              description:
+                'Das komplette FIFA 11+ Verletzungspräventionsprogramm mit Laufen, Kraft, Plyometrie und Gleichgewichtsübungen.',
+              type: 'chapters',
+              videoUrl:
+                'https://data-h03.fra1.cdn.digitaloceanspaces.com/FIFA',
+              playlistTitle: 'FIFA 11+ Original',
+              chapters: [
+                {
+                  id: 'fifa11-header-part-1',
+                  title: 'Teil 1: Laufübungen',
+                  startTime: 0,
+                },
+                {
+                  id: 'fifa11-20',
+                  title: '1. Geradeaus',
+                  description: '2 Mal durchführen.',
+                  startTime: 20,
+                },
+                {
+                  id: 'fifa11-39',
+                  title: '2. Hüftdrehung nach aussen',
+                  description: '2 Mal durchführen.',
+                  startTime: 39,
+                },
+                {
+                  id: 'fifa11-54',
+                  title: '3. Hüftdrehung nach innen',
+                  description: '2 Mal durchführen.',
+                  startTime: 54,
+                },
+                {
+                  id: 'fifa11-71',
+                  title: '4. Seitgalopp',
+                  description: '2 Mal durchführen.',
+                  startTime: 71,
+                },
+                {
+                  id: 'fifa11-95',
+                  title: '5. Schulterkontakt',
+                  description: '2 Mal durchführen.',
+                  startTime: 95,
+                },
+                {
+                  id: 'fifa11-116',
+                  title: '6. Vor- und Zurücksprinten',
+                  description: '2 Mal durchführen.',
+                  startTime: 116,
+                },
+                {
+                  id: 'fifa11-header-part-2',
+                  title: 'Teil 2: Kraft, Plyometrie und Gleichgewicht',
+                  startTime: 180,
+                },
+                {
+                  id: 'fifa11-180',
+                  title: '7.1 Unterarmstütz Halten',
+                  description: '3 Wiederholungen (jeweils 20–30 Sekunden).',
+                  startTime: 180,
+                },
+                {
+                  id: 'fifa11-210',
+                  title: '7.2 Unterarmstütz Beine wechselnd anheben',
+                  description: '3 Wiederholungen (jeweils 40–60 Sekunden).',
+                  startTime: 210,
+                },
+                {
+                  id: 'fifa11-246',
+                  title: '7.3 Unterarmstütz Bein anheben und halten',
+                  description:
+                    '3 Wiederholungen (jeweils 20–30 Sekunden auf jeder Seite).',
+                  startTime: 246,
+                },
+                {
+                  id: 'fifa11-287',
+                  title: '8.1 Seitlicher Unterarmstütz Halten',
+                  description:
+                    '3 Wiederholungen (jeweils 20–30 Sekunden auf jeder Seite).',
+                  startTime: 287,
+                },
+                {
+                  id: 'fifa11-320',
+                  title: '8.2 Seitlicher Unterarmstütz Hüfte heben und senken',
+                  description:
+                    '3 Wiederholungen (jeweils 20–30 Sekunden auf jeder Seite).',
+                  startTime: 320,
+                },
+                {
+                  id: 'fifa11-357',
+                  title: '8.3 Seitlicher Unterarmstütz Bein heben und senken',
+                  description:
+                    '3 Wiederholungen (jeweils 20–30 Sekunden auf jeder Seite).',
+                  startTime: 357,
+                },
+                {
+                  id: 'fifa11-398',
+                  title: '9.1 Oberschenkelrückseite Anfänger',
+                  description: '1 Mal (3–5 Wiederholungen).',
+                  startTime: 398,
+                },
+                {
+                  id: 'fifa11-411',
+                  title: '9.2 Oberschenkelrückseite Fortgeschritten',
+                  description: '1 Mal (7–10 Wiederholungen).',
+                  startTime: 411,
+                },
+                {
+                  id: 'fifa11-420',
+                  title: '9.3 Oberschenkelrückseite Topfit',
+                  description: '1 Mal (mindestens 12–15 Wiederholungen).',
+                  startTime: 420,
+                },
+                {
+                  id: 'fifa11-438',
+                  title: '10.1 Einbeinstand mit dem Ball',
+                  description: '2 Mal (jeweils 30 Sekunden auf jedem Bein).',
+                  startTime: 438,
+                },
+                {
+                  id: 'fifa11-470',
+                  title: '10.2 Einbeinstand Ball gegenseitig zuwerfen',
+                  description: '2 Mal (jeweils 30 Sekunden auf jedem Bein).',
+                  startTime: 470,
+                },
+                {
+                  id: 'fifa11-502',
+                  title: '10.3 Einbeinstand Gleichgewicht testen',
+                  description: '2 Mal (jeweils 30 Sekunden auf jedem Bein).',
+                  startTime: 502,
+                },
+                {
+                  id: 'fifa11-533',
+                  title: '11.1 Kniebeugen auf die Zehenspitzen',
+                  description: '2 Mal (jeweils 30 Sekunden).',
+                  startTime: 533,
+                },
+                {
+                  id: 'fifa11-572',
+                  title: '11.2 Kniebeugen Ausfallschritte',
+                  description: '2 Mal (jeweils 10 Schritte mit jedem Bein).',
+                  startTime: 572,
+                },
+                {
+                  id: 'fifa11-603',
+                  title: '11.3 Kniebeugen auf einem Bein',
+                  description: '2 Mal (jeweils 10 Mal auf jedem Bein).',
+                  startTime: 603,
+                },
+                {
+                  id: 'fifa11-639',
+                  title: '12.1 Springen Sprünge nach oben',
+                  description: '2 Mal (30 Sekunden).',
+                  startTime: 639,
+                },
+                {
+                  id: 'fifa11-673',
+                  title: '12.2 Springen Sprünge zur Seite',
+                  description: '2 Mal (30 Sekunden).',
+                  startTime: 673,
+                },
+                {
+                  id: 'fifa11-708',
+                  title: '12.3 Springen Kreuzsprünge',
+                  description: '2 Mal (30 Sekunden).',
+                  startTime: 708,
+                },
+                {
+                  id: 'fifa11-header-part-3',
+                  title: 'Teil 3: Laufübungen',
+                  startTime: 775,
+                },
+                {
+                  id: 'fifa11-775',
+                  title: '13. Laufen über das Spielfeld',
+                  description: '2 Mal durchführen.',
+                  startTime: 775,
+                },
+                {
+                  id: 'fifa11-798',
+                  title: '14. Laufen Hoch-Weit-Sprünge',
+                  description: '2 Mal durchführen.',
+                  startTime: 798,
+                },
+                {
+                  id: 'fifa11-824',
+                  title: '15. Laufen Richtungswechsel',
+                  description: '2 Mal durchführen.',
+                  startTime: 824,
+                },
+              ],
+            },
+            {
+              id: 'fifa-11-plus-world-soccer',
+              title: 'FIFA 11+ World Soccer Programm',
+              description:
+                'Alternatives FIFA 11+ Verletzungspräventionsprogramm mit aktualisierten Übungen und Demonstrationen.',
+              type: 'chapters',
+              videoUrl:
+                'https://data-h03.fra1.cdn.digitaloceanspaces.com/ws.mp4',
+              playlistTitle: 'FIFA 11+ World Soccer',
+              chapters: [
+                {
+                  id: 'ws-header-part-1',
+                  title: 'Teil 1: Laufübungen',
+                  startTime: 0,
+                },
+                {
+                  id: 'ws-24',
+                  title: '1. Geradeaus',
+                  description: '2 Mal durchführen.',
+                  startTime: 24,
+                },
+                {
+                  id: 'ws-37',
+                  title: '2. Hüftdrehung nach aussen',
+                  description: '2 Mal durchführen.',
+                  startTime: 37,
+                },
+                {
+                  id: 'ws-60',
+                  title: '3. Hüftdrehung nach innen',
+                  description: '2 Mal durchführen.',
+                  startTime: 60,
+                },
+                {
+                  id: 'ws-83',
+                  title: '4. Seitgalopp',
+                  description: '2 Mal durchführen.',
+                  startTime: 83,
+                },
+                {
+                  id: 'ws-114',
+                  title: '5. Schulterkontakt',
+                  description: '2 Mal durchführen.',
+                  startTime: 114,
+                },
+                {
+                  id: 'ws-144',
+                  title: '6. Vor- und Zurücksprinten',
+                  description: '2 Mal durchführen.',
+                  startTime: 144,
+                },
+                {
+                  id: 'ws-170',
+                  title: '7. Laufen über das Spielfeld',
+                  description: '2 Mal durchführen.',
+                  startTime: 170,
+                },
+                {
+                  id: 'ws-183',
+                  title: '8. Laufen Hoch-Weit-Sprünge',
+                  description: '2 Mal durchführen.',
+                  startTime: 183,
+                },
+                {
+                  id: 'ws-198',
+                  title: '9. Laufen Richtungswechsel',
+                  description: '2 Mal durchführen.',
+                  startTime: 198,
+                },
+                {
+                  id: 'ws-header-part-2',
+                  title: 'Teil 2: Kraft, Plyometrie und Gleichgewicht',
+                  startTime: 227,
+                },
+                {
+                  id: 'ws-227',
+                  title: '10. Unterarmstütz: Level 1 - Halten',
+                  description: '3 Wiederholungen (jeweils 20–30 Sekunden).',
+                  startTime: 227,
+                },
+                {
+                  id: 'ws-237',
+                  title: '11. Unterarmstütz: Level 2 - Beine wechselnd anheben',
+                  description: '3 Wiederholungen (jeweils 40–60 Sekunden).',
+                  startTime: 237,
+                },
+                {
+                  id: 'ws-248',
+                  title: '12. Unterarmstütz: Level 3 - Bein anheben und halten',
+                  description:
+                    '3 Wiederholungen (jeweils 20–30 Sekunden auf jeder Seite).',
+                  startTime: 248,
+                },
+                {
+                  id: 'ws-258',
+                  title: '13. Seitlicher Unterarmstütz: Level 1 - Halten',
+                  description:
+                    '3 Wiederholungen (jeweils 20–30 Sekunden auf jeder Seite).',
+                  startTime: 258,
+                },
+                {
+                  id: 'ws-268',
+                  title:
+                    '14. Seitlicher Unterarmstütz: Level 2 - Hüfte heben und senken',
+                  description:
+                    '3 Wiederholungen (jeweils 20–30 Sekunden auf jeder Seite).',
+                  startTime: 268,
+                },
+                {
+                  id: 'ws-279',
+                  title:
+                    '15. Seitlicher Unterarmstütz: Level 3 - mit Beinhebung',
+                  description:
+                    '3 Wiederholungen (jeweils 20–30 Sekunden auf jeder Seite).',
+                  startTime: 279,
+                },
+                {
+                  id: 'ws-290',
+                  title: '16. Oberschenkelrückseite: Level 1',
+                  description: '1 Mal (3–5 Wiederholungen).',
+                  startTime: 290,
+                },
+                {
+                  id: 'ws-304',
+                  title: '17. Oberschenkelrückseite: Level 2',
+                  description: '1 Mal (7–10 Wiederholungen).',
+                  startTime: 304,
+                },
+                {
+                  id: 'ws-316',
+                  title: '18. Oberschenkelrückseite: Level 3',
+                  description: '1 Mal (mindestens 12–15 Wiederholungen).',
+                  startTime: 316,
+                },
+                {
+                  id: 'ws-328',
+                  title: '19. Kopenhagen Adduktoren: Level 1 - Seitliche Beinhebung',
+                  description: '2 Mal (jeweils 30 Sekunden auf jeder Seite).',
+                  startTime: 328,
+                },
+                {
+                  id: 'ws-339',
+                  title: '20. Kopenhagen Adduktoren: Level 2 - Oberes Knie gestützt',
+                  description: '2 Mal (jeweils 30 Sekunden auf jeder Seite).',
+                  startTime: 339,
+                },
+                {
+                  id: 'ws-352',
+                  title:
+                    '21. Kopenhagen Adduktoren: Level 3 - Oberer Knöchel gestützt',
+                  description: '2 Mal (jeweils 30 Sekunden auf jeder Seite).',
+                  startTime: 352,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
   legacyVideos: [], // All legacy videos have been categorized
 };

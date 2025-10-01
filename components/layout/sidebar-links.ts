@@ -1,5 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import {
+  Activity,
   Database,
   Dumbbell,
   GraduationCap,
@@ -99,6 +100,13 @@ export const trainingToolsLinks: SidebarLink[] = [
     url: '/interval-timer',
     icon: Timer,
     mobileLabel: 'Timer',
+    showOnMobile: true,
+  },
+  {
+    title: 'Yo-Yo IR1 Test',
+    url: '/yoyo-ir1',
+    icon: Activity,
+    mobileLabel: 'Yo-Yo',
     showOnMobile: true,
   },
 ];
