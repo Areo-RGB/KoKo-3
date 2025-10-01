@@ -95,11 +95,6 @@ export const trainingToolsLinks: SidebarLink[] = [
     icon: Dumbbell,
   },
   {
-    title: 'YoYo-IR1',
-    url: '/yo-yo-ir1_test',
-    icon: PlayCircle,
-  },
-  {
     title: 'Interval Timer',
     url: '/interval-timer',
     icon: Timer,
