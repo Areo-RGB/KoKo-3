@@ -41,7 +41,7 @@ export default function ControlPanel({
             <SkipForward className="mr-2 h-5 w-5" />
             Skip
           </Button>
-          <Button onClick={onReset} disabled={isReady && status !== 'finished'} variant="outline" size="lg">
+          <Button onClick={onReset} disabled={isReady} variant="outline" size="lg">
             <RotateCcw className="mr-2 h-5 w-5" />
             Reset
           </Button>
@@ -60,4 +60,4 @@ export default function ControlPanel({
       </CardContent>
     </Card>
   );
-}
+}
