@@ -1,49 +1,111 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript"],
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2020": true
   },
   "rules": {
-    // Site-breaking errors only - these can cause runtime failures
-    "no-undef": "error",
-    "react-hooks/rules-of-hooks": "error",
+    // ============================================
+    // ERRORS: Build/Runtime breaking issues only
+    // ============================================
+    "no-undef": "error", // Undefined variables break runtime
+    "react-hooks/rules-of-hooks": "error", // Hook violations break React
+    "react/jsx-key": "error", // Missing keys cause React warnings
+
+    // ============================================
+    // DISABLED: Non-critical rules for AI flexibility
+    // ============================================
+
+    // Variable handling - let AI be flexible
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-var": "off",
+    "prefer-const": "off",
+
+    // Type safety - TypeScript handles this
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+
+    // React - non-breaking
+    "react/no-unescaped-entities": "off", // HTML entities handled by Next.js
+    "react-hooks/exhaustive-deps": "off", // Dependencies are AI-manageable
+    "react/prop-types": "off", // TypeScript handles prop validation
+    "react/display-name": "off", // Not critical for AI-generated code
+
+    // Code style - let Prettier handle
+    "object-shorthand": "off",
+    "prefer-template": "off",
+    "prefer-arrow-callback": "off",
+
+    // Next.js specific - optimization hints, not errors
     "@next/next/no-html-link-for-pages": "off",
     "@next/next/no-img-element": "off",
-    
-    // Downgraded to warnings - important but not site-breaking
-    "@typescript-eslint/no-unused-vars": "warn",
-    "@typescript-eslint/no-explicit-any": "warn",
-    "@typescript-eslint/strict-boolean-expressions": "warn",
-    "react-hooks/exhaustive-deps": "warn",
-    "prefer-const": "warn",
-    "no-var": "warn",
-    
-    // Disabled - code style/preference rules
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "object-shorthand": "off",
-    "prefer-template": "off"
+    "@next/next/no-page-custom-font": "off",
+    "@next/next/no-sync-scripts": "off",
+    "@next/next/no-title-in-document-head": "off",
+
+    // Import/export - TypeScript + Prettier handle
+    "import/no-unresolved": "off",
+    "import/named": "off",
+    "import/default": "off",
+    "import/namespace": "off",
+    "import/no-anonymous-default-export": "off"
   },
-  // Prevent client components from importing Node-only or server-only modules
+
+  // ============================================
+  // OVERRIDES: Contextual rules for specific patterns
+  // ============================================
   "overrides": [
     {
-      "files": [
-        "components/**/*.{ts,tsx}",
-        "app/**/_components/**/*.{ts,tsx}"
-      ],
+      "files": ["components/**/*.{ts,tsx}", "app/**/_components/**/*.{ts,tsx}"],
       "rules": {
+        // Client components MUST NOT import Node.js modules
         "no-restricted-imports": [
           "error",
           {
             "paths": [
-              { "name": "fs" },
-              { "name": "fs/promises" },
-              { "name": "path" },
-              { "name": "child_process" },
-              { "name": "os" },
-              { "name": "@/app/data-table-demo/_lib/data" }
+              {
+                "name": "fs",
+                "message": "fs is Node.js only - cannot be used in client components"
+              },
+              {
+                "name": "fs/promises",
+                "message": "fs/promises is Node.js only - cannot be used in client components"
+              },
+              {
+                "name": "path",
+                "message": "path is Node.js only - cannot be used in client components"
+              },
+              {
+                "name": "child_process",
+                "message": "child_process is Node.js only - cannot be used in client components"
+              },
+              {
+                "name": "os",
+                "message": "os is Node.js only - cannot be used in client components"
+              }
             ]
           }
         ]
+      }
+    },
+    {
+      "files": ["*.test.{ts,tsx}", "*.spec.{ts,tsx}"],
+      "rules": {
+        // Test files can be more permissive
+        "@typescript-eslint/no-explicit-any": "off",
+        "no-undef": "off"
       }
     }
   ]

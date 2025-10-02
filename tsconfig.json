@@ -1,26 +1,46 @@
 {
   "compilerOptions": {
+    // Language and library features
     "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES2020", // Modern target for better type inference
     "allowJs": true,
-    "target": "ES6",
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
+    "jsx": "preserve",
+
+    // Module resolution - optimized for AI understanding
     "module": "esnext",
     "moduleResolution": "bundler",
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+
+    // Type checking - stricter for AI safety
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true, // Skip lib checks for performance
+
+    // AI-friendly features
+    "forceConsistentCasingInFileNames": true, // Prevent casing errors
+    "noFallthroughCasesInSwitch": true, // Catch switch fallthrough bugs
+    "noUnusedLocals": false, // Allow unused vars during development
+    "noUnusedParameters": false, // Allow unused params during development
+    "noImplicitReturns": false, // Flexible for AI generation
+    "noUncheckedIndexedAccess": false, // Allow array access flexibility
+
+    // Path mapping for clean imports
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+
+    // Performance and incremental builds
     "incremental": true,
+
+    // Next.js plugin for AI-aware type support
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "paths": {
-      "@/*": ["./*"]
-    }
+    ]
   },
   "include": [
     "next-env.d.ts",

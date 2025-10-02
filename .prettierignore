@@ -1,22 +1,86 @@
-# Ignore large video files and virtualenv
-videos/
-videos/**
-videos/**/yt-uploader-env/
+# Dependencies and build outputs
 node_modules/
 .next/
-public/A-Junior/
-public/B-Junior/
-public/C-Junior/
-public/D-Junior/
-public/E-Junior/
-.archive
-.claude
-.cursor
-.github
-.next
-.roo
-.serena
-.vscode
-.workflows
-.*
-public
+out/
+dist/
+build/
+
+# Package manager files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Environment and config files that shouldn't be formatted
+.env*
+*.log
+
+# IDE and editor folders
+.vscode/
+.idea/
+.cursor/
+.claude/
+.serena/
+.rooignore
+
+# Git and CI/CD
+.git/
+.github/workflows/
+
+# Cache and temp files
+.cache/
+.temp/
+.tmp/
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+
+# User-generated content and assets that don't need formatting
+public/assets/
+public/data/
+public/junioren/
+public/data-table-demo/
+
+# Video files and large media
+videos/
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+
+# Image files (typically don't need formatting)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+*.ico
+*.webp
+
+# Documentation that may have specific formatting
+*.md
+CHANGELOG*
+LICENSE*
+
+# Large data files that shouldn't be formatted
+data/*.json
+lib/*.csv
+public/**/*.json
+app/data-combined/_data/*.json
+data/normative/*.json
+data/performance/*.json
+data/players/*.json
+data/sports/*.json
+
+# Archive and backup files
+.trash/
+.archive/
+*.tar.gz
+*.zip
+*.rar
+
+# Python virtual environments (if any)
+venv/
+env/
+.venv/

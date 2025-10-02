@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -133,7 +133,7 @@ export default function YoYoRankingPage() {
       const existingDistance = rankings[name];
       const prefillValue =
         existingDistance !== undefined &&
-        DISTANCE_OPTIONS.some((option) => option === existingDistance)
+          DISTANCE_OPTIONS.some((option) => option === existingDistance)
           ? String(existingDistance)
           : '';
       setDistanceInput(prefillValue);
@@ -210,7 +210,7 @@ export default function YoYoRankingPage() {
               className={cn(
                 'justify-start text-left text-base font-medium',
                 armedPlayer === name &&
-                  'border-red-500 text-red-600 shadow-[0_0_0_1px_rgba(239,68,68,0.2)]',
+                'border-red-500 text-red-600 shadow-[0_0_0_1px_rgba(239,68,68,0.2)]',
               )}
             >
               {name}
