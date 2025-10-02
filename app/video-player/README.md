@@ -145,9 +145,86 @@ For a full API reference covering props, events, and extensibility patterns, see
 
 ## Video Processing Workflow
 
-### Complete Workflow: YouTube to Cloudinary
+### Automated Python Scripts (Recommended)
 
-This workflow demonstrates how to download, cut, and upload training videos from YouTube to Cloudinary for use in the video player.
+Two Python scripts automate the entire workflow from YouTube download to Cloudinary upload:
+
+#### 1. Process Video Script (`scripts/process-video.py`)
+
+Downloads YouTube videos and cuts them into clips based on a JSON configuration file.
+
+**Usage:**
+```bash
+python3 scripts/process-video.py scripts/examples/speed-training-config.json
+```
+
+**Config Format:**
+```json
+{
+  "youtube_url": "https://www.youtube.com/watch?v=VIDEO_ID",
+  "output_name": "video_name",
+  "quality": "720p",
+  "output_dir": "./clips",
+  "encoding_preset": "medium",
+  "crf": 23,
+  "audio_bitrate": "128k",
+  "clips": [
+    {
+      "filename": "01_CLIP_NAME.mp4",
+      "start": "0:52",
+      "end": "1:36"
+    }
+  ]
+}
+```
+
+**Features:**
+- Single-pass ffmpeg processing for efficiency
+- Configurable quality, encoding settings, and output directory
+- Progress reporting and file size summary
+- Automatic directory creation
+
+#### 2. Cloudinary Upload Script (`scripts/upload-to-cloudinary.py`)
+
+Uploads all clips to Cloudinary and generates video-data.ts template code.
+
+**Usage:**
+```bash
+python3 scripts/upload-to-cloudinary.py scripts/examples/speed-training-upload.json
+```
+
+**Config Format:**
+```json
+{
+  "clips_dir": "./clips",
+  "cloudinary_folder": "trainings-video/Category/Subcategory/clips",
+  "cloudinary_cloud": "dg8zbx8ja",
+  "overwrite": true,
+  "generate_urls": true
+}
+```
+
+**Features:**
+- Batch upload all MP4 files in a directory
+- Automatic URL generation with proper Cloudinary paths
+- Generates ready-to-paste video-data.ts chapter templates
+- Progress reporting for each file
+
+**Complete Example Workflow:**
+```bash
+# 1. Create config files (see examples/ directory)
+# 2. Process video (download + cut)
+python3 scripts/process-video.py config.json
+
+# 3. Upload to Cloudinary
+python3 scripts/upload-to-cloudinary.py upload-config.json
+
+# 4. Copy generated template into video-data.ts
+```
+
+### Manual Workflow (Alternative)
+
+For manual control or one-off tasks, you can use the command-line tools directly:
 
 #### 1. Download Video from YouTube
 
@@ -281,14 +358,37 @@ for file in *.mp4; do
 done
 ```
 
+### Example Configurations
+
+Pre-configured examples are available in `scripts/examples/`:
+
+- **`speed-training-config.json`**: Process Speed Training video (10 clips)
+- **`speed-training-upload.json`**: Upload Speed Training clips to Cloudinary
+
+Use these as templates for new videos by copying and modifying the timestamps and paths.
+
 ### Tips & Best Practices
 
 1. **File Organization:**
    - Create folder structure on Cloudinary: `trainings-video/Category/Subcategory/clips/`
    - Use descriptive filenames: `01_EXERCISE_NAME.mp4`
    - Keep original video for re-cutting if needed
+   - Store config files in `.video/` directory alongside clips
 
-2. **Cloudinary CLI Setup:**
+2. **Python Scripts Setup:**
+   ```bash
+   # Required tools
+   pip install --user yt-dlp
+   pipx install cloudinary-cli
+   
+   # Configure Cloudinary
+   export CLOUDINARY_URL="cloudinary://API_KEY:API_SECRET@CLOUD_NAME"
+   
+   # Make scripts executable (if needed)
+   chmod +x scripts/process-video.py scripts/upload-to-cloudinary.py
+   ```
+
+3. **Cloudinary CLI Setup (for manual workflow):**
 
    ```bash
    # Install via pipx (recommended)
@@ -298,16 +398,22 @@ done
    export CLOUDINARY_URL="cloudinary://API_KEY:API_SECRET@CLOUD_NAME"
    ```
 
-3. **Quality Settings:**
+4. **Quality Settings:**
    - YouTube download: 720p is usually sufficient (`height<=720`)
    - Re-encoding: CRF 23 (good quality), preset medium (balanced speed/size)
    - Audio: AAC 128kbps is standard for training videos
 
-4. **Single-Pass Efficiency:**
+5. **Single-Pass Efficiency:**
    - The single ffmpeg command processes the input file once
    - All output clips are generated simultaneously
    - Much faster than running separate ffmpeg commands per clip
    - Maintains frame-accurate precision throughout
+
+6. **Config File Best Practices:**
+   - Store configs with descriptive names: `category-subcategory-config.json`
+   - Include all metadata in config for reproducibility
+   - Keep configs in version control for documentation
+   - Use relative paths for portability
 
 ## Zukünftige Verbesserungen
 

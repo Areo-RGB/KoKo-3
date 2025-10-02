@@ -11,7 +11,7 @@ node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
-
+.video/
 # Sensitive files
 apitxt
 secrets.txt
@@ -77,3 +77,6 @@ prettier.config.js
 .video
 app/video-player/README.md
 app/video-player/README.md
+2.webm
+armup.webm
+e.webm
