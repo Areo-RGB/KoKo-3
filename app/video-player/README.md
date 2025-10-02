@@ -143,6 +143,172 @@ For a full API reference covering props, events, and extensibility patterns, see
 - Static Export: Pre-built; videos/assets in public/ – no runtime fetches.
 - Refer to .vscode/project-structure.md for up-to-date file organization and imports.
 
+## Video Processing Workflow
+
+### Complete Workflow: YouTube to Cloudinary
+
+This workflow demonstrates how to download, cut, and upload training videos from YouTube to Cloudinary for use in the video player.
+
+#### 1. Download Video from YouTube
+
+Use `yt-dlp` to download videos at specific quality:
+
+```bash
+# Download at 720p quality
+yt-dlp -f "bestvideo[height<=720]+bestaudio/best[height<=720]" \
+  -o "video_name.%(ext)s" \
+  "https://www.youtube.com/watch?v=VIDEO_ID"
+```
+
+**Options:**
+
+- `-f`: Format selection (e.g., `bestvideo[height<=720]+bestaudio`)
+- `-o`: Output filename pattern
+- For best quality: Use `bestvideo+bestaudio/best`
+- For specific resolution: Use `bestvideo[height<=720]+bestaudio`
+
+#### 2. Cut Video into Clips
+
+Use a single ffmpeg command that reads the input file only once and generates all output clips in one pass with precise, frame-accurate cuts:
+
+```bash
+#!/bin/bash
+# Single-pass multi-output with re-encoding for precise cuts
+
+INPUT_VIDEO="input.mp4"
+
+ffmpeg -i "$INPUT_VIDEO" \
+  -ss 0:00 -to 0:53 -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k "01_CLIP_NAME.mp4" \
+  -ss 0:59 -to 1:29 -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k "02_CLIP_NAME.mp4" \
+  -ss 1:40 -to 2:33 -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k "03_CLIP_NAME.mp4"
+```
+
+**Key flags:**
+
+- `-ss`: Start time (precise to frame)
+- `-to`: End time (precise to frame)
+- `-c:v libx264`: H.264 video codec
+- `-crf 23`: Quality level (lower = better quality, 18-28 recommended)
+- `-preset medium`: Encoding speed/compression balance
+- `-c:a aac`: AAC audio codec
+- `-b:a 128k`: Audio bitrate
+
+#### 3. Upload to Cloudinary
+
+Use the Cloudinary CLI to upload all clips:
+
+```bash
+# Upload all clips to a specific folder structure
+for file in *.mp4; do
+  cld uploader upload "$file" \
+    --public-id "trainings-video/Category/Subcategory/clips/${file%.*}" \
+    --resource-type video \
+    --overwrite true
+done
+```
+
+**Bulk upload alternative:**
+
+```bash
+# Upload all MP4 files in current directory
+cld uploader upload *.mp4 \
+  --folder "trainings-video/Category/Subcategory/clips" \
+  --resource-type video
+```
+
+#### 4. Add to Video Database
+
+Update `app/video-player/_lib/video-data.ts` with the new video entry:
+
+```typescript
+{
+  name: 'Category Name',
+  subcategories: [
+    {
+      name: 'Subcategory Name',
+      videos: [
+        {
+          id: 'video-id',
+          title: 'Video Title',
+          description: 'Video description',
+          type: 'playlist', // or 'chapters'
+          playlistTitle: 'Playlist Title',
+          chapters: [
+            {
+              id: 'clip-1',
+              title: 'Clip 1 Name',
+              videoUrl: 'https://res.cloudinary.com/CLOUD_NAME/video/upload/v1234567890/trainings-video/Category/Subcategory/clips/01_CLIP_NAME.mp4',
+            },
+            // ... more clips
+          ],
+        },
+      ],
+    },
+  ],
+}
+```
+
+### Example: Sprint Drills Workflow
+
+Real example from the Sprint/Drills category:
+
+```bash
+# 1. Download YouTube video
+yt-dlp -f "bestvideo[height<=720]+bestaudio/best[height<=720]" \
+  -o "sprint_drills.%(ext)s" \
+  "https://www.youtube.com/watch?v=xiYTMBLqp8c"
+
+# 2. Cut into clips (stream copying - single pass)
+ffmpeg -i sprint_drills.mp4 \
+  -ss 0:00 -to 0:53 -c copy -avoid_negative_ts make_zero "01_WALKING_HIGH_KNEES.mp4" \
+  -ss 0:59 -to 1:29 -c copy -avoid_negative_ts make_zero "02_A-SKIP.mp4" \
+  -ss 1:40 -to 2:33 -c copy -avoid_negative_ts make_zero "03_B-SKIP.mp4" \
+  -ss 2:43 -to 3:39 -c copy -avoid_negative_ts make_zero "04_C-SKIP.mp4" \
+  -ss 3:49 -to 4:36 -c copy -avoid_negative_ts make_zero "05_HIGH_KNEES.mp4" \
+  -ss 4:46 -to 5:20 -c copy -avoid_negative_ts make_zero "06_KARAOKE.mp4" \
+  -ss 5:30 -to 7:16 -c copy -avoid_negative_ts make_zero "07_FAST_LEGS.mp4" \
+  -ss 7:26 -to 7:51 -c copy -avoid_negative_ts make_zero "08_ALTERNATING_FAST_LEGS.mp4" \
+  -ss 8:01 -to 8:28 -c copy -avoid_negative_ts make_zero "09_DOUBLE_ALTERNATING_FAST_LEGS.mp4" \
+  -ss 8:38 -to 9:55 -c copy -avoid_negative_ts make_zero "10_STICK_IT_DRILL.mp4" \
+  -ss 10:05 -to 10:26 -c copy -avoid_negative_ts make_zero "11_1_2_3_DRILL.mp4"
+
+# 3. Upload to Cloudinary
+for file in *.mp4; do
+  cld uploader upload "$file" \
+    --public-id "trainings-video/Sprint/Drills/clips/${file%.*}" \
+    --resource-type video \
+    --overwrite true
+done
+```
+
+### Tips & Best Practices
+
+1. **File Organization:**
+   - Create folder structure on Cloudinary: `trainings-video/Category/Subcategory/clips/`
+   - Use descriptive filenames: `01_EXERCISE_NAME.mp4`
+   - Keep original video for re-cutting if needed
+
+2. **Cloudinary CLI Setup:**
+
+   ```bash
+   # Install via pipx (recommended)
+   pipx install cloudinary-cli
+
+   # Configure with environment variable
+   export CLOUDINARY_URL="cloudinary://API_KEY:API_SECRET@CLOUD_NAME"
+   ```
+
+3. **Quality Settings:**
+   - YouTube download: 720p is usually sufficient (`height<=720`)
+   - Re-encoding: CRF 23 (good quality), preset medium (balanced speed/size)
+   - Audio: AAC 128kbps is standard for training videos
+
+4. **Single-Pass Efficiency:**
+   - The single ffmpeg command processes the input file once
+   - All output clips are generated simultaneously
+   - Much faster than running separate ffmpeg commands per clip
+   - Maintains frame-accurate precision throughout
+
 ## Zukünftige Verbesserungen
 
 Kurzfristig geplante Verbesserungen und mögliche Erweiterungen:

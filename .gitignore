@@ -74,3 +74,6 @@ docs/wsl-auth-analysis.md
 .rooignore
 .prettierignore
 prettier.config.js
+.video
+app/video-player/README.md
+app/video-player/README.md
