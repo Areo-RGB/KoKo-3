@@ -32,22 +32,22 @@ export const metadata: Metadata = {
     icon: [
       {
         rel: 'icon',
-        url: '/icons/icon-32x32.png',
+        url: '/assets/icons/favicon-32x32.png',
         type: 'image/png',
         sizes: '32x32',
       },
       {
         rel: 'icon',
-        url: '/icons/icon-16x16.png',
+        url: '/assets/icons/favicon-16x16.png',
         type: 'image/png',
         sizes: '16x16',
       },
-      { rel: 'icon', url: '/favicon.ico' },
+      { rel: 'icon', url: '/assets/icons/favicon.ico' },
     ],
     apple: [
       {
         rel: 'apple-touch-icon',
-        url: '/icons/apple-touch-icon.png',
+        url: '/assets/icons/ios/apple-touch-icon-180x180.png',
         sizes: '180x180',
       },
     ],
@@ -83,20 +83,23 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="de" suppressHydrationWarning>
       <head>
         {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/assets/icons/favicon.ico" />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/icons/icon-32x32.png"
+          href="/assets/icons/favicon-32x32.png"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/icons/icon-16x16.png"
+          href="/assets/icons/favicon-16x16.png"
         />
-        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+        <link
+          rel="apple-touch-icon"
+          href="/assets/icons/ios/apple-touch-icon-180x180.png"
+        />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0f172a" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
