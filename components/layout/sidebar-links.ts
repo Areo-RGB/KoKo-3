@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import {
   Database,
+  Download,
   Dumbbell,
   GraduationCap,
   Home,
@@ -67,7 +68,15 @@ export const datenLinks: SidebarLink[] = [
   },
 ];
 
-export const toolsLinks: SidebarLink[] = [];
+export const toolsLinks: SidebarLink[] = [
+  {
+    title: 'Video Cache',
+    url: '/cache',
+    icon: Download,
+    mobileLabel: 'Cache',
+    showOnMobile: false,
+  },
+];
 
 export const trainingToolsLinks: SidebarLink[] = [
   {

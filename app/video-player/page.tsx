@@ -19,9 +19,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { VideoCacheManager } from '@/components/video-cache-manager';
 import { Play } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const playlistTitleForVideo = (video: Video) => {
   const candidate = video.playlistTitle;
@@ -118,29 +117,6 @@ export default function VideoPlayerPage() {
           playlistTitle: playlistTitleForVideo(selectedVideo),
         }
       : null;
-
-  // Extract all video URLs for caching
-  const allVideoUrls = useMemo(() => {
-    const urls: string[] = [];
-    videoData.categories.forEach((category) => {
-      category.subcategories.forEach((subcategory) => {
-        subcategory.videos.forEach((video) => {
-          // Add main video URL if it's a chapters-based video
-          if (video.videoUrl) {
-            urls.push(video.videoUrl);
-          }
-          // Add individual chapter URLs for playlist-based videos
-          video.chapters.forEach((chapter) => {
-            if (chapter.videoUrl) {
-              urls.push(chapter.videoUrl);
-            }
-          });
-        });
-      });
-    });
-    return urls;
-  }, [videoData]);
-
   if (videoData.categories.length === 0) {
     return (
       <div className="container max-w-7xl px-4 py-6 sm:p-6">
@@ -168,11 +144,6 @@ export default function VideoPlayerPage() {
             Professionelle Trainingsinhalte zur Fähigkeitsentwicklung und
             Leistungssteigerung
           </p>
-        </div>
-
-        {/* Video Cache Manager */}
-        <div className="mb-6">
-          <VideoCacheManager videoUrls={allVideoUrls} autoUpdate />
         </div>
 
         {/* Category Dropdown */}
