@@ -112,10 +112,10 @@ export default function VideoPlayerPage() {
   const videoDataForPlayer: VideoData | null =
     selectedVideo !== null
       ? {
-          ...selectedVideo,
-          category: selectedCategory,
-          playlistTitle: playlistTitleForVideo(selectedVideo),
-        }
+        ...selectedVideo,
+        category: selectedCategory,
+        playlistTitle: playlistTitleForVideo(selectedVideo),
+      }
       : null;
   if (videoData.categories.length === 0) {
     return (
