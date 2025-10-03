@@ -5,6 +5,7 @@ import { Slider } from '@/components/ui/slider';
 import { VideoChapter } from '@/lib/video-data';
 import { cn } from '@/util/utils';
 import {
+  Gauge,
   List,
   Maximize,
   Minimize,
@@ -32,6 +33,8 @@ interface VideoPlayerControlsProps {
   onToggleFullscreen: () => void;
   onSkipBack: () => void;
   onSkipForward: () => void;
+  playbackRate: number;
+  onToggleSlowMotion: () => void;
   chapters?: VideoChapter[];
   className?: string;
   isMobile?: boolean;
@@ -54,6 +57,8 @@ export default function VideoPlayerControls({
   onToggleFullscreen,
   onSkipBack,
   onSkipForward,
+  playbackRate,
+  onToggleSlowMotion,
   chapters = [],
   className,
   isMobile = false,
@@ -177,6 +182,30 @@ export default function VideoPlayerControls({
             aria-label="10 Sekunden vorspulen"
           >
             <SkipForward className={cn(isMobile ? 'h-5 w-5' : 'h-4 w-4')} />
+          </Button>
+
+          {/* Slow Motion Toggle */}
+          <Button
+            variant="ghost"
+            size={isMobile ? 'default' : 'sm'}
+            onClick={onToggleSlowMotion}
+            className={cn(
+              'touch-manipulation text-white hover:bg-white/20 hover:text-white',
+              playbackRate === 0.25 && 'bg-white/20',
+              isMobile ? 'p-3' : 'p-2',
+            )}
+            aria-label={
+              playbackRate === 0.25
+                ? 'Normale Geschwindigkeit'
+                : 'Zeitlupe (0.25x)'
+            }
+          >
+            <Gauge className={cn(isMobile ? 'h-5 w-5' : 'h-4 w-4')} />
+            {!isMobile && (
+              <span className="ml-1 text-xs">
+                {playbackRate === 0.25 ? '0.25×' : '1×'}
+              </span>
+            )}
           </Button>
 
           {/* Time Display - Hidden on small mobile screens */}

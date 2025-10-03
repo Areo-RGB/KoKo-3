@@ -40,6 +40,7 @@ export default function VideoPlayer({
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [playbackRate, setPlaybackRate] = useState(1);
 
   // Playlist state
   const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistItem[]>(
@@ -183,6 +184,14 @@ export default function VideoPlayer({
     }
   };
 
+  const handleToggleSlowMotion = () => {
+    if (videoRef.current) {
+      const newRate = playbackRate === 1 ? 0.25 : 1;
+      videoRef.current.playbackRate = newRate;
+      setPlaybackRate(newRate);
+    }
+  };
+
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       // Logic for keyboard shortcuts
@@ -299,6 +308,8 @@ export default function VideoPlayer({
               onToggleFullscreen={handleToggleFullscreen}
               onSkipBack={handleSkipBack}
               onSkipForward={handleSkipForward}
+              playbackRate={playbackRate}
+              onToggleSlowMotion={handleToggleSlowMotion}
               chapters={currentVideo?.chapters}
               isMobile={isMobile}
             />

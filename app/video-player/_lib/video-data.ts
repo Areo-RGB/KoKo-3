@@ -1359,6 +1359,129 @@ const allVideoData: HierarchicalVideoData = {
       name: 'Sprint',
       subcategories: [
         {
+          name: 'Acceleration',
+          videos: [
+            {
+              id: 'acceleration-drills',
+              title: 'Acceleration Drills',
+              description:
+                'Eighteen essential acceleration drills to improve sprint starts, explosive power, and first-step quickness',
+              type: 'playlist',
+              playlistTitle: 'Acceleration Drills',
+              chapters: [
+                {
+                  id: 'wall-drills',
+                  title: '01 Wall Drills',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516442/01_Wall_Drills_stifji.mp4',
+                },
+                {
+                  id: 'half-kneeling-sprint-start',
+                  title: '02 Half-Kneeling Sprint Start',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516441/02_Half-Kneeling_Sprint_Start_shwfx1.mp4',
+                },
+                {
+                  id: 'single-leg-broad-jumps',
+                  title: '03 Single Leg Broad Jumps',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516415/03_Single_Leg_Broad_Jumps_dnicbk.mp4',
+                },
+                {
+                  id: 'single-leg-hop-back-to-broad-jump',
+                  title: '04 Single Leg Hop Back to Broad Jump',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516421/04_Single_Leg_Hop_Back_to_Broad_Jump_w2wvzi.mp4',
+                },
+                {
+                  id: 'bounds',
+                  title: '05 Bounds',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516433/05_Bounds_suuics.mp4',
+                },
+                {
+                  id: 'broad-jump-to-single-leg-bounds',
+                  title: '06 Broad Jump to Single Leg Bounds',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516427/06_Broad_Jump_to_Single_Leg_Bounds_ccngpb.mp4',
+                },
+                {
+                  id: 'depth-jumps',
+                  title: '07 Depth Jumps',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516435/07_Depth_Jumps_tyrdfm.mp4',
+                },
+                {
+                  id: 'forward-ankle-jumps',
+                  title: '08 Forward Ankle Jumps',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516432/08_Forward_Ankle_Jumps_ilgniq.mp4',
+                },
+                {
+                  id: 'lateral-jump-to-broad-jump',
+                  title: '09 Lateral Jump to Broad Jump',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516430/09_Lateral_Jump_to_Broad_Jump_joywjb.mp4',
+                },
+                {
+                  id: 'single-leg-line-hops',
+                  title: '10 Single Leg Line Hops',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516434/10_Single_Leg_Line_Hops_i9o2se.mp4',
+                },
+                {
+                  id: 'resisted-sprints-hops',
+                  title: '11 Resisted Sprints & Hops',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516440/11_Resisted_Sprints_Hops_jh28yk.mp4',
+                },
+                {
+                  id: 'resisted-horizontal-high-knees',
+                  title: '12 Resisted Horizontal High Knees',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516423/12_Resisted_Horizontal_High_Knees_dhiahy.mp4',
+                },
+                {
+                  id: 'resisted-broad-jumps',
+                  title: '13 Resisted Broad Jumps',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516412/13_Resisted_Broad_Jumps_gyfgij.mp4',
+                },
+                {
+                  id: 'kettlebell-ankle-mobility',
+                  title: '14 Kettlebell Ankle Mobility',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516417/14_Kettlebell_Ankle_Mobility_nxkscr.mp4',
+                },
+                {
+                  id: 'single-leg-plate-jumps',
+                  title: '15 Single Leg Plate Jumps',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516417/15_Single_Leg_Plate_Jumps_arh4k7.mp4',
+                },
+                {
+                  id: 'single-leg-calf-machine-hops',
+                  title: '16 Single Leg Calf Machine Hops',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516423/16_Single_Leg_Calf_Machine_Hops_vdpxxw.mp4',
+                },
+                {
+                  id: 'bent-knee-calf-raise',
+                  title: '17 Bent Knee Calf Raise',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516416/17_Bent_Knee_Calf_Raise_ukss3a.mp4',
+                },
+                {
+                  id: 'heels-up-squat',
+                  title: '18 Heels-Up Squat',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759516415/18_Heels-Up_Squat_jkmrxn.mp4',
+                },
+              ],
+            },
+          ],
+        },
+        {
           name: 'Drills',
           videos: [
             {
@@ -1519,6 +1642,62 @@ const allVideoData: HierarchicalVideoData = {
     {
       name: 'Routines',
       subcategories: [
+        {
+          name: 'Core',
+          videos: [
+            {
+              id: 'core-drills',
+              title: 'Core Drills',
+              description: 'Essential core strengthening exercises',
+              type: 'playlist',
+              playlistTitle: 'Core Drills',
+              chapters: [
+                {
+                  id: 'low-plank-hold',
+                  title: '01 Low Plank Hold',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759515706/01_Low_Plank_Hold_chzrfb.mp4',
+                },
+                {
+                  id: 'v-sit',
+                  title: '02 V Sit',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759515718/02_V_Sit_hvlowu.mp4',
+                },
+                {
+                  id: 'bicycle-crunches',
+                  title: '03 Bicycle Crunches',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759515708/03_Bicycle_Crunches_qndppc.mp4',
+                },
+                {
+                  id: 'side-plank',
+                  title: '04 Side Plank',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759515707/04_Side_Plank_grij0p.mp4',
+                },
+                {
+                  id: 'glute-bridges',
+                  title: '05 Glute Bridges',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759515713/05_Glute_Bridges_iksr6t.mp4',
+                },
+                {
+                  id: 'leg-raises',
+                  title: '06 Leg Raises',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759515720/06_Leg_Raises_ghtxd2.mp4',
+                },
+                {
+                  id: 'pushups',
+                  title: '07 Pushups',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759515727/07_Pushups_ogejxg.mp4',
+                },
+              ],
+            },
+          ],
+        },
         {
           name: 'FIFA 11+',
           videos: [
