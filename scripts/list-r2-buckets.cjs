@@ -37,12 +37,14 @@ async function loadEnv() {
 
 async function main() {
   const env = Object.assign({}, await loadEnv(), process.env);
-  
+
   const accessKeyId = env.R2_ACCESS_KEY_ID;
   const secretAccessKey = env.R2_SECRET_ACCESS_KEY;
-  const endpoint = env.R2_ENDPOINT || (env.R2_ACCOUNT_ID
-    ? `https://${env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`
-    : undefined);
+  const endpoint =
+    env.R2_ENDPOINT ||
+    (env.R2_ACCOUNT_ID
+      ? `https://${env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`
+      : undefined);
   const region = env.R2_REGION || 'auto';
 
   if (!accessKeyId || !secretAccessKey) {
@@ -61,7 +63,10 @@ async function main() {
 
   try {
     const response = await s3.send(new ListBucketsCommand({}));
-    console.log('Available buckets:', response.Buckets?.map(b => b.Name) || []);
+    console.log(
+      'Available buckets:',
+      response.Buckets?.map((b) => b.Name) || [],
+    );
   } catch (err) {
     console.error('Error listing buckets:', err.message);
   }

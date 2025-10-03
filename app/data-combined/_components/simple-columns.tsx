@@ -40,7 +40,7 @@ export const simpleColumns: ColumnDef<SimpleNormativeDataRow>[] = [
     },
     cell: ({ row }) => {
       const age = row.getValue('age') as string;
-      return <div className="font-mono text-center font-medium">{age}</div>;
+      return <div className="text-center font-mono font-medium">{age}</div>;
     },
   },
   {
@@ -60,7 +60,7 @@ export const simpleColumns: ColumnDef<SimpleNormativeDataRow>[] = [
       const lowest = row.getValue('lowest') as number;
       const unit = row.original.unit;
       return (
-        <div className="text-right font-mono text-green-600 font-medium">
+        <div className="text-right font-mono font-medium text-green-600">
           {lowest} {unit}
         </div>
       );
@@ -83,7 +83,7 @@ export const simpleColumns: ColumnDef<SimpleNormativeDataRow>[] = [
       const highest = row.getValue('highest') as number;
       const unit = row.original.unit;
       return (
-        <div className="text-right font-mono text-red-600 font-medium">
+        <div className="text-right font-mono font-medium text-red-600">
           {highest} {unit}
         </div>
       );

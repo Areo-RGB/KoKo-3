@@ -60,12 +60,12 @@ export function FullscreenToggle({
       aria-label={label}
       onClick={toggleFullscreen}
       className={cn(
-        'rounded-full p-2 transition-colors hover:bg-muted',
+        'hover:bg-muted rounded-full p-2 transition-colors',
         className,
       )}
       {...props}
     >
-      <Icon className={cn('h-5 w-5 text-muted-foreground', iconClassName)} />
+      <Icon className={cn('text-muted-foreground h-5 w-5', iconClassName)} />
       <span className="sr-only">{label}</span>
     </button>
   );

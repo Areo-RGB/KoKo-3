@@ -23,9 +23,9 @@ import { cn } from '@/util/utils';
 type RankingMap = Record<string, number>;
 
 const DISTANCE_OPTIONS = [
-  40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600,
-  640, 680, 720, 760, 800, 840, 880, 920, 960, 1000, 1040, 1080, 1120, 1160,
-  1200, 1240, 1280,
+  40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600, 640,
+  680, 720, 760, 800, 840, 880, 920, 960, 1000, 1040, 1080, 1120, 1160, 1200,
+  1240, 1280,
 ] as const;
 const LOCAL_STORAGE_KEY = 'yo-yo-ranking';
 
@@ -86,15 +86,15 @@ export default function YoYoRankingPage() {
       const parsed = JSON.parse(stored) as unknown;
       if (!parsed || typeof parsed !== 'object') return;
 
-      const validatedEntries = Object.entries(parsed as Record<string, unknown>)
-        .reduce<RankingMap>((accumulator, [name, value]) => {
-          const numericValue =
-            typeof value === 'number' ? value : Number(value);
-          if (Number.isFinite(numericValue) && numericValue > 0) {
-            accumulator[name] = numericValue;
-          }
-          return accumulator;
-        }, {});
+      const validatedEntries = Object.entries(
+        parsed as Record<string, unknown>,
+      ).reduce<RankingMap>((accumulator, [name, value]) => {
+        const numericValue = typeof value === 'number' ? value : Number(value);
+        if (Number.isFinite(numericValue) && numericValue > 0) {
+          accumulator[name] = numericValue;
+        }
+        return accumulator;
+      }, {});
 
       setRankings(validatedEntries);
     } catch {
@@ -121,8 +121,8 @@ export default function YoYoRankingPage() {
 
   const rankingList = useMemo(
     () =>
-      Object.entries(rankings).sort(([, aDistance], [, bDistance]) =>
-        bDistance - aDistance,
+      Object.entries(rankings).sort(
+        ([, aDistance], [, bDistance]) => bDistance - aDistance,
       ),
     [rankings],
   );
@@ -133,7 +133,7 @@ export default function YoYoRankingPage() {
       const existingDistance = rankings[name];
       const prefillValue =
         existingDistance !== undefined &&
-          DISTANCE_OPTIONS.some((option) => option === existingDistance)
+        DISTANCE_OPTIONS.some((option) => option === existingDistance)
           ? String(existingDistance)
           : '';
       setDistanceInput(prefillValue);
@@ -185,8 +185,8 @@ export default function YoYoRankingPage() {
       <header className="space-y-2">
         <h1 className="text-3xl font-bold">Yo-Yo Test</h1>
         <p className="text-muted-foreground text-sm">
-          Wähle eine Spielerin oder einen Spieler aus und erfasse die
-          gelaufene Distanz.
+          Wähle eine Spielerin oder einen Spieler aus und erfasse die gelaufene
+          Distanz.
         </p>
       </header>
 
@@ -194,9 +194,7 @@ export default function YoYoRankingPage() {
         <p className="text-muted-foreground text-sm">Lade Spieler...</p>
       )}
 
-      {loadError && (
-        <p className="text-destructive text-sm">{loadError}</p>
-      )}
+      {loadError && <p className="text-destructive text-sm">{loadError}</p>}
 
       {!loading && !loadError && (
         <section className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -210,7 +208,7 @@ export default function YoYoRankingPage() {
               className={cn(
                 'justify-start text-left text-base font-medium',
                 armedPlayer === name &&
-                'border-red-500 text-red-600 shadow-[0_0_0_1px_rgba(239,68,68,0.2)]',
+                  'border-red-500 text-red-600 shadow-[0_0_0_1px_rgba(239,68,68,0.2)]',
               )}
             >
               {name}
@@ -241,7 +239,7 @@ export default function YoYoRankingPage() {
             {rankingList.map(([name, distance], index) => (
               <li
                 key={name}
-                className="flex items-center justify-between rounded-md border bg-card p-3"
+                className="bg-card flex items-center justify-between rounded-md border p-3"
               >
                 <span className="flex items-center gap-3">
                   <span className="text-muted-foreground font-medium">
@@ -249,14 +247,19 @@ export default function YoYoRankingPage() {
                   </span>
                   <span>{name}</span>
                 </span>
-                <span className="font-semibold">{formatDistance(distance)}</span>
+                <span className="font-semibold">
+                  {formatDistance(distance)}
+                </span>
               </li>
             ))}
           </ol>
         )}
       </section>
 
-      <Dialog open={dialogPlayer !== null} onOpenChange={(open) => !open && handleDialogClose()}>
+      <Dialog
+        open={dialogPlayer !== null}
+        onOpenChange={(open) => !open && handleDialogClose()}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Distanz eintragen</DialogTitle>
@@ -292,7 +295,11 @@ export default function YoYoRankingPage() {
               )}
             </div>
             <div className="flex justify-end gap-2">
-              <Button type="button" variant="outline" onClick={handleDialogClose}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleDialogClose}
+              >
                 Abbrechen
               </Button>
               <Button type="submit">Speichern</Button>

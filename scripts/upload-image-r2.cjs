@@ -142,21 +142,21 @@ async function uploadFile(s3, bucket, filePath, key, dryRun = false) {
 
     const Body = fs.createReadStream(filePath);
     const ContentType = guessContentType(filePath);
-    
+
     await s3.send(
-      new PutObjectCommand({ 
-        Bucket: bucket, 
-        Key: key, 
-        Body, 
+      new PutObjectCommand({
+        Bucket: bucket,
+        Key: key,
+        Body,
         ContentType,
         // Add metadata for images
         Metadata: {
           'original-name': path.basename(filePath),
           'upload-date': new Date().toISOString(),
-        }
-      })
+        },
+      }),
     );
-    
+
     console.log(`[OK] ${filePath} -> ${bucket}/${key}`);
     return { success: true };
   } catch (err) {
@@ -172,18 +172,23 @@ async function main() {
   const bucket = env.R2_BUCKET || 'video';
   const accessKeyId = env.R2_ACCESS_KEY_ID;
   const secretAccessKey = env.R2_SECRET_ACCESS_KEY;
-  const endpoint = env.R2_ENDPOINT || (env.R2_ACCOUNT_ID
-    ? `https://${env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`
-    : undefined);
+  const endpoint =
+    env.R2_ENDPOINT ||
+    (env.R2_ACCOUNT_ID
+      ? `https://${env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`
+      : undefined);
   const region = env.R2_REGION || 'auto';
   const dryRun = !!args.dryRun;
 
-  if (!bucket)
-    throw new Error('Missing bucket: set R2_BUCKET in .env.local');
+  if (!bucket) throw new Error('Missing bucket: set R2_BUCKET in .env.local');
   if (!accessKeyId || !secretAccessKey)
-    throw new Error('Missing R2 credentials: set R2_ACCESS_KEY_ID and R2_SECRET_ACCESS_KEY in .env.local');
+    throw new Error(
+      'Missing R2 credentials: set R2_ACCESS_KEY_ID and R2_SECRET_ACCESS_KEY in .env.local',
+    );
   if (!endpoint)
-    throw new Error('Missing R2 endpoint: set R2_ENDPOINT or R2_ACCOUNT_ID in .env.local');
+    throw new Error(
+      'Missing R2 endpoint: set R2_ENDPOINT or R2_ACCOUNT_ID in .env.local',
+    );
 
   const s3 = new S3Client({
     region,
@@ -192,7 +197,9 @@ async function main() {
     credentials: { accessKeyId, secretAccessKey },
   });
 
-  console.log(`Uploading to R2 bucket: ${bucket} via ${endpoint}${dryRun ? ' [DRY RUN]' : ''}`);
+  console.log(
+    `Uploading to R2 bucket: ${bucket} via ${endpoint}${dryRun ? ' [DRY RUN]' : ''}`,
+  );
 
   let success = 0;
   let failed = 0;
@@ -201,7 +208,7 @@ async function main() {
   if (args.file) {
     const filePath = path.resolve(args.file);
     const fileStat = await fsp.stat(filePath).catch(() => null);
-    
+
     if (!fileStat || !fileStat.isFile()) {
       throw new Error(`File not found: ${filePath}`);
     }
@@ -213,23 +220,23 @@ async function main() {
 
     const key = args.key || path.basename(filePath);
     const result = await uploadFile(s3, bucket, filePath, key, dryRun);
-    
+
     if (result.success) success++;
     else failed++;
   }
-  
+
   // Directory upload
   else if (args.dir) {
     const sourceDir = path.resolve(args.dir);
     const dirStat = await fsp.stat(sourceDir).catch(() => null);
-    
+
     if (!dirStat || !dirStat.isDirectory()) {
       throw new Error(`Directory not found: ${sourceDir}`);
     }
 
     const prefix = (args.prefix || '').replace(/^\/+|\/+$/g, '');
     const files = [];
-    
+
     for await (const file of walk(sourceDir)) {
       const ext = path.extname(file).toLowerCase();
       if (IMAGE_EXTS.has(ext)) {
@@ -248,13 +255,11 @@ async function main() {
       const rel = path.relative(sourceDir, filePath);
       const key = toPosixKey(prefix ? `${prefix}/${rel}` : rel);
       const result = await uploadFile(s3, bucket, filePath, key, dryRun);
-      
+
       if (result.success) success++;
       else failed++;
     }
-  }
-  
-  else {
+  } else {
     throw new Error('Please specify either --file or --dir option');
   }
 

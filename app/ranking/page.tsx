@@ -1,11 +1,11 @@
 'use client';
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button as MovingBorderButton } from '@/components/ui/moving-border';
 import { SelectNative } from '@/components/ui/select-native';
 import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
 import { sportsData } from '@/lib/data';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   getSportsDataWithRanks,
   getVideoForPlayer,
@@ -288,12 +288,14 @@ export default function HomePage() {
                       onClick={() =>
                         handlePlayerClick(participant.name, selectedSport.name)
                       }
-                      containerClassName={`w-full h-auto ${videoAvailable ? 'cursor-pointer' : ''
-                        }`}
-                      className={`flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-200 ${videoAvailable
-                        ? 'bg-muted hover:bg-accent cursor-pointer'
-                        : 'bg-muted hover:bg-accent'
-                        }`}
+                      containerClassName={`w-full h-auto ${
+                        videoAvailable ? 'cursor-pointer' : ''
+                      }`}
+                      className={`flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-200 ${
+                        videoAvailable
+                          ? 'bg-muted hover:bg-accent cursor-pointer'
+                          : 'bg-muted hover:bg-accent'
+                      }`}
                       borderRadius="var(--radius)"
                       duration={3000}
                       borderClassName="bg-[radial-gradient(hsl(var(--primary))_40%,transparent_60%)] opacity-[0.8]"
@@ -303,8 +305,13 @@ export default function HomePage() {
                           {participant.rank}
                         </div>
                         <Avatar className="h-8 w-8">
-                          <AvatarImage src={getAvatarForName(participant.name)} alt={participant.name} />
-                          <AvatarFallback>{getInitials(participant.name)}</AvatarFallback>
+                          <AvatarImage
+                            src={getAvatarForName(participant.name)}
+                            alt={participant.name}
+                          />
+                          <AvatarFallback>
+                            {getInitials(participant.name)}
+                          </AvatarFallback>
                         </Avatar>
                         <span className="text-foreground font-medium">
                           {participant.name}
@@ -331,18 +338,24 @@ export default function HomePage() {
                       onClick={() =>
                         handlePlayerClick(participant.name, selectedSport.name)
                       }
-                      className={`flex items-center justify-between rounded-lg border px-4 py-3 transition-all duration-200 ${videoAvailable
-                        ? 'border-border bg-muted hover:border-primary hover:bg-accent cursor-pointer'
-                        : 'border-border bg-muted hover:border-primary hover:bg-accent'
-                        }`}
+                      className={`flex items-center justify-between rounded-lg border px-4 py-3 transition-all duration-200 ${
+                        videoAvailable
+                          ? 'border-border bg-muted hover:border-primary hover:bg-accent cursor-pointer'
+                          : 'border-border bg-muted hover:border-primary hover:bg-accent'
+                      }`}
                     >
                       <div className="flex items-center gap-4">
                         <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold">
                           {participant.rank}
                         </div>
                         <Avatar className="h-8 w-8">
-                          <AvatarImage src={getAvatarForName(participant.name)} alt={participant.name} />
-                          <AvatarFallback>{getInitials(participant.name)}</AvatarFallback>
+                          <AvatarImage
+                            src={getAvatarForName(participant.name)}
+                            alt={participant.name}
+                          />
+                          <AvatarFallback>
+                            {getInitials(participant.name)}
+                          </AvatarFallback>
                         </Avatar>
                         <span className="text-foreground font-medium">
                           {participant.name}

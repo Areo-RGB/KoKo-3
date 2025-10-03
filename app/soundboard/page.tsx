@@ -3,9 +3,13 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Slider } from '@/components/ui/slider';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import {
   Select,
   SelectContent,
@@ -13,11 +17,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
 import { Pause, Play, Square, Star, StarOff, Volume2 } from 'lucide-react';
 import React from 'react';
 
-type SoundItem = { id: string; label: string; src: string; sources: string[]; ttsFallback?: boolean };
+type SoundItem = {
+  id: string;
+  label: string;
+  src: string;
+  sources: string[];
+  ttsFallback?: boolean;
+};
 type Topic = { id: string; name: string; sounds: SoundItem[] };
 
 const FAVORITES_KEY = 'soundboard:favorites';
@@ -40,11 +52,16 @@ export default function SoundboardPage() {
   const [lastPlayed, setLastPlayed] = React.useState<string | null>(null);
   const [isMuted, setIsMuted] = React.useState<boolean>(false);
   const [topics, setTopics] = React.useState<Topic[] | null>(null);
-  const [variantTarget, setVariantTarget] = React.useState<SoundItem | null>(null);
+  const [variantTarget, setVariantTarget] = React.useState<SoundItem | null>(
+    null,
+  );
   const [favoriteIds, setFavoriteIds] = React.useState<Set<string>>(new Set());
   const [favoritesHydrated, setFavoritesHydrated] = React.useState(false);
   const [showFavoritesOnly, setShowFavoritesOnly] = React.useState(false);
-  const makeFavoriteKey = React.useCallback((topicId: string, soundId: string) => `${topicId}::${soundId}`, []);
+  const makeFavoriteKey = React.useCallback(
+    (topicId: string, soundId: string) => `${topicId}::${soundId}`,
+    [],
+  );
 
   const favoriteLookup = React.useMemo(() => {
     const map = new Map<string, Set<string>>();
@@ -69,7 +86,11 @@ export default function SoundboardPage() {
           if (raw) {
             const parsed = JSON.parse(raw) as string[];
             if (Array.isArray(parsed)) {
-              setFavoriteIds(new Set(parsed.map((value) => normalizeFavoriteKey(String(value)))));
+              setFavoriteIds(
+                new Set(
+                  parsed.map((value) => normalizeFavoriteKey(String(value))),
+                ),
+              );
             }
           }
         } catch {
@@ -101,7 +122,10 @@ export default function SoundboardPage() {
   React.useEffect(() => {
     if (!favoritesHydrated || typeof window === 'undefined') return;
     try {
-      window.localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.from(favoriteIds)));
+      window.localStorage.setItem(
+        FAVORITES_KEY,
+        JSON.stringify(Array.from(favoriteIds)),
+      );
     } catch {
       // ignore storage failure (quota, etc.)
     }
@@ -123,7 +147,8 @@ export default function SoundboardPage() {
   const speak = React.useCallback(
     (text: string) => {
       // Browser TTS fallback if no file is provided
-      if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+      if (typeof window === 'undefined' || !('speechSynthesis' in window))
+        return;
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.volume = isMuted ? 0 : Math.max(0, Math.min(1, volume));
       try {
@@ -143,7 +168,9 @@ export default function SoundboardPage() {
       }
 
       setLastPlayed(
-        sound.sources?.length > 1 ? `${sound.label} (Version ${sourceIndex + 1})` : sound.label,
+        sound.sources?.length > 1
+          ? `${sound.label} (Version ${sourceIndex + 1})`
+          : sound.label,
       );
 
       // Stop and clean up any prior instance of the same sound
@@ -183,7 +210,9 @@ export default function SoundboardPage() {
         .map((topic) => {
           const favSet = favoriteLookup.get(topic.id);
           if (!favSet?.size) return null;
-          const favSounds = topic.sounds.filter((sound) => favSet.has(sound.id));
+          const favSounds = topic.sounds.filter((sound) =>
+            favSet.has(sound.id),
+          );
           if (!favSounds.length) return null;
           return { ...topic, sounds: favSounds } as Topic;
         })
@@ -203,7 +232,8 @@ export default function SoundboardPage() {
       return;
     }
     setActiveTopic((prev) => {
-      if (prev && filteredTopics.some((topic) => topic.id === prev)) return prev;
+      if (prev && filteredTopics.some((topic) => topic.id === prev))
+        return prev;
       return filteredTopics[0].id;
     });
   }, [filteredTopics]);
@@ -255,14 +285,21 @@ export default function SoundboardPage() {
     const favSet = favoriteLookup.get(activeTopic);
     if (!favSet?.size) return [];
     return currentSounds.filter((sound) => favSet.has(sound.id));
-  }, [collection, currentSounds, showFavoritesOnly, favoriteLookup, activeTopic]);
+  }, [
+    collection,
+    currentSounds,
+    showFavoritesOnly,
+    favoriteLookup,
+    activeTopic,
+  ]);
 
   const deferredSounds = React.useDeferredValue(displayedSounds);
   const soundsPending = deferredSounds !== displayedSounds;
   const soundsToRender = deferredSounds;
 
   const emptyMessage = React.useMemo(() => {
-    if (collection === 'favorites') return 'Du hast noch keine Favoriten gespeichert.';
+    if (collection === 'favorites')
+      return 'Du hast noch keine Favoriten gespeichert.';
     if (showFavoritesOnly) return 'Keine Favoriten in diesem Thema gefunden.';
     return 'Keine Sounds gefunden.';
   }, [collection, showFavoritesOnly]);
@@ -314,10 +351,12 @@ export default function SoundboardPage() {
               </TabsList>
             </Tabs>
           ) : (
-            <div className="text-muted-foreground text-sm">Keine Themen verfügbar.</div>
+            <div className="text-muted-foreground text-sm">
+              Keine Themen verfügbar.
+            </div>
           )
         ) : (
-          <div className="h-8 w-64 animate-pulse rounded-md bg-muted/60" />
+          <div className="bg-muted/60 h-8 w-64 animate-pulse rounded-md" />
         )}
       </div>
 
@@ -374,22 +413,26 @@ export default function SoundboardPage() {
         {soundsToRender.map((sound) => {
           const isPlaying = playingMap.current.has(sound.id);
           const topicId = activeTopic;
-          const isFavorite = topicId ? Boolean(favoriteLookup.get(topicId)?.has(sound.id)) : false;
+          const isFavorite = topicId
+            ? Boolean(favoriteLookup.get(topicId)?.has(sound.id))
+            : false;
 
           return (
             <div key={sound.id} className="relative">
               <button
                 type="button"
-                aria-label={isFavorite ? 'Favorit entfernen' : 'Als Favorit markieren'}
+                aria-label={
+                  isFavorite ? 'Favorit entfernen' : 'Als Favorit markieren'
+                }
                 onClick={(event) => {
                   event.stopPropagation();
                   if (!topicId) return;
                   toggleFavorite(topicId, sound);
                 }}
-                className="hover:bg-background/60 absolute right-2 top-2 rounded-full border bg-background/40 p-1 shadow-sm transition"
+                className="hover:bg-background/60 bg-background/40 absolute top-2 right-2 rounded-full border p-1 shadow-sm transition"
               >
                 {isFavorite ? (
-                  <Star className="text-primary h-4 w-4 fill-primary" />
+                  <Star className="text-primary fill-primary h-4 w-4" />
                 ) : (
                   <StarOff className="text-muted-foreground h-4 w-4" />
                 )}
@@ -398,7 +441,7 @@ export default function SoundboardPage() {
               <button
                 onClick={() => handleSoundPress(sound)}
                 className={cn(
-                  'hover:border-primary/40 hover:bg-accent/30 group flex h-20 w-full select-none items-center justify-center rounded-md border bg-card p-3 text-center text-sm font-medium shadow-xs transition-all active:scale-[0.98] sm:h-24',
+                  'hover:border-primary/40 hover:bg-accent/30 group bg-card flex h-20 w-full items-center justify-center rounded-md border p-3 text-center text-sm font-medium shadow-xs transition-all select-none active:scale-[0.98] sm:h-24',
                   isPlaying && 'border-primary bg-primary/5',
                 )}
                 aria-pressed={isPlaying}
@@ -409,7 +452,9 @@ export default function SoundboardPage() {
                   ) : (
                     <Play className="text-muted-foreground h-4 w-4" />
                   )}
-                  <span className="line-clamp-2 leading-tight text-left">{sound.label}</span>
+                  <span className="line-clamp-2 text-left leading-tight">
+                    {sound.label}
+                  </span>
                 </span>
               </button>
             </div>
@@ -417,7 +462,10 @@ export default function SoundboardPage() {
         })}
       </div>
 
-      <Dialog open={!!variantTarget} onOpenChange={(open) => !open && setVariantTarget(null)}>
+      <Dialog
+        open={!!variantTarget}
+        onOpenChange={(open) => !open && setVariantTarget(null)}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Version auswählen</DialogTitle>

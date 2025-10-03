@@ -52,7 +52,7 @@ function AvatarGroupTooltip({
         {children}
       </motion.div>
       <AvatarGroupTooltipArrowPrimitive
-        className="fill-primary size-3 data-[side='bottom']:translate-y-[1px] data-[side='right']:translate-x-[1px] data-[side='left']:translate-x-[-1px] data-[side='top']:translate-y-[-1px]"
+        className="fill-primary size-3 data-[side='bottom']:translate-y-[1px] data-[side='left']:translate-x-[-1px] data-[side='right']:translate-x-[1px] data-[side='top']:translate-y-[-1px]"
         tipRadius={2}
       />
     </AvatarGroupTooltipPrimitive>

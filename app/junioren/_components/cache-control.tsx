@@ -222,7 +222,7 @@ export function CacheControl({
     <Card>
       <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
         <CollapsibleTrigger asChild>
-          <CardHeader className="cursor-pointer transition-colors hover:bg-muted/50">
+          <CardHeader className="hover:bg-muted/50 cursor-pointer transition-colors">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Download className="h-4 w-4" />
@@ -246,7 +246,7 @@ export function CacheControl({
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="text-right text-xs text-muted-foreground">
+                <div className="text-muted-foreground text-right text-xs">
                   <div>
                     {cachedFiles}/{availableFiles} Dateien
                   </div>
@@ -255,9 +255,9 @@ export function CacheControl({
                   )}
                 </div>
                 {isExpanded ? (
-                  <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                  <ChevronDown className="text-muted-foreground h-4 w-4" />
                 ) : (
-                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                  <ChevronRight className="text-muted-foreground h-4 w-4" />
                 )}
               </div>
             </div>
@@ -266,7 +266,7 @@ export function CacheControl({
 
         <CollapsibleContent>
           <CardContent className="space-y-6 px-6 pt-0 pb-6">
-            <div className="flex items-center justify-between rounded-lg bg-muted/30 p-4">
+            <div className="bg-muted/30 flex items-center justify-between rounded-lg p-4">
               <Badge
                 variant="secondary"
                 className={
@@ -298,9 +298,9 @@ export function CacheControl({
             />
 
             {isCaching && cacheProgress && (
-              <div className="space-y-3 rounded-lg bg-muted/30 p-4">
+              <div className="bg-muted/30 space-y-3 rounded-lg p-4">
                 <Progress value={cacheProgress.progress} className="w-full" />
-                <div className="text-center text-sm text-muted-foreground">
+                <div className="text-muted-foreground text-center text-sm">
                   {cacheProgress.progress}% - {cacheProgress.cachedFiles} von{' '}
                   {availableFiles} Dateien geladen
                   {cacheProgress.failedFiles > 0 && (
@@ -312,7 +312,7 @@ export function CacheControl({
               </div>
             )}
 
-            <div className="flex gap-3 rounded-lg bg-muted/20 p-4">
+            <div className="bg-muted/20 flex gap-3 rounded-lg p-4">
               <Button
                 onClick={handleCacheAgeGroup}
                 disabled={!isOnline || isCaching || availableFiles === 0}

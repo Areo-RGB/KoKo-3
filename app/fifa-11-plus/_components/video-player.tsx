@@ -35,13 +35,13 @@ export default function VideoPlayer({
 
   if (hasError) {
     return (
-      <div className="aspect-video w-full bg-black flex items-center justify-center rounded-lg">
-        <div className="text-center text-red-400 p-4">
-          <p className="text-lg font-semibold mb-2">⚠️ Video Ladefehler</p>
-          <p className="text-sm text-gray-300 mb-4">
+      <div className="flex aspect-video w-full items-center justify-center rounded-lg bg-black">
+        <div className="p-4 text-center text-red-400">
+          <p className="mb-2 text-lg font-semibold">⚠️ Video Ladefehler</p>
+          <p className="mb-4 text-sm text-gray-300">
             Die Videodatei konnte nicht geladen werden.
           </p>
-          <p className="text-xs text-gray-500 break-all">{videoUrl}</p>
+          <p className="text-xs break-all text-gray-500">{videoUrl}</p>
           <button
             onClick={() => {
               setHasError(false);
@@ -50,7 +50,7 @@ export default function VideoPlayer({
                 videoRef.current.load();
               }
             }}
-            className="mt-4 px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md transition-colors"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground mt-4 rounded-md px-4 py-2 transition-colors"
           >
             Erneut versuchen
           </button>
@@ -60,11 +60,11 @@ export default function VideoPlayer({
   }
 
   return (
-    <div className="aspect-video w-full bg-black relative rounded-lg overflow-hidden">
+    <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black">
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 z-10">
+        <div className="bg-opacity-75 absolute inset-0 z-10 flex items-center justify-center bg-black">
           <div className="text-center text-white">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
+            <div className="border-primary mx-auto mb-2 h-8 w-8 animate-spin rounded-full border-b-2"></div>
             <p className="text-sm">Video wird geladen...</p>
           </div>
         </div>
@@ -75,7 +75,7 @@ export default function VideoPlayer({
         controls
         playsInline
         autoPlay
-        className="w-full h-full"
+        className="h-full w-full"
         onLoadedMetadata={handleLoadedMetadata}
         onError={handleError}
         onLoadStart={handleLoadStart}

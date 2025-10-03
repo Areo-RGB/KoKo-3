@@ -522,7 +522,7 @@ function JuniorenTrainingPageContent() {
                 </div>
               )}
               {warmupsError && !warmupsLoading && (
-                <div className="text-red-600 py-6 text-center text-sm">
+                <div className="py-6 text-center text-sm text-red-600">
                   {warmupsError}
                 </div>
               )}
@@ -769,7 +769,7 @@ function JuniorenTrainingPageContent() {
               </>
             ) : loadError ? (
               <>
-                <Search className="text-red-500 mx-auto mb-4 h-12 w-12" />
+                <Search className="mx-auto mb-4 h-12 w-12 text-red-500" />
                 <h3 className="mb-2 text-lg font-semibold">
                   Fehler beim Laden
                 </h3>

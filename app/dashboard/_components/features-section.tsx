@@ -25,7 +25,7 @@ export function FeaturesSectionDemo() {
           <h2 className="text-3xl font-semibold tracking-tight">
             Direkte Navigation
           </h2>
-          <p className="mt-2 text-muted-foreground">
+          <p className="text-muted-foreground mt-2">
             Alle Links aus der Seitenleiste als Kartenuebersicht.
           </p>
         </div>
@@ -34,7 +34,7 @@ export function FeaturesSectionDemo() {
             <Link
               key={`${item.sectionLabel}-${item.title}`}
               href={item.url}
-              className="group block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2"
+              className="group focus-visible:ring-primary/60 block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
             >
               <Card className="h-full transition-transform duration-200 group-hover:-translate-y-1 group-hover:shadow-lg">
                 <CardHeader className="space-y-4">

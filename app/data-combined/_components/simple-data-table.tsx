@@ -205,7 +205,7 @@ export function SimpleDataTable<TData extends SimpleNormativeDataRow, TValue>({
         </div>
 
         {/* Info */}
-        <div className="flex items-center gap-2 text-sm text-muted-foreground lg:ml-auto">
+        <div className="text-muted-foreground flex items-center gap-2 text-sm lg:ml-auto">
           <span>{table.getFilteredRowModel().rows.length} Werte</span>
         </div>
       </div>
@@ -265,7 +265,7 @@ export function SimpleDataTable<TData extends SimpleNormativeDataRow, TValue>({
 
       {/* Pagination */}
       <div className="flex items-center justify-end space-x-2">
-        <div className="flex-1 text-sm text-muted-foreground">
+        <div className="text-muted-foreground flex-1 text-sm">
           {table.getFilteredSelectedRowModel().rows.length} von{' '}
           {table.getFilteredRowModel().rows.length} Zeile(n) ausgewählt.
         </div>

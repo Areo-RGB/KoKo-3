@@ -105,7 +105,7 @@ export default function VideoThumbnail({
 
   return (
     <div
-      className={cn('group relative overflow-hidden bg-muted/40', className)}
+      className={cn('group bg-muted/40 relative overflow-hidden', className)}
     >
       <div className="aspect-video w-full">
         {isImage && !hasError ? (

@@ -136,16 +136,16 @@ export default function VideoLibrary({ playlists }: Props) {
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 p-4">
-      <div className="md:w-2/3 w-full">
+    <div className="flex flex-col gap-4 p-4 md:flex-row">
+      <div className="w-full md:w-2/3">
         {current !== undefined ? (
-          <div className="w-full aspect-video bg-black rounded-lg overflow-hidden">
+          <div className="aspect-video w-full overflow-hidden rounded-lg bg-black">
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
               ref={videoRef}
               playsInline
               controls
-              className="w-full h-full"
+              className="h-full w-full"
             >
               <source src={current.url} type="video/mp4" />
             </video>
@@ -165,18 +165,18 @@ export default function VideoLibrary({ playlists }: Props) {
             </Button>
           </div>
         )}
-        <div className="mt-3 text-sm text-muted-foreground">
+        <div className="text-muted-foreground mt-3 text-sm">
           {playlists[activeList]?.name} / {current?.title}
         </div>
       </div>
-      <div className="md:w-1/3 w-full">
+      <div className="w-full md:w-1/3">
         <div className="mb-2 font-medium">Playlists</div>
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="mb-4 flex flex-wrap gap-2">
           {playlists.map((pl, i) => (
             <button
               key={pl.name}
               onClick={() => handleSelectList(i)}
-              className={`px-3 py-1 rounded border text-sm ${
+              className={`rounded border px-3 py-1 text-sm ${
                 i === activeList
                   ? 'bg-black text-white dark:bg-white dark:text-black'
                   : ''
@@ -186,12 +186,12 @@ export default function VideoLibrary({ playlists }: Props) {
             </button>
           ))}
         </div>
-        <div className="max-h-[60vh] overflow-auto border rounded-md divide-y">
+        <div className="max-h-[60vh] divide-y overflow-auto rounded-md border">
           {playlists[activeList]?.items.map((v, i) => (
             <button
               key={v.key}
               onClick={() => handleSelectItem(i)}
-              className={`w-full text-left px-3 py-2 hover:bg-gray-50 dark:hover:bg-zinc-900 ${
+              className={`w-full px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-zinc-900 ${
                 i === activeIndex ? 'bg-gray-100 dark:bg-zinc-900' : ''
               }`}
             >

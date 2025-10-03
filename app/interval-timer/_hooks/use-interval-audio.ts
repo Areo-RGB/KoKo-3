@@ -37,14 +37,32 @@ export function useIntervalAudio() {
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(0.8);
 
-  const playStartBeep = useCallback(() => playAudio(AUDIO_FILES.start, volume, isMuted), [volume, isMuted]);
-  const playEndBeep = useCallback(() => playAudio(AUDIO_FILES.end, volume, isMuted), [volume, isMuted]);
-  const playRestBeep = useCallback(() => playAudio(AUDIO_FILES.rest, volume, isMuted), [volume, isMuted]);
-  const playFinishBeep = useCallback(() => playAudio(AUDIO_FILES.finish, volume, isMuted), [volume, isMuted]);
-  const playTransitionBeep = useCallback(() => playAudio(AUDIO_FILES.transition, volume, isMuted), [volume, isMuted]);
-  const playSideChangeBeep = useCallback(() => playAudio(AUDIO_FILES.sideChange, volume, isMuted), [volume, isMuted]);
-  
-  const toggleMute = useCallback(() => setIsMuted(prev => !prev), []);
+  const playStartBeep = useCallback(
+    () => playAudio(AUDIO_FILES.start, volume, isMuted),
+    [volume, isMuted],
+  );
+  const playEndBeep = useCallback(
+    () => playAudio(AUDIO_FILES.end, volume, isMuted),
+    [volume, isMuted],
+  );
+  const playRestBeep = useCallback(
+    () => playAudio(AUDIO_FILES.rest, volume, isMuted),
+    [volume, isMuted],
+  );
+  const playFinishBeep = useCallback(
+    () => playAudio(AUDIO_FILES.finish, volume, isMuted),
+    [volume, isMuted],
+  );
+  const playTransitionBeep = useCallback(
+    () => playAudio(AUDIO_FILES.transition, volume, isMuted),
+    [volume, isMuted],
+  );
+  const playSideChangeBeep = useCallback(
+    () => playAudio(AUDIO_FILES.sideChange, volume, isMuted),
+    [volume, isMuted],
+  );
+
+  const toggleMute = useCallback(() => setIsMuted((prev) => !prev), []);
 
   return {
     isMuted,
@@ -58,4 +76,4 @@ export function useIntervalAudio() {
     playTransitionBeep,
     playSideChangeBeep,
   };
-}
+}

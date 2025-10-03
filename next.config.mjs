@@ -1,3 +1,13 @@
+import createNextPWA from 'next-pwa';
+
+const withPWA = createNextPWA({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: false,
+  buildExcludes: [/middleware-manifest\.json$/],
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Enable static export mode for deployment to static hosting services
@@ -51,4 +61,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA(nextConfig);

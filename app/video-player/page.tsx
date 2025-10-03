@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Play, X } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 const playlistTitleForVideo = (video: Video) => {
@@ -86,7 +86,9 @@ export default function VideoPlayerPage() {
     setSelectedCategory(categoryName);
 
     // Reset subcategory to first one in the selected category
-    const category = videoData.categories.find((cat) => cat.name === categoryName);
+    const category = videoData.categories.find(
+      (cat) => cat.name === categoryName,
+    );
     if (category !== undefined && category.subcategories.length > 0) {
       setSelectedSubcategory(category.subcategories[0].name);
     } else {
@@ -121,7 +123,7 @@ export default function VideoPlayerPage() {
       <div className="container max-w-7xl px-4 py-6 sm:p-6">
         <div className="py-12 text-center">
           <div className="text-muted-foreground mb-4">
-            <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+            <div className="border-primary mx-auto h-16 w-16 animate-spin rounded-full border-4 border-t-transparent" />
           </div>
           <h3 className="mb-2 text-lg font-semibold">
             Daten werden geladen...
@@ -148,7 +150,10 @@ export default function VideoPlayerPage() {
         {/* Category Dropdown */}
         <div className="mb-4 flex flex-col items-stretch gap-3 sm:mb-6 sm:flex-row sm:items-center sm:gap-4">
           <div className="flex-1">
-            <Select value={selectedCategory} onValueChange={handleCategoryChange}>
+            <Select
+              value={selectedCategory}
+              onValueChange={handleCategoryChange}
+            >
               <SelectTrigger className="w-full sm:w-64">
                 <SelectValue placeholder="Kategorie auswählen" />
               </SelectTrigger>
@@ -253,7 +258,7 @@ export default function VideoPlayerPage() {
 
       {/* Video Player Overlay */}
       {isPlayerOpen && videoDataForPlayer && (
-        <div className="fixed inset-0 z-50 h-full w-full bg-background">
+        <div className="bg-background fixed inset-0 z-50 h-full w-full">
           <VideoPlayer
             initialVideo={videoDataForPlayer}
             onClose={handleClosePlayer}

@@ -18,8 +18,13 @@ const phaseColors: Record<string, string> = {
   finished: 'bg-gray-700 text-gray-100',
 };
 
-export default function TimerDisplay({ phase, timeRemaining }: TimerDisplayProps) {
-  const bgColor = phase ? phaseColors[phase.type] : 'bg-gray-200 dark:bg-gray-800';
+export default function TimerDisplay({
+  phase,
+  timeRemaining,
+}: TimerDisplayProps) {
+  const bgColor = phase
+    ? phaseColors[phase.type]
+    : 'bg-gray-200 dark:bg-gray-800';
   const timeStr = formatTime(timeRemaining);
 
   return (
@@ -35,7 +40,9 @@ export default function TimerDisplay({ phase, timeRemaining }: TimerDisplayProps
         </div>
         <div className="mt-2 text-2xl font-semibold text-white/90">
           {phase?.name}
-          {phase?.side && phase.side !== 'none' && ` (${phase.side.toUpperCase()})`}
+          {phase?.side &&
+            phase.side !== 'none' &&
+            ` (${phase.side.toUpperCase()})`}
         </div>
         {phase && phase.type !== 'prepare' && phase.type !== 'finished' && (
           <div className="mt-1 text-base text-white/80">

@@ -8,12 +8,12 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import performanceData from './data/performance.json';
 import { useState } from 'react';
 import ChartDataTable from './_components/chart-data-table';
 import VerticalBarChart from './_components/vertical-bar-chart';
 import { TABS } from './_lib/config';
 import { sortDescending } from './_lib/utils';
+import performanceData from './data/performance.json';
 
 export default function PerformanceChartsPage() {
   const [tab, setTab] = useState(TABS[0].key);
@@ -40,7 +40,9 @@ export default function PerformanceChartsPage() {
         </TabsList>
 
         {TABS.map((item) => {
-          const rows = (performanceData[item.key as keyof typeof performanceData] || []) as {
+          const rows = (performanceData[
+            item.key as keyof typeof performanceData
+          ] || []) as {
             name: string;
             value: number;
             date: string;

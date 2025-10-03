@@ -9,7 +9,8 @@ type ApiTopic = { id: string; name: string; sounds: ApiSound[] };
 const DEFAULT_REGION = process.env.DO_SPACES_REGION || 'fra1';
 const DEFAULT_BUCKET = process.env.DO_SPACES_BUCKET || 'data-h03';
 const CDN_BASE_URL =
-  process.env.DO_SPACES_PUBLIC_BASE_URL || `https://${DEFAULT_BUCKET}.${DEFAULT_REGION}.cdn.digitaloceanspaces.com`;
+  process.env.DO_SPACES_PUBLIC_BASE_URL ||
+  `https://${DEFAULT_BUCKET}.${DEFAULT_REGION}.cdn.digitaloceanspaces.com`;
 
 // Known champion prefixes to include in the manifest
 const CHAMPIONS: { id: string; name: string }[] = [
@@ -41,7 +42,11 @@ async function listAllObjects(bucket: string, region: string, prefix: string) {
   let continuationToken: string | undefined;
 
   do {
-    const params = new URLSearchParams({ 'list-type': '2', prefix, 'max-keys': '1000' });
+    const params = new URLSearchParams({
+      'list-type': '2',
+      prefix,
+      'max-keys': '1000',
+    });
     if (continuationToken) params.set('continuation-token', continuationToken);
 
     const res = await fetch(`${originBaseUrl}/?${params.toString()}`);
@@ -53,7 +58,9 @@ async function listAllObjects(bucket: string, region: string, prefix: string) {
       if (key) results.push({ Key: key });
     }
 
-    const nextMatch = xml.match(/<NextContinuationToken>(.*?)<\/NextContinuationToken>/);
+    const nextMatch = xml.match(
+      /<NextContinuationToken>(.*?)<\/NextContinuationToken>/,
+    );
     continuationToken = nextMatch ? decodeXml(nextMatch[1]) : undefined;
   } while (continuationToken);
 
@@ -89,7 +96,9 @@ export async function GET() {
         .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
         .map(([folder, entry]) => {
           // Choose first mp3 in lexical order
-          entry.files.sort((a, b) => a.key.localeCompare(b.key, undefined, { numeric: true }));
+          entry.files.sort((a, b) =>
+            a.key.localeCompare(b.key, undefined, { numeric: true }),
+          );
           const pick = entry.files[0];
           const id = folder;
           const label = folder.replace(/^\d+[_\-\s]*/, '').trim();
@@ -104,6 +113,9 @@ export async function GET() {
     return NextResponse.json({ baseUrl, topics });
   } catch (err) {
     console.error('Manifest error', err);
-    return NextResponse.json({ error: 'failed_to_build_manifest' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'failed_to_build_manifest' },
+      { status: 500 },
+    );
   }
 }

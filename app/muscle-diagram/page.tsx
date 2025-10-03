@@ -247,7 +247,7 @@ export default function MuscleDiagramPage() {
         visible={overlay.show}
         muscle={
           muscleToExerciseDataMap[
-          selectedMuscle.id ?? hoveredMuscle.id ?? ''
+            selectedMuscle.id ?? hoveredMuscle.id ?? ''
           ] ?? null
         }
         exerciseType={overlay.exerciseType}

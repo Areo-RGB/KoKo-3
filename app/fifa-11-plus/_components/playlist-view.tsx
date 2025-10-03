@@ -223,7 +223,7 @@ export default function PlaylistView({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-foreground">{playlist.name}</h2>
+        <h2 className="text-foreground text-2xl font-bold">{playlist.name}</h2>
         <p className="text-muted-foreground mt-1">{playlist.description}</p>
       </div>
       <div className="space-y-2">
@@ -231,7 +231,7 @@ export default function PlaylistView({
           if (video.isHeader === true) {
             return (
               <div key={video.id} className="pt-6 pb-2">
-                <h3 className="text-xl font-semibold text-primary tracking-wide">
+                <h3 className="text-primary text-xl font-semibold tracking-wide">
                   {video.title}
                 </h3>
               </div>
@@ -249,20 +249,20 @@ export default function PlaylistView({
             <div
               key={video.id}
               className={cn(
-                'w-full rounded-lg transition-all duration-200 p-3',
-                isActive ? 'bg-accent ring-2 ring-primary' : 'bg-card',
+                'w-full rounded-lg p-3 transition-all duration-200',
+                isActive ? 'bg-accent ring-primary ring-2' : 'bg-card',
               )}
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
                 <button
                   onClick={() => onVideoSelect(video)}
-                  className="flex flex-1 items-start gap-4 rounded p-2 text-left transition-colors hover:bg-muted/50"
+                  className="hover:bg-muted/50 flex flex-1 items-start gap-4 rounded p-2 text-left transition-colors"
                 >
                   <div className="w-8 flex-shrink-0 text-center">
                     {isActive ? (
-                      <Play className="mx-auto h-6 w-6 text-primary" />
+                      <Play className="text-primary mx-auto h-6 w-6" />
                     ) : (
-                      <span className="font-semibold text-muted-foreground">
+                      <span className="text-muted-foreground font-semibold">
                         {chapterCounter}
                       </span>
                     )}
@@ -276,11 +276,11 @@ export default function PlaylistView({
                     >
                       {video.title}
                     </p>
-                    <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mt-1 line-clamp-2 text-sm">
                       {video.description}
                     </p>
                   </div>
-                  <p className="font-mono text-sm text-muted-foreground">
+                  <p className="text-muted-foreground font-mono text-sm">
                     {video.timestamp}
                   </p>
                 </button>

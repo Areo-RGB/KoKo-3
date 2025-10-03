@@ -4,7 +4,6 @@ import { sidebarSections } from '@/components/layout/sidebar-links';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
 
 // The navigation items are now dynamically generated from a single source of truth.
 const NAV_ITEMS = sidebarSections
@@ -31,7 +30,7 @@ export function MobileFooterNav({ className }: { className?: string }) {
       <nav
         className={cn(
           'fixed inset-x-0 bottom-0 z-50 md:hidden',
-          'bg-background border-t border-border',
+          'bg-background border-border border-t',
           // Account for iOS home indicator area without adding visual margins
           'pb-[max(env(safe-area-inset-bottom),0px)]',
           'h-14',

@@ -15,7 +15,11 @@ interface IntervalTimerInterfaceProps {
   audio: IntervalTimerAudio;
 }
 
-export default function IntervalTimerInterface({ state, controls, audio }: IntervalTimerInterfaceProps) {
+export default function IntervalTimerInterface({
+  state,
+  controls,
+  audio,
+}: IntervalTimerInterfaceProps) {
   return (
     <div className="space-y-6">
       {!state.selectedPreset ? (
@@ -41,9 +45,11 @@ export default function IntervalTimerInterface({ state, controls, audio }: Inter
             onToggleMute={audio.toggleMute}
             onVolumeChange={audio.setVolume}
           />
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             <ProgressIndicator state={state} />
-            <ExerciseInstructions instructions={state.activePhase?.instructions ?? null} />
+            <ExerciseInstructions
+              instructions={state.activePhase?.instructions ?? null}
+            />
           </div>
         </>
       )}

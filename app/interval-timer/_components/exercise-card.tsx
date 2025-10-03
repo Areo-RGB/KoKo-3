@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
-import { useId, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -10,18 +10,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import {
-  ChevronDown,
-  Clock,
-  Layers3,
-  Play,
-  Shuffle,
-} from 'lucide-react';
+import { ChevronDown, Clock, Layers3, Play, Shuffle } from 'lucide-react';
+import Image from 'next/image';
+import { useId, useState } from 'react';
 
-import type { Exercise } from '../_lib/types';
 import type { ExerciseMedia } from '../_lib/exercise-media';
+import type { Exercise } from '../_lib/types';
 
 interface ExerciseCardProps {
   exercise: Exercise;
@@ -89,24 +83,21 @@ export function ExerciseCard({
 
   return (
     <Card
-      className="group relative flex h-full flex-col overflow-hidden border-border/60 transition-transform duration-200 focus-within:ring-2 focus-within:ring-primary/40 focus-within:ring-offset-2 focus-within:ring-offset-background hover:-translate-y-1 hover:shadow-lg"
+      className="group border-border/60 focus-within:ring-primary/40 focus-within:ring-offset-background relative flex h-full flex-col overflow-hidden transition-transform duration-200 focus-within:ring-2 focus-within:ring-offset-2 hover:-translate-y-1 hover:shadow-lg"
       tabIndex={-1}
     >
-      <div className="relative aspect-video w-full overflow-hidden bg-muted">
+      <div className="bg-muted relative aspect-video w-full overflow-hidden">
         {hasImage ? (
           <Image
             src={media!.imageSrc!}
-            alt={
-              media?.imageAlt ??
-              `${exercise.name} demonstration`
-            }
+            alt={media?.imageAlt ?? `${exercise.name} demonstration`}
             fill
             className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
             sizes="(min-width: 1024px) 300px, (min-width: 768px) 45vw, 90vw"
             priority={false}
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-muted to-muted-foreground/20 text-muted-foreground">
+          <div className="from-muted to-muted-foreground/20 text-muted-foreground flex h-full w-full items-center justify-center bg-gradient-to-br">
             <Shuffle className="size-12 opacity-60" aria-hidden="true" />
             <span className="sr-only">
               No image available for {exercise.name}
@@ -115,7 +106,7 @@ export function ExerciseCard({
         )}
 
         {exercise.sideSpecific ? (
-          <Badge className="absolute left-3 top-3 bg-background/90 text-foreground shadow-sm backdrop-blur-sm">
+          <Badge className="bg-background/90 text-foreground absolute top-3 left-3 shadow-sm backdrop-blur-sm">
             Side Specific
           </Badge>
         ) : null}
@@ -126,7 +117,7 @@ export function ExerciseCard({
             variant="secondary"
             size="sm"
             onClick={handlePlayVideo}
-            className="absolute bottom-3 right-3 bg-background/90 text-foreground shadow-md backdrop-blur-sm transition hover:translate-y-[-2px]"
+            className="bg-background/90 text-foreground absolute right-3 bottom-3 shadow-md backdrop-blur-sm transition hover:translate-y-[-2px]"
           >
             <Play className="size-4" aria-hidden="true" />
             Watch Demo
@@ -136,7 +127,7 @@ export function ExerciseCard({
 
       <CardHeader className="flex flex-col gap-3 pb-0">
         <div className="flex items-start justify-between gap-3">
-          <CardTitle className="text-lg font-semibold leading-tight">
+          <CardTitle className="text-lg leading-tight font-semibold">
             {exercise.name}
           </CardTitle>
           <Badge
@@ -146,7 +137,7 @@ export function ExerciseCard({
             {TYPE_LABELS[exercise.type]}
           </Badge>
         </div>
-        <CardDescription className="text-sm text-muted-foreground">
+        <CardDescription className="text-muted-foreground text-sm">
           {exercise.type === 'reps'
             ? `Complete ${exercise.reps ?? '—'} reps each set`
             : `Perform for ${formatDuration(exercise.duration)} per set`}
@@ -156,11 +147,11 @@ export function ExerciseCard({
       <CardContent className="flex flex-1 flex-col justify-between gap-4 pt-4">
         <dl className="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
           <div className="space-y-1">
-            <dt className="flex items-center gap-2 text-muted-foreground">
+            <dt className="text-muted-foreground flex items-center gap-2">
               <Clock className="size-4" aria-hidden="true" />
               Duration
             </dt>
-            <dd className="text-base font-semibold text-foreground">
+            <dd className="text-foreground text-base font-semibold">
               {exercise.type === 'reps'
                 ? `${exercise.reps ?? '—'} reps`
                 : formatDuration(exercise.duration)}
@@ -168,32 +159,32 @@ export function ExerciseCard({
           </div>
 
           <div className="space-y-1">
-            <dt className="flex items-center gap-2 text-muted-foreground">
+            <dt className="text-muted-foreground flex items-center gap-2">
               <Layers3 className="size-4" aria-hidden="true" />
               Sets
             </dt>
-            <dd className="text-base font-semibold text-foreground">
+            <dd className="text-foreground text-base font-semibold">
               {exercise.sets}
             </dd>
           </div>
 
           <div className="space-y-1">
-            <dt className="flex items-center gap-2 text-muted-foreground">
+            <dt className="text-muted-foreground flex items-center gap-2">
               <Shuffle className="size-4" aria-hidden="true" />
               Rest After
             </dt>
-            <dd className="text-base font-semibold text-foreground">
+            <dd className="text-foreground text-base font-semibold">
               {formatDuration(exercise.restAfter)}
             </dd>
           </div>
 
           {exercise.sideSpecific ? (
             <div className="space-y-1">
-              <dt className="flex items-center gap-2 text-muted-foreground">
+              <dt className="text-muted-foreground flex items-center gap-2">
                 <Shuffle className="size-4" aria-hidden="true" />
                 Sides
               </dt>
-              <dd className="text-base font-semibold text-foreground">
+              <dd className="text-foreground text-base font-semibold">
                 Alternate left & right
               </dd>
             </div>
@@ -202,7 +193,7 @@ export function ExerciseCard({
       </CardContent>
 
       {hasInstructions ? (
-        <CardFooter className="flex flex-col gap-2 border-t border-border/50 bg-muted/10 px-6 py-4">
+        <CardFooter className="border-border/50 bg-muted/10 flex flex-col gap-2 border-t px-6 py-4">
           <Button
             type="button"
             variant="ghost"
@@ -214,8 +205,9 @@ export function ExerciseCard({
           >
             <span>Instructions</span>
             <ChevronDown
-              className={`size-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''
-                }`}
+              className={`size-4 transition-transform duration-200 ${
+                isExpanded ? 'rotate-180' : ''
+              }`}
               aria-hidden="true"
             />
           </Button>
@@ -224,8 +216,11 @@ export function ExerciseCard({
             id={instructionsId}
             role="region"
             aria-live="polite"
-            className={`text-sm leading-relaxed text-muted-foreground ${isExpanded ? 'max-h-[320px] animate-in fade-in slide-in-from-top-1' : 'hidden'
-              }`}
+            className={`text-muted-foreground text-sm leading-relaxed ${
+              isExpanded
+                ? 'animate-in fade-in slide-in-from-top-1 max-h-[320px]'
+                : 'hidden'
+            }`}
           >
             {exercise.instructions}
           </div>

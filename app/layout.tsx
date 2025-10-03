@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: 'Q.V - QuoVadis Sports Training',
   description:
     'Professional sports training platform with offline access to training materials, exercises, and performance tracking',
+  manifest: '/manifest.json',
   formatDetection: {
     telephone: false,
   },
@@ -27,6 +28,35 @@ export const metadata: Metadata = {
   creator: 'QuoVadis Sports',
   publisher: 'QuoVadis Sports',
   category: 'sports',
+  icons: {
+    icon: [
+      {
+        rel: 'icon',
+        url: '/icons/icon-32x32.png',
+        type: 'image/png',
+        sizes: '32x32',
+      },
+      {
+        rel: 'icon',
+        url: '/icons/icon-16x16.png',
+        type: 'image/png',
+        sizes: '16x16',
+      },
+      { rel: 'icon', url: '/favicon.ico' },
+    ],
+    apple: [
+      {
+        rel: 'apple-touch-icon',
+        url: '/icons/apple-touch-icon.png',
+        sizes: '180x180',
+      },
+    ],
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'QuoVadis Sports Training',
+  },
 };
 
 export const viewport: Viewport = {
@@ -66,6 +96,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           sizes="16x16"
           href="/icons/icon-16x16.png"
         />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0f172a" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body>
         <ClientAppShell>{children}</ClientAppShell>

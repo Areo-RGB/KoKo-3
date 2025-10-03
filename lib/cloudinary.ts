@@ -4,7 +4,8 @@ import { v2 as cloudinary } from 'cloudinary';
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dg8zbx8ja',
   api_key: process.env.CLOUDINARY_API_KEY || '195935627435494',
-  api_secret: process.env.CLOUDINARY_API_SECRET || 'UAsTzHNZMkAOihHq2pb2XGTrEWc',
+  api_secret:
+    process.env.CLOUDINARY_API_SECRET || 'UAsTzHNZMkAOihHq2pb2XGTrEWc',
 });
 
 /**
@@ -26,7 +27,7 @@ export function getOptimizedImageUrl(
     grayscale?: boolean;
     sepia?: boolean;
     [key: string]: any;
-  } = {}
+  } = {},
 ) {
   const {
     width,
@@ -66,7 +67,7 @@ export function getOptimizedImageUrl(
   });
 
   const transformationString = transformations.join(',');
-  
+
   return cloudinary.url(publicId, {
     transformation: transformationString,
     secure: true,
@@ -83,7 +84,7 @@ export async function uploadToCloudinary(
     publicId?: string;
     tags?: string[];
     overwrite?: boolean;
-  } = {}
+  } = {},
 ) {
   try {
     const result = await cloudinary.uploader.upload(filePath, {
@@ -109,11 +110,15 @@ export async function uploadToCloudinary(
  */
 export function getResponsiveImageUrls(
   publicId: string,
-  breakpoints: number[] = [320, 640, 768, 1024, 1280, 1536]
+  breakpoints: number[] = [320, 640, 768, 1024, 1280, 1536],
 ) {
   return breakpoints.map((width) => ({
     width,
-    url: getOptimizedImageUrl(publicId, { width, format: 'auto', quality: 'auto' }),
+    url: getOptimizedImageUrl(publicId, {
+      width,
+      format: 'auto',
+      quality: 'auto',
+    }),
   }));
 }
 
@@ -122,18 +127,21 @@ export function getResponsiveImageUrls(
  */
 export function getAvatarUrls(
   publicId: string,
-  sizes: number[] = [32, 48, 64, 96, 128, 256]
+  sizes: number[] = [32, 48, 64, 96, 128, 256],
 ) {
-  return sizes.reduce((acc, size) => {
-    acc[size] = getOptimizedImageUrl(publicId, {
-      width: size,
-      height: size,
-      crop: 'fill',
-      format: 'auto',
-      quality: 'auto',
-    });
-    return acc;
-  }, {} as Record<number, string>);
+  return sizes.reduce(
+    (acc, size) => {
+      acc[size] = getOptimizedImageUrl(publicId, {
+        width: size,
+        height: size,
+        crop: 'fill',
+        format: 'auto',
+        quality: 'auto',
+      });
+      return acc;
+    },
+    {} as Record<number, string>,
+  );
 }
 
 export default cloudinary;

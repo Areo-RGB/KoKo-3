@@ -35,7 +35,7 @@ export default function ChartDataTable({
   return (
     <div className="mt-4">
       <div className="bg-card rounded-md border">
-        <div className="p-2 overflow-x-auto">
+        <div className="overflow-x-auto p-2">
           <Table>
             <TableHeader>
               <TableRow>
@@ -49,7 +49,7 @@ export default function ChartDataTable({
             <TableBody>
               {rows.map((row: any, index: number) => (
                 <TableRow key={row.name}>
-                  <TableCell className="text-center text-muted-foreground font-medium">
+                  <TableCell className="text-muted-foreground text-center font-medium">
                     {index + 1}
                   </TableCell>
                   <TableCell>{row.name}</TableCell>

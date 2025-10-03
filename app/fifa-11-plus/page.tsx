@@ -4,8 +4,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import React, { useMemo, useRef, useState } from 'react';
 import PlaylistView from './_components/playlist-view';
-import VideoPlayer from './_components/video-player';
 import { VideoCacheButton } from './_components/video-cache-button';
+import VideoPlayer from './_components/video-player';
 import {
   MAIN_VIDEO_URL,
   PLAYLIST,
@@ -46,12 +46,12 @@ const FifaProgramView: React.FC<FifaProgramViewProps> = ({
             startTime={currentVideo.startTime}
           />
         ) : (
-          <div className="aspect-video bg-muted flex items-center justify-center rounded-lg">
-            <div className="text-center p-4">
+          <div className="bg-muted flex aspect-video items-center justify-center rounded-lg">
+            <div className="p-4 text-center">
               <img
                 src="/assets/svg/FIFA_Logo.svg"
                 alt="FIFA Logo"
-                className="w-48 h-auto mx-auto mb-4 opacity-80"
+                className="mx-auto mb-4 h-auto w-48 opacity-80"
               />
               <p className="text-muted-foreground">
                 Wählen Sie ein Video-Kapitel zum Abspielen.
@@ -63,9 +63,12 @@ const FifaProgramView: React.FC<FifaProgramViewProps> = ({
       <Card>
         <CardContent className="p-4 md:p-6">
           <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-2">FIFA 11+ Komplettes Programm</h3>
-            <p className="text-muted-foreground text-sm mb-4">
-              Das komplette FIFA 11+ Verletzungspräventionsprogramm mit Laufen, Kraft, Plyometrie und Gleichgewichtsübungen.
+            <h3 className="mb-2 text-lg font-semibold">
+              FIFA 11+ Komplettes Programm
+            </h3>
+            <p className="text-muted-foreground mb-4 text-sm">
+              Das komplette FIFA 11+ Verletzungspräventionsprogramm mit Laufen,
+              Kraft, Plyometrie und Gleichgewichtsübungen.
             </p>
             <VideoCacheButton playlist={playlist} videoUrl={videoUrl} />
           </div>
@@ -99,7 +102,7 @@ export default function Fifa11PlusPage() {
   ];
 
   return (
-    <div className="container mx-auto max-w-4xl py-8 px-4">
+    <div className="container mx-auto max-w-4xl px-4 py-8">
       <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold tracking-tight">FIFA 11+ Programm</h1>
         <p className="text-muted-foreground mt-2">

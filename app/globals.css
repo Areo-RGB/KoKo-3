@@ -81,7 +81,9 @@
     --destructive-foreground: oklch(1 0 0);
     --border: oklch(0.9 0 0);
     --input: oklch(0.9 0 0);
-    --ring: oklch(0.6 0.2 255); /* Made ring slightly brighter for better visibility */
+    --ring: oklch(
+      0.6 0.2 255
+    ); /* Made ring slightly brighter for better visibility */
 
     /* Chart Colors */
     --chart-1: oklch(0.55 0.2 255);
@@ -93,7 +95,7 @@
     /* Layout & Sizing */
     --radius: 0.75rem;
     --spacing: 0.25rem;
-    
+
     /* Sidebar Theme */
     --sidebar: oklch(0.98 0 0);
     --sidebar-foreground: var(--foreground);
@@ -103,9 +105,12 @@
     --sidebar-accent-foreground: var(--accent-foreground);
     --sidebar-border: var(--border);
     --sidebar-ring: var(--ring);
-    
+
     /* Fonts */
-    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    --font-sans:
+      'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+      'Segoe UI Symbol';
     --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
     --font-mono: monospace;
     --letter-spacing: 0.025em;
@@ -113,27 +118,31 @@
 
     /* --- IMPROVEMENT: Softer, more realistic shadows --- */
     --shadow-color: 220 6% 15%; /* A cool, dark neutral for shadows */
-    --shadow-sm: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.2),
-                 0.4px 0.8px 1px -1.2px hsl(var(--shadow-color) / 0.2),
-                 1px 2px 2.5px -2.5px hsl(var(--shadow-color) / 0.2);
-    --shadow-md: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.2),
-                 0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.2),
-                 2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.2),
-                 5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.2);
-    --shadow-lg: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.2),
-                 1.5px 2.9px 3.7px -0.6px hsl(var(--shadow-color) / 0.2),
-                 2.7px 5.4px 6.8px -1.1px hsl(var(--shadow-color) / 0.2),
-                 4.5px 8.9px 11.2px -1.7px hsl(var(--shadow-color) / 0.2),
-                 7.1px 14.3px 18px -2.2px hsl(var(--shadow-color) / 0.2),
-                 11.2px 22.3px 28.2px -2.8px hsl(var(--shadow-color) / 0.2);
-    --shadow-xl: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
-                 2.7px 5.4px 6.8px -0.4px hsl(var(--shadow-color) / 0.36),
-                 5.1px 10.1px 12.8px -0.7px hsl(var(--shadow-color) / 0.36),
-                 8.2px 16.5px 20.8px -1.1px hsl(var(--shadow-color) / 0.36),
-                 12.8px 25.6px 32.3px -1.4px hsl(var(--shadow-color) / 0.36),
-                 19.7px 39.4px 49.7px -1.8px hsl(var(--shadow-color) / 0.36),
-                 29.7px 59.4px 74.9px -2.1px hsl(var(--shadow-color) / 0.36),
-                 43.6px 87.2px 110px -2.5px hsl(var(--shadow-color) / 0.36);
+    --shadow-sm:
+      0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.2),
+      0.4px 0.8px 1px -1.2px hsl(var(--shadow-color) / 0.2),
+      1px 2px 2.5px -2.5px hsl(var(--shadow-color) / 0.2);
+    --shadow-md:
+      0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.2),
+      0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.2),
+      2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.2),
+      5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.2);
+    --shadow-lg:
+      0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.2),
+      1.5px 2.9px 3.7px -0.6px hsl(var(--shadow-color) / 0.2),
+      2.7px 5.4px 6.8px -1.1px hsl(var(--shadow-color) / 0.2),
+      4.5px 8.9px 11.2px -1.7px hsl(var(--shadow-color) / 0.2),
+      7.1px 14.3px 18px -2.2px hsl(var(--shadow-color) / 0.2),
+      11.2px 22.3px 28.2px -2.8px hsl(var(--shadow-color) / 0.2);
+    --shadow-xl:
+      0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
+      2.7px 5.4px 6.8px -0.4px hsl(var(--shadow-color) / 0.36),
+      5.1px 10.1px 12.8px -0.7px hsl(var(--shadow-color) / 0.36),
+      8.2px 16.5px 20.8px -1.1px hsl(var(--shadow-color) / 0.36),
+      12.8px 25.6px 32.3px -1.4px hsl(var(--shadow-color) / 0.36),
+      19.7px 39.4px 49.7px -1.8px hsl(var(--shadow-color) / 0.36),
+      29.7px 59.4px 74.9px -2.1px hsl(var(--shadow-color) / 0.36),
+      43.6px 87.2px 110px -2.5px hsl(var(--shadow-color) / 0.36);
   }
 
   .dark {
@@ -156,7 +165,9 @@
     --destructive-foreground: oklch(0.98 0.01 260);
     --border: oklch(0.23 0.018 260);
     --input: oklch(0.23 0.018 260);
-    --ring: oklch(0.65 0.17 260); /* Made ring slightly brighter for better visibility */
+    --ring: oklch(
+      0.65 0.17 260
+    ); /* Made ring slightly brighter for better visibility */
 
     /* Chart Colors */
     --chart-1: oklch(0.63 0.17 260);
@@ -167,7 +178,7 @@
 
     /* --- IMPROVEMENT: Shadows for Dark Mode --- */
     --shadow-color: 220 50% 5%; /* A very dark, saturated blue for rich dark shadows */
-    
+
     /* Sidebar Themes */
     /* Default */
     --sidebar: oklch(0.11 0.01 260);
@@ -178,7 +189,7 @@
     --sidebar-accent-foreground: var(--accent-foreground);
     --sidebar-border: var(--border);
     --sidebar-ring: var(--ring);
-    
+
     /* Grayscale */
     --sidebar-grayscale-bg: oklch(0.11 0 0);
     --sidebar-grayscale-foreground: oklch(0.85 0 0);
@@ -188,7 +199,7 @@
     --sidebar-grayscale-accent-foreground: oklch(0.95 0 0);
     --sidebar-grayscale-border: oklch(0.23 0 0);
     --sidebar-grayscale-ring: oklch(0.63 0 0);
-    
+
     /* Component Variables */
     --component-inactive-color: var(--muted-foreground);
     --component-bg: var(--card);
@@ -206,7 +217,11 @@
   body {
     /* --- IMPROVEMENT: Subtle gradient and better typography --- */
     background-color: var(--background);
-    background-image: linear-gradient(180deg, oklch(from var(--background) calc(l + 0.01) c h) 0%, var(--background) 100%);
+    background-image: linear-gradient(
+      180deg,
+      oklch(from var(--background) calc(l + 0.01) c h) 0%,
+      var(--background) 100%
+    );
     @apply text-foreground;
     letter-spacing: var(--tracking-normal);
     -webkit-font-smoothing: antialiased;
@@ -240,7 +255,9 @@
     color: var(--card-foreground);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition:
+      transform 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out;
   }
   .card:hover {
     transform: translateY(-4px);
@@ -248,15 +265,24 @@
   }
 
   /* Smooth transitions and better focus states for interactive elements */
-  button, a, input, textarea, select, [role="button"] {
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow, transform;
+  button,
+  a,
+  input,
+  textarea,
+  select,
+  [role='button'] {
+    transition-property:
+      color, background-color, border-color, text-decoration-color, fill,
+      stroke, box-shadow, transform;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
     outline: none;
   }
-  
-  :is(button, a, input, textarea, select, [role="button"]):focus-visible {
-    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+
+  :is(button, a, input, textarea, select, [role='button']):focus-visible {
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 4px var(--ring);
   }
 }
 
@@ -312,11 +338,12 @@
   --color-chart-4: var(--color-chart-4);
   --color-chart-5: var(--color-chart-5);
   @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
+    0%,
+    100% {
+      transform: translateY(0px);
     }
-  50% {
-    transform: translateY(-10px);
+    50% {
+      transform: translateY(-10px);
     }
   }
 }

@@ -1,12 +1,12 @@
 'use client';
 
+import { FullscreenToggle } from '@/components/layout/fullscreen-toggle';
 import MainLayout from '@/components/layout/main-layout';
 import { MobileFooterNav } from '@/components/layout/mobile-footer-nav';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Toaster } from '@/components/ui/toaster';
-import { FullscreenToggle } from '@/components/layout/fullscreen-toggle';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
@@ -31,7 +31,7 @@ export default function ClientAppShell({ children }: Props) {
     >
       <MainLayout>
         <div className="flex min-h-screen w-full overflow-x-hidden">
-          <div className="flex-1 min-w-0">
+          <div className="min-w-0 flex-1">
             <header className="flex h-16 items-center justify-between border-b py-3 pr-4 pl-0">
               <div className="flex items-center gap-2">
                 <SidebarTrigger className="ml-2" />

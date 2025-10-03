@@ -12,7 +12,7 @@ const FCHertha03IVPage = () => {
       <iframe
         title="FC Hertha 03 IV Mannschaft auf fussball.de"
         src="https://next.fussball.de/mannschaft/-/011MIC3SQK000000VTVG0001VTR8C1K7#spiele"
-        className="flex-1 h-full w-full border-0"
+        className="h-full w-full flex-1 border-0"
         loading="lazy"
         allowFullScreen
       />

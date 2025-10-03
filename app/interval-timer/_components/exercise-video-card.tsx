@@ -1,8 +1,8 @@
 import { Card } from '@/components/ui/card';
-import { EXERCISE_MEDIA_MAP } from '../_lib/exercise-media';
-import type { TimerPhase } from '../_lib/types';
 import { Film } from 'lucide-react';
 import { useCallback, useRef } from 'react';
+import { EXERCISE_MEDIA_MAP } from '../_lib/exercise-media';
+import type { TimerPhase } from '../_lib/types';
 
 interface ExerciseVideoCardProps {
   phase: TimerPhase | null;
@@ -18,9 +18,9 @@ export default function ExerciseVideoCard({ phase }: ExerciseVideoCardProps) {
 
     // Toggle play/pause state
     if (video.paused || video.ended) {
-      video.play().catch(error => {
+      video.play().catch((error) => {
         // Autoplay policies can prevent play, so we catch errors.
-        console.error("Error attempting to play video:", error);
+        console.error('Error attempting to play video:', error);
       });
     } else {
       video.pause();
@@ -54,7 +54,7 @@ export default function ExerciseVideoCard({ phase }: ExerciseVideoCardProps) {
       }}
     >
       {hasVideo ? (
-        <div className="aspect-video w-full bg-muted">
+        <div className="bg-muted aspect-video w-full">
           <video
             ref={videoRef}
             key={videoSrc}
@@ -65,12 +65,12 @@ export default function ExerciseVideoCard({ phase }: ExerciseVideoCardProps) {
           />
         </div>
       ) : (
-        <div className="aspect-video w-full flex flex-col items-center justify-center bg-muted text-muted-foreground p-6">
+        <div className="bg-muted text-muted-foreground flex aspect-video w-full flex-col items-center justify-center p-6">
           {phase.instructions ? (
             <p className="text-center">{phase.instructions}</p>
           ) : (
             <>
-              <Film className="h-10 w-10 mb-2" />
+              <Film className="mb-2 h-10 w-10" />
               <p>No video for this step.</p>
             </>
           )}

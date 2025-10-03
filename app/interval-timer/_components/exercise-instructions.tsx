@@ -4,7 +4,9 @@ interface ExerciseInstructionsProps {
   instructions: string | null;
 }
 
-export default function ExerciseInstructions({ instructions }: ExerciseInstructionsProps) {
+export default function ExerciseInstructions({
+  instructions,
+}: ExerciseInstructionsProps) {
   if (!instructions) {
     return null;
   }
@@ -19,4 +21,4 @@ export default function ExerciseInstructions({ instructions }: ExerciseInstructi
       </CardContent>
     </Card>
   );
-}
+}

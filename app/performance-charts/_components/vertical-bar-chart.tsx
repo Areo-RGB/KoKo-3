@@ -5,9 +5,9 @@ import {
   CategoryScale,
   Chart as ChartJS,
   ChartOptions,
-  Plugin,
   Legend,
   LinearScale,
+  Plugin,
   Tooltip,
 } from 'chart.js';
 import { useTheme } from 'next-themes';
@@ -126,11 +126,13 @@ export default function VerticalBarChart({
         if (!dataset || !meta || !meta.data) return;
 
         ctx.save();
-        ctx.font = '700 12px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial';
+        ctx.font =
+          '700 12px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial';
         // Use dark text for orange bars, white text for blue bars
-        ctx.fillStyle = variant === 'orange'
-          ? 'rgba(0, 0, 0, 0.9)'
-          : 'rgba(255, 255, 255, 0.95)';
+        ctx.fillStyle =
+          variant === 'orange'
+            ? 'rgba(0, 0, 0, 0.9)'
+            : 'rgba(255, 255, 255, 0.95)';
         ctx.textBaseline = 'middle';
 
         meta.data.forEach((bar: any, index: number) => {
@@ -139,7 +141,9 @@ export default function VerticalBarChart({
 
           const val = typeof raw === 'number' ? raw : Number(raw);
           if (Number.isNaN(val)) return;
-          const label = Number.isInteger(val) ? String(val) : val.toLocaleString();
+          const label = Number.isInteger(val)
+            ? String(val)
+            : val.toLocaleString();
 
           const x = bar.x as number;
           const y = bar.y as number;

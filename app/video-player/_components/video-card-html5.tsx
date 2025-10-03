@@ -44,7 +44,7 @@ function VideoCardHTML5({
       className={cn(
         'group flex cursor-pointer items-center gap-4 p-3 transition-all duration-200',
         'hover:bg-accent/50 border border-transparent',
-        isActive ? 'rounded-none border-border bg-accent' : 'rounded-lg',
+        isActive ? 'border-border bg-accent rounded-none' : 'rounded-lg',
         className,
       )}
       onClick={handleClick}

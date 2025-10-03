@@ -1,7 +1,9 @@
 'use client';
 
+import { ChevronDown, Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 import { ThemeToggle } from '../theme/theme-toggle';
 import {
@@ -22,8 +24,6 @@ import {
 } from '../ui/sidebar';
 import { FullscreenToggle } from './fullscreen-toggle';
 import { sidebarSections, type SidebarSection } from './sidebar-links';
-import { ChevronDown, Search } from 'lucide-react';
-import { usePathname } from 'next/navigation';
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar>;
 
@@ -35,7 +35,9 @@ export default function AppSidebar({ ...props }: AppSidebarProps) {
   const [query, setQuery] = React.useState('');
 
   // Persisted collapsed state per section
-  const [collapsed, setCollapsed] = React.useState<Record<SidebarSection['id'], boolean>>({
+  const [collapsed, setCollapsed] = React.useState<
+    Record<SidebarSection['id'], boolean>
+  >({
     navigation: false,
     daten: false,
     training: false,
@@ -54,7 +56,10 @@ export default function AppSidebar({ ...props }: AppSidebarProps) {
       setCollapsed((prev) => {
         const next = { ...prev, [id]: value };
         try {
-          localStorage.setItem('sidebar_collapsed_sections', JSON.stringify(next));
+          localStorage.setItem(
+            'sidebar_collapsed_sections',
+            JSON.stringify(next),
+          );
         } catch {}
         return next;
       });
@@ -89,7 +94,7 @@ export default function AppSidebar({ ...props }: AppSidebarProps) {
         style={{ height: 'auto' }}
       />
       {state === 'expanded' && (
-        <span className="text-sidebar-foreground whitespace-pre font-medium">
+        <span className="text-sidebar-foreground font-medium whitespace-pre">
           Hertha 03
         </span>
       )}
@@ -112,7 +117,7 @@ export default function AppSidebar({ ...props }: AppSidebarProps) {
               aria-label="Navigation filtern"
               className="pl-8"
             />
-            <Search className="pointer-events-none absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-2 h-4 w-4 -translate-y-1/2" />
           </div>
         </div>
       </SidebarHeader>
@@ -135,11 +140,13 @@ export default function AppSidebar({ ...props }: AppSidebarProps) {
                   <SidebarGroupLabel asChild>
                     <button
                       type="button"
-                      className="text-sidebar-foreground/70 text-xs font-medium uppercase tracking-wider flex w-full items-center justify-between"
+                      className="text-sidebar-foreground/70 flex w-full items-center justify-between text-xs font-medium tracking-wider uppercase"
                       aria-expanded={!isCollapsed}
                       onClick={() => toggleSection(section.id)}
                     >
-                      <span className="truncate text-left">{section.label}</span>
+                      <span className="truncate text-left">
+                        {section.label}
+                      </span>
                       <ChevronDown
                         className={`h-4 w-4 transition-transform ${isCollapsed ? '-rotate-90' : ''}`}
                         aria-hidden
@@ -153,7 +160,11 @@ export default function AppSidebar({ ...props }: AppSidebarProps) {
                           const isActive = pathname === item.url;
                           return (
                             <SidebarMenuItem key={item.title}>
-                              <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
+                              <SidebarMenuButton
+                                asChild
+                                isActive={isActive}
+                                tooltip={item.title}
+                              >
                                 <Link
                                   href={item.url}
                                   onClick={handleNavClick}
@@ -179,14 +190,14 @@ export default function AppSidebar({ ...props }: AppSidebarProps) {
         <div className="flex items-center justify-between p-2">
           <div className="flex items-center gap-1">
             {state === 'expanded' && (
-              <span className="text-sidebar-foreground/60 ml-2 whitespace-pre text-xs">
+              <span className="text-sidebar-foreground/60 ml-2 text-xs whitespace-pre">
                 Hertha 03 Training
               </span>
             )}
           </div>
           <div className="flex items-center gap-1">
             <FullscreenToggle
-              className="p-1.5 hover:bg-sidebar-accent"
+              className="hover:bg-sidebar-accent p-1.5"
               iconClassName="h-4 w-4"
             />
             <ThemeToggle />

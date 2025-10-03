@@ -7,12 +7,18 @@ interface ProgressIndicatorProps {
 }
 
 export default function ProgressIndicator({ state }: ProgressIndicatorProps) {
-  const overallProgress = state.totalTime > 0 ? (state.currentTime / state.totalTime) * 100 : 0;
-  const phaseProgress = state.activePhase?.duration ?? 0 > 0
-    ? ((state.activePhase!.duration - state.phaseTimeRemaining) / state.activePhase!.duration) * 100
-    : 0;
-    
-  const nextPhase = state.activePhase ? state.phases[state.activePhase.phaseIndex + 1] : null;
+  const overallProgress =
+    state.totalTime > 0 ? (state.currentTime / state.totalTime) * 100 : 0;
+  const phaseProgress =
+    (state.activePhase?.duration ?? 0 > 0)
+      ? ((state.activePhase!.duration - state.phaseTimeRemaining) /
+          state.activePhase!.duration) *
+        100
+      : 0;
+
+  const nextPhase = state.activePhase
+    ? state.phases[state.activePhase.phaseIndex + 1]
+    : null;
 
   return (
     <Card>
@@ -23,7 +29,9 @@ export default function ProgressIndicator({ state }: ProgressIndicatorProps) {
         <div>
           <label className="text-sm font-medium">Overall Progress</label>
           <Progress value={overallProgress} className="mt-1" />
-          <div className="text-xs text-muted-foreground mt-1 text-right">{Math.round(overallProgress)}%</div>
+          <div className="text-muted-foreground mt-1 text-right text-xs">
+            {Math.round(overallProgress)}%
+          </div>
         </div>
         <div>
           <label className="text-sm font-medium">Current Phase Progress</label>
@@ -32,10 +40,12 @@ export default function ProgressIndicator({ state }: ProgressIndicatorProps) {
         <div className="text-sm">
           <span className="font-medium">Next: </span>
           <span className="text-muted-foreground">
-            {nextPhase && nextPhase.type !== 'finished' ? `${nextPhase.name} (${nextPhase.duration}s)` : 'Workout End'}
+            {nextPhase && nextPhase.type !== 'finished'
+              ? `${nextPhase.name} (${nextPhase.duration}s)`
+              : 'Workout End'}
           </span>
         </div>
       </CardContent>
     </Card>
   );
-}
+}

@@ -43,7 +43,7 @@ export default function IntervalTimerPage() {
               onToggleMute={audio.toggleMute}
               onVolumeChange={audio.setVolume}
             />
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-6 md:grid-cols-2">
               <ProgressIndicator state={state} />
               <ExerciseVideoCard phase={state.activePhase} />
             </div>
