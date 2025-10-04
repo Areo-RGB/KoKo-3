@@ -72,6 +72,7 @@ C:UsersAnwenderAppDataLocalpnpmstorev10/
 .serena
 .trash
 .workflows
+.workflows/digitalocean
 scripts/setup-wsl-auth.sh
 docs/wsl-browser-auth-fix.md
 docs/wsl-auth-analysis.md
