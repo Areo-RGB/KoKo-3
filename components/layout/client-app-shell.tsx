@@ -20,6 +20,44 @@ export default function ClientAppShell({ children }: Props) {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (
+      typeof window === 'undefined' ||
+      !('serviceWorker' in navigator) ||
+      process.env.NODE_ENV !== 'production'
+    ) {
+      return;
+    }
+
+    const registerServiceWorker = async () => {
+      try {
+        const existingRegistration =
+          await navigator.serviceWorker.getRegistration();
+
+        if (existingRegistration) {
+          return existingRegistration;
+        }
+
+        return await navigator.serviceWorker.register('/sw.js', {
+          scope: '/',
+        });
+      } catch (error) {
+        console.error('Service worker registration failed:', error);
+        return undefined;
+      }
+    };
+
+    registerServiceWorker()
+      .then((registration) => {
+        if (registration) {
+          console.log('Service worker registered:', registration.scope);
+        }
+      })
+      .catch((error) => {
+        console.error('Service worker registration error:', error);
+      });
+  }, []);
+
   if (!mounted) return null;
 
   return (
