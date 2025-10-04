@@ -73,6 +73,7 @@ export const useVideoCache = () => {
 
   /**
    * Cache a video URL for offline access
+   * This fully downloads the video file to ensure offline playback
    */
   const cacheVideo = async (url: string): Promise<boolean> => {
     const normalizedUrl = normalizeVideoUrl(url);
@@ -83,6 +84,7 @@ export const useVideoCache = () => {
     }
 
     try {
+      // Check if already cached
       if (await isVideoCached(normalizedUrl)) {
         await updateCachedVideosList();
         return true;
@@ -90,24 +92,52 @@ export const useVideoCache = () => {
 
       const cache = await caches.open('video-cache-v1');
 
-      // Use put() instead of add() to handle CORS and network issues better
+      // Fetch the entire video file (no range requests during caching)
+      // This ensures the full video is downloaded and cached
       const response = await fetch(normalizedUrl, {
         mode: 'cors',
         credentials: 'omit',
+        headers: {
+          // Request the full file, not just metadata
+          Accept: 'video/mp4,video/*;q=0.9,*/*;q=0.8',
+        },
       });
 
-      if (response.ok || response.status === 206) {
-        await cache.put(normalizedUrl, response.clone());
-
-        // Update cached videos list
-        await updateCachedVideosList();
-        return true;
+      if (!response.ok && response.status !== 206) {
+        console.warn(
+          `Failed to fetch ${normalizedUrl}: ${response.status} ${response.statusText}`,
+        );
+        return false;
       }
 
-      console.warn(
-        `Failed to cache ${normalizedUrl}: ${response.status} ${response.statusText}`,
+      // Clone the response before consuming it
+      const responseToCache = response.clone();
+
+      // Force full download by reading the blob
+      // This is CRITICAL - without this, only headers are cached!
+      const blob = await response.blob();
+      console.log(
+        `📥 Downloaded ${normalizedUrl}: ${(blob.size / 1024 / 1024).toFixed(2)} MB`,
       );
-      return false;
+
+      // Create a new response with the blob to ensure it's fully cached
+      const fullResponse = new Response(blob, {
+        status: 200,
+        statusText: 'OK',
+        headers: {
+          'Content-Type':
+            responseToCache.headers.get('Content-Type') || 'video/mp4',
+          'Content-Length': blob.size.toString(),
+          'Cache-Control': 'public, max-age=31536000',
+        },
+      });
+
+      // Store the full video in cache
+      await cache.put(normalizedUrl, fullResponse);
+
+      // Update cached videos list
+      await updateCachedVideosList();
+      return true;
     } catch (error) {
       console.error('Failed to cache video:', normalizedUrl, error);
       return false;
@@ -115,7 +145,7 @@ export const useVideoCache = () => {
   };
 
   /**
-   * Cache multiple videos
+   * Cache multiple videos with progress tracking
    */
   const cacheVideos = async (
     urls: string[],
@@ -127,8 +157,9 @@ export const useVideoCache = () => {
     let failed = 0;
 
     for (const url of urls) {
-      // Add a small delay between requests to avoid overwhelming the server
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      // Add delay between requests to avoid overwhelming server
+      // Longer delay for large video files
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       const result = await cacheVideo(url);
       if (result) {
