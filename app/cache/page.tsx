@@ -42,6 +42,26 @@ interface PageCacheInfo {
   progress: number;
 }
 
+// All app pages that should be precached
+const APP_PAGES = [
+  '/',
+  '/cache/',
+  '/offline/',
+  '/dashboard/',
+  '/fifa-11-plus/',
+  '/video-player/',
+  '/junioren/',
+  '/interval-timer/',
+  '/muscle-diagram/',
+  '/ranking/',
+  '/soundboard/',
+  '/yo-yo/',
+  '/data-combined/',
+  '/performance-charts/',
+  '/hertha-03-iv/',
+  '/fortschritt/',
+];
+
 export default function CachePage() {
   const {
     cacheStatus,
@@ -57,6 +77,9 @@ export default function CachePage() {
   const [isClearing, setIsClearing] = useState(false);
   const [pages, setPages] = useState<PageCacheInfo[]>([]);
   const [isCachingAll, setIsCachingAll] = useState(false);
+  const [isCachingPages, setIsCachingPages] = useState(false);
+  const [cachedPagesCount, setCachedPagesCount] = useState(0);
+  const [pagesCacheProgress, setPagesCacheProgress] = useState(0);
 
   // Initialize page data
   useEffect(() => {
@@ -132,6 +155,7 @@ export default function CachePage() {
     window.addEventListener('offline', handleOffline);
 
     loadCacheInfo();
+    checkCachedPages();
 
     return () => {
       window.removeEventListener('online', handleOnline);
@@ -142,6 +166,57 @@ export default function CachePage() {
   const loadCacheInfo = async () => {
     const info = await getCacheInfo();
     setCacheInfo(info);
+  };
+
+  const checkCachedPages = async () => {
+    if (!('caches' in window)) return;
+
+    try {
+      const cache = await caches.open('pages-cache-v1');
+      const keys = await cache.keys();
+      const cachedUrls = keys.map((req) => new URL(req.url).pathname);
+
+      let count = 0;
+      for (const page of APP_PAGES) {
+        const isPageCached = cachedUrls.some((url) => url === page);
+        if (isPageCached) count++;
+      }
+
+      setCachedPagesCount(count);
+      setPagesCacheProgress((count / APP_PAGES.length) * 100);
+    } catch (error) {
+      console.error('Failed to check cached pages:', error);
+    }
+  };
+
+  const cacheAllAppPages = async () => {
+    setIsCachingPages(true);
+    let successCount = 0;
+
+    for (let i = 0; i < APP_PAGES.length; i++) {
+      const page = APP_PAGES[i];
+      try {
+        // Fetch the page to trigger caching
+        const response = await fetch(page);
+        if (response.ok) {
+          // Manually cache it in pages-cache-v1
+          const cache = await caches.open('pages-cache-v1');
+          await cache.put(page, response);
+          successCount++;
+        }
+      } catch (error) {
+        console.error(`Failed to cache page ${page}:`, error);
+      }
+
+      setCachedPagesCount(successCount);
+      setPagesCacheProgress(((i + 1) / APP_PAGES.length) * 100);
+
+      // Small delay to avoid overwhelming the server
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+
+    setIsCachingPages(false);
+    await checkCachedPages();
   };
 
   const checkCachedVideos = async (pagesData: PageCacheInfo[]) => {
@@ -359,6 +434,87 @@ export default function CachePage() {
               )}
             </Button>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* HTML Pages Cache Card */}
+      <Card className="mb-6">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <HardDrive className="size-5" />
+            App-Seiten Cache
+          </CardTitle>
+          <CardDescription>
+            Alle Seiten für Offline-Nutzung vorcachen (ohne jede Seite zu
+            besuchen)
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {/* Pages Cache Info */}
+          <div className="bg-muted grid grid-cols-2 gap-4 rounded-lg p-4">
+            <div className="space-y-1">
+              <p className="text-muted-foreground text-sm">Seiten gesamt</p>
+              <p className="text-2xl font-bold">{APP_PAGES.length}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-muted-foreground text-sm">Gecacht</p>
+              <p className="text-2xl font-bold">{cachedPagesCount}</p>
+            </div>
+          </div>
+
+          {/* Progress */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-sm">
+              <span>Seiten-Cache Fortschritt</span>
+              <span className="font-mono">
+                {pagesCacheProgress.toFixed(1)}%
+              </span>
+            </div>
+            <Progress value={pagesCacheProgress} />
+          </div>
+
+          {/* Cache All Pages Button */}
+          <Button
+            onClick={cacheAllAppPages}
+            disabled={isCachingPages || !isOnline}
+            className="w-full"
+            variant={
+              cachedPagesCount === APP_PAGES.length ? 'outline' : 'default'
+            }
+          >
+            {isCachingPages ? (
+              <>
+                <Loader2 className="mr-2 size-4 animate-spin" />
+                Caching Seiten... ({cachedPagesCount}/{APP_PAGES.length})
+              </>
+            ) : cachedPagesCount === APP_PAGES.length ? (
+              <>
+                <Download className="mr-2 size-4" />
+                Alle Seiten gecacht
+              </>
+            ) : (
+              <>
+                <Download className="mr-2 size-4" />
+                Alle {APP_PAGES.length} App-Seiten cachen
+              </>
+            )}
+          </Button>
+
+          {/* Page List */}
+          <details className="text-sm">
+            <summary className="text-muted-foreground hover:text-foreground cursor-pointer">
+              Seiten-Liste anzeigen ({APP_PAGES.length} Seiten)
+            </summary>
+            <div className="bg-muted mt-2 max-h-48 overflow-y-auto rounded-lg p-3">
+              <ul className="space-y-1">
+                {APP_PAGES.map((page) => (
+                  <li key={page} className="font-mono text-xs">
+                    {page}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </details>
         </CardContent>
       </Card>
 
