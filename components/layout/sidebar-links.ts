@@ -9,7 +9,6 @@ import {
   PlayCircle,
   Timer,
   Trophy,
-  Users,
 } from 'lucide-react';
 
 export type SidebarLink = {
@@ -58,13 +57,6 @@ export const datenLinks: SidebarLink[] = [
     title: 'Performance Charts',
     url: '/performance-charts',
     icon: Database,
-  },
-  {
-    title: 'Spieler',
-    url: '/spieler',
-    icon: Users,
-    mobileLabel: 'Spieler',
-    showOnMobile: true,
   },
 ];
 

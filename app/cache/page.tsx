@@ -72,21 +72,15 @@ export default function CachePage() {
         .map((v) => `${WS_VIDEO_URL}#t=${v.startTime || 0}`);
 
       // Video Player - extract all video URLs
-      const videoPlayerUrls: string[] = [];
-      hierarchicalVideoData.categories.forEach((category) => {
-        category.subcategories.forEach((subcategory) => {
-          subcategory.videos.forEach((video) => {
-            if (video.videoUrl) {
-              videoPlayerUrls.push(video.videoUrl);
-            }
-            video.chapters.forEach((chapter) => {
-              if (chapter.videoUrl) {
-                videoPlayerUrls.push(chapter.videoUrl);
-              }
-            });
-          });
-        });
-      });
+      const videoPlayerUrls = hierarchicalVideoData.categories.flatMap((cat) =>
+        cat.subcategories.flatMap((sub) =>
+          sub.videos.flatMap((vid) =>
+            [vid.videoUrl, ...vid.chapters.map((c) => c.videoUrl)].filter(
+              (url): url is string => !!url,
+            ),
+          ),
+        ),
+      );
 
       const pagesData: PageCacheInfo[] = [
         {
@@ -126,6 +120,7 @@ export default function CachePage() {
     };
 
     initializePages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Monitor online/offline status
@@ -160,7 +155,8 @@ export default function CachePage() {
         return {
           ...page,
           cachedCount,
-          progress: (cachedCount / page.videoCount) * 100,
+          progress:
+            page.videoCount > 0 ? (cachedCount / page.videoCount) * 100 : 0,
         };
       }),
     );
@@ -175,32 +171,36 @@ export default function CachePage() {
     const page = pages.find((p) => p.id === pageId);
     if (!page) return;
 
-    let cached = 0;
+    let processedCount = 0;
     for (const url of page.videoUrls) {
       const isCached = await isVideoCached(url);
       if (!isCached) {
         await cacheVideos([url]);
       }
-      cached++;
+      processedCount++;
 
       setPages((prev) =>
         prev.map((p) =>
           p.id === pageId
             ? {
                 ...p,
-                cachedCount: cached,
-                progress: (cached / p.videoCount) * 100,
+                cachedCount: processedCount,
+                progress: (processedCount / p.videoCount) * 100,
               }
             : p,
         ),
       );
     }
 
-    setPages((prev) =>
-      prev.map((p) => (p.id === pageId ? { ...p, isCaching: false } : p)),
-    );
-
     await loadCacheInfo();
+    // After caching, get the latest pages state and run a final check to update counts
+    setPages((currentPages) => {
+      const pagesToUpdate = currentPages.map((p) =>
+        p.id === pageId ? { ...p, isCaching: false } : p,
+      );
+      checkCachedVideos(pagesToUpdate);
+      return pagesToUpdate;
+    });
   };
 
   const cacheAllPages = async () => {

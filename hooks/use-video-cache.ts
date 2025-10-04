@@ -99,14 +99,6 @@ export const useVideoCache = () => {
       if (response.ok || response.status === 206) {
         await cache.put(normalizedUrl, response.clone());
 
-        // Also message the service worker to cache it
-        if (navigator.serviceWorker.controller) {
-          navigator.serviceWorker.controller.postMessage({
-            type: 'CACHE_VIDEO',
-            url: normalizedUrl,
-          });
-        }
-
         // Update cached videos list
         await updateCachedVideosList();
         return true;
