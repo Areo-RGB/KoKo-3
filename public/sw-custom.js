@@ -200,18 +200,50 @@ const OFFLINE_CACHE_NAME = 'offline-v1';
 self.addEventListener('install', (event) => {
   event.waitUntil(
     (async () => {
-      const cache = await caches.open(OFFLINE_CACHE_NAME);
-      // Pre-cache critical offline resources
+      // Pre-cache critical pages in pages-cache-v1 (same cache used by runtime)
+      const pagesCache = await caches.open('pages-cache-v1');
+      const offlineCache = await caches.open(OFFLINE_CACHE_NAME);
+
+      // Critical pages for navigation
+      const criticalPages = [
+        '/', // Homepage
+        '/cache/', // Cache management
+        '/offline/', // Offline page
+        '/dashboard/', // Dashboard
+        '/fifa-11-plus/', // FIFA 11+
+        '/video-player/', // Video player
+        '/junioren/', // Junioren
+        '/interval-timer/', // Interval timer
+        '/muscle-diagram/', // Muscle diagram
+        '/ranking/', // Ranking
+        '/soundboard/', // Soundboard
+        '/yo-yo/', // Yo-Yo test
+        '/data-combined/', // Data combined
+        '/performance-charts/', // Performance charts
+        '/hertha-03-iv/', // Hertha 03
+        '/fortschritt/', // Fortschritt
+      ];
+
       try {
-        await cache.addAll([
-          OFFLINE_URL,
-          '/', // Homepage
-          '/manifest.json',
-          '/cache/', // Cache management page
-        ]);
+        // Cache all critical pages for offline navigation
+        console.log('📦 Pre-caching critical pages...');
+        await pagesCache.addAll(criticalPages);
+        console.log('✅ All critical pages cached successfully');
+
+        // Also cache offline essentials
+        await offlineCache.addAll([OFFLINE_URL, '/manifest.json']);
         console.log('✅ Offline resources cached successfully');
       } catch (error) {
-        console.warn('⚠️ Some offline resources failed to cache:', error);
+        console.warn('⚠️ Some resources failed to cache:', error);
+        // Try to cache individually to see which ones fail
+        for (const page of criticalPages) {
+          try {
+            await pagesCache.add(page);
+            console.log(`✅ Cached: ${page}`);
+          } catch (err) {
+            console.warn(`❌ Failed to cache: ${page}`, err);
+          }
+        }
       }
     })(),
   );
