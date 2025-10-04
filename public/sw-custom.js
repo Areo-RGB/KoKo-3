@@ -172,14 +172,19 @@ registerRoute(
 // ============================================
 // NAVIGATION (HTML pages)
 // ============================================
+// Use Network First with a longer timeout for better offline experience
 registerRoute(
   ({ request }) => request.mode === 'navigate',
   new NetworkFirst({
     cacheName: 'pages-cache-v1',
-    networkTimeoutSeconds: 3,
+    networkTimeoutSeconds: 5, // Increased timeout for better UX
     plugins: [
       new CacheableResponsePlugin({
         statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 24 * 60 * 60, // 24 hours
       }),
     ],
   }),
@@ -190,17 +195,73 @@ registerRoute(
 // ============================================
 // Offline page handling
 const OFFLINE_URL = '/offline/';
-const CACHE_NAME = 'offline-v1';
+const OFFLINE_CACHE_NAME = 'offline-v1';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      // Pre-cache offline page if it exists
-      return cache.add(OFFLINE_URL).catch(() => {
-        console.log('No offline page found, skipping offline cache');
-      });
-    }),
+    (async () => {
+      const cache = await caches.open(OFFLINE_CACHE_NAME);
+      // Pre-cache critical offline resources
+      try {
+        await cache.addAll([
+          OFFLINE_URL,
+          '/', // Homepage
+          '/manifest.json',
+          '/cache/', // Cache management page
+        ]);
+        console.log('✅ Offline resources cached successfully');
+      } catch (error) {
+        console.warn('⚠️ Some offline resources failed to cache:', error);
+      }
+    })(),
   );
+  // Force the waiting service worker to become active
+  self.skipWaiting();
+});
+
+// ============================================
+// OFFLINE FALLBACK FOR NAVIGATION
+// ============================================
+// Set a catch handler for navigation requests (after all routes are registered)
+// This is called AFTER workbox routes have been checked
+workbox.routing.setCatchHandler(async ({ event }) => {
+  // Only handle navigation requests (page loads)
+  if (event.request.mode === 'navigate') {
+    // Try to get from pages cache
+    const cachedPage = await caches.match(event.request);
+    if (cachedPage) {
+      return cachedPage;
+    }
+
+    // Return offline page
+    const offlineCache = await caches.open(OFFLINE_CACHE_NAME);
+    const offlineResponse = await offlineCache.match(OFFLINE_URL);
+    if (offlineResponse) {
+      return offlineResponse;
+    }
+
+    // Ultimate fallback
+    return new Response(
+      '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Offline</title></head><body><h1>Offline</h1><p>No internet connection available.</p></body></html>',
+      {
+        status: 503,
+        statusText: 'Service Unavailable',
+        headers: { 'Content-Type': 'text/html; charset=utf-8' },
+      },
+    );
+  }
+
+  // For non-navigation requests, try cache
+  const cachedResponse = await caches.match(event.request);
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  // Return error response
+  return new Response('Network request failed and no cache available', {
+    status: 503,
+    statusText: 'Service Unavailable',
+  });
 });
 
 // ============================================
@@ -249,11 +310,42 @@ self.addEventListener('message', (event) => {
 // ============================================
 // CACHE SIZE MONITORING
 // ============================================
-// Log cache sizes for debugging
-if (self.registration && self.registration.navigationPreload) {
-  self.addEventListener('activate', (event) => {
-    event.waitUntil(self.registration.navigationPreload.enable());
-  });
-}
+// Activate event - claim clients and enable navigation preload
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    (async () => {
+      // Enable navigation preload if available
+      if (self.registration.navigationPreload) {
+        await self.registration.navigationPreload.enable();
+      }
+
+      // Clean up old caches
+      const cacheWhitelist = [
+        'video-cache-v1',
+        'images-cache-v1',
+        'audio-cache-v1',
+        'google-fonts-cache-v1',
+        'api-cache-v1',
+        'static-assets-cache-v1',
+        'pages-cache-v1',
+        'offline-v1',
+      ];
+
+      const cacheNames = await caches.keys();
+      await Promise.all(
+        cacheNames.map((cacheName) => {
+          if (!cacheWhitelist.includes(cacheName)) {
+            console.log('🗑️ Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        }),
+      );
+
+      // Take control of all clients immediately
+      await self.clients.claim();
+      console.log('✅ Service Worker activated and clients claimed');
+    })(),
+  );
+});
 
 console.log('🎥 Custom Service Worker with Video Caching loaded successfully');
