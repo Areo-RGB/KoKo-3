@@ -18,6 +18,21 @@ interface VideoCache {
   timestamp?: number;
 }
 
+const normalizeVideoUrl = (input: string): string => {
+  if (!input) {
+    return input;
+  }
+
+  try {
+    const url = new URL(input);
+    url.hash = '';
+    return url.toString();
+  } catch (error) {
+    const [withoutHash] = input.split('#');
+    return withoutHash;
+  }
+};
+
 export const useVideoCache = () => {
   const [cacheStatus, setCacheStatus] = useState<CacheStatus>({
     isSupported: false,
@@ -60,42 +75,49 @@ export const useVideoCache = () => {
    * Cache a video URL for offline access
    */
   const cacheVideo = async (url: string): Promise<boolean> => {
+    const normalizedUrl = normalizeVideoUrl(url);
+
     if (!cacheStatus.isSupported) {
       console.warn('Cache API not supported');
       return false;
     }
 
     try {
+      if (await isVideoCached(normalizedUrl)) {
+        await updateCachedVideosList();
+        return true;
+      }
+
       const cache = await caches.open('video-cache-v1');
 
       // Use put() instead of add() to handle CORS and network issues better
-      const response = await fetch(url, {
+      const response = await fetch(normalizedUrl, {
         mode: 'cors',
         credentials: 'omit',
       });
 
       if (response.ok || response.status === 206) {
-        await cache.put(url, response);
+        await cache.put(normalizedUrl, response.clone());
 
         // Also message the service worker to cache it
         if (navigator.serviceWorker.controller) {
           navigator.serviceWorker.controller.postMessage({
             type: 'CACHE_VIDEO',
-            url,
+            url: normalizedUrl,
           });
         }
 
         // Update cached videos list
         await updateCachedVideosList();
         return true;
-      } else {
-        console.warn(
-          `Failed to cache ${url}: ${response.status} ${response.statusText}`,
-        );
-        return false;
       }
+
+      console.warn(
+        `Failed to cache ${normalizedUrl}: ${response.status} ${response.statusText}`,
+      );
+      return false;
     } catch (error) {
-      console.error('Failed to cache video:', url, error);
+      console.error('Failed to cache video:', normalizedUrl, error);
       return false;
     }
   };
@@ -131,11 +153,13 @@ export const useVideoCache = () => {
    * Check if a specific video is cached
    */
   const isVideoCached = async (url: string): Promise<boolean> => {
+    const normalizedUrl = normalizeVideoUrl(url);
+
     if (!cacheStatus.isSupported) return false;
 
     try {
       const cache = await caches.open('video-cache-v1');
-      const response = await cache.match(url);
+      const response = await cache.match(normalizedUrl);
       return response !== undefined;
     } catch (error) {
       console.error('Failed to check cache status:', error);
@@ -147,11 +171,13 @@ export const useVideoCache = () => {
    * Remove a video from cache
    */
   const uncacheVideo = async (url: string): Promise<boolean> => {
+    const normalizedUrl = normalizeVideoUrl(url);
+
     if (!cacheStatus.isSupported) return false;
 
     try {
       const cache = await caches.open('video-cache-v1');
-      const deleted = await cache.delete(url);
+      const deleted = await cache.delete(normalizedUrl);
       await updateCachedVideosList();
       return deleted;
     } catch (error) {
@@ -196,9 +222,17 @@ export const useVideoCache = () => {
       const requests = await cache.keys();
 
       const videos: VideoCache[] = requests
-        .filter((req) => req.url.endsWith('.mp4'))
+        .filter((req) => {
+          const url = req.url.toLowerCase();
+          return (
+            url.endsWith('.mp4') ||
+            url.endsWith('.webm') ||
+            url.endsWith('.mov') ||
+            url.endsWith('.m4v')
+          );
+        })
         .map((req) => ({
-          url: req.url,
+          url: normalizeVideoUrl(req.url),
         }));
 
       setCachedVideos(videos);

@@ -19,6 +19,7 @@ import {
   Wifi,
   WifiOff,
 } from 'lucide-react';
+import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
 interface VideoCacheManagerProps {
@@ -26,7 +27,7 @@ interface VideoCacheManagerProps {
   autoUpdate?: boolean;
 }
 
-export const VideoCacheManager: React.FC<VideoCacheManagerProps> = ({
+export const VideoCacheManager: FC<VideoCacheManagerProps> = ({
   videoUrls = [],
   autoUpdate = true,
 }) => {

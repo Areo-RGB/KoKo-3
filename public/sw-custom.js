@@ -11,6 +11,21 @@ const { ExpirationPlugin } = workbox.expiration;
 const { RangeRequestsPlugin } = workbox.rangeRequests;
 const { CacheableResponsePlugin } = workbox.cacheableResponse;
 
+const normalizeVideoUrl = (input) => {
+  if (!input) {
+    return input;
+  }
+
+  try {
+    const url = new URL(input);
+    url.hash = '';
+    return url.toString();
+  } catch (error) {
+    const [withoutHash] = input.split('#');
+    return withoutHash;
+  }
+};
+
 // Skip waiting and claim clients immediately
 self.skipWaiting();
 workbox.core.clientsClaim();
@@ -211,7 +226,7 @@ self.addEventListener('message', (event) => {
   }
 
   if (event.data && event.data.type === 'CACHE_VIDEO') {
-    const videoUrl = event.data.url;
+    const videoUrl = normalizeVideoUrl(event.data.url);
     event.waitUntil(
       caches.open('video-cache-v1').then((cache) => {
         return cache.add(videoUrl).catch((error) => {

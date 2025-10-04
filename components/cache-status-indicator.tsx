@@ -12,9 +12,10 @@ import {
 import { Progress } from '@/components/ui/progress';
 import { useVideoCache } from '@/hooks/use-video-cache';
 import { Download, HardDrive, Trash2, Wifi, WifiOff } from 'lucide-react';
+import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
-export const CacheStatusIndicator: React.FC = () => {
+export const CacheStatusIndicator: FC = () => {
   const { cacheStatus, getCacheInfo, clearVideoCache, formatBytes } =
     useVideoCache();
 
