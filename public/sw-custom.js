@@ -200,7 +200,9 @@ const OFFLINE_CACHE_NAME = 'offline-v1';
 self.addEventListener('install', (event) => {
   event.waitUntil(
     (async () => {
-      console.log('🚀 Service Worker installing - Pre-caching ALL resources...');
+      console.log(
+        '🚀 Service Worker installing - Pre-caching ALL resources...',
+      );
 
       // Open all caches
       const pagesCache = await caches.open('pages-cache-v1');
