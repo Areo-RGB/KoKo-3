@@ -17,6 +17,14 @@ export const TABS: readonly TabConfig[] = [
     description: 'Zurückgelegte Distanz pro Spieler',
     variant: 'blue',
   },
+  {
+    key: 'fortschritt',
+    title: 'Fortschritt',
+    valueKey: 'level',
+    unit: 'Level',
+    description: 'Spielerfortschritt und Level-Übersicht',
+    variant: 'orange',
+  },
 ] as const;
 
 export type TabKey = (typeof TABS)[number]['key'];

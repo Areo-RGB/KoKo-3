@@ -5,7 +5,6 @@ import {
   Dumbbell,
   GraduationCap,
   Home,
-  LineChart,
   PlayCircle,
   Timer,
   Trophy,
@@ -32,11 +31,6 @@ export const navigationLinks: SidebarLink[] = [
     icon: Home,
     mobileLabel: 'Home',
     showOnMobile: true,
-  },
-  {
-    title: 'Fortschritt',
-    url: '/fortschritt',
-    icon: LineChart,
   },
 ];
 

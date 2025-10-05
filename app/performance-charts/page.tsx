@@ -10,6 +10,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useState } from 'react';
 import ChartDataTable from './_components/chart-data-table';
+import FortschrittTimeline from './_components/fortschritt-timeline';
 import VerticalBarChart from './_components/vertical-bar-chart';
 import { TABS } from './_lib/config';
 import { sortDescending } from './_lib/utils';
@@ -31,7 +32,7 @@ export default function PerformanceChartsPage() {
       </div>
 
       <Tabs value={tab} onValueChange={(value) => setTab(value as typeof tab)}>
-        <TabsList className="grid w-full grid-cols-2 md:w-fit">
+        <TabsList className="grid w-full grid-cols-3 md:w-fit">
           {TABS.map((item) => (
             <TabsTrigger key={item.key} value={item.key} className="px-6 py-2">
               {item.title}
@@ -40,6 +41,15 @@ export default function PerformanceChartsPage() {
         </TabsList>
 
         {TABS.map((item) => {
+          // Special handling for fortschritt tab
+          if (item.key === 'fortschritt') {
+            return (
+              <TabsContent key={item.key} value={item.key} className="mt-6">
+                <FortschrittTimeline />
+              </TabsContent>
+            );
+          }
+
           const rows = (performanceData[
             item.key as keyof typeof performanceData
           ] || []) as {

@@ -59,7 +59,6 @@ const APP_PAGES = [
   '/data-combined/',
   '/performance-charts/',
   '/hertha-03-iv/',
-  '/fortschritt/',
 ];
 
 export default function CachePage() {
@@ -258,10 +257,10 @@ export default function CachePage() {
         prev.map((p) =>
           p.id === pageId
             ? {
-                ...p,
-                cachedCount: processedCount,
-                progress: (processedCount / p.videoCount) * 100,
-              }
+              ...p,
+              cachedCount: processedCount,
+              progress: (processedCount / p.videoCount) * 100,
+            }
             : p,
         ),
       );
