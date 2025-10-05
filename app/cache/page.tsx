@@ -257,10 +257,10 @@ export default function CachePage() {
         prev.map((p) =>
           p.id === pageId
             ? {
-              ...p,
-              cachedCount: processedCount,
-              progress: (processedCount / p.videoCount) * 100,
-            }
+                ...p,
+                cachedCount: processedCount,
+                progress: (processedCount / p.videoCount) * 100,
+              }
             : p,
         ),
       );

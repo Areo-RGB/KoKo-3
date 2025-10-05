@@ -5,6 +5,7 @@ import MainLayout from '@/components/layout/main-layout';
 import { MobileFooterNav } from '@/components/layout/mobile-footer-nav';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
+import { TimerOverlay, TimerToggle } from '@/components/timer';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Toaster } from '@/components/ui/toaster';
 import React, { useEffect, useState } from 'react';
@@ -15,6 +16,7 @@ type Props = {
 
 export default function ClientAppShell({ children }: Props) {
   const [mounted, setMounted] = useState(false);
+  const [isTimerOpen, setIsTimerOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -75,6 +77,7 @@ export default function ClientAppShell({ children }: Props) {
                 <SidebarTrigger className="ml-2" />
               </div>
               <div className="flex items-center gap-2">
+                <TimerToggle onClick={() => setIsTimerOpen(true)} />
                 <FullscreenToggle />
                 <ThemeToggle />
               </div>
@@ -86,6 +89,11 @@ export default function ClientAppShell({ children }: Props) {
       <Toaster />
       {/* Mobile footer navigation */}
       <MobileFooterNav />
+      {/* Timer overlay */}
+      <TimerOverlay
+        isOpen={isTimerOpen}
+        onClose={() => setIsTimerOpen(false)}
+      />
     </ThemeProvider>
   );
 }
