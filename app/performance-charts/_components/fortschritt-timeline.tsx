@@ -31,6 +31,11 @@ const players = [
       'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780476/spieler-avatars/behrat.png',
   },
   {
+    name: 'Bent',
+    image:
+      'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1759777878/spieler-avatars/bent.png',
+  },
+  {
     name: 'Eray',
     image:
       'https://res.cloudinary.com/dg8zbx8ja/image/upload/v1758780481/spieler-avatars/eray.png',
@@ -152,10 +157,6 @@ export default function FortschrittTimeline(): ReactElement {
               </TimelineIndicator>
             </TimelineHeader>
             <TimelineContent>
-              <p className="text-muted-foreground mb-4 text-sm">
-                Gesamter Spielerkader als Avatar-Galerie. Inhalte lassen sich
-                direkt durchscrollen.
-              </p>
               <AvatarStacks data={players} />
             </TimelineContent>
           </TimelineItem>

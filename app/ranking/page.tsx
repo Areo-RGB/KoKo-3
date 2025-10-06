@@ -61,6 +61,7 @@ export default function HomePage() {
   // Avatar image URLs mirrored from the Fortschritt page
   const nameToAvatarUrl: Record<string, string> = {
     Behrat: '/assets/images/spieler-avatars/avatars-256/behrat.webp',
+    Bent: '/assets/images/spieler-avatars/avatars-256/bent.webp',
     Eray: '/assets/images/spieler-avatars/avatars-256/eray.webp',
     Erik: '/assets/images/spieler-avatars/avatars-256/erik.webp',
     Finley: '/assets/images/spieler-avatars/avatars-256/finley.webp',
@@ -288,14 +289,12 @@ export default function HomePage() {
                       onClick={() =>
                         handlePlayerClick(participant.name, selectedSport.name)
                       }
-                      containerClassName={`w-full h-auto ${
-                        videoAvailable ? 'cursor-pointer' : ''
-                      }`}
-                      className={`flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-200 ${
-                        videoAvailable
+                      containerClassName={`w-full h-auto ${videoAvailable ? 'cursor-pointer' : ''
+                        }`}
+                      className={`flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-200 ${videoAvailable
                           ? 'bg-muted hover:bg-accent cursor-pointer'
                           : 'bg-muted hover:bg-accent'
-                      }`}
+                        }`}
                       borderRadius="var(--radius)"
                       duration={3000}
                       borderClassName="bg-[radial-gradient(hsl(var(--primary))_40%,transparent_60%)] opacity-[0.8]"
@@ -338,11 +337,10 @@ export default function HomePage() {
                       onClick={() =>
                         handlePlayerClick(participant.name, selectedSport.name)
                       }
-                      className={`flex items-center justify-between rounded-lg border px-4 py-3 transition-all duration-200 ${
-                        videoAvailable
+                      className={`flex items-center justify-between rounded-lg border px-4 py-3 transition-all duration-200 ${videoAvailable
                           ? 'border-border bg-muted hover:border-primary hover:bg-accent cursor-pointer'
                           : 'border-border bg-muted hover:border-primary hover:bg-accent'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center gap-4">
                         <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold">

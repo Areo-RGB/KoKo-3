@@ -10,6 +10,10 @@
     },
     "smithery-github": {
       "url": "https://server.smithery.ai/@smithery-ai/github/mcp?api_key=febeb247-1ac6-4f48-b9ba-6ac901468ab1&profile=imaginative-cat-SNCI7n"
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
     }
   }
 }

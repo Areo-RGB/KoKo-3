@@ -38,7 +38,7 @@ export default function VideoPlayer({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
 
@@ -101,6 +101,8 @@ export default function VideoPlayer({
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
       setDuration(videoRef.current.duration);
+      // Set video to muted by default
+      videoRef.current.muted = true;
       if (typeof currentItem?.startTime === 'number') {
         videoRef.current.currentTime = currentItem.startTime;
       }
@@ -284,6 +286,7 @@ export default function VideoPlayer({
             preload="metadata"
             playsInline
             controls={false}
+            muted
             onDoubleClick={() => !isMobile && handleToggleFullscreen()}
           />
           <div
