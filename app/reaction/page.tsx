@@ -9,23 +9,13 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { reactionCards } from './_data/cards';
 
 export const metadata = {
     title: 'Reaktion — Trainer Auswahl',
 };
 
-const cards = [
-    {
-        title: 'Reaktionstrainer (2x2 Farben)',
-        description: 'Zufällige Farbfelder — 1s Standardintervall',
-        href: '/reaction/2x2',
-    },
-    { title: 'Trainer 2', description: 'Bald verfügbar', href: '#' },
-    { title: 'Trainer 3', description: 'Bald verfügbar', href: '#' },
-    { title: 'Trainer 4', description: 'Bald verfügbar', href: '#' },
-    { title: 'Trainer 5', description: 'Bald verfügbar', href: '#' },
-    { title: 'Trainer 6', description: 'Bald verfügbar', href: '#' },
-];
+// Data is co-located under ./_data/cards
 
 export default function ReactionIndexPage() {
     return (
@@ -36,7 +26,7 @@ export default function ReactionIndexPage() {
             </p>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {cards.map((card) => (
+                {reactionCards.map((card) => (
                     <Card key={card.title} className="h-full">
                         <CardHeader>
                             <CardTitle>{card.title}</CardTitle>
@@ -44,7 +34,7 @@ export default function ReactionIndexPage() {
                             <CardAction>
                                 <Link
                                     href={card.href}
-                                    aria-disabled={card.href === '#'}
+                                    aria-disabled={card.disabled}
                                     className="text-sm font-medium text-primary underline-offset-4 hover:underline aria-disabled:pointer-events-none aria-disabled:opacity-50"
                                 >
                                     Öffnen
