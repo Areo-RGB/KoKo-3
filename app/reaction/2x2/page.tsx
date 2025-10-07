@@ -1,10 +1,7 @@
+"use client";
 import { Suspense } from 'react';
 
 import { ReactionTrainer } from '@/components/reaction-trainer';
-
-export const metadata = {
-    title: 'Reaktion — 2x2 Farben',
-};
 
 export default function Reaction2x2Page() {
     return (

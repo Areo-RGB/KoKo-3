@@ -1,3 +1,4 @@
+"use client";
 import Link from 'next/link';
 
 import {
@@ -11,10 +12,6 @@ import {
 } from '@/components/ui/card';
 import { reactionCards } from './_data/cards';
 
-export const metadata = {
-    title: 'Reaktion — Trainer Auswahl',
-};
-
 // Data is co-located under ./_data/cards
 
 export default function ReactionIndexPage() {
@@ -27,7 +24,7 @@ export default function ReactionIndexPage() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {reactionCards.map((card) => (
-                    <Card key={card.title} className="h-full">
+                    <Card key={card.id} className="h-full">
                         <CardHeader>
                             <CardTitle>{card.title}</CardTitle>
                             <CardDescription>{card.description}</CardDescription>

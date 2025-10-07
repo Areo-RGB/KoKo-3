@@ -41,7 +41,7 @@ export const datenLinks: SidebarLink[] = [
     url: '/ranking',
     icon: Trophy,
     mobileLabel: 'Ranking',
-    showOnMobile: true,
+    showOnMobile: false,
   },
   {
     title: 'Daten & Normwerte',
@@ -84,6 +84,8 @@ export const trainingToolsLinks: SidebarLink[] = [
     title: 'FIFA 11+',
     url: '/fifa-11-plus',
     icon: PlayCircle,
+    mobileLabel: 'FIFA 11+',
+    showOnMobile: true,
   },
   {
     title: 'Stabi-Training',
@@ -95,14 +97,14 @@ export const trainingToolsLinks: SidebarLink[] = [
     url: '/interval-timer',
     icon: Timer,
     mobileLabel: 'Timer',
-    showOnMobile: true,
+    showOnMobile: false,
   },
   {
     title: 'Yo-Yo Ranking',
     url: '/yo-yo',
     icon: Trophy,
     mobileLabel: 'Ranking',
-    showOnMobile: true,
+    showOnMobile: false,
   },
   {
     title: 'Reaktion',
@@ -119,7 +121,7 @@ export const juniorLinks: SidebarLink[] = [
     url: '/junioren',
     icon: GraduationCap,
     mobileLabel: 'Junioren',
-    showOnMobile: true,
+    showOnMobile: false,
   },
 ];
 
