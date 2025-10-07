@@ -6,6 +6,7 @@ import {
   GraduationCap,
   Home,
   PlayCircle,
+  Target,
   Timer,
   Trophy,
 } from 'lucide-react';
@@ -101,6 +102,13 @@ export const trainingToolsLinks: SidebarLink[] = [
     url: '/yo-yo',
     icon: Trophy,
     mobileLabel: 'Ranking',
+    showOnMobile: true,
+  },
+  {
+    title: 'Reaktion',
+    url: '/reaction',
+    icon: Target,
+    mobileLabel: 'Reaktion',
     showOnMobile: true,
   },
 ];
