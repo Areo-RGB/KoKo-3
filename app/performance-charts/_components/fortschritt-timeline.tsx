@@ -140,7 +140,7 @@ const AvatarStacks = ({ data }: { data: readonly Player[] }) => (
 
 export default function FortschrittTimeline(): ReactElement {
   return (
-    <div className="bg-background min-h-screen px-4 py-12">
+    <div className="bg-background min-h-[100svh] px-4 py-12">
       <div className="mx-auto w-full max-w-5xl">
         <Timeline defaultValue={1}>
           <TimelineItem

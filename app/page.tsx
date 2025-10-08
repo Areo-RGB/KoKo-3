@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 const HomePage = () => {
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex min-h-[100svh] flex-col">
       <iframe
         title="FC Hertha 03 IV Mannschaft auf fussball.de"
         src="https://next.fussball.de/mannschaft/-/011MIC3SQK000000VTVG0001VTR8C1K7#spiele"

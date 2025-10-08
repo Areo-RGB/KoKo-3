@@ -70,9 +70,14 @@ export default function ClientAppShell({ children }: Props) {
       disableTransitionOnChange
     >
       <MainLayout>
-        <div className="flex min-h-screen w-full overflow-x-hidden">
+        <div className="flex min-h-[100svh] w-full overflow-x-hidden">
           <div className="min-w-0 flex-1">
-            <header className="flex h-16 items-center justify-between border-b py-3 pr-4 pl-0">
+            <header
+              className="flex min-h-[4rem] items-center justify-between border-b pb-3 pr-4 pl-0"
+              style={{
+                paddingTop: 'max(env(safe-area-inset-top, 0px), 0.75rem)',
+              }}
+            >
               <div className="flex items-center gap-2">
                 <SidebarTrigger className="ml-2" />
               </div>

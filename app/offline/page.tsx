@@ -114,7 +114,7 @@ export default function OfflinePage() {
   const storagePercent = (cacheInfo.totalSize / estimatedQuota) * 100;
 
   return (
-    <div className="container mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-4 py-16">
+    <div className="container mx-auto flex min-h-[100svh] max-w-4xl flex-col items-center justify-center px-4 py-16">
       {/* Main Offline Card */}
       <Card className="w-full border-2 border-orange-500/50 shadow-lg">
         <CardHeader className="text-center">
