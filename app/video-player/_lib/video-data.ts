@@ -887,77 +887,92 @@ const allVideoData: HierarchicalVideoData = {
                 {
                   id: 'two-foot-forwards',
                   title: 'Two Foot Forwards',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873141/agility-drills/01_two-foot-forwards.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873141/agility-drills/01_two-foot-forwards.mp4',
                 },
                 {
                   id: 'two-foot-sideways',
                   title: 'Two Foot Sideways',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873143/agility-drills/02_two-foot-sideways.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873143/agility-drills/02_two-foot-sideways.mp4',
                 },
                 {
                   id: 'icky-shuffle',
                   title: 'Icky Shuffle',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873146/agility-drills/03_icky-shuffle.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873146/agility-drills/03_icky-shuffle.mp4',
                 },
                 {
                   id: 'backwards-icky-shuffle',
                   title: 'Backwards Icky Shuffle',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873150/agility-drills/04_backwards-icky-shuffle.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873150/agility-drills/04_backwards-icky-shuffle.mp4',
                 },
                 {
                   id: 'in-and-out',
                   title: 'In & Out',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873153/agility-drills/05_in-and-out.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873153/agility-drills/05_in-and-out.mp4',
                 },
                 {
                   id: 'sl-in-and-out',
                   title: 'SL In & Out',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873158/agility-drills/06_sl-in-and-out.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873158/agility-drills/06_sl-in-and-out.mp4',
                 },
                 {
                   id: 'lateral-in-and-out',
                   title: 'Lateral In & Out',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873162/agility-drills/07_lateral-in-and-out.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873162/agility-drills/07_lateral-in-and-out.mp4',
                 },
                 {
                   id: 'crossover',
                   title: 'Crossover',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873164/agility-drills/08_crossover.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873164/agility-drills/08_crossover.mp4',
                 },
                 {
                   id: 'foot-exchange',
                   title: 'Foot Exchange',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873167/agility-drills/09_foot-exchange.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873167/agility-drills/09_foot-exchange.mp4',
                 },
                 {
                   id: 'reverse-crossover',
                   title: 'Reverse Crossover',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873171/agility-drills/10_reverse-crossover.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873171/agility-drills/10_reverse-crossover.mp4',
                 },
                 {
                   id: 'hip-twist',
                   title: 'Hip Twist',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873176/agility-drills/11_hip-twist.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873176/agility-drills/11_hip-twist.mp4',
                 },
                 {
                   id: 'carioca',
                   title: 'Carioca',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873179/agility-drills/12_carioca.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873179/agility-drills/12_carioca.mp4',
                 },
                 {
                   id: 'two-footed-hop',
                   title: 'Two Footed Hop',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873182/agility-drills/13_two-footed-hop.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873182/agility-drills/13_two-footed-hop.mp4',
                 },
                 {
                   id: 'one-footed-hop',
                   title: 'One Footed Hop',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873185/agility-drills/14_one-footed-hop.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873185/agility-drills/14_one-footed-hop.mp4',
                 },
                 {
                   id: 'two-forward-one-back',
                   title: 'Two Forward One Back',
-                  videoUrl: 'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873189/agility-drills/15_two-forward-one-back.mp4',
+                  videoUrl:
+                    'https://res.cloudinary.com/dg8zbx8ja/video/upload/v1759873189/agility-drills/15_two-forward-one-back.mp4',
                 },
               ],
             },

@@ -289,12 +289,14 @@ export default function HomePage() {
                       onClick={() =>
                         handlePlayerClick(participant.name, selectedSport.name)
                       }
-                      containerClassName={`w-full h-auto ${videoAvailable ? 'cursor-pointer' : ''
-                        }`}
-                      className={`flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-200 ${videoAvailable
+                      containerClassName={`w-full h-auto ${
+                        videoAvailable ? 'cursor-pointer' : ''
+                      }`}
+                      className={`flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-200 ${
+                        videoAvailable
                           ? 'bg-muted hover:bg-accent cursor-pointer'
                           : 'bg-muted hover:bg-accent'
-                        }`}
+                      }`}
                       borderRadius="var(--radius)"
                       duration={3000}
                       borderClassName="bg-[radial-gradient(hsl(var(--primary))_40%,transparent_60%)] opacity-[0.8]"
@@ -337,10 +339,11 @@ export default function HomePage() {
                       onClick={() =>
                         handlePlayerClick(participant.name, selectedSport.name)
                       }
-                      className={`flex items-center justify-between rounded-lg border px-4 py-3 transition-all duration-200 ${videoAvailable
+                      className={`flex items-center justify-between rounded-lg border px-4 py-3 transition-all duration-200 ${
+                        videoAvailable
                           ? 'border-border bg-muted hover:border-primary hover:bg-accent cursor-pointer'
                           : 'border-border bg-muted hover:border-primary hover:bg-accent'
-                        }`}
+                      }`}
                     >
                       <div className="flex items-center gap-4">
                         <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold">

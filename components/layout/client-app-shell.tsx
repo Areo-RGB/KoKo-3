@@ -73,7 +73,7 @@ export default function ClientAppShell({ children }: Props) {
         <div className="flex min-h-[100svh] w-full overflow-x-hidden">
           <div className="min-w-0 flex-1">
             <header
-              className="flex min-h-[4rem] items-center justify-between border-b pb-3 pr-4 pl-0"
+              className="flex min-h-[4rem] items-center justify-between border-b pr-4 pb-3 pl-0"
               style={{
                 paddingTop: 'max(env(safe-area-inset-top, 0px), 0.75rem)',
               }}

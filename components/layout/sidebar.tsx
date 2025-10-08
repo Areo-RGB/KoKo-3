@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronDown, Search } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -14,7 +14,6 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
-  SidebarInput,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -30,9 +29,6 @@ type AppSidebarProps = React.ComponentProps<typeof Sidebar>;
 export default function AppSidebar({ ...props }: AppSidebarProps) {
   const { state, isMobile, setOpenMobile } = useSidebar();
   const pathname = usePathname();
-
-  // Search/filter state
-  const [query, setQuery] = React.useState('');
 
   // Persisted collapsed state per section
   const [collapsed, setCollapsed] = React.useState<
@@ -107,29 +103,12 @@ export default function AppSidebar({ ...props }: AppSidebarProps) {
         <div className="flex items-center justify-between px-2 py-1.5">
           <Logo />
         </div>
-        {/* Quick search */}
-        <div className="px-2 pb-1">
-          <div className="relative">
-            <SidebarInput
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder={state === 'expanded' ? 'Suchen… /' : 'Suchen…'}
-              aria-label="Navigation filtern"
-              className="pl-8"
-            />
-            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-2 h-4 w-4 -translate-y-1/2" />
-          </div>
-        </div>
       </SidebarHeader>
       <SidebarContent>
         {sidebarSections
           .map((section) => ({
             ...section,
-            links: query
-              ? section.links.filter((l) =>
-                  l.title.toLowerCase().includes(query.toLowerCase()),
-                )
-              : section.links,
+            links: section.links,
           }))
           .filter((section) => section.links.length > 0)
           .map((section, index, arr) => {
