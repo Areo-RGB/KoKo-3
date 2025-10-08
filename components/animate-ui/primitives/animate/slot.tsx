@@ -1,5 +1,7 @@
 'use client';
 
+// Internal primitive slot helper used by animate-ui components.
+
 import { cn } from '@/lib/utils';
 import { isMotionComponent, motion, type HTMLMotionProps } from 'motion/react';
 import * as React from 'react';

@@ -229,5 +229,3 @@ export function ExerciseCard({
     </Card>
   );
 }
-
-export default ExerciseCard;

@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { muscleToExerciseDataMap } from '@/util/muscle-name-helper';
+import { muscleToExerciseDataMap } from '@/app/muscle-diagram/_lib/muscle-name-helper';
 import { useState } from 'react';
 
 interface ExerciseInfo {

@@ -3,7 +3,7 @@
   "short_name": "Q.V Training",
   "description": "Professional sports training platform with offline access to exercises and analytics.",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#0f172a",
   "background_color": "#ffffff",
   "orientation": "portrait",

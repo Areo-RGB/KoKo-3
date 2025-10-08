@@ -42,8 +42,9 @@ components/
 
 lib/
   utils.ts                # cn() for Tailwind class merging
-  video-data.ts           # Central video database with categories & chapters
   cache-manager.ts        # Service worker cache utilities
+app/video-player/_lib/
+  video-data.ts           # Central video database with categories & chapters
 
 public/
   sw-custom.js            # Custom service worker (VIDEO CACHING CRITICAL)
@@ -79,7 +80,7 @@ pnpm qwen             # Run Qwen AI assistant
 Located in `scripts/`:
 1.  **Download & Clip**: `process-video.py <config.json>` (uses yt-dlp + ffmpeg)
 2.  **Upload to Cloud**: `upload-to-cloudinary.py <config.json>` or use R2-specific scripts (e.g., `r2-upload.cjs`) for bulk uploads.
-3.  **Update `lib/video-data.ts`**: Add new entries to `videoDatabase` array
+3.  **Update `app/video-player/_lib/video-data.ts`**: Add new entries to `videoDatabase` array
 
 See `scripts/README.md` for detailed examples.
 
@@ -130,7 +131,7 @@ import { cn } from '@/lib/utils';
 
 ### Video Data Structure
 ```typescript
-// lib/video-data.ts exports:
+// app/video-player/_lib/video-data.ts exports:
 export interface VideoData {
   id: string;
   type: 'chapters' | 'playlist';  // CRITICAL distinction
@@ -154,7 +155,7 @@ export interface VideoData {
 -   `/cache/` - User-facing cache management (download content for offline)
 -   `/offline/` - Offline fallback page (shown when no network + no cache)
 -   `hooks/use-video-cache.ts` - React hook for video caching API
--   `components/video-cache-manager.tsx` - UI for batch video caching
+-   `app/cache/page.tsx` - UI surface for batch video caching
 
 **Testing Offline**: DevTools → Application → Service Workers → check "Offline"
 
@@ -172,11 +173,11 @@ export interface VideoData {
 1.  Create `app/[route-name]/page.tsx` (client component if interactive)
 2.  Add `_components/` for route-specific UI (e.g., `playlist-view.tsx`, `video-player.tsx`)
 3.  Add `_data/` or `_lib/` with route-specific constants (playlist, video URLs)
-4.  Import types from `lib/video-data.ts` or a local `_types/` file.
+4.  Import types from `app/video-player/_lib/video-data.ts` or a local `_types/` file.
 5.  Use `VideoPlayer` component (handles Plyr.js integration)
 
 ### Add Videos to Central Database
-Edit `lib/video-data.ts`:
+Edit `app/video-player/_lib/video-data.ts`:
 ```typescript
 export const videoDatabase: VideoData[] = [
   // ... existing entries

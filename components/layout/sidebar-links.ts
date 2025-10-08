@@ -11,7 +11,7 @@ import {
   Trophy,
 } from 'lucide-react';
 
-export type SidebarLink = {
+type SidebarLink = {
   title: string;
   url: string;
   icon: LucideIcon;
@@ -25,7 +25,7 @@ export type SidebarSection = {
   links: SidebarLink[];
 };
 
-export const navigationLinks: SidebarLink[] = [
+const navigationLinks: SidebarLink[] = [
   {
     title: 'Startseite',
     url: '/',
@@ -35,7 +35,7 @@ export const navigationLinks: SidebarLink[] = [
   },
 ];
 
-export const datenLinks: SidebarLink[] = [
+const datenLinks: SidebarLink[] = [
   {
     title: 'Video DFB Tests',
     url: '/ranking',
@@ -55,7 +55,7 @@ export const datenLinks: SidebarLink[] = [
   },
 ];
 
-export const toolsLinks: SidebarLink[] = [
+const toolsLinks: SidebarLink[] = [
   {
     title: 'Video Cache',
     url: '/cache',
@@ -65,7 +65,7 @@ export const toolsLinks: SidebarLink[] = [
   },
 ];
 
-export const trainingToolsLinks: SidebarLink[] = [
+const trainingToolsLinks: SidebarLink[] = [
   {
     title: 'Trainingsvideos',
     url: '/video-player',
@@ -115,7 +115,7 @@ export const trainingToolsLinks: SidebarLink[] = [
   },
 ];
 
-export const juniorLinks: SidebarLink[] = [
+const juniorLinks: SidebarLink[] = [
   {
     title: 'Junioren \u00dcbersicht',
     url: '/junioren',

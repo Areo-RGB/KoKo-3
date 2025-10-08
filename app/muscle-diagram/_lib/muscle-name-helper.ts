@@ -1,6 +1,7 @@
 /**
- * Muscle Name Helper Utility
- * Converts muscle group IDs from SVG to human-readable names
+ * Maps SVG muscle IDs to the corresponding exercise data keys and display names
+ * for the muscle diagram experience. The logic lives alongside the route to
+ * keep all per-page helpers colocated.
  */
 
 // Mapping from SVG muscle IDs to exercise data muscle groups
@@ -121,19 +122,15 @@ export const muscleNameMap: Record<string, string> = {
 };
 
 /**
- * Converts a muscle group ID to a human-readable name
- * @param muscleId - The muscle group ID from SVG (e.g., "upper-trapezius")
- * @returns The human-readable muscle name (e.g., "Upper Trapezius")
+ * Converts a muscle group ID to a human-readable name.
  */
 export function getMuscleDisplayName(muscleId: string | null): string {
   if (muscleId == null || muscleId === '') return '';
 
-  // Direct lookup first
   if (muscleNameMap[muscleId]) {
     return muscleNameMap[muscleId];
   }
 
-  // Fallback: Convert kebab-case to title case
   return muscleId
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -141,18 +138,13 @@ export function getMuscleDisplayName(muscleId: string | null): string {
 }
 
 /**
- * Gets the muscle group ID from an SVG element
- * Looks for the closest parent group with an ID
- * @param element - The SVG element that was hovered
- * @returns The muscle group ID or null
+ * Walks up the DOM tree to find the closest SVG group ID for a hovered element.
  */
 export function getMuscleIdFromElement(element: Element): string | null {
-  // Check if the element itself has an id
   if (element.id) {
     return element.id;
   }
 
-  // Look for parent group with id
   let parent = element.parentElement;
   while (parent) {
     if (parent.id && parent.tagName.toLowerCase() === 'g') {
@@ -165,9 +157,7 @@ export function getMuscleIdFromElement(element: Element): string | null {
 }
 
 /**
- * Gets the exercise data key for a given muscle ID
- * @param muscleId - The muscle group ID from SVG
- * @returns The corresponding exercise data key
+ * Maps a muscle ID to the exercise data key consumed by the page.
  */
 export function getExerciseDataKey(muscleId: string | null): string | null {
   if (muscleId == null || muscleId === '') return null;
@@ -175,14 +165,10 @@ export function getExerciseDataKey(muscleId: string | null): string | null {
 }
 
 /**
- * Formats muscle name for display with additional styling or context
- * @param muscleId - The muscle group ID
- * @returns Formatted display string
+ * Formats muscle name for display.
  */
 export function formatMuscleForDisplay(muscleId: string | null): string {
   const displayName = getMuscleDisplayName(muscleId);
   if (!displayName) return '';
-
-  // Return clean display name without emojis
   return displayName;
 }

@@ -1,5 +1,7 @@
 'use client';
 
+// Internal primitives consumed by components/animate-ui/components/animate.
+
 import { HTMLMotionProps, motion, type Transition } from 'motion/react';
 import * as React from 'react';
 

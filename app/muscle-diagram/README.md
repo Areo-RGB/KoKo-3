@@ -15,7 +15,7 @@ This page features an interactive anatomical diagram that allows users to explor
 
 1.  The `InteractiveMuscleSVG` component fetches SVG content from `public/assets/svg/front.svg` or `public/assets/svg/back.svg`.
 2.  When a user interacts with a muscle in the SVG, its ID is extracted (e.g., "gluteus-maximus").
-3.  This SVG ID is mapped to a data key (e.g., "glutes") using the `muscleToExerciseDataMap` in `util/muscle-name-helper.ts`.
+3.  This SVG ID is mapped to a data key (e.g., "glutes") using the `muscleToExerciseDataMap` in `_lib/muscle-name-helper.ts`.
 4.  The `getExerciseDataKey` function resolves the final key, which is then used by `loadMuscleData` from `_lib/exercise-data-loader.ts` to asynchronously fetch the relevant exercise data from a corresponding JSON file (e.g., `public/data/exercises/glutes.json`).
 5.  The fetched data (exercise titles, video URLs) is then passed to the `ExerciseFullscreenOverlay` when a user clicks an exercise button.
 
@@ -35,7 +35,7 @@ This page features an interactive anatomical diagram that allows users to explor
 
 - The interaction logic is heavily dependent on the structure of the SVG files. The IDs of `<path>` and `<g>` elements within the SVGs are used to identify muscle groups.
 - This page demonstrates a "lazy loading" or "on-demand" data fetching pattern. Data is not loaded until the user interacts with a specific muscle.
-- The `util/muscle-name-helper.ts` file is crucial as it acts as a bridge between the SVG element IDs and the data file names.
+- The `_lib/muscle-name-helper.ts` file is crucial as it acts as a bridge between the SVG element IDs and the data file names.
 
 ## Development Notes
 

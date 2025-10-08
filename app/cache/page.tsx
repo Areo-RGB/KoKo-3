@@ -12,17 +12,19 @@ import {
 import { Progress } from '@/components/ui/progress';
 import { useVideoCache } from '@/hooks/use-video-cache';
 import {
+  AlertTriangle,
+  Bug,
   Download,
   HardDrive,
   Loader2,
+  StopCircle,
   Trash2,
   Video,
   Wifi,
   WifiOff,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-// Import video data from different pages
 import {
   MAIN_VIDEO_URL,
   PLAYLIST,
@@ -42,24 +44,22 @@ interface PageCacheInfo {
   progress: number;
 }
 
-// All app pages that should be precached
-const APP_PAGES = [
-  '/',
-  '/cache/',
-  '/offline/',
-  '/dashboard/',
-  '/fifa-11-plus/',
-  '/video-player/',
-  '/junioren/',
-  '/interval-timer/',
-  '/muscle-diagram/',
-  '/ranking/',
-  '/soundboard/',
-  '/yo-yo/',
-  '/data-combined/',
-  '/performance-charts/',
-  '/hertha-03-iv/',
-];
+const STATUS_LABEL: Record<string, string> = {
+  idle: 'Bereit',
+  running: 'Aktiver Download',
+  completed: 'Abgeschlossen',
+  error: 'Fehlgeschlagen',
+  aborted: 'Abgebrochen',
+};
+
+const STATUS_BADGE_VARIANT: Record<string, 'default' | 'secondary' | 'destructive' | 'outline'> =
+  {
+    idle: 'outline',
+    running: 'default',
+    completed: 'secondary',
+    error: 'destructive',
+    aborted: 'destructive',
+  };
 
 export default function CachePage() {
   const {
@@ -69,6 +69,10 @@ export default function CachePage() {
     getCacheInfo,
     formatBytes,
     isVideoCached,
+    checkQuotaBeforeCaching,
+    cacheProgress,
+    cancelActiveTask,
+    swEvents,
   } = useVideoCache();
 
   const [cacheInfo, setCacheInfo] = useState({ size: 0, count: 0 });
@@ -76,24 +80,25 @@ export default function CachePage() {
   const [isClearing, setIsClearing] = useState(false);
   const [pages, setPages] = useState<PageCacheInfo[]>([]);
   const [isCachingAll, setIsCachingAll] = useState(false);
-  const [isCachingPages, setIsCachingPages] = useState(false);
-  const [cachedPagesCount, setCachedPagesCount] = useState(0);
-  const [pagesCacheProgress, setPagesCacheProgress] = useState(0);
+  const [fifaPreloadUrls, setFifaPreloadUrls] = useState<string[]>([]);
+  const [showDebug, setShowDebug] = useState(false);
 
-  // Initialize page data
+  const pagesRef = useRef<PageCacheInfo[]>([]);
+
+  useEffect(() => {
+    pagesRef.current = pages;
+  }, [pages]);
+
   useEffect(() => {
     const initializePages = () => {
-      // FIFA 11+ Original
       const fifa11Original = PLAYLIST.videos
         .filter((v) => !v.isHeader)
         .map((v) => `${MAIN_VIDEO_URL}#t=${v.startTime || 0}`);
 
-      // FIFA 11+ World Soccer
       const fifa11WS = WS_PLAYLIST.videos
         .filter((v) => !v.isHeader)
         .map((v) => `${WS_VIDEO_URL}#t=${v.startTime || 0}`);
 
-      // Video Player - extract all video URLs
       const videoPlayerUrls = hierarchicalVideoData.categories.flatMap((cat) =>
         cat.subcategories.flatMap((sub) =>
           sub.videos.flatMap((vid) =>
@@ -138,6 +143,9 @@ export default function CachePage() {
       ];
 
       setPages(pagesData);
+      setFifaPreloadUrls(
+        Array.from(new Set([...fifa11Original, ...fifa11WS])),
+      );
       checkCachedVideos(pagesData);
     };
 
@@ -145,7 +153,6 @@ export default function CachePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Monitor online/offline status
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
@@ -154,7 +161,6 @@ export default function CachePage() {
     window.addEventListener('offline', handleOffline);
 
     loadCacheInfo();
-    checkCachedPages();
 
     return () => {
       window.removeEventListener('online', handleOnline);
@@ -162,60 +168,21 @@ export default function CachePage() {
     };
   }, []);
 
+  useEffect(() => {
+    if (
+      cacheProgress.status === 'completed' ||
+      cacheProgress.status === 'error' ||
+      cacheProgress.status === 'aborted'
+    ) {
+      loadCacheInfo();
+      checkCachedVideos(pagesRef.current);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cacheProgress.status]);
+
   const loadCacheInfo = async () => {
     const info = await getCacheInfo();
     setCacheInfo(info);
-  };
-
-  const checkCachedPages = async () => {
-    if (!('caches' in window)) return;
-
-    try {
-      const cache = await caches.open('pages-cache-v1');
-      const keys = await cache.keys();
-      const cachedUrls = keys.map((req) => new URL(req.url).pathname);
-
-      let count = 0;
-      for (const page of APP_PAGES) {
-        const isPageCached = cachedUrls.some((url) => url === page);
-        if (isPageCached) count++;
-      }
-
-      setCachedPagesCount(count);
-      setPagesCacheProgress((count / APP_PAGES.length) * 100);
-    } catch (error) {
-      console.error('Failed to check cached pages:', error);
-    }
-  };
-
-  const cacheAllAppPages = async () => {
-    setIsCachingPages(true);
-    let successCount = 0;
-
-    for (let i = 0; i < APP_PAGES.length; i++) {
-      const page = APP_PAGES[i];
-      try {
-        // Fetch the page to trigger caching
-        const response = await fetch(page);
-        if (response.ok) {
-          // Manually cache it in pages-cache-v1
-          const cache = await caches.open('pages-cache-v1');
-          await cache.put(page, response);
-          successCount++;
-        }
-      } catch (error) {
-        console.error(`Failed to cache page ${page}:`, error);
-      }
-
-      setCachedPagesCount(successCount);
-      setPagesCacheProgress(((i + 1) / APP_PAGES.length) * 100);
-
-      // Small delay to avoid overwhelming the server
-      await new Promise((resolve) => setTimeout(resolve, 100));
-    }
-
-    setIsCachingPages(false);
-    await checkCachedPages();
   };
 
   const checkCachedVideos = async (pagesData: PageCacheInfo[]) => {
@@ -223,9 +190,10 @@ export default function CachePage() {
       pagesData.map(async (page) => {
         let cachedCount = 0;
         for (const url of page.videoUrls) {
-          const isCached = await isVideoCached(url);
-          if (isCached) cachedCount++;
+          const cached = await isVideoCached(url);
+          if (cached) cachedCount++;
         }
+
         return {
           ...page,
           cachedCount,
@@ -237,50 +205,70 @@ export default function CachePage() {
     setPages(updatedPages);
   };
 
+  const confirmQuotaIfNeeded = async (urls: string[]) => {
+    const quotaCheck = await checkQuotaBeforeCaching(urls);
+
+    if (quotaCheck.hasSpace) {
+      return true;
+    }
+
+    const requiredMB = quotaCheck.required
+      ? (quotaCheck.required / 1024 / 1024).toFixed(0)
+      : '?';
+    const availableMB = quotaCheck.available
+      ? (quotaCheck.available / 1024 / 1024).toFixed(0)
+      : '?';
+
+    let message =
+      `⚠️ Warnung: Möglicherweise nicht genug Speicherplatz!\n\n` +
+      `Benötigt: ~${requiredMB} MB\n` +
+      `Verfügbar: ${availableMB} MB\n` +
+      `Quota-Auslastung: ${quotaCheck.quotaPercent.toFixed(1)}%`;
+
+    if (quotaCheck.unknownUrls.length > 0) {
+      message +=
+        `\n\nFür ${quotaCheck.unknownUrls.length} Videos konnte die Größe nicht ermittelt werden.`;
+    }
+
+    message += `\n\nTrotzdem fortfahren? Cache könnte unvollständig sein.`;
+
+    return window.confirm(message);
+  };
+
   const cachePage = async (pageId: string) => {
+    const target = pages.find((p) => p.id === pageId);
+    if (!target) return;
+
+    const proceed = await confirmQuotaIfNeeded(target.videoUrls);
+    if (!proceed) {
+      return;
+    }
+
     setPages((prev) =>
       prev.map((p) => (p.id === pageId ? { ...p, isCaching: true } : p)),
     );
 
-    const page = pages.find((p) => p.id === pageId);
-    if (!page) return;
-
-    let processedCount = 0;
-    for (const url of page.videoUrls) {
-      const isCached = await isVideoCached(url);
-      if (!isCached) {
-        await cacheVideos([url]);
-      }
-      processedCount++;
-
+    try {
+      await cacheVideos(target.videoUrls, { label: target.name });
+    } finally {
       setPages((prev) =>
-        prev.map((p) =>
-          p.id === pageId
-            ? {
-                ...p,
-                cachedCount: processedCount,
-                progress: (processedCount / p.videoCount) * 100,
-              }
-            : p,
-        ),
+        prev.map((p) => (p.id === pageId ? { ...p, isCaching: false } : p)),
       );
+      await loadCacheInfo();
+      await checkCachedVideos(pagesRef.current);
     }
-
-    await loadCacheInfo();
-    // After caching, get the latest pages state and run a final check to update counts
-    setPages((currentPages) => {
-      const pagesToUpdate = currentPages.map((p) =>
-        p.id === pageId ? { ...p, isCaching: false } : p,
-      );
-      checkCachedVideos(pagesToUpdate);
-      return pagesToUpdate;
-    });
   };
 
   const cacheAllPages = async () => {
+    const snapshot = pagesRef.current;
+    const allUrls = snapshot.flatMap((p) => p.videoUrls);
+
+    const proceed = await confirmQuotaIfNeeded(allUrls);
+    if (!proceed) return;
+
     setIsCachingAll(true);
 
-    for (const page of pages) {
+    for (const page of snapshot) {
       await cachePage(page.id);
     }
 
@@ -291,12 +279,28 @@ export default function CachePage() {
     setIsClearing(true);
     await clearVideoCache();
     await loadCacheInfo();
-    await checkCachedVideos(pages);
+    await checkCachedVideos(pagesRef.current);
     setIsClearing(false);
   };
 
-  const totalVideos = pages.reduce((sum, page) => sum + page.videoCount, 0);
-  const totalCached = pages.reduce((sum, page) => sum + page.cachedCount, 0);
+  const handlePreloadFifa = async () => {
+    if (!fifaPreloadUrls.length) return;
+    const proceed = await confirmQuotaIfNeeded(fifaPreloadUrls);
+    if (!proceed) return;
+    await cacheVideos(fifaPreloadUrls, { label: 'FIFA 11+ Vorladen' });
+    await loadCacheInfo();
+    await checkCachedVideos(pagesRef.current);
+  };
+
+  const totalVideos = useMemo(
+    () => pages.reduce((sum, page) => sum + page.videoCount, 0),
+    [pages],
+  );
+  const totalCached = useMemo(
+    () => pages.reduce((sum, page) => sum + page.cachedCount, 0),
+    [pages],
+  );
+
   const overallProgress =
     totalVideos > 0 ? (totalCached / totalVideos) * 100 : 0;
 
@@ -304,6 +308,12 @@ export default function CachePage() {
     cacheStatus.estimate?.usagePercent?.toFixed(1) || 0;
   const quota = cacheStatus.estimate?.quota || 0;
   const usage = cacheStatus.estimate?.usage || 0;
+
+  const isTaskRunning = cacheProgress.status === 'running';
+  const activeTaskPercent =
+    cacheProgress.total > 0
+      ? Math.min(100, (cacheProgress.completed / cacheProgress.total) * 100)
+      : 0;
 
   if (!cacheStatus.isSupported) {
     return (
@@ -328,15 +338,22 @@ export default function CachePage() {
 
   return (
     <div className="container mx-auto max-w-4xl px-4 py-8">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="mb-2 text-3xl font-bold">Video Cache Manager</h1>
-            <p className="text-muted-foreground">
-              Verwalten Sie Ihre Offline-Videos für schnelleren Zugriff
-            </p>
-          </div>
+      <div className="mb-8 flex items-center justify-between">
+        <div>
+          <h1 className="mb-2 text-3xl font-bold">Video Cache Manager</h1>
+          <p className="text-muted-foreground">
+            Verwalten Sie Ihre Offline-Videos für schnelleren Zugriff
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setShowDebug((prev) => !prev)}
+            title="Service-Worker-Debug anzeigen"
+          >
+            <Bug className="size-5" />
+          </Button>
           {isOnline ? (
             <Wifi className="size-6 text-green-500" />
           ) : (
@@ -345,14 +362,66 @@ export default function CachePage() {
         </div>
       </div>
 
-      {/* Overall Stats */}
+      {cacheProgress.status !== 'idle' && (
+        <Card className="mb-6 border-primary/40 bg-primary/5">
+          <CardHeader className="flex flex-row items-start justify-between space-y-0">
+            <div>
+              <CardTitle className="flex items-center gap-2 text-base font-semibold">
+                {cacheProgress.label || 'Aktiver Download'}
+                <Badge variant={STATUS_BADGE_VARIANT[cacheProgress.status]}>
+                  {STATUS_LABEL[cacheProgress.status]}
+                </Badge>
+              </CardTitle>
+              <CardDescription>
+                {cacheProgress.status === 'running'
+                  ? `${cacheProgress.completed}/${cacheProgress.total} Videos`
+                  : cacheProgress.status === 'completed'
+                    ? 'Alle angeforderten Videos sind verfügbar.'
+                    : cacheProgress.status === 'aborted'
+                      ? 'Download wurde abgebrochen.'
+                      : cacheProgress.message || 'Es trat ein Fehler auf.'}
+              </CardDescription>
+            </div>
+            {cacheProgress.status === 'running' && (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => cancelActiveTask()}
+              >
+                <StopCircle className="mr-2 size-4" />
+                Abbrechen
+              </Button>
+            )}
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <Progress value={activeTaskPercent} />
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+              <span>
+                Insgesamt: {cacheProgress.total} · Erfolgreich:{' '}
+                {cacheProgress.completed} · Fehler: {cacheProgress.failed}
+              </span>
+              {cacheProgress.currentUrl && (
+                <span className="max-w-[60%] truncate">
+                  {cacheProgress.currentUrl}
+                </span>
+              )}
+            </div>
+            {cacheProgress.error && (
+              <div className="flex items-center gap-2 text-sm text-destructive">
+                <AlertTriangle className="size-4" />
+                {cacheProgress.error}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
       <Card className="mb-6">
         <CardHeader>
           <CardTitle>Gesamtübersicht</CardTitle>
           <CardDescription>Status aller verfügbaren Videos</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* Storage Usage */}
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
               <span className="flex items-center gap-2">
@@ -367,7 +436,6 @@ export default function CachePage() {
             <Progress value={Number(storageUsagePercent)} />
           </div>
 
-          {/* Cache Info */}
           <div className="bg-muted grid grid-cols-3 gap-4 rounded-lg p-4">
             <div className="space-y-1">
               <p className="text-muted-foreground text-sm">Verfügbar</p>
@@ -385,7 +453,6 @@ export default function CachePage() {
             </div>
           </div>
 
-          {/* Overall Progress */}
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
               <span>Gesamt-Fortschritt</span>
@@ -394,18 +461,36 @@ export default function CachePage() {
             <Progress value={overallProgress} />
           </div>
 
-          {/* Actions */}
           <div className="flex flex-col gap-2 sm:flex-row">
             <Button
+              onClick={handlePreloadFifa}
+              disabled={
+                !isOnline ||
+                !fifaPreloadUrls.length ||
+                isTaskRunning ||
+                cacheProgress.status === 'running'
+              }
+              variant="secondary"
+              className="flex-1"
+            >
+              <Download className="mr-2 size-4" />
+              FIFA 11+ vorladen
+            </Button>
+            <Button
               onClick={cacheAllPages}
-              disabled={isCachingAll || !isOnline}
+              disabled={
+                isCachingAll ||
+                !isOnline ||
+                isTaskRunning ||
+                cacheProgress.status === 'running'
+              }
               className="flex-1"
               variant="default"
             >
               {isCachingAll ? (
                 <>
                   <Loader2 className="mr-2 size-4 animate-spin" />
-                  Caching...
+                  Lädt...
                 </>
               ) : (
                 <>
@@ -436,152 +521,83 @@ export default function CachePage() {
         </CardContent>
       </Card>
 
-      {/* HTML Pages Cache Card */}
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <HardDrive className="size-5" />
-            App-Seiten Cache
-          </CardTitle>
-          <CardDescription>
-            Alle Seiten für Offline-Nutzung vorcachen (ohne jede Seite zu
-            besuchen)
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {/* Pages Cache Info */}
-          <div className="bg-muted grid grid-cols-2 gap-4 rounded-lg p-4">
-            <div className="space-y-1">
-              <p className="text-muted-foreground text-sm">Seiten gesamt</p>
-              <p className="text-2xl font-bold">{APP_PAGES.length}</p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-muted-foreground text-sm">Gecacht</p>
-              <p className="text-2xl font-bold">{cachedPagesCount}</p>
-            </div>
-          </div>
-
-          {/* Progress */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
-              <span>Seiten-Cache Fortschritt</span>
-              <span className="font-mono">
-                {pagesCacheProgress.toFixed(1)}%
-              </span>
-            </div>
-            <Progress value={pagesCacheProgress} />
-          </div>
-
-          {/* Cache All Pages Button */}
-          <Button
-            onClick={cacheAllAppPages}
-            disabled={isCachingPages || !isOnline}
-            className="w-full"
-            variant={
-              cachedPagesCount === APP_PAGES.length ? 'outline' : 'default'
-            }
-          >
-            {isCachingPages ? (
-              <>
-                <Loader2 className="mr-2 size-4 animate-spin" />
-                Caching Seiten... ({cachedPagesCount}/{APP_PAGES.length})
-              </>
-            ) : cachedPagesCount === APP_PAGES.length ? (
-              <>
-                <Download className="mr-2 size-4" />
-                Alle Seiten gecacht
-              </>
-            ) : (
-              <>
-                <Download className="mr-2 size-4" />
-                Alle {APP_PAGES.length} App-Seiten cachen
-              </>
-            )}
-          </Button>
-
-          {/* Page List */}
-          <details className="text-sm">
-            <summary className="text-muted-foreground hover:text-foreground cursor-pointer">
-              Seiten-Liste anzeigen ({APP_PAGES.length} Seiten)
-            </summary>
-            <div className="bg-muted mt-2 max-h-48 overflow-y-auto rounded-lg p-3">
-              <ul className="space-y-1">
-                {APP_PAGES.map((page) => (
-                  <li key={page} className="font-mono text-xs">
-                    {page}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </details>
-        </CardContent>
-      </Card>
-
-      {/* Individual Pages */}
       <div className="space-y-4">
         <h2 className="text-xl font-semibold">Nach Seite herunterladen</h2>
 
-        {pages.map((page) => (
-          <Card key={page.id}>
-            <CardHeader>
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <CardTitle className="flex items-center gap-2">
-                    {page.name}
-                    <Badge variant="secondary">{page.videoCount} Videos</Badge>
-                  </CardTitle>
-                  <CardDescription>{page.description}</CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {/* Progress */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span>
-                    {page.cachedCount} / {page.videoCount} Videos gecacht
-                  </span>
-                  <span className="font-mono">{page.progress.toFixed(1)}%</span>
-                </div>
-                <Progress value={page.progress} />
-              </div>
+        {pages.map((page) => {
+          const isActiveTask =
+            isTaskRunning && cacheProgress.label === page.name;
+          const displayedProgress = isActiveTask
+            ? activeTaskPercent
+            : page.progress;
+          const displayedCount = isActiveTask
+            ? Math.min(cacheProgress.completed, page.videoCount)
+            : page.cachedCount;
+          const disableButton =
+            !isOnline ||
+            isTaskRunning ||
+            page.isCaching ||
+            displayedCount === page.videoCount;
 
-              {/* Action Button */}
-              <Button
-                onClick={() => cachePage(page.id)}
-                disabled={
-                  page.isCaching ||
-                  !isOnline ||
-                  page.cachedCount === page.videoCount
-                }
-                className="w-full"
-                variant={
-                  page.cachedCount === page.videoCount ? 'outline' : 'default'
-                }
-              >
-                {page.isCaching ? (
-                  <>
-                    <Loader2 className="mr-2 size-4 animate-spin" />
-                    Caching... ({page.cachedCount}/{page.videoCount})
-                  </>
-                ) : page.cachedCount === page.videoCount ? (
-                  <>
-                    <Download className="mr-2 size-4" />
-                    Vollständig gecacht
-                  </>
-                ) : (
-                  <>
-                    <Download className="mr-2 size-4" />
-                    Videos herunterladen
-                  </>
-                )}
-              </Button>
-            </CardContent>
-          </Card>
-        ))}
+          return (
+            <Card key={page.id}>
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <CardTitle className="flex items-center gap-2">
+                      {page.name}
+                      <Badge variant="secondary">
+                        {page.videoCount} Videos
+                      </Badge>
+                    </CardTitle>
+                    <CardDescription>{page.description}</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span>
+                      {displayedCount} / {page.videoCount} Videos gecacht
+                    </span>
+                    <span className="font-mono">
+                      {displayedProgress.toFixed(1)}%
+                    </span>
+                  </div>
+                  <Progress value={displayedProgress} />
+                </div>
+
+                <Button
+                  onClick={() => cachePage(page.id)}
+                  disabled={disableButton}
+                  className="w-full"
+                  variant={
+                    displayedCount === page.videoCount ? 'outline' : 'default'
+                  }
+                >
+                  {page.isCaching || isActiveTask ? (
+                    <>
+                      <Loader2 className="mr-2 size-4 animate-spin" />
+                      Lädt... ({displayedCount}/{page.videoCount})
+                    </>
+                  ) : displayedCount === page.videoCount ? (
+                    <>
+                      <Download className="mr-2 size-4" />
+                      Vollständig gecacht
+                    </>
+                  ) : (
+                    <>
+                      <Download className="mr-2 size-4" />
+                      Videos herunterladen
+                    </>
+                  )}
+                </Button>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
 
-      {/* Offline Notice */}
       {!isOnline && (
         <Card className="mt-6 border-orange-500/50 bg-orange-500/10">
           <CardContent className="p-4">
@@ -594,7 +610,6 @@ export default function CachePage() {
         </Card>
       )}
 
-      {/* Service Worker Warning */}
       {!cacheStatus.isRegistered && (
         <Card className="mt-6 border-yellow-500/50 bg-yellow-500/10">
           <CardContent className="p-4">
@@ -604,6 +619,50 @@ export default function CachePage() {
             </div>
           </CardContent>
         </Card>
+      )}
+
+      {showDebug && (
+        <div className="fixed bottom-4 right-4 z-40 w-[360px] max-w-[calc(100%-2rem)]">
+          <Card className="shadow-xl">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0">
+              <CardTitle className="text-base font-semibold">
+                Service Worker Debug
+              </CardTitle>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowDebug(false)}
+              >
+                Schließen
+              </Button>
+            </CardHeader>
+            <CardContent className="max-h-64 space-y-3 overflow-y-auto text-xs">
+              {swEvents.length === 0 && (
+                <p className="text-muted-foreground">
+                  Noch keine Ereignisse empfangen.
+                </p>
+              )}
+              {swEvents.map((event) => (
+                <div
+                  key={event.id}
+                  className="rounded border border-border/60 bg-muted/40 px-3 py-2"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-medium">{event.eventName}</span>
+                    <span className="text-muted-foreground">
+                      {new Date(event.timestamp).toLocaleTimeString()}
+                    </span>
+                  </div>
+                  {event.detail && (
+                    <pre className="mt-2 whitespace-pre-wrap break-words font-mono text-[11px] text-muted-foreground">
+                      {JSON.stringify(event.detail, null, 2)}
+                    </pre>
+                  )}
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
       )}
     </div>
   );

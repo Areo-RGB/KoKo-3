@@ -5,7 +5,7 @@ import {
   formatMuscleForDisplay,
   getExerciseDataKey,
   getMuscleIdFromElement,
-} from '@/util/muscle-name-helper';
+} from '@/app/muscle-diagram/_lib/muscle-name-helper';
 import { useEffect, useRef, useState } from 'react';
 
 interface ExerciseInfo {

@@ -1,5 +1,7 @@
 'use client';
 
+// Internal tooltip primitives; public consumers should import via components/animate-ui/components/animate.
+
 import {
   autoUpdate,
   flip,
