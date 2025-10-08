@@ -90,3 +90,8 @@ public/assets/images/spieler-avatars
 docs/OFFLINE-PWA-GUIDE.md
 docs/OFFLINE-SUMMARY.md
 docs/OFFLINE-TESTING.md
+
+/.claude
+/.cursor
+/.serena
+/.workflows
