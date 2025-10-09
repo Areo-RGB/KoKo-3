@@ -202,8 +202,7 @@ const cacheVideoBatch = async ({ taskId, urls, label }) => {
           status: 200,
           statusText: 'OK',
           headers: {
-            'Content-Type':
-              response.headers.get('Content-Type') || 'video/mp4',
+            'Content-Type': response.headers.get('Content-Type') || 'video/mp4',
             'Content-Length': blob.size.toString(),
             'Cache-Control': 'public, max-age=31536000',
           },
@@ -542,14 +541,19 @@ self.addEventListener('install', (event) => {
           try {
             await pagesCache.add(page);
           } catch (error) {
-            await recordEvent('install-cache-miss', { page, message: error.message });
+            await recordEvent('install-cache-miss', {
+              page,
+              message: error.message,
+            });
           }
         }
 
         try {
           await offlineCache.addAll([OFFLINE_URL, '/manifest.json']);
         } catch (error) {
-          await recordEvent('install-offline-cache-miss', { message: error.message });
+          await recordEvent('install-offline-cache-miss', {
+            message: error.message,
+          });
         }
 
         for (const asset of staticAssets) {
@@ -698,7 +702,8 @@ self.addEventListener('message', (event) => {
 
   if (data.type === 'CACHE_VIDEO_URLS') {
     const taskId =
-      data.taskId || `cache-${Date.now()}-${Math.random().toString(16).slice(2, 6)}`;
+      data.taskId ||
+      `cache-${Date.now()}-${Math.random().toString(16).slice(2, 6)}`;
     event.waitUntil(
       (async () => {
         const summary = await cacheVideoBatch({
@@ -799,6 +804,4 @@ self.addEventListener('message', (event) => {
   }
 });
 
-console.log(
-  `🎥 Custom Service Worker loaded (cache version ${CACHE_VERSION})`,
-);
+console.log(`🎥 Custom Service Worker loaded (cache version ${CACHE_VERSION})`);

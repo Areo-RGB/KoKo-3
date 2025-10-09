@@ -2,6 +2,7 @@
 
 import ExerciseFullscreenOverlay from '@/app/muscle-diagram/_components/exercise-fullscreen-overlay';
 import InteractiveMuscleSVG from '@/app/muscle-diagram/_components/interactive-muscle-svg';
+import { muscleToExerciseDataMap } from '@/app/muscle-diagram/_lib/muscle-name-helper';
 import { Button } from '@/components/ui/button';
 import {
   Carousel,
@@ -10,7 +11,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { muscleToExerciseDataMap } from '@/app/muscle-diagram/_lib/muscle-name-helper';
 import { useState } from 'react';
 
 interface ExerciseInfo {

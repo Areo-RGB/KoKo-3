@@ -101,16 +101,12 @@ export const useVideoCache = () => {
     isRegistered: false,
   });
   const [cachedVideos, setCachedVideos] = useState<VideoCache[]>([]);
-  const [cacheProgress, setCacheProgress] = useState<CacheTaskProgress>(
-    loadStoredProgress,
-  );
+  const [cacheProgress, setCacheProgress] =
+    useState<CacheTaskProgress>(loadStoredProgress);
   const [swEvents, setSwEvents] = useState<ServiceWorkerEvent[]>([]);
 
   const pendingTasksRef = useRef<
-    Map<
-      string,
-      (result: CacheTaskProgress) => void
-    >
+    Map<string, (result: CacheTaskProgress) => void>
   >(new Map());
 
   const persistProgress = useCallback((progress: CacheTaskProgress) => {
@@ -119,7 +115,11 @@ export const useVideoCache = () => {
   }, []);
 
   const updateProgress = useCallback(
-    (updater: CacheTaskProgress | ((prev: CacheTaskProgress) => CacheTaskProgress)) => {
+    (
+      updater:
+        | CacheTaskProgress
+        | ((prev: CacheTaskProgress) => CacheTaskProgress),
+    ) => {
       setCacheProgress((prev) => {
         const next =
           typeof updater === 'function'
@@ -254,9 +254,7 @@ export const useVideoCache = () => {
       }
 
       if (type === 'SW_EVENT_LOG' && Array.isArray(payload)) {
-        setSwEvents(
-          (payload as ServiceWorkerEvent[]).slice(0, MAX_SW_EVENTS),
-        );
+        setSwEvents((payload as ServiceWorkerEvent[]).slice(0, MAX_SW_EVENTS));
       }
 
       if (type === 'SW_TOAST') {
@@ -417,16 +415,19 @@ export const useVideoCache = () => {
 
       return await new Promise<{ success: number; failed: number }>(
         (resolve) => {
-          const timeoutId = window.setTimeout(() => {
-            pendingTasksRef.current.delete(taskId);
-            updateProgress((prev) => ({
-              ...prev,
-              status: 'error',
-              message: 'Zeitüberschreitung beim Video-Download.',
-              finishedAt: Date.now(),
-            }));
-            resolve({ success: 0, failed: normalizedUrls.length });
-          }, 1000 * 60 * 5);
+          const timeoutId = window.setTimeout(
+            () => {
+              pendingTasksRef.current.delete(taskId);
+              updateProgress((prev) => ({
+                ...prev,
+                status: 'error',
+                message: 'Zeitüberschreitung beim Video-Download.',
+                finishedAt: Date.now(),
+              }));
+              resolve({ success: 0, failed: normalizedUrls.length });
+            },
+            1000 * 60 * 5,
+          );
 
           pendingTasksRef.current.set(taskId, (result) => {
             window.clearTimeout(timeoutId);
@@ -449,7 +450,13 @@ export const useVideoCache = () => {
         },
       );
     },
-    [cacheStatus.isSupported, postToServiceWorker, refreshCacheStatus, updateCachedVideosList, updateProgress],
+    [
+      cacheStatus.isSupported,
+      postToServiceWorker,
+      refreshCacheStatus,
+      updateCachedVideosList,
+      updateProgress,
+    ],
   );
 
   const cacheVideo = useCallback(
@@ -517,7 +524,12 @@ export const useVideoCache = () => {
       console.error('Failed to clear video cache:', error);
       return false;
     }
-  }, [cacheStatus.isSupported, refreshCacheStatus, updateCachedVideosList, updateProgress]);
+  }, [
+    cacheStatus.isSupported,
+    refreshCacheStatus,
+    updateCachedVideosList,
+    updateProgress,
+  ]);
 
   const getCacheInfo = useCallback(async (): Promise<{
     size: number;
@@ -620,8 +632,7 @@ export const useVideoCache = () => {
       }
 
       const estimate = await navigator.storage.estimate();
-      const available =
-        (estimate.quota || 0) - (estimate.usage || 0);
+      const available = (estimate.quota || 0) - (estimate.usage || 0);
 
       const { total, unknown } = await estimateRemoteSizes(urls);
 

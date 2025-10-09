@@ -18,6 +18,14 @@ export const TABS: readonly TabConfig[] = [
     variant: 'blue',
   },
   {
+    key: 'heatmap',
+    title: 'Heatmap',
+    valueKey: 'combined',
+    unit: 'Score',
+    description: 'Kombinierte Leistungsübersicht: Yo-Yo IR1 & Jonglieren',
+    variant: 'blue',
+  },
+  {
     key: 'fortschritt',
     title: 'Fortschritt',
     valueKey: 'level',

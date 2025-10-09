@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useState } from 'react';
 import ChartDataTable from './_components/chart-data-table';
 import FortschrittTimeline from './_components/fortschritt-timeline';
+import PerformanceHeatmap from './_components/performance-heatmap';
 import VerticalBarChart from './_components/vertical-bar-chart';
 import { TABS } from './_lib/config';
 import { sortDescending } from './_lib/utils';
@@ -32,7 +33,7 @@ export default function PerformanceChartsPage() {
       </div>
 
       <Tabs value={tab} onValueChange={(value) => setTab(value as typeof tab)}>
-        <TabsList className="grid w-full grid-cols-3 md:w-fit">
+        <TabsList className="grid w-full grid-cols-4 md:w-fit">
           {TABS.map((item) => (
             <TabsTrigger key={item.key} value={item.key} className="px-6 py-2">
               {item.title}
@@ -46,6 +47,91 @@ export default function PerformanceChartsPage() {
             return (
               <TabsContent key={item.key} value={item.key} className="mt-6">
                 <FortschrittTimeline />
+              </TabsContent>
+            );
+          }
+
+          // Special handling for heatmap tab
+          if (item.key === 'heatmap') {
+            const yoyoData = performanceData.yoyoIr1 || [];
+            const jonglierenData = performanceData.jonglieren || [];
+
+            // Merge data for players who have both scores
+            const heatmapData = yoyoData
+              .map((yoyoEntry) => {
+                const jonglierenEntry = jonglierenData.find(
+                  (j) => j.name === yoyoEntry.name,
+                );
+                if (!jonglierenEntry) return null;
+
+                return {
+                  name: yoyoEntry.name,
+                  yoyo: yoyoEntry.value,
+                  jonglieren: jonglierenEntry.value,
+                };
+              })
+              .filter((entry): entry is NonNullable<typeof entry> => !!entry);
+
+            if (heatmapData.length === 0) {
+              return (
+                <TabsContent key={item.key} value={item.key} className="mt-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{item.title}</CardTitle>
+                      <CardDescription>{item.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground text-sm">
+                        Aktuell liegen nicht genügend Daten für diese Auswertung
+                        vor. Spieler benötigen sowohl Yo-Yo IR1- als auch
+                        Jonglier-Ergebnisse.
+                      </p>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              );
+            }
+
+            return (
+              <TabsContent key={item.key} value={item.key} className="mt-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{item.title}</CardTitle>
+                    <CardDescription>{item.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <PerformanceHeatmap data={heatmapData} />
+                    <div className="text-muted-foreground mt-6 space-y-3 text-sm">
+                      <p className="font-semibold">
+                        Wie wird der Gesamtwert berechnet?
+                      </p>
+                      <p>
+                        Jede Metrik wird normalisiert (0-100%), dann wird der
+                        Durchschnitt beider Werte gebildet:
+                      </p>
+                      <ul className="ml-4 list-disc space-y-1">
+                        <li>
+                          <strong>Yo-Yo IR1:</strong> Ausdauer/Fitness (max:{' '}
+                          {Math.max(...heatmapData.map((d) => d.yoyo))}m)
+                        </li>
+                        <li>
+                          <strong>Jonglieren:</strong> Technische Fähigkeiten
+                          (max:{' '}
+                          {Math.max(...heatmapData.map((d) => d.jonglieren))}{' '}
+                          Wdh.)
+                        </li>
+                        <li>
+                          <strong>Gesamtwert:</strong> (Normalisiertes Yo-Yo +
+                          Normalisiertes Jonglieren) ÷ 2
+                        </li>
+                      </ul>
+                      <p className="pt-2">
+                        <strong>Farbcodierung:</strong> 🟢 Grün ≥75% | 🟡 Gelb
+                        50-74% | 🟠 Orange 25-49% | 🔴 Rot &lt;25%
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
               </TabsContent>
             );
           }

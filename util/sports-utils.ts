@@ -55,10 +55,7 @@ function isScoreExcluded(score: string): boolean {
  * Calculate percent rank for a given rank and total participants
  * Formula: ((rank - 1) / (totalParticipants - 1)) * 100
  */
-function calculatePercentRank(
-  rank: number,
-  totalParticipants: number,
-): number {
+function calculatePercentRank(rank: number, totalParticipants: number): number {
   if (totalParticipants <= 1) return 0;
   return ((rank - 1) / (totalParticipants - 1)) * 100;
 }
@@ -94,9 +91,7 @@ export function hasVideo(
 /**
  * Detect scoring type based on score format
  */
-function detectScoreType(
-  score: string,
-): 'lower-better' | 'higher-better' {
+function detectScoreType(score: string): 'lower-better' | 'higher-better' {
   if (score.endsWith('s')) {
     // Time scores: lower is better
     return 'lower-better';

@@ -52,14 +52,16 @@ const STATUS_LABEL: Record<string, string> = {
   aborted: 'Abgebrochen',
 };
 
-const STATUS_BADGE_VARIANT: Record<string, 'default' | 'secondary' | 'destructive' | 'outline'> =
-  {
-    idle: 'outline',
-    running: 'default',
-    completed: 'secondary',
-    error: 'destructive',
-    aborted: 'destructive',
-  };
+const STATUS_BADGE_VARIANT: Record<
+  string,
+  'default' | 'secondary' | 'destructive' | 'outline'
+> = {
+  idle: 'outline',
+  running: 'default',
+  completed: 'secondary',
+  error: 'destructive',
+  aborted: 'destructive',
+};
 
 export default function CachePage() {
   const {
@@ -143,9 +145,7 @@ export default function CachePage() {
       ];
 
       setPages(pagesData);
-      setFifaPreloadUrls(
-        Array.from(new Set([...fifa11Original, ...fifa11WS])),
-      );
+      setFifaPreloadUrls(Array.from(new Set([...fifa11Original, ...fifa11WS])));
       checkCachedVideos(pagesData);
     };
 
@@ -226,8 +226,7 @@ export default function CachePage() {
       `Quota-Auslastung: ${quotaCheck.quotaPercent.toFixed(1)}%`;
 
     if (quotaCheck.unknownUrls.length > 0) {
-      message +=
-        `\n\nFür ${quotaCheck.unknownUrls.length} Videos konnte die Größe nicht ermittelt werden.`;
+      message += `\n\nFür ${quotaCheck.unknownUrls.length} Videos konnte die Größe nicht ermittelt werden.`;
     }
 
     message += `\n\nTrotzdem fortfahren? Cache könnte unvollständig sein.`;
@@ -363,7 +362,7 @@ export default function CachePage() {
       </div>
 
       {cacheProgress.status !== 'idle' && (
-        <Card className="mb-6 border-primary/40 bg-primary/5">
+        <Card className="border-primary/40 bg-primary/5 mb-6">
           <CardHeader className="flex flex-row items-start justify-between space-y-0">
             <div>
               <CardTitle className="flex items-center gap-2 text-base font-semibold">
@@ -395,7 +394,7 @@ export default function CachePage() {
           </CardHeader>
           <CardContent className="space-y-3">
             <Progress value={activeTaskPercent} />
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+            <div className="text-muted-foreground flex flex-wrap items-center justify-between gap-2 text-xs">
               <span>
                 Insgesamt: {cacheProgress.total} · Erfolgreich:{' '}
                 {cacheProgress.completed} · Fehler: {cacheProgress.failed}
@@ -407,7 +406,7 @@ export default function CachePage() {
               )}
             </div>
             {cacheProgress.error && (
-              <div className="flex items-center gap-2 text-sm text-destructive">
+              <div className="text-destructive flex items-center gap-2 text-sm">
                 <AlertTriangle className="size-4" />
                 {cacheProgress.error}
               </div>
@@ -622,7 +621,7 @@ export default function CachePage() {
       )}
 
       {showDebug && (
-        <div className="fixed bottom-4 right-4 z-40 w-[360px] max-w-[calc(100%-2rem)]">
+        <div className="fixed right-4 bottom-4 z-40 w-[360px] max-w-[calc(100%-2rem)]">
           <Card className="shadow-xl">
             <CardHeader className="flex flex-row items-center justify-between space-y-0">
               <CardTitle className="text-base font-semibold">
@@ -645,7 +644,7 @@ export default function CachePage() {
               {swEvents.map((event) => (
                 <div
                   key={event.id}
-                  className="rounded border border-border/60 bg-muted/40 px-3 py-2"
+                  className="border-border/60 bg-muted/40 rounded border px-3 py-2"
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-medium">{event.eventName}</span>
@@ -654,7 +653,7 @@ export default function CachePage() {
                     </span>
                   </div>
                   {event.detail && (
-                    <pre className="mt-2 whitespace-pre-wrap break-words font-mono text-[11px] text-muted-foreground">
+                    <pre className="text-muted-foreground mt-2 font-mono text-[11px] break-words whitespace-pre-wrap">
                       {JSON.stringify(event.detail, null, 2)}
                     </pre>
                   )}

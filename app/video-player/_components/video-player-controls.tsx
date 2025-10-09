@@ -1,8 +1,8 @@
 'use client';
 
+import { VideoChapter } from '@/app/video-player/_lib/video-data';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
-import { VideoChapter } from '@/app/video-player/_lib/video-data';
 import { cn } from '@/util/utils';
 import {
   Gauge,
