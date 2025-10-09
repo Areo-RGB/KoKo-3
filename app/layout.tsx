@@ -42,7 +42,7 @@ export const metadata: Metadata = {
         type: 'image/png',
         sizes: '16x16',
       },
-      { rel: 'icon', url: '/assets/icons/favicon.ico' },
+      { rel: 'icon', url: '/favicon.ico' },
     ],
     apple: [
       {
@@ -83,7 +83,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="de" suppressHydrationWarning>
       <head>
         {/* Favicon */}
-        <link rel="icon" href="/assets/icons/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
         <link
           rel="icon"
           type="image/png"
