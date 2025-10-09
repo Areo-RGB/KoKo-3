@@ -1,11 +1,4 @@
-Of course. I've combined the relevant information from `AGENTS.md` and `.github/copilot-instructions.md` into a single, comprehensive guide for AI assistants. The file `GEMINI.md` was for a different project, so its contents were not included.
-
-This new file, `.github/copilot-instructions.md`, is now the single source of truth. The other two files can be deleted.
-
-Here is the updated and consolidated guide:
-
-```markdown
-// .github/copilot-instructions.md
+// AGENTS.md
 # QuoVadis Sports Training - AI Agent Guide
 
 Next.js 15 PWA for offline-capable sports training with video content management, built for German youth soccer programs.
@@ -236,4 +229,3 @@ Everything else is handled by TypeScript strict mode + Prettier auto-formatting.
 ---
 
 **Remember**: Format (`pnpm format`) → Lint (`pnpm lint`) → Build (`pnpm build`) before committing.
-```

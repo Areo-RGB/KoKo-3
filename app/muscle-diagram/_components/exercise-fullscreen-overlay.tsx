@@ -2,7 +2,7 @@
 
 import { loadMuscleData } from '@/app/muscle-diagram/_lib/exercise-data-loader';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/util/utils';
+import { cn } from '@/lib/utils';
 import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 

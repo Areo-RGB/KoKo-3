@@ -2,7 +2,6 @@
 
 import { FullscreenToggle } from '@/components/layout/fullscreen-toggle';
 import MainLayout from '@/components/layout/main-layout';
-import { MobileFooterNav } from '@/components/layout/mobile-footer-nav';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 import { TimerOverlay, TimerToggle } from '@/components/timer';
@@ -62,6 +61,24 @@ export default function ClientAppShell({ children }: Props) {
 
   if (!mounted) return null;
 
+  const header = (
+    <header
+      className="bg-background sticky top-0 z-30 flex min-h-[4rem] items-center justify-between border-b pr-4 pb-3 pl-0"
+      style={{
+        paddingTop: 'max(env(safe-area-inset-top, 0px), 0.75rem)',
+      }}
+    >
+      <div className="flex items-center gap-2">
+        <SidebarTrigger className="ml-2" />
+      </div>
+      <div className="flex items-center gap-2">
+        <TimerToggle onClick={() => setIsTimerOpen(true)} />
+        <FullscreenToggle />
+        <ThemeToggle />
+      </div>
+    </header>
+  );
+
   return (
     <ThemeProvider
       attribute="class"
@@ -69,31 +86,8 @@ export default function ClientAppShell({ children }: Props) {
       enableSystem
       disableTransitionOnChange
     >
-      <MainLayout>
-        <div className="flex min-h-[100svh] w-full overflow-x-hidden">
-          <div className="min-w-0 flex-1">
-            <header
-              className="flex min-h-[4rem] items-center justify-between border-b pr-4 pb-3 pl-0"
-              style={{
-                paddingTop: 'max(env(safe-area-inset-top, 0px), 0.75rem)',
-              }}
-            >
-              <div className="flex items-center gap-2">
-                <SidebarTrigger className="ml-2" />
-              </div>
-              <div className="flex items-center gap-2">
-                <TimerToggle onClick={() => setIsTimerOpen(true)} />
-                <FullscreenToggle />
-                <ThemeToggle />
-              </div>
-            </header>
-            {children}
-          </div>
-        </div>
-      </MainLayout>
+      <MainLayout header={header}>{children}</MainLayout>
       <Toaster />
-      {/* Mobile footer navigation */}
-      <MobileFooterNav />
       {/* Timer overlay */}
       <TimerOverlay
         isOpen={isTimerOpen}

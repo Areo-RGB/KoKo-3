@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { cn } from '@/util/utils';
+import { cn } from '@/lib/utils';
 
 type RankingMap = Record<string, number>;
 

@@ -42,7 +42,3 @@ export const sportsData: SportData[] = TESTS.map((t) => ({
     })
     .filter(Boolean) as any,
 }));
-
-export const participants = Array.from(
-  new Set((unified.players as any[]).map((p) => p.name)),
-).sort();

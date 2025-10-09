@@ -3,7 +3,7 @@
 import { VideoChapter } from '@/app/video-player/_lib/video-data';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
-import { cn } from '@/util/utils';
+import { cn } from '@/lib/utils';
 import {
   Gauge,
   List,

@@ -4,7 +4,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { cn } from '@/util/utils';
+import { cn } from '@/lib/utils';
 import { ChevronUp, Grid3X3, List, X } from 'lucide-react';
 import { useState } from 'react';
 import { PlaylistItem } from '../_lib/video-data';

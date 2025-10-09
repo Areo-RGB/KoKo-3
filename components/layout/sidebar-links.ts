@@ -5,10 +5,12 @@ import {
   Dumbbell,
   GraduationCap,
   Home,
+  LayoutDashboard,
   PlayCircle,
   Target,
   Timer,
   Trophy,
+  WifiOff,
 } from 'lucide-react';
 
 type SidebarLink = {
@@ -31,6 +33,13 @@ const navigationLinks: SidebarLink[] = [
     url: '/',
     icon: Home,
     mobileLabel: 'Home',
+    showOnMobile: true,
+  },
+  {
+    title: 'Dashboard',
+    url: '/dashboard',
+    icon: LayoutDashboard,
+    mobileLabel: 'Dashboard',
     showOnMobile: true,
   },
 ];
@@ -61,6 +70,13 @@ const toolsLinks: SidebarLink[] = [
     url: '/cache',
     icon: Download,
     mobileLabel: 'Cache',
+    showOnMobile: false,
+  },
+  {
+    title: 'Offline Modus',
+    url: '/offline',
+    icon: WifiOff,
+    mobileLabel: 'Offline',
     showOnMobile: false,
   },
 ];
