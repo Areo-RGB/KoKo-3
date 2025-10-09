@@ -63,7 +63,7 @@ export default function ClientAppShell({ children }: Props) {
 
   const header = (
     <header
-      className="bg-background sticky top-0 z-30 flex min-h-[4rem] items-center justify-between border-b pr-4 pb-3 pl-0"
+      className="bg-background sticky top-0 z-40 flex min-h-[4rem] shrink-0 items-center justify-between border-b pr-4 pb-3 pl-0"
       style={{
         paddingTop: 'max(env(safe-area-inset-top, 0px), 0.75rem)',
       }}

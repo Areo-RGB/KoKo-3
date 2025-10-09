@@ -15,13 +15,11 @@ export default function MainLayout({ children, header }: MainLayoutProps) {
 
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="flex min-h-[100svh] w-full overflow-x-hidden">
+      <div className="flex min-h-[100svh] w-full">
         <AppSidebar />
-        <SidebarInset className="min-w-0">
-          <div className="bg-background flex w-full min-w-0 flex-1 flex-col">
-            {header}
-            <main className="w-full flex-1 overflow-auto">{children}</main>
-          </div>
+        <SidebarInset className="flex min-w-0 flex-col">
+          {header}
+          <main className="bg-background w-full flex-1">{children}</main>
         </SidebarInset>
       </div>
     </SidebarProvider>
