@@ -2,7 +2,13 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-export type CacheBucketKind = 'media' | 'pages' | 'static' | 'data' | 'images' | 'fallback';
+export type CacheBucketKind =
+  | 'media'
+  | 'pages'
+  | 'static'
+  | 'data'
+  | 'images'
+  | 'fallback';
 
 export interface CacheBucketSummary {
   cacheName: string;
@@ -17,7 +23,12 @@ export interface CacheSummary {
   caches: CacheBucketSummary[];
 }
 
-export type PrefetchStatus = 'idle' | 'running' | 'completed' | 'error' | 'aborted';
+export type PrefetchStatus =
+  | 'idle'
+  | 'running'
+  | 'completed'
+  | 'error'
+  | 'aborted';
 
 export interface PrefetchProgress {
   taskId: string | null;
@@ -58,13 +69,17 @@ const MESSAGE_TYPES = {
 } as const;
 
 const isServiceWorkerSupported = () =>
-  typeof window !== 'undefined' && 'serviceWorker' in navigator && 'caches' in window;
+  typeof window !== 'undefined' &&
+  'serviceWorker' in navigator &&
+  'caches' in window;
 
 export const useVideoCache = () => {
   const [isSupported, setIsSupported] = useState(false);
-  const [registration, setRegistration] = useState<ServiceWorkerRegistration | null>(null);
+  const [registration, setRegistration] =
+    useState<ServiceWorkerRegistration | null>(null);
   const [summary, setSummary] = useState<CacheSummary | null>(null);
-  const [storageSnapshot, setStorageSnapshot] = useState<StorageSnapshot | null>(null);
+  const [storageSnapshot, setStorageSnapshot] =
+    useState<StorageSnapshot | null>(null);
   const [progress, setProgress] = useState<PrefetchProgress>(DEFAULT_PROGRESS);
 
   const latestTaskId = useRef<string | null>(null);
@@ -83,10 +98,16 @@ export const useVideoCache = () => {
 
   const captureStorageSnapshot = useCallback(async () => {
     if (!isSupported) return;
-    if ('storage' in navigator && typeof navigator.storage?.estimate === 'function') {
+    if (
+      'storage' in navigator &&
+      typeof navigator.storage?.estimate === 'function'
+    ) {
       try {
         const estimate = await navigator.storage.estimate();
-        setStorageSnapshot({ quota: estimate.quota ?? undefined, usage: estimate.usage ?? undefined });
+        setStorageSnapshot({
+          quota: estimate.quota ?? undefined,
+          usage: estimate.usage ?? undefined,
+        });
       } catch (error) {
         // ignore storage estimate issues
       }
@@ -128,7 +149,11 @@ export const useVideoCache = () => {
         case MESSAGE_TYPES.prefetchUpdate: {
           if (!payload) return;
           const taskId = payload.taskId ?? null;
-          if (latestTaskId.current && taskId && latestTaskId.current !== taskId) {
+          if (
+            latestTaskId.current &&
+            taskId &&
+            latestTaskId.current !== taskId
+          ) {
             return;
           }
           latestTaskId.current = taskId;
@@ -211,7 +236,10 @@ export const useVideoCache = () => {
   const formatBytes = useCallback((bytes?: number | null) => {
     if (!bytes || bytes <= 0) return '0 B';
     const units = ['B', 'KB', 'MB', 'GB', 'TB'];
-    const exponent = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+    const exponent = Math.min(
+      Math.floor(Math.log(bytes) / Math.log(1024)),
+      units.length - 1,
+    );
     const value = bytes / Math.pow(1024, exponent);
     return `${value.toFixed(value >= 10 ? 0 : 1)} ${units[exponent]}`;
   }, []);

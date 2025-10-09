@@ -1,7 +1,7 @@
 'use client';
 
-import { deriveThumbnailFromVideoUrl } from '@/util/thumbnail-utils';
 import { cn } from '@/lib/utils';
+import { deriveThumbnailFromVideoUrl } from '@/util/thumbnail-utils';
 import { Clock, Pause, Play } from 'lucide-react';
 import React, { memo } from 'react';
 import { PlaylistItem } from '../_lib/video-data';

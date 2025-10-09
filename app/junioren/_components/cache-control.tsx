@@ -32,7 +32,7 @@ import {
   WifiOff,
   XCircle,
 } from 'lucide-react';
-import React, { useEffect, useMemo, useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 interface CacheControlProps {
   selectedAgeGroup: string | null;
@@ -131,14 +131,17 @@ export function CacheControl({
   const [showDetails, setShowDetails] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const updateCacheStatus = useCallback(async (ageGroup: string) => {
-    try {
-      const status = await getCacheStatus(ageGroup);
-      setCacheStatus(status);
-    } catch (err) {
-      console.error('Failed to get cache status:', err);
-    }
-  }, [getCacheStatus]);
+  const updateCacheStatus = useCallback(
+    async (ageGroup: string) => {
+      try {
+        const status = await getCacheStatus(ageGroup);
+        setCacheStatus(status);
+      } catch (err) {
+        console.error('Failed to get cache status:', err);
+      }
+    },
+    [getCacheStatus],
+  );
 
   useEffect(() => {
     if (selectedAgeGroup && isInitialized) {

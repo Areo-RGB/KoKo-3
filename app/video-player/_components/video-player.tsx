@@ -2,8 +2,9 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { useCachedVideo } from '@/hooks/use-cached-video';
 import { cn } from '@/lib/utils';
-import { X } from 'lucide-react';
+import { Loader2, X } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   PlaylistItem,
@@ -59,10 +60,18 @@ export default function VideoPlayer({
   const currentVideo = currentItem ? getVideoById(currentItem.videoId) : null;
   const videoUrl = currentItem?.videoUrl || currentVideo?.videoUrl || '';
 
+  // Load video through Service Worker cache
+  const {
+    blobUrl,
+    isLoading: isVideoLoading,
+    error: videoError,
+    isCached,
+  } = useCachedVideo(videoUrl);
+
   // --- EFFECT FOR MANAGING PLAYBACK ---
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !videoUrl) return;
+    if (!video || !blobUrl) return;
 
     // Do not autoplay when the player first opens.
     if (isInitialMount.current) {
@@ -83,7 +92,7 @@ export default function VideoPlayer({
     return () => {
       video.removeEventListener('canplay', handleCanPlay);
     };
-  }, [currentVideoIndex, videoUrl]); // Re-run when the video changes
+  }, [currentVideoIndex, blobUrl]); // Re-run when the video changes
 
   // Auto-hide controls
   const resetControlsTimeout = useCallback(() => {
@@ -197,7 +206,7 @@ export default function VideoPlayer({
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       e.preventDefault();
-      
+
       // Spacebar: Toggle play/pause
       if (e.code === 'Space') {
         handlePlayPause();
@@ -217,13 +226,19 @@ export default function VideoPlayer({
       // Arrow Left: Seek backward
       else if (e.code === 'ArrowLeft') {
         if (videoRef.current) {
-          videoRef.current.currentTime = Math.max(videoRef.current.currentTime - 10, 0);
+          videoRef.current.currentTime = Math.max(
+            videoRef.current.currentTime - 10,
+            0,
+          );
         }
       }
       // Arrow Right: Seek forward
       else if (e.code === 'ArrowRight') {
         if (videoRef.current) {
-          videoRef.current.currentTime = Math.min(videoRef.current.currentTime + 10, videoRef.current.duration);
+          videoRef.current.currentTime = Math.min(
+            videoRef.current.currentTime + 10,
+            videoRef.current.duration,
+          );
         }
       }
       // F key: Toggle fullscreen
@@ -238,11 +253,19 @@ export default function VideoPlayer({
       else if (e.code.startsWith('Digit') && !e.shiftKey) {
         const digit = parseInt(e.code.replace('Digit', ''));
         if (!isNaN(digit) && videoRef.current) {
-          videoRef.current.currentTime = (digit / 10) * videoRef.current.duration;
+          videoRef.current.currentTime =
+            (digit / 10) * videoRef.current.duration;
         }
       }
     },
-    [isFullscreen, volume, onClose, handlePlayPause, handleVolumeChange, handleToggleMute],
+    [
+      isFullscreen,
+      volume,
+      onClose,
+      handlePlayPause,
+      handleVolumeChange,
+      handleToggleMute,
+    ],
   );
 
   useEffect(() => {
@@ -272,6 +295,25 @@ export default function VideoPlayer({
           <p className="text-gray-400">
             Bitte wählen Sie ein Video aus der Wiedergabeliste.
           </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (videoError) {
+    return (
+      <div className="flex h-full items-center justify-center bg-black text-white">
+        <div className="text-center">
+          <h2 className="mb-2 text-xl font-bold text-red-500">
+            Fehler beim Laden
+          </h2>
+          <p className="mb-4 text-gray-400">{videoError}</p>
+          {onClose && (
+            <Button onClick={onClose} variant="outline">
+              Schließen
+            </Button>
+          )}
         </div>
       </div>
     );
@@ -316,10 +358,19 @@ export default function VideoPlayer({
             isFullscreen ? 'h-full' : 'aspect-video',
           )}
         >
+          {/* Loading overlay */}
+          {isVideoLoading && (
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80">
+              <Loader2 className="mb-4 h-12 w-12 animate-spin text-white" />
+              <p className="text-sm text-white">
+                {isCached ? 'Lade aus Cache...' : 'Lade Video...'}
+              </p>
+            </div>
+          )}
           <video
             ref={videoRef}
-            key={videoUrl}
-            src={videoUrl}
+            key={blobUrl}
+            src={blobUrl || ''}
             onTimeUpdate={handleTimeUpdate}
             onLoadedMetadata={handleLoadedMetadata}
             onEnded={handleVideoEnd}

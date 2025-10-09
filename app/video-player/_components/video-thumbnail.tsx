@@ -1,7 +1,7 @@
 'use client';
 
-import { isImageUrl, pickBestThumbnail } from '@/util/thumbnail-utils';
 import { cn } from '@/lib/utils';
+import { isImageUrl, pickBestThumbnail } from '@/util/thumbnail-utils';
 import { generateRandomFrameThumbnail } from '@/util/video-frame-thumbnail';
 import { Play } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';

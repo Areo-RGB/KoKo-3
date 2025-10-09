@@ -1,10 +1,14 @@
 // Modernized Service Worker for QuoVadis Sports Training
 // Implements updated caching strategies with Workbox 7 for resilient offline support
 
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/7.3.0/workbox-sw.js');
+importScripts(
+  'https://storage.googleapis.com/workbox-cdn/releases/7.3.0/workbox-sw.js',
+);
 
 if (!self.workbox) {
-  console.warn('Workbox konnte nicht geladen werden. Offline-Funktionen eingeschränkt.');
+  console.warn(
+    'Workbox konnte nicht geladen werden. Offline-Funktionen eingeschränkt.',
+  );
 }
 
 const {
@@ -96,11 +100,17 @@ const navigationStrategy = NetworkFirst
   : null;
 
 if (registerRoute && navigationStrategy) {
-  registerRoute(({ request }) => request.mode === 'navigate', navigationStrategy);
+  registerRoute(
+    ({ request }) => request.mode === 'navigate',
+    navigationStrategy,
+  );
 }
 
 if (warmStrategyCache && navigationStrategy) {
-  warmStrategyCache({ urls: PREFETCHABLE_ROUTES, strategy: navigationStrategy });
+  warmStrategyCache({
+    urls: PREFETCHABLE_ROUTES,
+    strategy: navigationStrategy,
+  });
 }
 
 if (offlineFallback) {
@@ -231,9 +241,15 @@ self.addEventListener('activate', (event) => {
         }),
       );
 
-      const clients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      const clients = await self.clients.matchAll({
+        type: 'window',
+        includeUncontrolled: true,
+      });
       for (const client of clients) {
-        client.postMessage({ type: 'CACHE_VERSION', payload: { version: APP_VERSION } });
+        client.postMessage({
+          type: 'CACHE_VERSION',
+          payload: { version: APP_VERSION },
+        });
       }
     })(),
   );
@@ -464,7 +480,8 @@ self.addEventListener('message', (event) => {
     }
     case 'PREFETCH_VIDEOS': {
       const taskId =
-        data.taskId || `prefetch-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+        data.taskId ||
+        `prefetch-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
       const payload = {
         taskId,
         urls: Array.isArray(data.urls) ? data.urls : [],

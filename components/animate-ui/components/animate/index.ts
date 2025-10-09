@@ -1,4 +1,1 @@
-export {
-  AvatarGroup,
-  AvatarGroupTooltip,
-} from './avatar-group';
+export { AvatarGroup, AvatarGroupTooltip } from './avatar-group';

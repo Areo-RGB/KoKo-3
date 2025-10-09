@@ -1,17 +1,25 @@
 'use client';
 
-import { useMemo, useState } from 'react';
 import {
   AlertTriangle,
   CheckCircle2,
   Download,
+  ExternalLink,
   HardDrive,
   PauseCircle,
   RefreshCw,
   Trash2,
   XCircle,
 } from 'lucide-react';
+import { useMemo, useState } from 'react';
 
+import {
+  MAIN_VIDEO_URL,
+  PLAYLIST,
+  WS_PLAYLIST,
+  WS_VIDEO_URL,
+} from '@/app/fifa-11-plus/_lib/data';
+import { hierarchicalVideoData } from '@/app/video-player/_lib/video-data';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -31,13 +39,6 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useVideoCache } from '@/hooks/use-video-cache';
-import {
-  MAIN_VIDEO_URL,
-  PLAYLIST,
-  WS_PLAYLIST,
-  WS_VIDEO_URL,
-} from '@/app/fifa-11-plus/_lib/data';
-import { hierarchicalVideoData } from '@/app/video-player/_lib/video-data';
 
 const STATUS_LABEL: Record<string, string> = {
   idle: 'Bereit',
@@ -47,12 +48,25 @@ const STATUS_LABEL: Record<string, string> = {
   aborted: 'Abgebrochen',
 };
 
-const STATUS_BADGE: Record<string, 'default' | 'secondary' | 'destructive' | 'outline'> = {
+const STATUS_BADGE: Record<
+  string,
+  'default' | 'secondary' | 'destructive' | 'outline'
+> = {
   idle: 'outline',
   running: 'default',
   completed: 'secondary',
   error: 'destructive',
   aborted: 'destructive',
+};
+
+const openChromeSettings = () => {
+  if (typeof window !== 'undefined') {
+    const siteUrl = encodeURIComponent(window.location.origin);
+    window.open(
+      `chrome://settings/content/siteDetails?site=${siteUrl}`,
+      '_blank',
+    );
+  }
 };
 
 const collectVideoUrls = (): string[] => {
@@ -124,7 +138,9 @@ export default function CachePage() {
 
   const storageQuota = storageSnapshot?.quota ?? 0;
   const storageUsage = storageSnapshot?.usage ?? 0;
-  const storagePercent = storageQuota ? Math.min((storageUsage / storageQuota) * 100, 100) : 0;
+  const storagePercent = storageQuota
+    ? Math.min((storageUsage / storageQuota) * 100, 100)
+    : 0;
 
   const handleStart = async () => {
     if (!isSupported || !allVideoUrls.length || isRunning) return;
@@ -160,20 +176,20 @@ export default function CachePage() {
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold">Offline-Speicher</h1>
         <p className="text-muted-foreground">
-          Verwalte zwischengespeicherte Trainingsinhalte, überprüfe den Speicherverbrauch
-          und lade Videos für den Offline-Gebrauch herunter.
+          Verwalte zwischengespeicherte Trainingsinhalte, überprüfe den
+          Speicherverbrauch und lade Videos für den Offline-Gebrauch herunter.
         </p>
       </div>
 
       {!isSupported ? (
         <Card className="border-destructive/50 bg-destructive/5">
           <CardHeader className="flex flex-row items-center gap-3">
-            <AlertTriangle className="h-6 w-6 text-destructive" />
+            <AlertTriangle className="text-destructive h-6 w-6" />
             <div>
               <CardTitle>Offline-Funktion nicht verfügbar</CardTitle>
               <CardDescription>
-                Dieser Browser unterstützt keine Service Worker oder Cache Storage. Offline-Modus steht
-                daher nicht zur Verfügung.
+                Dieser Browser unterstützt keine Service Worker oder Cache
+                Storage. Offline-Modus steht daher nicht zur Verfügung.
               </CardDescription>
             </div>
           </CardHeader>
@@ -187,28 +203,52 @@ export default function CachePage() {
                   <HardDrive className="h-5 w-5" /> Speicherübersicht
                 </CardTitle>
                 <CardDescription>
-                  Aktuelle Nutzung des Browser-Speichers für Offline-Inhalte.
+                  Gesamter Browser-Speicher inkl. HTTP-Cache & Service Worker
+                  Cache.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <div className="flex items-center justify-between text-sm font-medium">
-                    <span>Belegung</span>
+                    <span>Gesamtbelegung</span>
                     <span>
                       {formatBytes(storageUsage)} / {formatBytes(storageQuota)}
                     </span>
                   </div>
                   <Progress value={storagePercent} className="mt-2" />
+                  <p className="text-muted-foreground mt-2 text-xs">
+                    {storagePercent.toFixed(1)}% belegt
+                  </p>
                 </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="gap-2"
-                  onClick={() => requestSummary()}
-                  disabled={isStarting}
-                >
-                  <RefreshCw className="h-4 w-4" /> Aktualisieren
-                </Button>
+                <div className="bg-muted/40 space-y-1 rounded-md border p-3 text-xs">
+                  <p className="font-medium">ℹ️ Wichtig</p>
+                  <p className="text-muted-foreground">
+                    Diese Anzeige umfasst ALLE gespeicherten Daten dieser App,
+                    einschließlich Chrome&apos;s HTTP-Cache (Videos beim
+                    Abspielen) und Service Worker Cache (manuell
+                    heruntergeladene Inhalte).
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="gap-2"
+                    onClick={() => requestSummary()}
+                    disabled={isStarting}
+                  >
+                    <RefreshCw className="h-4 w-4" /> Aktualisieren
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="gap-2"
+                    onClick={openChromeSettings}
+                    title="Chrome-Einstellungen für diese Website öffnen"
+                  >
+                    <ExternalLink className="h-4 w-4" /> Speicher löschen
+                  </Button>
+                </div>
               </CardContent>
             </Card>
 
@@ -218,23 +258,40 @@ export default function CachePage() {
                   <Download className="h-5 w-5" /> Video-Downloads
                 </CardTitle>
                 <CardDescription>
-                  Lade alle verfügbaren Trainingsvideos zur Offline-Nutzung herunter.
+                  Lade alle verfügbaren Trainingsvideos zur Offline-Nutzung
+                  herunter.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Verfügbare Videos</span>
-                  <span className="text-sm font-medium">{allVideoUrls.length}</span>
+                  <span className="text-muted-foreground text-sm">
+                    Verfügbare Videos
+                  </span>
+                  <span className="text-sm font-medium">
+                    {allVideoUrls.length}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Bereits im Cache</span>
+                  <span className="text-muted-foreground text-sm">
+                    Im SW-Cache
+                  </span>
                   <span className="text-sm font-medium">{mediaEntries}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Gesamte Videogröße</span>
+                  <span className="text-muted-foreground text-sm">
+                    SW-Cache Größe
+                  </span>
                   <span className="text-sm font-medium">
                     {mediaSize != null ? formatBytes(mediaSize) : '–'}
                   </span>
+                </div>
+                <div className="rounded-md border-l-4 border-blue-500 bg-blue-50 p-2 dark:bg-blue-950/20">
+                  <p className="text-xs text-blue-900 dark:text-blue-100">
+                    <strong>Hinweis:</strong> Videos werden zusätzlich im
+                    Browser-HTTP-Cache gespeichert. Die tatsächliche
+                    Speichernutzung sehen Sie oben unter
+                    &quot;Gesamtbelegung&quot;.
+                  </p>
                 </div>
 
                 <div className="space-y-2">
@@ -243,7 +300,7 @@ export default function CachePage() {
                     <Badge variant={statusBadge}>{statusLabel}</Badge>
                   </div>
                   <Progress value={progressPercent} />
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <div className="text-muted-foreground flex items-center justify-between text-xs">
                     <span>
                       {progress.completed} / {progress.total} Dateien
                     </span>
@@ -252,7 +309,7 @@ export default function CachePage() {
                 </div>
 
                 {errorMessage ? (
-                  <div className="flex items-start gap-2 rounded-md border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+                  <div className="border-destructive/40 bg-destructive/10 text-destructive flex items-start gap-2 rounded-md border p-3 text-sm">
                     <XCircle className="mt-0.5 h-4 w-4" />
                     <span>{errorMessage}</span>
                   </div>
@@ -262,7 +319,9 @@ export default function CachePage() {
                   <Button
                     className="gap-2"
                     onClick={handleStart}
-                    disabled={isRunning || isStarting || allVideoUrls.length === 0}
+                    disabled={
+                      isRunning || isStarting || allVideoUrls.length === 0
+                    }
                   >
                     <Download className="h-4 w-4" />
                     Offline-Speicherung starten
@@ -278,7 +337,7 @@ export default function CachePage() {
                   </Button>
                   <Button
                     variant="ghost"
-                    className="gap-2 text-destructive hover:text-destructive"
+                    className="text-destructive hover:text-destructive gap-2"
                     onClick={handleClear}
                     disabled={mediaEntries === 0}
                   >
@@ -288,17 +347,20 @@ export default function CachePage() {
                 </div>
 
                 {progress.status === 'completed' ? (
-                  <div className="flex items-start gap-2 rounded-md border border-secondary/40 bg-secondary/10 p-3 text-sm">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-secondary-foreground" />
-                    <span>Alle ausgewählten Videos sind jetzt offline verfügbar.</span>
+                  <div className="border-secondary/40 bg-secondary/10 flex items-start gap-2 rounded-md border p-3 text-sm">
+                    <CheckCircle2 className="text-secondary-foreground mt-0.5 h-4 w-4" />
+                    <span>
+                      Alle ausgewählten Videos sind jetzt offline verfügbar.
+                    </span>
                   </div>
                 ) : null}
 
                 {progress.status === 'error' ? (
-                  <div className="flex items-start gap-2 rounded-md border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+                  <div className="border-destructive/40 bg-destructive/10 text-destructive flex items-start gap-2 rounded-md border p-3 text-sm">
                     <AlertTriangle className="mt-0.5 h-4 w-4" />
                     <span>
-                      Einige Dateien konnten nicht geladen werden. Prüfe deine Verbindung oder den verfügbaren Speicher.
+                      Einige Dateien konnten nicht geladen werden. Prüfe deine
+                      Verbindung oder den verfügbaren Speicher.
                     </span>
                   </div>
                 ) : null}
@@ -310,11 +372,14 @@ export default function CachePage() {
                 <CardTitle className="flex items-center gap-2">
                   <RefreshCw className="h-5 w-5" /> Cache-Details
                 </CardTitle>
-                <CardDescription>Überblick über die von der App genutzten Cache-Bereiche.</CardDescription>
+                <CardDescription>
+                  Überblick über die von der App genutzten Cache-Bereiche.
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-sm text-muted-foreground">
-                  Die Cache-Namen entsprechen den vom Service Worker verwalteten Bereichen.
+                <div className="text-muted-foreground text-sm">
+                  Die Cache-Namen entsprechen den vom Service Worker verwalteten
+                  Bereichen.
                 </div>
                 <div className="rounded-md border">
                   <Table>
@@ -329,17 +394,26 @@ export default function CachePage() {
                     <TableBody>
                       {summary?.caches.map((cache) => (
                         <TableRow key={cache.cacheName}>
-                          <TableCell className="font-medium">{cache.cacheName}</TableCell>
+                          <TableCell className="font-medium">
+                            {cache.cacheName}
+                          </TableCell>
                           <TableCell>{cache.kind}</TableCell>
-                          <TableCell className="text-right">{cache.entryCount}</TableCell>
                           <TableCell className="text-right">
-                            {cache.totalBytes != null ? formatBytes(cache.totalBytes) : '–'}
+                            {cache.entryCount}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            {cache.totalBytes != null
+                              ? formatBytes(cache.totalBytes)
+                              : '–'}
                           </TableCell>
                         </TableRow>
                       ))}
                       {!summary?.caches.length ? (
                         <TableRow>
-                          <TableCell colSpan={4} className="text-center text-sm text-muted-foreground">
+                          <TableCell
+                            colSpan={4}
+                            className="text-muted-foreground text-center text-sm"
+                          >
                             Keine Cache-Daten verfügbar.
                           </TableCell>
                         </TableRow>
@@ -347,12 +421,26 @@ export default function CachePage() {
                     </TableBody>
                   </Table>
                 </div>
-                <div className="rounded-md border bg-muted/40 p-3 text-xs text-muted-foreground">
-                  <p className="font-medium">Hinweis</p>
-                  <p>
-                    Die Videodaten werden im Cache &quot;media&quot; gespeichert. Lösche nicht manuell den Browser-Speicher,
-                    wenn du die Offline-Funktion behalten möchtest.
-                  </p>
+                <div className="bg-muted/40 text-muted-foreground space-y-2 rounded-md border p-3 text-xs">
+                  <div>
+                    <p className="font-medium">💾 Zwei Cache-Systeme</p>
+                    <p className="mt-1">
+                      <strong>Service Worker Cache:</strong> Manuell
+                      heruntergeladene Videos (hier angezeigt)
+                    </p>
+                    <p className="mt-1">
+                      <strong>HTTP-Cache:</strong> Beim Abspielen automatisch
+                      gecachte Videos (nicht hier angezeigt)
+                    </p>
+                  </div>
+                  <div className="border-t pt-2">
+                    <p className="font-medium">🗑️ Speicher freigeben</p>
+                    <p className="mt-1">
+                      Um den gesamten Speicher zu löschen (inkl. HTTP-Cache),
+                      klicke oben auf &quot;Speicher löschen&quot; oder öffne
+                      Chrome-Einstellungen manuell.
+                    </p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
