@@ -6,12 +6,13 @@ import {
   Download,
   ExternalLink,
   HardDrive,
-  PauseCircle,
+  Loader2,
   RefreshCw,
   Trash2,
+  Video,
   XCircle,
 } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import {
   MAIN_VIDEO_URL,
@@ -38,26 +39,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useBulkVideoDownload } from '@/hooks/use-bulk-video-download';
 import { useVideoCache } from '@/hooks/use-video-cache';
-
-const STATUS_LABEL: Record<string, string> = {
-  idle: 'Bereit',
-  running: 'Aktiver Download',
-  completed: 'Abgeschlossen',
-  error: 'Fehler',
-  aborted: 'Abgebrochen',
-};
-
-const STATUS_BADGE: Record<
-  string,
-  'default' | 'secondary' | 'destructive' | 'outline'
-> = {
-  idle: 'outline',
-  running: 'default',
-  completed: 'secondary',
-  error: 'destructive',
-  aborted: 'destructive',
-};
 
 const openChromeSettings = () => {
   if (typeof window !== 'undefined') {
@@ -119,22 +102,18 @@ export default function CachePage() {
     summary,
     mediaCache,
     storageSnapshot,
-    progress,
-    prefetchVideos,
-    abortPrefetch,
     clearVideoCache,
     requestSummary,
     formatBytes,
   } = useVideoCache();
 
-  const [isStarting, setIsStarting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const {
+    progress: downloadProgress,
+    startBulkDownload,
+    cancelDownload,
+  } = useBulkVideoDownload();
 
   const allVideoUrls = useMemo(() => collectVideoUrls(), []);
-  const isRunning = progress.status === 'running';
-  const progressPercent = progress.total
-    ? Math.round((progress.completed / progress.total) * 100)
-    : 0;
 
   const storageQuota = storageSnapshot?.quota ?? 0;
   const storageUsage = storageSnapshot?.usage ?? 0;
@@ -142,42 +121,47 @@ export default function CachePage() {
     ? Math.min((storageUsage / storageQuota) * 100, 100)
     : 0;
 
-  const handleStart = async () => {
-    if (!isSupported || !allVideoUrls.length || isRunning) return;
-    setErrorMessage(null);
-    setIsStarting(true);
-    try {
-      const taskId = await prefetchVideos(allVideoUrls, 'offline-videos');
-      if (!taskId) {
-        setErrorMessage('Service Worker nicht verfügbar.');
-      }
-    } catch (error) {
-      setErrorMessage('Download konnte nicht gestartet werden.');
-    } finally {
-      setIsStarting(false);
+  const mediaEntries = mediaCache?.entryCount ?? 0;
+  const mediaSize = mediaCache?.totalBytes ?? null;
+  const cachePercent =
+    allVideoUrls.length > 0
+      ? Math.round((mediaEntries / allVideoUrls.length) * 100)
+      : 0;
+
+  const handleClear = () => {
+    if (
+      confirm(
+        'Alle gecachten Videos löschen? Sie müssen erneut abgespielt werden, um offline verfügbar zu sein.',
+      )
+    ) {
+      clearVideoCache();
     }
   };
 
-  const handleAbort = () => {
-    abortPrefetch();
+  const handleBulkDownload = async () => {
+    if (
+      confirm(
+        `${allVideoUrls.length} Videos für Offline-Nutzung herunterladen? Dies kann einige Zeit dauern und benötigt Speicherplatz.`,
+      )
+    ) {
+      await startBulkDownload(allVideoUrls);
+      // Refresh cache summary after download completes
+      setTimeout(() => requestSummary(), 1000);
+    }
   };
 
-  const handleClear = () => {
-    clearVideoCache();
-  };
-
-  const statusLabel = STATUS_LABEL[progress.status] ?? 'Unbekannt';
-  const statusBadge = STATUS_BADGE[progress.status] ?? 'outline';
-  const mediaEntries = mediaCache?.entryCount ?? 0;
-  const mediaSize = mediaCache?.totalBytes ?? null;
+  const progressPercent =
+    downloadProgress.total > 0
+      ? Math.round((downloadProgress.completed / downloadProgress.total) * 100)
+      : 0;
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold">Offline-Speicher</h1>
         <p className="text-muted-foreground">
-          Verwalte zwischengespeicherte Trainingsinhalte, überprüfe den
-          Speicherverbrauch und lade Videos für den Offline-Gebrauch herunter.
+          Videos werden automatisch beim Abspielen gecacht und sind dann offline
+          verfügbar.
         </p>
       </div>
 
@@ -197,195 +181,224 @@ export default function CachePage() {
       ) : (
         <>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {/* Storage Overview */}
             <Card>
               <CardHeader className="space-y-1">
                 <CardTitle className="flex items-center gap-2">
                   <HardDrive className="h-5 w-5" /> Speicherübersicht
                 </CardTitle>
                 <CardDescription>
-                  Gesamter Browser-Speicher inkl. HTTP-Cache & Service Worker
-                  Cache.
+                  Gesamter Browser-Speicher für diese App.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <div className="flex items-center justify-between text-sm font-medium">
-                    <span>Gesamtbelegung</span>
+                    <span>Belegung</span>
                     <span>
                       {formatBytes(storageUsage)} / {formatBytes(storageQuota)}
                     </span>
                   </div>
                   <Progress value={storagePercent} className="mt-2" />
                   <p className="text-muted-foreground mt-2 text-xs">
-                    {storagePercent.toFixed(1)}% belegt
-                  </p>
-                </div>
-                <div className="bg-muted/40 space-y-1 rounded-md border p-3 text-xs">
-                  <p className="font-medium">ℹ️ Wichtig</p>
-                  <p className="text-muted-foreground">
-                    Diese Anzeige umfasst ALLE gespeicherten Daten dieser App,
-                    einschließlich Chrome&apos;s HTTP-Cache (Videos beim
-                    Abspielen) und Service Worker Cache (manuell
-                    heruntergeladene Inhalte).
+                    {storagePercent.toFixed(1)}% verwendet
                   </p>
                 </div>
                 <div className="flex gap-2">
                   <Button
                     variant="outline"
                     size="sm"
-                    className="gap-2"
+                    className="flex-1 gap-2"
                     onClick={() => requestSummary()}
-                    disabled={isStarting}
                   >
                     <RefreshCw className="h-4 w-4" /> Aktualisieren
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="gap-2"
+                    className="flex-1 gap-2"
                     onClick={openChromeSettings}
-                    title="Chrome-Einstellungen für diese Website öffnen"
+                    title="Chrome-Einstellungen öffnen"
                   >
-                    <ExternalLink className="h-4 w-4" /> Speicher löschen
+                    <ExternalLink className="h-4 w-4" /> Einstellungen
                   </Button>
                 </div>
               </CardContent>
             </Card>
 
+            {/* Video Cache */}
             <Card>
               <CardHeader className="space-y-1">
                 <CardTitle className="flex items-center gap-2">
-                  <Download className="h-5 w-5" /> Video-Downloads
+                  <Video className="h-5 w-5" /> Video-Cache
                 </CardTitle>
                 <CardDescription>
-                  Lade alle verfügbaren Trainingsvideos zur Offline-Nutzung
-                  herunter.
+                  Automatisch gecachte Videos beim Abspielen.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground text-sm">
-                    Verfügbare Videos
-                  </span>
-                  <span className="text-sm font-medium">
-                    {allVideoUrls.length}
-                  </span>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground text-sm">
+                      Verfügbare Videos
+                    </span>
+                    <span className="text-sm font-medium">
+                      {allVideoUrls.length}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground text-sm">
+                      Gecacht
+                    </span>
+                    <span className="text-sm font-medium">{mediaEntries}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground text-sm">
+                      Cache-Größe
+                    </span>
+                    <span className="text-sm font-medium">
+                      {mediaSize != null ? formatBytes(mediaSize) : '–'}
+                    </span>
+                  </div>
+                  <div>
+                    <div className="text-muted-foreground mb-1 flex items-center justify-between text-xs">
+                      <span>Fortschritt</span>
+                      <span>{cachePercent}%</span>
+                    </div>
+                    <Progress value={cachePercent} />
+                  </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground text-sm">
-                    Im SW-Cache
-                  </span>
-                  <span className="text-sm font-medium">{mediaEntries}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground text-sm">
-                    SW-Cache Größe
-                  </span>
-                  <span className="text-sm font-medium">
-                    {mediaSize != null ? formatBytes(mediaSize) : '–'}
-                  </span>
-                </div>
-                <div className="rounded-md border-l-4 border-blue-500 bg-blue-50 p-2 dark:bg-blue-950/20">
+
+                <div className="rounded-md border-l-4 border-blue-500 bg-blue-50 p-3 dark:bg-blue-950/20">
+                  <p className="mb-1 text-xs font-medium text-blue-900 dark:text-blue-100">
+                    ✨ Automatisches Caching
+                  </p>
                   <p className="text-xs text-blue-900 dark:text-blue-100">
-                    <strong>Hinweis:</strong> Videos werden zusätzlich im
-                    Browser-HTTP-Cache gespeichert. Die tatsächliche
-                    Speichernutzung sehen Sie oben unter
-                    &quot;Gesamtbelegung&quot;.
+                    Videos werden beim Abspielen automatisch gespeichert. Keine
+                    manuelle Aktion nötig!
                   </p>
                 </div>
 
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span>Status</span>
-                    <Badge variant={statusBadge}>{statusLabel}</Badge>
+                {downloadProgress.isDownloading && (
+                  <div className="bg-muted/50 space-y-2 rounded-md border p-3">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="font-medium">Download läuft...</span>
+                      <span className="text-muted-foreground">
+                        {downloadProgress.completed} / {downloadProgress.total}
+                      </span>
+                    </div>
+                    {downloadProgress.currentUrl && (
+                      <p className="text-muted-foreground truncate text-xs">
+                        {downloadProgress.currentUrl.split('/').pop()}
+                      </p>
+                    )}
+                    <Progress value={progressPercent} />
+                    {downloadProgress.bytesDownloaded > 0 && (
+                      <p className="text-muted-foreground text-xs">
+                        {formatBytes(downloadProgress.bytesDownloaded)}{' '}
+                        heruntergeladen
+                      </p>
+                    )}
                   </div>
-                  <Progress value={progressPercent} />
-                  <div className="text-muted-foreground flex items-center justify-between text-xs">
-                    <span>
-                      {progress.completed} / {progress.total} Dateien
-                    </span>
-                    <span>{formatBytes(progress.bytesDownloaded)}</span>
-                  </div>
-                </div>
+                )}
 
-                {errorMessage ? (
-                  <div className="border-destructive/40 bg-destructive/10 text-destructive flex items-start gap-2 rounded-md border p-3 text-sm">
-                    <XCircle className="mt-0.5 h-4 w-4" />
-                    <span>{errorMessage}</span>
-                  </div>
-                ) : null}
-
-                <div className="flex flex-wrap gap-2">
+                <div className="flex gap-2">
                   <Button
-                    className="gap-2"
-                    onClick={handleStart}
+                    variant="default"
+                    className="flex-1 gap-2"
+                    onClick={handleBulkDownload}
                     disabled={
-                      isRunning || isStarting || allVideoUrls.length === 0
+                      downloadProgress.isDownloading ||
+                      allVideoUrls.length === 0
                     }
                   >
-                    <Download className="h-4 w-4" />
-                    Offline-Speicherung starten
+                    {downloadProgress.isDownloading ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Lädt... ({downloadProgress.completed}/
+                        {downloadProgress.total})
+                      </>
+                    ) : (
+                      <>
+                        <Download className="h-4 w-4" />
+                        Alle herunterladen ({allVideoUrls.length})
+                      </>
+                    )}
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="gap-2"
-                    onClick={handleAbort}
-                    disabled={!isRunning}
-                  >
-                    <PauseCircle className="h-4 w-4" />
-                    Vorgang abbrechen
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="text-destructive hover:text-destructive gap-2"
-                    onClick={handleClear}
-                    disabled={mediaEntries === 0}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                    Video-Cache leeren
-                  </Button>
+                  {downloadProgress.isDownloading && (
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={cancelDownload}
+                      title="Download abbrechen"
+                    >
+                      <XCircle className="h-4 w-4" />
+                    </Button>
+                  )}
                 </div>
 
-                {progress.status === 'completed' ? (
-                  <div className="border-secondary/40 bg-secondary/10 flex items-start gap-2 rounded-md border p-3 text-sm">
-                    <CheckCircle2 className="text-secondary-foreground mt-0.5 h-4 w-4" />
-                    <span>
-                      Alle ausgewählten Videos sind jetzt offline verfügbar.
-                    </span>
-                  </div>
-                ) : null}
+                <Button
+                  variant="outline"
+                  className="w-full gap-2"
+                  onClick={handleClear}
+                  disabled={
+                    mediaEntries === 0 || downloadProgress.isDownloading
+                  }
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Cache leeren ({mediaEntries})
+                </Button>
 
-                {progress.status === 'error' ? (
-                  <div className="border-destructive/40 bg-destructive/10 text-destructive flex items-start gap-2 rounded-md border p-3 text-sm">
-                    <AlertTriangle className="mt-0.5 h-4 w-4" />
-                    <span>
-                      Einige Dateien konnten nicht geladen werden. Prüfe deine
-                      Verbindung oder den verfügbaren Speicher.
-                    </span>
+                {downloadProgress.errors.length > 0 && (
+                  <div className="border-destructive/40 bg-destructive/10 rounded-md border p-3">
+                    <p className="text-destructive mb-1 text-xs font-medium">
+                      ⚠️ {downloadProgress.errors.length} Fehler
+                    </p>
+                    <p className="text-destructive/90 text-xs">
+                      Einige Videos konnten nicht heruntergeladen werden.
+                    </p>
                   </div>
-                ) : null}
+                )}
+
+                {!downloadProgress.isDownloading && (
+                  <>
+                    {mediaEntries > 0 ? (
+                      <div className="flex items-start gap-2 rounded-md border border-green-500/40 bg-green-50 p-3 text-sm dark:bg-green-950/20">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 text-green-600" />
+                        <span className="text-green-900 dark:text-green-100">
+                          {mediaEntries} von {allVideoUrls.length} Videos
+                          offline verfügbar
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="flex items-start gap-2 rounded-md border border-yellow-500/40 bg-yellow-50 p-3 text-sm dark:bg-yellow-950/20">
+                        <Download className="mt-0.5 h-4 w-4 text-yellow-600" />
+                        <span className="text-yellow-900 dark:text-yellow-100">
+                          Keine Videos im Cache. Nutzen Sie "Alle herunterladen"
+                          für vollständige Offline-Fähigkeit.
+                        </span>
+                      </div>
+                    )}
+                  </>
+                )}
               </CardContent>
             </Card>
 
+            {/* Cache Details */}
             <Card className="md:col-span-2 xl:col-span-1">
               <CardHeader className="space-y-1">
                 <CardTitle className="flex items-center gap-2">
-                  <RefreshCw className="h-5 w-5" /> Cache-Details
+                  <RefreshCw className="h-5 w-5" /> Cache-Bereiche
                 </CardTitle>
                 <CardDescription>
-                  Überblick über die von der App genutzten Cache-Bereiche.
+                  Service Worker Cache-Übersicht
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-muted-foreground text-sm">
-                  Die Cache-Namen entsprechen den vom Service Worker verwalteten
-                  Bereichen.
-                </div>
                 <div className="rounded-md border">
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Name</TableHead>
                         <TableHead>Typ</TableHead>
                         <TableHead className="text-right">Einträge</TableHead>
                         <TableHead className="text-right">Größe</TableHead>
@@ -395,9 +408,17 @@ export default function CachePage() {
                       {summary?.caches.map((cache) => (
                         <TableRow key={cache.cacheName}>
                           <TableCell className="font-medium">
-                            {cache.cacheName}
+                            <div className="flex items-center gap-2">
+                              <Badge
+                                variant={
+                                  cache.kind === 'media' ? 'default' : 'outline'
+                                }
+                                className="text-xs"
+                              >
+                                {cache.kind}
+                              </Badge>
+                            </div>
                           </TableCell>
-                          <TableCell>{cache.kind}</TableCell>
                           <TableCell className="text-right">
                             {cache.entryCount}
                           </TableCell>
@@ -411,36 +432,15 @@ export default function CachePage() {
                       {!summary?.caches.length ? (
                         <TableRow>
                           <TableCell
-                            colSpan={4}
+                            colSpan={3}
                             className="text-muted-foreground text-center text-sm"
                           >
-                            Keine Cache-Daten verfügbar.
+                            Keine Cache-Daten verfügbar
                           </TableCell>
                         </TableRow>
                       ) : null}
                     </TableBody>
                   </Table>
-                </div>
-                <div className="bg-muted/40 text-muted-foreground space-y-2 rounded-md border p-3 text-xs">
-                  <div>
-                    <p className="font-medium">💾 Zwei Cache-Systeme</p>
-                    <p className="mt-1">
-                      <strong>Service Worker Cache:</strong> Manuell
-                      heruntergeladene Videos (hier angezeigt)
-                    </p>
-                    <p className="mt-1">
-                      <strong>HTTP-Cache:</strong> Beim Abspielen automatisch
-                      gecachte Videos (nicht hier angezeigt)
-                    </p>
-                  </div>
-                  <div className="border-t pt-2">
-                    <p className="font-medium">🗑️ Speicher freigeben</p>
-                    <p className="mt-1">
-                      Um den gesamten Speicher zu löschen (inkl. HTTP-Cache),
-                      klicke oben auf &quot;Speicher löschen&quot; oder öffne
-                      Chrome-Einstellungen manuell.
-                    </p>
-                  </div>
                 </div>
               </CardContent>
             </Card>
