@@ -16,6 +16,7 @@ const CDN_BASE_URL =
 const CHAMPIONS: { id: string; name: string }[] = [
   { id: 'aatrox_quotes', name: 'Aatrox' },
   { id: 'announcer_quotes', name: 'Announcer' },
+  { id: 'crusader_quotes', name: 'Crusader' },
   { id: 'pyke_quotes', name: 'Pyke' },
   { id: 'sion_quotes', name: 'Sion' },
   { id: 'swain_quotes', name: 'Swain' },
@@ -132,13 +133,28 @@ export async function GET() {
       const fullPrefix = `soundboard/${champ.id}/`;
       const objects = await listAllObjects(bucket, region, fullPrefix);
 
-      // Group by immediate subfolder (quote folder), then pick first mp3/ogg
+      // Group by immediate subfolder (quote folder), then pick first mp3/ogg/m4a
       const byQuote = new Map<string, { files: { key: string }[] }>();
       for (const { Key } of objects) {
-        if (!Key.endsWith('.mp3') && !Key.endsWith('.ogg')) continue;
+        if (
+          !Key.endsWith('.mp3') &&
+          !Key.endsWith('.ogg') &&
+          !Key.endsWith('.m4a')
+        )
+          continue;
         const rest = Key.slice(fullPrefix.length);
         const parts = rest.split('/');
-        const quoteFolder = parts.length > 1 ? parts[0] : '';
+
+        // For crusader_quotes, handle nested structure: UnitType/QuoteName/filename.ext
+        let quoteFolder: string;
+        if (champ.id === 'crusader_quotes' && parts.length >= 3) {
+          // Use UnitType/QuoteName as the quote identifier
+          quoteFolder = `${parts[0]}/${parts[1]}`;
+        } else {
+          // Default behavior for other categories
+          quoteFolder = parts.length > 1 ? parts[0] : '';
+        }
+
         if (!quoteFolder) continue;
         // Filter out non-verbal sounds
         if (shouldFilterOut(quoteFolder)) continue;
@@ -151,7 +167,7 @@ export async function GET() {
       const sounds: ApiSound[] = Array.from(byQuote.entries())
         .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
         .map(([folder, entry]) => {
-          // Choose first mp3/ogg in lexical order
+          // Choose first mp3/ogg/m4a in lexical order
           entry.files.sort((a, b) =>
             a.key.localeCompare(b.key, undefined, { numeric: true }),
           );

@@ -24,10 +24,7 @@ import { Slider } from '@/components/ui/slider';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
 
-import {
-  persistFavorites,
-  readFavoritesFromStorage,
-} from '../_lib/favorites';
+import { persistFavorites, readFavoritesFromStorage } from '../_lib/favorites';
 import { SoundItem, Topic } from '../_types/soundboard';
 
 export function SoundboardPage() {

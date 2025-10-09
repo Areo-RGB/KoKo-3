@@ -109,3 +109,10 @@ a.html
 /delete-commands.sh
 /delete-soundboard-filtered.sh
 scripts/download-lol-announcer.py
+
+/scripts
+/audio_clips
+extract_audio_clips.py
+upload_crusader_clips.py
+extract_spearman_clips.py
+CRUSADER-QUICKSTART.md
