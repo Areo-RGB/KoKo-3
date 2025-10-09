@@ -5,13 +5,16 @@ node_modules/
 .pnpm-store/
 node_modules/
 
-# Environment
+# Environment Files
 .env
 .env.local
+.env*.local
 .env.development.local
 .env.test.local
 .env.production.local
-.video/
+.env copy
+*.env.backup
+
 # Sensitive files
 apitxt
 secrets.txt
