@@ -104,3 +104,8 @@ easy2coach_scraper.py
 
 .gemini/settings.json
 a.html
+
+/scripts/lol-announcer-sounds
+/delete-commands.sh
+/delete-soundboard-filtered.sh
+scripts/download-lol-announcer.py

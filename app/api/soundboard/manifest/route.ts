@@ -15,6 +15,7 @@ const CDN_BASE_URL =
 // Known champion prefixes to include in the manifest
 const CHAMPIONS: { id: string; name: string }[] = [
   { id: 'aatrox_quotes', name: 'Aatrox' },
+  { id: 'announcer_quotes', name: 'Announcer' },
   { id: 'pyke_quotes', name: 'Pyke' },
   { id: 'sion_quotes', name: 'Sion' },
   { id: 'swain_quotes', name: 'Swain' },
@@ -34,6 +35,59 @@ function decodeXml(text: string) {
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>');
+}
+
+function shouldFilterOut(quoteFolder: string): boolean {
+  const withoutNumber = quoteFolder.replace(/^\d+[_\-\s]*/, '').trim();
+
+  const nonVerbalPatterns = [
+    /^(laughs?|chuckles?|giggles?)$/i,
+    /^(grunts?|groans?|growls?)$/i,
+    /^(roars?|screams?|yells?|shouts?)$/i,
+    /^(sighs?|gasps?|coughs?)$/i,
+    /^(snorts?|wheezes?)$/i,
+    /^(breathing|inhales?|exhales?)$/i,
+    /^(attacks?|efforts?|pains?|deaths?)$/i,
+    /^(taunts?|jokes?)$/i,
+    /^(long|short|move|select|ban|pick)$/i,
+    /^[A-Z][a-z]+\s+(laughs?|chuckles?|giggles?|grunts?|groans?|growls?|roars?|screams?|yells?|shouts?|sighs?|gasps?|scoffs?)$/i,
+    /^[A-Z][a-z]+\s+(laughs?|chuckles?|giggles?)\s+(mockingly|menacingly|maniacally|slyly|darkly|coldly|softly|quietly|loudly|nervously|wickedly|evilly|heartily)$/i,
+    /^[A-Z][a-z]+\s+(grunts?|groans?)\s+(in\s+frustration|in\s+pain|angrily|and\s+chuckles?|loudly|forcefully)$/i,
+  ];
+
+  for (const pattern of nonVerbalPatterns) {
+    if (pattern.test(withoutNumber)) {
+      return true;
+    }
+  }
+
+  const parts = withoutNumber.split(/\.\s+/);
+  if (parts.length > 1) {
+    const dialoguePart = parts.slice(1).join('. ').trim();
+    const wordCount = dialoguePart
+      .split(/\s+/)
+      .filter((w) => w.length > 0).length;
+    if (wordCount >= 3) {
+      return false;
+    }
+  }
+
+  const totalWords = withoutNumber
+    .split(/\s+/)
+    .filter((w) => w.length > 0).length;
+  if (totalWords >= 5) {
+    return false;
+  }
+
+  const hasOnlyAction =
+    /^[A-Z][a-z]+\s+(laughs?|chuckles?|grunts?|groans?|growls?|roars?|screams?|yells?|shouts?|sighs?|gasps?|scoffs?)(\s+\w+)?$/i.test(
+      withoutNumber,
+    );
+  if (hasOnlyAction && totalWords <= 3) {
+    return true;
+  }
+
+  return false;
 }
 
 async function listAllObjects(bucket: string, region: string, prefix: string) {
@@ -78,14 +132,16 @@ export async function GET() {
       const fullPrefix = `soundboard/${champ.id}/`;
       const objects = await listAllObjects(bucket, region, fullPrefix);
 
-      // Group by immediate subfolder (quote folder), then pick first mp3
+      // Group by immediate subfolder (quote folder), then pick first mp3/ogg
       const byQuote = new Map<string, { files: { key: string }[] }>();
       for (const { Key } of objects) {
-        if (!Key.endsWith('.mp3')) continue;
+        if (!Key.endsWith('.mp3') && !Key.endsWith('.ogg')) continue;
         const rest = Key.slice(fullPrefix.length);
         const parts = rest.split('/');
         const quoteFolder = parts.length > 1 ? parts[0] : '';
         if (!quoteFolder) continue;
+        // Filter out non-verbal sounds
+        if (shouldFilterOut(quoteFolder)) continue;
         const entry = byQuote.get(quoteFolder) || { files: [] };
         entry.files.push({ key: Key });
         byQuote.set(quoteFolder, entry);
@@ -95,7 +151,7 @@ export async function GET() {
       const sounds: ApiSound[] = Array.from(byQuote.entries())
         .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
         .map(([folder, entry]) => {
-          // Choose first mp3 in lexical order
+          // Choose first mp3/ogg in lexical order
           entry.files.sort((a, b) =>
             a.key.localeCompare(b.key, undefined, { numeric: true }),
           );
