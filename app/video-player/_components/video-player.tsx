@@ -120,7 +120,7 @@ export default function VideoPlayer({
     }
   };
 
-  const handlePlayPause = () => {
+  const handlePlayPause = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
 
@@ -134,7 +134,7 @@ export default function VideoPlayer({
     } else {
       video.play().catch((e) => console.error('Error playing video:', e));
     }
-  };
+  }, [isPlaying]);
 
   // State update only, playback is handled by the useEffect hook
   const handleVideoSelect = (item: PlaylistItem, index: number) => {
@@ -144,21 +144,21 @@ export default function VideoPlayer({
     }
   };
 
-  const handleVolumeChange = (newVolume: number) => {
+  const handleVolumeChange = useCallback((newVolume: number) => {
     if (videoRef.current) {
       videoRef.current.volume = newVolume;
       setVolume(newVolume);
       setIsMuted(newVolume === 0);
     }
-  };
+  }, []);
 
-  const handleToggleMute = () => {
+  const handleToggleMute = useCallback(() => {
     if (videoRef.current) {
       const newMuted = !isMuted;
       videoRef.current.muted = newMuted;
       setIsMuted(newMuted);
     }
-  };
+  }, [isMuted]);
 
   const handleSkipBack = () => {
     if (currentVideoIndex > 0) {
@@ -196,10 +196,53 @@ export default function VideoPlayer({
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      // Logic for keyboard shortcuts
-      // ... (omitted for brevity, no changes here)
+      e.preventDefault();
+      
+      // Spacebar: Toggle play/pause
+      if (e.code === 'Space') {
+        handlePlayPause();
+      }
+      // M key: Toggle mute
+      else if (e.code === 'KeyM') {
+        handleToggleMute();
+      }
+      // Arrow Up: Increase volume
+      else if (e.code === 'ArrowUp') {
+        handleVolumeChange(Math.min(volume + 0.1, 1));
+      }
+      // Arrow Down: Decrease volume
+      else if (e.code === 'ArrowDown') {
+        handleVolumeChange(Math.max(volume - 0.1, 0));
+      }
+      // Arrow Left: Seek backward
+      else if (e.code === 'ArrowLeft') {
+        if (videoRef.current) {
+          videoRef.current.currentTime = Math.max(videoRef.current.currentTime - 10, 0);
+        }
+      }
+      // Arrow Right: Seek forward
+      else if (e.code === 'ArrowRight') {
+        if (videoRef.current) {
+          videoRef.current.currentTime = Math.min(videoRef.current.currentTime + 10, videoRef.current.duration);
+        }
+      }
+      // F key: Toggle fullscreen
+      else if (e.code === 'KeyF') {
+        handleToggleFullscreen();
+      }
+      // Escape: Close player (if not fullscreen)
+      else if (e.code === 'Escape' && !isFullscreen) {
+        onClose?.();
+      }
+      // 0-9: Jump to percentage of video (0 = beginning, 1 = 10%, etc.)
+      else if (e.code.startsWith('Digit') && !e.shiftKey) {
+        const digit = parseInt(e.code.replace('Digit', ''));
+        if (!isNaN(digit) && videoRef.current) {
+          videoRef.current.currentTime = (digit / 10) * videoRef.current.duration;
+        }
+      }
     },
-    [isFullscreen, volume, onClose, handlePlayPause, handleVolumeChange],
+    [isFullscreen, volume, onClose, handlePlayPause, handleVolumeChange, handleToggleMute],
   );
 
   useEffect(() => {

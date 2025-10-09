@@ -333,15 +333,15 @@ function JuniorenTrainingPageContent() {
     return out || String(num);
   };
 
-  const variantOrder = (title: string): number => {
-    const m = title.match(/(\b[IVXLCDM]+)$/i);
-    if (m && m[1]) return romanToInt(m[1]);
-    const n = title.match(/(\b\d+)$/); // unlikely, but fallback if numeric suffix
-    if (n && n[1]) return parseInt(n[1], 10);
-    return Number.MAX_SAFE_INTEGER - 1;
-  };
-
   const warmupGroups = useMemo((): Record<string, WarmupItem[]> => {
+    const variantOrder = (title: string): number => {
+      const m = title.match(/(\b[IVXLCDM]+)$/i);
+      if (m && m[1]) return romanToInt(m[1]);
+      const n = title.match(/(\b\d+)$/); // unlikely, but fallback if numeric suffix
+      if (n && n[1]) return parseInt(n[1], 10);
+      return Number.MAX_SAFE_INTEGER - 1;
+    };
+
     const grouped: Record<string, WarmupItem[]> = {};
     for (const w of warmups) {
       const { base } = extractBaseAndVariant(w.title);

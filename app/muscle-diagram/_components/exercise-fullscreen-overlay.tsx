@@ -86,7 +86,7 @@ export default function ExerciseFullscreenOverlay({
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, [visible, onClose]);
+  }, [visible, onClose, currentExercise, selectedVideoIndex]);
 
   if (!visible) return null;
 
