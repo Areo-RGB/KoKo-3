@@ -269,16 +269,6 @@ export default function CachePage() {
                   </div>
                 </div>
 
-                <div className="rounded-md border-l-4 border-blue-500 bg-blue-50 p-3 dark:bg-blue-950/20">
-                  <p className="mb-1 text-xs font-medium text-blue-900 dark:text-blue-100">
-                    ✨ Automatisches Caching
-                  </p>
-                  <p className="text-xs text-blue-900 dark:text-blue-100">
-                    Videos werden beim Abspielen automatisch gespeichert. Keine
-                    manuelle Aktion nötig!
-                  </p>
-                </div>
-
                 {downloadProgress.isDownloading && (
                   <div className="bg-muted/50 space-y-2 rounded-md border p-3">
                     <div className="flex items-center justify-between text-sm">
