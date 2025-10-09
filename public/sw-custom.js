@@ -42,7 +42,12 @@ const RUNTIME_CACHES = new Set([
 ]);
 
 const FALLBACK_PAGE = '/offline/';
-const PREFETCHABLE_ROUTES = ['/', '/offline/', '/cache/'];
+const APP_SHELL_PATHS = ['/', '/cache/'];
+const PREFETCHABLE_ROUTES = [...APP_SHELL_PATHS, FALLBACK_PAGE];
+const APP_SHELL_PRIMARY = APP_SHELL_PATHS[0];
+
+const toAbsoluteUrl = (input) =>
+  new URL(input, self.registration?.scope ?? self.location.origin).toString();
 
 let defaultStaticStrategy = null;
 
@@ -198,11 +203,27 @@ if (registerRoute && StaleWhileRevalidate) {
 if (setCatchHandler) {
   setCatchHandler(async ({ request }) => {
     if (request.destination === 'document') {
-      const cached = await caches.match(FALLBACK_PAGE, {
+      try {
+        const pageCache = await caches.open(PAGE_CACHE);
+        const cachedPage = await pageCache.match(request);
+        if (cachedPage) {
+          return cachedPage;
+        }
+
+        const appShellUrl = toAbsoluteUrl(APP_SHELL_PRIMARY);
+        const appShellResponse = await pageCache.match(appShellUrl);
+        if (appShellResponse) {
+          return appShellResponse;
+        }
+      } catch (error) {
+        console.warn('Navigation cache lookup failed', error);
+      }
+
+      const cached = await caches.match(toAbsoluteUrl(FALLBACK_PAGE), {
         cacheName: FALLBACK_CACHE,
       });
       if (cached) return cached;
-      return caches.match(FALLBACK_PAGE) ?? Response.error();
+      return caches.match(toAbsoluteUrl(FALLBACK_PAGE)) ?? Response.error();
     }
 
     if (request.destination === 'image') {
@@ -216,8 +237,34 @@ if (setCatchHandler) {
 self.addEventListener('install', (event) => {
   event.waitUntil(
     (async () => {
-      const fallbackCache = await caches.open(FALLBACK_CACHE);
-      await fallbackCache.addAll(PREFETCHABLE_ROUTES);
+      try {
+        const fallbackCache = await caches.open(FALLBACK_CACHE);
+        const fallbackUrl = toAbsoluteUrl(FALLBACK_PAGE);
+        const response = await fetch(fallbackUrl, { cache: 'reload' });
+        if (response.ok) {
+          await fallbackCache.put(fallbackUrl, response.clone());
+        }
+      } catch (error) {
+        console.warn('Fallback cache priming failed:', error);
+      }
+
+      try {
+        const pageCache = await caches.open(PAGE_CACHE);
+        const absoluteShellUrls = APP_SHELL_PATHS.map((path) =>
+          toAbsoluteUrl(path),
+        );
+
+        await Promise.all(
+          absoluteShellUrls.map(async (url) => {
+            const response = await fetch(url, { cache: 'reload' });
+            if (response.ok) {
+              await pageCache.put(url, response.clone());
+            }
+          }),
+        );
+      } catch (error) {
+        console.warn('App shell prefetch failed:', error);
+      }
     })(),
   );
 });
