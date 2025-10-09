@@ -10,9 +10,10 @@ import {
   RefreshCw,
   Trash2,
   Video,
+  Volume2,
   XCircle,
 } from 'lucide-react';
-import { useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import {
   MAIN_VIDEO_URL,
@@ -96,6 +97,19 @@ const collectVideoUrls = (): string[] => {
   return Array.from(urls);
 };
 
+type SoundboardManifest = {
+  topics: Array<{
+    id: string;
+    name: string;
+    sounds: Array<{
+      id: string;
+      label: string;
+      src?: string;
+      sources?: string[];
+    }>;
+  }>;
+};
+
 export default function CachePage() {
   const {
     isSupported,
@@ -108,12 +122,68 @@ export default function CachePage() {
   } = useVideoCache();
 
   const {
-    progress: downloadProgress,
-    startBulkDownload,
-    cancelDownload,
+    progress: videoDownloadProgress,
+    startBulkDownload: startVideoBulkDownload,
+    cancelDownload: cancelVideoDownload,
   } = useBulkVideoDownload();
 
+  const {
+    progress: soundDownloadProgress,
+    startBulkDownload: startSoundBulkDownload,
+    cancelDownload: cancelSoundDownload,
+    resetProgress: resetSoundProgress,
+  } = useBulkVideoDownload();
+
+  const [soundUrls, setSoundUrls] = useState<string[]>([]);
+  const [isLoadingSounds, setIsLoadingSounds] = useState(false);
+  const [soundError, setSoundError] = useState<string | null>(null);
+
   const allVideoUrls = useMemo(() => collectVideoUrls(), []);
+
+  const loadSoundManifest = useCallback(async () => {
+    setIsLoadingSounds(true);
+    try {
+      const res = await fetch('/api/soundboard/manifest', {
+        cache: 'no-store',
+      });
+      if (!res.ok) {
+        throw new Error(`manifest_fetch_failed:${res.status}`);
+      }
+      const data = (await res.json()) as SoundboardManifest;
+      const urls = new Set<string>();
+      data.topics.forEach((topic) => {
+        topic.sounds.forEach((sound) => {
+          if (sound.src) {
+            urls.add(sound.src);
+          }
+          sound.sources?.forEach((source) => {
+            if (source) urls.add(source);
+          });
+        });
+      });
+      const list = Array.from(urls);
+      setSoundUrls(list);
+      setSoundError(null);
+      if (!list.length) {
+        resetSoundProgress();
+      }
+      return list;
+    } catch (error) {
+      console.error('Sound manifest load failed', error);
+      setSoundError(
+        'Soundboard-Manifest konnte nicht geladen werden. Bitte versuchen Sie es erneut.',
+      );
+      setSoundUrls([]);
+      resetSoundProgress();
+      return [];
+    } finally {
+      setIsLoadingSounds(false);
+    }
+  }, [resetSoundProgress]);
+
+  useEffect(() => {
+    void loadSoundManifest();
+  }, [loadSoundManifest]);
 
   const storageQuota = storageSnapshot?.quota ?? 0;
   const storageUsage = storageSnapshot?.usage ?? 0;
@@ -144,15 +214,43 @@ export default function CachePage() {
         `${allVideoUrls.length} Videos für Offline-Nutzung herunterladen? Dies kann einige Zeit dauern und benötigt Speicherplatz.`,
       )
     ) {
-      await startBulkDownload(allVideoUrls);
+      await startVideoBulkDownload(allVideoUrls);
       // Refresh cache summary after download completes
       setTimeout(() => requestSummary(), 1000);
     }
   };
 
-  const progressPercent =
-    downloadProgress.total > 0
-      ? Math.round((downloadProgress.completed / downloadProgress.total) * 100)
+  const handleSoundDownload = async () => {
+    const urls = soundUrls.length > 0 ? soundUrls : await loadSoundManifest();
+    if (!urls.length) {
+      alert(
+        'Keine Sounddateien gefunden. Bitte stellen Sie eine Internetverbindung her und versuchen Sie es erneut.',
+      );
+      return;
+    }
+
+    if (
+      confirm(
+        `${urls.length} Sound-Dateien für die Soundboard-Seite herunterladen? Dies benötigt zusätzlichen Speicherplatz.`,
+      )
+    ) {
+      await startSoundBulkDownload(urls);
+      setTimeout(() => requestSummary(), 1000);
+    }
+  };
+
+  const videoProgressPercent =
+    videoDownloadProgress.total > 0
+      ? Math.round(
+          (videoDownloadProgress.completed / videoDownloadProgress.total) * 100,
+        )
+      : 0;
+
+  const soundProgressPercent =
+    soundDownloadProgress.total > 0
+      ? Math.round(
+          (soundDownloadProgress.completed / soundDownloadProgress.total) * 100,
+        )
       : 0;
 
   return (
@@ -269,23 +367,24 @@ export default function CachePage() {
                   </div>
                 </div>
 
-                {downloadProgress.isDownloading && (
+                {videoDownloadProgress.isDownloading && (
                   <div className="bg-muted/50 space-y-2 rounded-md border p-3">
                     <div className="flex items-center justify-between text-sm">
                       <span className="font-medium">Download läuft...</span>
                       <span className="text-muted-foreground">
-                        {downloadProgress.completed} / {downloadProgress.total}
+                        {videoDownloadProgress.completed} /{' '}
+                        {videoDownloadProgress.total}
                       </span>
                     </div>
-                    {downloadProgress.currentUrl && (
+                    {videoDownloadProgress.currentUrl && (
                       <p className="text-muted-foreground truncate text-xs">
-                        {downloadProgress.currentUrl.split('/').pop()}
+                        {videoDownloadProgress.currentUrl.split('/').pop()}
                       </p>
                     )}
-                    <Progress value={progressPercent} />
-                    {downloadProgress.bytesDownloaded > 0 && (
+                    <Progress value={videoProgressPercent} />
+                    {videoDownloadProgress.bytesDownloaded > 0 && (
                       <p className="text-muted-foreground text-xs">
-                        {formatBytes(downloadProgress.bytesDownloaded)}{' '}
+                        {formatBytes(videoDownloadProgress.bytesDownloaded)}{' '}
                         heruntergeladen
                       </p>
                     )}
@@ -298,15 +397,15 @@ export default function CachePage() {
                     className="flex-1 gap-2"
                     onClick={handleBulkDownload}
                     disabled={
-                      downloadProgress.isDownloading ||
+                      videoDownloadProgress.isDownloading ||
                       allVideoUrls.length === 0
                     }
                   >
-                    {downloadProgress.isDownloading ? (
+                    {videoDownloadProgress.isDownloading ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        Lädt... ({downloadProgress.completed}/
-                        {downloadProgress.total})
+                        Lädt... ({videoDownloadProgress.completed}/
+                        {videoDownloadProgress.total})
                       </>
                     ) : (
                       <>
@@ -315,11 +414,11 @@ export default function CachePage() {
                       </>
                     )}
                   </Button>
-                  {downloadProgress.isDownloading && (
+                  {videoDownloadProgress.isDownloading && (
                     <Button
                       variant="outline"
                       size="icon"
-                      onClick={cancelDownload}
+                      onClick={cancelVideoDownload}
                       title="Download abbrechen"
                     >
                       <XCircle className="h-4 w-4" />
@@ -332,17 +431,17 @@ export default function CachePage() {
                   className="w-full gap-2"
                   onClick={handleClear}
                   disabled={
-                    mediaEntries === 0 || downloadProgress.isDownloading
+                    mediaEntries === 0 || videoDownloadProgress.isDownloading
                   }
                 >
                   <Trash2 className="h-4 w-4" />
                   Cache leeren ({mediaEntries})
                 </Button>
 
-                {downloadProgress.errors.length > 0 && (
+                {videoDownloadProgress.errors.length > 0 && (
                   <div className="border-destructive/40 bg-destructive/10 rounded-md border p-3">
                     <p className="text-destructive mb-1 text-xs font-medium">
-                      ⚠️ {downloadProgress.errors.length} Fehler
+                      ⚠️ {videoDownloadProgress.errors.length} Fehler
                     </p>
                     <p className="text-destructive/90 text-xs">
                       Einige Videos konnten nicht heruntergeladen werden.
@@ -350,7 +449,7 @@ export default function CachePage() {
                   </div>
                 )}
 
-                {!downloadProgress.isDownloading && (
+                {!videoDownloadProgress.isDownloading && (
                   <>
                     {mediaEntries > 0 ? (
                       <div className="flex items-start gap-2 rounded-md border border-green-500/40 bg-green-50 p-3 text-sm dark:bg-green-950/20">
@@ -371,6 +470,173 @@ export default function CachePage() {
                     )}
                   </>
                 )}
+              </CardContent>
+            </Card>
+
+            {/* Soundboard Cache */}
+            <Card>
+              <CardHeader className="space-y-1">
+                <CardTitle className="flex items-center gap-2">
+                  <Volume2 className="h-5 w-5" /> Soundboard-Cache
+                </CardTitle>
+                <CardDescription>
+                  Sprachclips der Soundboard-Seite offline verfügbar machen.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground text-sm">
+                      Gefundene Sounds
+                    </span>
+                    <span className="text-sm font-medium">
+                      {isLoadingSounds ? '…' : soundUrls.length}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground text-sm">
+                      Download-Status
+                    </span>
+                    <span className="text-sm font-medium">
+                      {soundDownloadProgress.isDownloading
+                        ? `${soundDownloadProgress.completed} / ${soundDownloadProgress.total}`
+                        : 'Bereit'}
+                    </span>
+                  </div>
+                  <div>
+                    <div className="text-muted-foreground mb-1 flex items-center justify-between text-xs">
+                      <span>Fortschritt</span>
+                      <span>
+                        {soundDownloadProgress.isDownloading
+                          ? `${soundProgressPercent}%`
+                          : soundUrls.length > 0
+                            ? `${soundUrls.length} Dateien`
+                            : '–'}
+                      </span>
+                    </div>
+                    <Progress
+                      value={
+                        soundDownloadProgress.isDownloading
+                          ? soundProgressPercent
+                          : 0
+                      }
+                    />
+                  </div>
+                </div>
+
+                {soundDownloadProgress.isDownloading && (
+                  <div className="bg-muted/50 space-y-2 rounded-md border p-3">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="font-medium">Download läuft...</span>
+                      <span className="text-muted-foreground">
+                        {soundDownloadProgress.completed} /{' '}
+                        {soundDownloadProgress.total}
+                      </span>
+                    </div>
+                    {soundDownloadProgress.currentUrl && (
+                      <p className="text-muted-foreground truncate text-xs">
+                        {soundDownloadProgress.currentUrl.split('/').pop()}
+                      </p>
+                    )}
+                    <Progress value={soundProgressPercent} />
+                    {soundDownloadProgress.bytesDownloaded > 0 && (
+                      <p className="text-muted-foreground text-xs">
+                        {formatBytes(soundDownloadProgress.bytesDownloaded)}{' '}
+                        heruntergeladen
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                <div className="flex flex-col gap-2">
+                  <div className="flex gap-2">
+                    <Button
+                      className="flex-1 gap-2"
+                      onClick={handleSoundDownload}
+                      disabled={
+                        soundDownloadProgress.isDownloading ||
+                        isLoadingSounds ||
+                        (!soundUrls.length && !!soundError)
+                      }
+                    >
+                      {soundDownloadProgress.isDownloading ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          Lädt... ({soundDownloadProgress.completed}/
+                          {soundDownloadProgress.total})
+                        </>
+                      ) : (
+                        <>
+                          <Download className="h-4 w-4" />
+                          Soundboard herunterladen
+                        </>
+                      )}
+                    </Button>
+                    {soundDownloadProgress.isDownloading && (
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={cancelSoundDownload}
+                        title="Download abbrechen"
+                      >
+                        <XCircle className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </div>
+                  <Button
+                    variant="outline"
+                    className="w-full gap-2"
+                    onClick={() => void loadSoundManifest()}
+                    disabled={
+                      isLoadingSounds || soundDownloadProgress.isDownloading
+                    }
+                  >
+                    {isLoadingSounds ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Manifest lädt...
+                      </>
+                    ) : (
+                      <>
+                        <RefreshCw className="h-4 w-4" />
+                        Manifest aktualisieren
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                {soundError && (
+                  <div className="border-destructive/40 bg-destructive/10 rounded-md border p-3 text-xs">
+                    <p className="text-destructive font-medium">
+                      ⚠️ {soundError}
+                    </p>
+                  </div>
+                )}
+
+                {soundDownloadProgress.errors.length > 0 && (
+                  <div className="border-destructive/40 bg-destructive/10 rounded-md border p-3 text-xs">
+                    <p className="text-destructive font-medium">
+                      ⚠️ {soundDownloadProgress.errors.length} Fehler beim
+                      Herunterladen
+                    </p>
+                    <p className="text-destructive/90">
+                      Einige Sound-Dateien konnten nicht gespeichert werden.
+                    </p>
+                  </div>
+                )}
+
+                {!soundDownloadProgress.isDownloading &&
+                  !soundError &&
+                  soundUrls.length > 0 && (
+                    <div className="flex items-start gap-2 rounded-md border border-blue-500/40 bg-blue-50 p-3 text-sm dark:bg-blue-950/20">
+                      <Volume2 className="mt-0.5 h-4 w-4 text-blue-600" />
+                      <span className="text-blue-900 dark:text-blue-100">
+                        {soundUrls.length} Sound-Clips können offline
+                        gespeichert werden. Tippen Sie auf „Soundboard
+                        herunterladen“, um sie lokal verfügbar zu machen.
+                      </span>
+                    </div>
+                  )}
               </CardContent>
             </Card>
 
