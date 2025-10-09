@@ -4,21 +4,15 @@
   "private": true,
   "packageManager": "pnpm@10.15.1",
   "scripts": {
-    "build": "next build",
     "build:clean": "node -e \"try{require('fs').rmSync('.next',{recursive:true,force:true})}catch(e){}try{require('fs').rmSync('out',{recursive:true,force:true})}catch(e){}\" && next build",
     "clean:dev": "node -e \"try{require('fs').rmSync('.next',{recursive:true,force:true})}catch(e){}\"",
     "build:export": "next build",
     "dev": "next dev --turbopack",
     "dev:webpack": "next dev",
-    "claude": "claude --dangerously-skip-permissions",
-    "qwen": "qwen --yolo",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "next lint --strict",
-    "start": "next start",
-    "serve": "serve out -p 3001",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "serve": "serve out -p 3001"
   },
   "engines": {
     "node": ">=20"

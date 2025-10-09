@@ -1,692 +1,237 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { toast } from 'sonner';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-interface CacheStatus {
-  isSupported: boolean;
-  isRegistered: boolean;
-  estimate?: {
-    quota?: number;
-    usage?: number;
-    usagePercent?: number;
-  };
+export type CacheBucketKind = 'media' | 'pages' | 'static' | 'data' | 'images' | 'fallback';
+
+export interface CacheBucketSummary {
+  cacheName: string;
+  kind: CacheBucketKind;
+  entryCount: number;
+  totalBytes: number | null;
+  sampleUrls: string[];
 }
 
-interface VideoCache {
-  url: string;
-  size?: number;
-  timestamp?: number;
+export interface CacheSummary {
+  generatedAt: number;
+  caches: CacheBucketSummary[];
 }
 
-type CacheTaskState = 'idle' | 'running' | 'completed' | 'error' | 'aborted';
+export type PrefetchStatus = 'idle' | 'running' | 'completed' | 'error' | 'aborted';
 
-interface CacheTaskProgress {
+export interface PrefetchProgress {
   taskId: string | null;
   label?: string;
-  status: CacheTaskState;
+  status: PrefetchStatus;
   total: number;
   completed: number;
   failed: number;
+  bytesDownloaded: number;
   currentUrl?: string;
-  note?: string;
-  error?: string;
-  message?: string;
   startedAt?: number;
   finishedAt?: number;
+  error?: string;
 }
 
-interface QuotaCheckResult {
-  hasSpace: boolean;
-  required: number;
-  available: number;
-  quota: number;
-  usage: number;
-  quotaPercent: number;
-  unknownUrls: string[];
+interface StorageSnapshot {
+  quota?: number;
+  usage?: number;
 }
 
-interface ServiceWorkerEvent {
-  id: string;
-  eventName: string;
-  detail?: Record<string, unknown>;
-  timestamp: number;
-}
-
-const PROGRESS_STORAGE_KEY = 'video-cache-progress';
-const MAX_SW_EVENTS = 50;
-const CACHE_NAME = 'video-cache-v1';
-
-const defaultProgress: CacheTaskProgress = {
+const DEFAULT_PROGRESS: PrefetchProgress = {
   taskId: null,
   status: 'idle',
   total: 0,
   completed: 0,
   failed: 0,
+  bytesDownloaded: 0,
 };
 
-const normalizeVideoUrl = (input: string): string => {
-  if (!input) return input;
+const MESSAGE_TYPES = {
+  summaryRequest: 'REQUEST_CACHE_SUMMARY',
+  summaryResponse: 'CACHE_SUMMARY',
+  prefetch: 'PREFETCH_VIDEOS',
+  prefetchUpdate: 'PREFETCH_VIDEOS_UPDATE',
+  abort: 'ABORT_PREFETCH',
+  clear: 'CLEAR_MEDIA_CACHE',
+  cleared: 'CACHE_CLEARED',
+} as const;
 
-  try {
-    const url = new URL(input);
-    url.hash = '';
-    return url.toString();
-  } catch (error) {
-    const [withoutHash] = input.split('#');
-    return withoutHash;
-  }
-};
-
-const loadStoredProgress = (): CacheTaskProgress => {
-  if (typeof window === 'undefined') return defaultProgress;
-
-  const stored = window.localStorage.getItem(PROGRESS_STORAGE_KEY);
-  if (!stored) return defaultProgress;
-
-  try {
-    const parsed = JSON.parse(stored) as CacheTaskProgress;
-    return {
-      ...defaultProgress,
-      ...parsed,
-    };
-  } catch (error) {
-    return defaultProgress;
-  }
-};
+const isServiceWorkerSupported = () =>
+  typeof window !== 'undefined' && 'serviceWorker' in navigator && 'caches' in window;
 
 export const useVideoCache = () => {
-  const [cacheStatus, setCacheStatus] = useState<CacheStatus>({
-    isSupported: false,
-    isRegistered: false,
-  });
-  const [cachedVideos, setCachedVideos] = useState<VideoCache[]>([]);
-  const [cacheProgress, setCacheProgress] =
-    useState<CacheTaskProgress>(loadStoredProgress);
-  const [swEvents, setSwEvents] = useState<ServiceWorkerEvent[]>([]);
+  const [isSupported, setIsSupported] = useState(false);
+  const [registration, setRegistration] = useState<ServiceWorkerRegistration | null>(null);
+  const [summary, setSummary] = useState<CacheSummary | null>(null);
+  const [storageSnapshot, setStorageSnapshot] = useState<StorageSnapshot | null>(null);
+  const [progress, setProgress] = useState<PrefetchProgress>(DEFAULT_PROGRESS);
 
-  const pendingTasksRef = useRef<
-    Map<string, (result: CacheTaskProgress) => void>
-  >(new Map());
+  const latestTaskId = useRef<string | null>(null);
 
-  const persistProgress = useCallback((progress: CacheTaskProgress) => {
-    if (typeof window === 'undefined') return;
-    window.localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(progress));
-  }, []);
-
-  const updateProgress = useCallback(
-    (
-      updater:
-        | CacheTaskProgress
-        | ((prev: CacheTaskProgress) => CacheTaskProgress),
-    ) => {
-      setCacheProgress((prev) => {
-        const next =
-          typeof updater === 'function'
-            ? (updater as (prev: CacheTaskProgress) => CacheTaskProgress)(prev)
-            : updater;
-        persistProgress(next);
-        return next;
-      });
+  const postMessage = useCallback(
+    (message: Record<string, unknown>) => {
+      if (!isSupported) return;
+      const controller = navigator.serviceWorker.controller;
+      const target = registration?.active ?? controller;
+      if (target && typeof target.postMessage === 'function') {
+        target.postMessage(message);
+      }
     },
-    [persistProgress],
+    [isSupported, registration?.active],
   );
 
-  const refreshCacheStatus = useCallback(async () => {
-    if (typeof window === 'undefined') return;
-
-    const isSupported = 'serviceWorker' in navigator && 'caches' in window;
-    const registration = isSupported
-      ? await navigator.serviceWorker.getRegistration()
-      : undefined;
-
-    let estimate;
-    if (
-      isSupported &&
-      'storage' in navigator &&
-      typeof navigator.storage?.estimate === 'function'
-    ) {
+  const captureStorageSnapshot = useCallback(async () => {
+    if (!isSupported) return;
+    if ('storage' in navigator && typeof navigator.storage?.estimate === 'function') {
       try {
-        const storageEstimate = await navigator.storage.estimate();
-        estimate = {
-          quota: storageEstimate.quota,
-          usage: storageEstimate.usage,
-          usagePercent: storageEstimate.quota
-            ? ((storageEstimate.usage || 0) / storageEstimate.quota) * 100
-            : 0,
-        };
+        const estimate = await navigator.storage.estimate();
+        setStorageSnapshot({ quota: estimate.quota ?? undefined, usage: estimate.usage ?? undefined });
       } catch (error) {
-        // Ignore estimation issues
+        // ignore storage estimate issues
       }
     }
+  }, [isSupported]);
 
-    setCacheStatus({
-      isSupported,
-      isRegistered: Boolean(registration),
-      estimate,
-    });
-  }, []);
-
-  const updateCachedVideosList = useCallback(async () => {
-    if (typeof window === 'undefined' || !cacheStatus.isSupported) return;
-
-    try {
-      const cache = await caches.open(CACHE_NAME);
-      const requests = await cache.keys();
-
-      const videos: VideoCache[] = [];
-      for (const request of requests) {
-        const url = normalizeVideoUrl(request.url);
-        videos.push({ url });
-      }
-
-      setCachedVideos(videos);
-    } catch (error) {
-      console.error('Failed to read cached videos:', error);
-    }
-  }, [cacheStatus.isSupported]);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    refreshCacheStatus().catch(() => {
+  const requestSummary = useCallback(() => {
+    postMessage({ type: MESSAGE_TYPES.summaryRequest });
+    captureStorageSnapshot().catch(() => {
       /* noop */
     });
-    updateCachedVideosList().catch(() => {
-      /* noop */
-    });
-  }, [refreshCacheStatus, updateCachedVideosList]);
-
-  const handleServiceWorkerMessage = useCallback(
-    (event: MessageEvent) => {
-      const data = event.data;
-      if (!data || typeof data !== 'object') return;
-
-      const { type, payload } = data;
-
-      if (type === 'CACHE_TASK_UPDATE') {
-        updateProgress((prev) => ({
-          ...prev,
-          ...payload,
-          taskId: payload?.taskId ?? prev.taskId,
-          status: payload?.status ?? prev.status,
-          label: payload?.label ?? prev.label,
-          currentUrl: payload?.currentUrl,
-          note: payload?.note,
-          error: payload?.error,
-          message: payload?.message ?? prev.message,
-        }));
-
-        if (
-          payload?.taskId &&
-          ['completed', 'error', 'aborted'].includes(payload.status)
-        ) {
-          const resolver = pendingTasksRef.current.get(payload.taskId);
-          if (resolver) {
-            resolver({
-              taskId: payload.taskId,
-              label: payload.label,
-              status: payload.status,
-              total: payload.total ?? 0,
-              completed: payload.completed ?? 0,
-              failed: payload.failed ?? 0,
-            });
-            pendingTasksRef.current.delete(payload.taskId);
-          }
-
-          refreshCacheStatus().catch(() => {});
-          updateCachedVideosList().catch(() => {});
-        }
-      }
-
-      if (type === 'CACHE_TASK_RESULT' && payload?.taskId) {
-        const resolver = pendingTasksRef.current.get(payload.taskId);
-        if (resolver) {
-          resolver(payload);
-          pendingTasksRef.current.delete(payload.taskId);
-        }
-      }
-
-      if (type === 'SW_EVENT') {
-        setSwEvents((prev) =>
-          [payload as ServiceWorkerEvent, ...prev].slice(0, MAX_SW_EVENTS),
-        );
-      }
-
-      if (type === 'SW_EVENT_LOG' && Array.isArray(payload)) {
-        setSwEvents((payload as ServiceWorkerEvent[]).slice(0, MAX_SW_EVENTS));
-      }
-
-      if (type === 'SW_TOAST') {
-        const toastPayload = payload as {
-          kind?: 'warning' | 'error' | 'info';
-          message: string;
-          description?: string;
-        };
-
-        if (!toastPayload?.message) return;
-
-        if (toastPayload.kind === 'warning') {
-          toast.warning(toastPayload.message, {
-            description: toastPayload.description,
-            duration: 6000,
-          });
-        } else if (toastPayload.kind === 'error') {
-          toast.error(toastPayload.message, {
-            description: toastPayload.description,
-            duration: 6000,
-          });
-        } else {
-          toast(toastPayload.message, {
-            description: toastPayload.description,
-            duration: 4000,
-          });
-        }
-      }
-
-      if (type === 'CACHE_CLEARED') {
-        refreshCacheStatus().catch(() => {});
-        updateCachedVideosList().catch(() => {});
-      }
-    },
-    [refreshCacheStatus, updateCachedVideosList, updateProgress],
-  );
+  }, [captureStorageSnapshot, postMessage]);
 
   useEffect(() => {
-    if (
-      typeof window === 'undefined' ||
-      !('serviceWorker' in navigator) ||
-      !cacheStatus.isSupported
-    ) {
+    if (!isServiceWorkerSupported()) {
+      setIsSupported(false);
       return;
     }
 
-    navigator.serviceWorker.addEventListener(
-      'message',
-      handleServiceWorkerMessage,
-    );
+    setIsSupported(true);
+    let cancelled = false;
 
     navigator.serviceWorker.ready
-      .then((registration) => {
-        registration.active?.postMessage({ type: 'REQUEST_EVENT_LOG' });
+      .then((reg) => {
+        if (!cancelled) {
+          setRegistration(reg);
+        }
       })
       .catch(() => {
         /* noop */
       });
 
-    return () => {
-      navigator.serviceWorker.removeEventListener(
-        'message',
-        handleServiceWorkerMessage,
-      );
-    };
-  }, [cacheStatus.isSupported, handleServiceWorkerMessage]);
+    const handleMessage = (event: MessageEvent) => {
+      const data = event.data;
+      if (!data || typeof data !== 'object') return;
+      const { type, payload } = data as { type?: string; payload?: any };
 
-  const postToServiceWorker = useCallback(
-    async (message: Record<string, unknown>) => {
-      if (typeof navigator === 'undefined' || !navigator.serviceWorker) {
-        throw new Error('Service Worker API unavailable');
-      }
-
-      const registration = await navigator.serviceWorker.ready;
-      const controller =
-        navigator.serviceWorker.controller || registration.active;
-
-      if (!controller) {
-        throw new Error('Kein aktiver Service Worker gefunden');
-      }
-
-      controller.postMessage(message);
-    },
-    [],
-  );
-
-  const waitForVideoCache = useCallback(
-    async (url: string, timeoutMs = 2 * 60 * 1000): Promise<boolean> => {
-      const start = Date.now();
-      while (Date.now() - start < timeoutMs) {
-        if (await isVideoCached(url)) {
-          return true;
+      switch (type) {
+        case MESSAGE_TYPES.prefetchUpdate: {
+          if (!payload) return;
+          const taskId = payload.taskId ?? null;
+          if (latestTaskId.current && taskId && latestTaskId.current !== taskId) {
+            return;
+          }
+          latestTaskId.current = taskId;
+          setProgress({
+            taskId,
+            label: payload.label,
+            status: payload.status ?? 'idle',
+            total: payload.total ?? 0,
+            completed: payload.completed ?? 0,
+            failed: payload.failed ?? 0,
+            bytesDownloaded: payload.bytesDownloaded ?? 0,
+            currentUrl: payload.currentUrl,
+            startedAt: payload.startedAt,
+            finishedAt: payload.finishedAt,
+            error: payload.error,
+          });
+          break;
         }
-        await new Promise((resolve) => setTimeout(resolve, 600));
+        case MESSAGE_TYPES.summaryResponse: {
+          if (payload) {
+            setSummary(payload as CacheSummary);
+          }
+          break;
+        }
+        case MESSAGE_TYPES.cleared: {
+          setProgress(DEFAULT_PROGRESS);
+          requestSummary();
+          break;
+        }
+        default:
+          break;
       }
-      return false;
-    },
-    [],
-  );
+    };
 
-  const cacheVideos = useCallback(
-    async (
-      urls: string[],
-      options?: {
-        label?: string;
-      },
-    ): Promise<{ success: number; failed: number }> => {
-      if (!cacheStatus.isSupported) {
-        console.warn('Cache API not supported');
-        return { success: 0, failed: urls.length };
-      }
+    navigator.serviceWorker.addEventListener('message', handleMessage);
 
-      const normalizedUrls = Array.from(
-        new Set(
-          urls
-            .map((url) => normalizeVideoUrl(url))
-            .filter((url): url is string => Boolean(url)),
-        ),
-      );
+    return () => {
+      cancelled = true;
+      navigator.serviceWorker.removeEventListener('message', handleMessage);
+    };
+  }, [requestSummary]);
 
-      if (!normalizedUrls.length) {
-        return { success: 0, failed: 0 };
-      }
+  useEffect(() => {
+    if (!isSupported || !registration) return;
+    requestSummary();
+  }, [isSupported, registration, requestSummary]);
 
-      const taskId = `cache-${Date.now()}-${Math.random()
-        .toString(36)
-        .slice(2, 6)}`;
-
-      updateProgress({
-        ...defaultProgress,
+  const prefetchVideos = useCallback(
+    async (urls: string[], label = 'videos'): Promise<string | null> => {
+      if (!isSupported || urls.length === 0) return null;
+      const taskId = `prefetch-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+      latestTaskId.current = taskId;
+      setProgress({
+        ...DEFAULT_PROGRESS,
         taskId,
-        label: options?.label,
+        label,
         status: 'running',
-        total: normalizedUrls.length,
-        completed: 0,
-        failed: 0,
+        total: urls.length,
         startedAt: Date.now(),
       });
-
-      try {
-        await postToServiceWorker({
-          type: 'CACHE_VIDEO_URLS',
-          urls: normalizedUrls,
-          taskId,
-          label: options?.label,
-        });
-      } catch (error) {
-        const message =
-          error instanceof Error ? error.message : 'Unbekannter Fehler';
-        toast.error('Caching fehlgeschlagen', { description: message });
-        updateProgress({
-          ...defaultProgress,
-          status: 'error',
-          message,
-        });
-        return { success: 0, failed: normalizedUrls.length };
-      }
-
-      return await new Promise<{ success: number; failed: number }>(
-        (resolve) => {
-          const timeoutId = window.setTimeout(
-            () => {
-              pendingTasksRef.current.delete(taskId);
-              updateProgress((prev) => ({
-                ...prev,
-                status: 'error',
-                message: 'Zeitüberschreitung beim Video-Download.',
-                finishedAt: Date.now(),
-              }));
-              resolve({ success: 0, failed: normalizedUrls.length });
-            },
-            1000 * 60 * 5,
-          );
-
-          pendingTasksRef.current.set(taskId, (result) => {
-            window.clearTimeout(timeoutId);
-            updateProgress((prev) => ({
-              ...prev,
-              status: result.status,
-              completed: result.completed ?? prev.completed,
-              failed: result.failed ?? prev.failed,
-              finishedAt: Date.now(),
-            }));
-
-            refreshCacheStatus().catch(() => {});
-            updateCachedVideosList().catch(() => {});
-
-            resolve({
-              success: result.completed ?? 0,
-              failed: result.failed ?? 0,
-            });
-          });
-        },
-      );
+      postMessage({ type: MESSAGE_TYPES.prefetch, taskId, urls, label });
+      return taskId;
     },
-    [
-      cacheStatus.isSupported,
-      postToServiceWorker,
-      refreshCacheStatus,
-      updateCachedVideosList,
-      updateProgress,
-    ],
+    [isSupported, postMessage],
   );
 
-  const cacheVideo = useCallback(
-    async (url: string, options?: { label?: string }) => {
-      const { success } = await cacheVideos([url], options);
-      return success === 1;
-    },
-    [cacheVideos],
-  );
-
-  const isVideoCached = useCallback(
-    async (url: string): Promise<boolean> => {
-      const normalizedUrl = normalizeVideoUrl(url);
-      if (!cacheStatus.isSupported) return false;
-
-      try {
-        const cache = await caches.open(CACHE_NAME);
-        const response = await cache.match(normalizedUrl);
-        return response !== undefined;
-      } catch (error) {
-        console.error('Failed to check cache status:', error);
-        return false;
-      }
-    },
-    [cacheStatus.isSupported],
-  );
-
-  const uncacheVideo = useCallback(
-    async (url: string): Promise<boolean> => {
-      const normalizedUrl = normalizeVideoUrl(url);
-      if (!cacheStatus.isSupported) return false;
-
-      try {
-        const cache = await caches.open(CACHE_NAME);
-        const deleted = await cache.delete(normalizedUrl);
-        await updateCachedVideosList();
-        await refreshCacheStatus();
-        return deleted;
-      } catch (error) {
-        console.error('Failed to remove video from cache:', error);
-        return false;
-      }
-    },
-    [cacheStatus.isSupported, refreshCacheStatus, updateCachedVideosList],
-  );
-
-  const clearVideoCache = useCallback(async (): Promise<boolean> => {
-    if (!cacheStatus.isSupported) return false;
-
-    try {
-      const deleted = await caches.delete(CACHE_NAME);
-
-      if (navigator.serviceWorker.controller) {
-        navigator.serviceWorker.controller.postMessage({
-          type: 'CLEAR_CACHE',
-          cacheName: CACHE_NAME,
-        });
-      }
-
-      await updateCachedVideosList();
-      await refreshCacheStatus();
-      updateProgress(defaultProgress);
-      return deleted;
-    } catch (error) {
-      console.error('Failed to clear video cache:', error);
-      return false;
-    }
-  }, [
-    cacheStatus.isSupported,
-    refreshCacheStatus,
-    updateCachedVideosList,
-    updateProgress,
-  ]);
-
-  const getCacheInfo = useCallback(async (): Promise<{
-    size: number;
-    count: number;
-  }> => {
-    if (!cacheStatus.isSupported) {
-      return { size: 0, count: 0 };
-    }
-
-    try {
-      const cache = await caches.open(CACHE_NAME);
-      const requests = await cache.keys();
-
-      let totalSize = 0;
-      for (const request of requests) {
-        const response = await cache.match(request);
-        if (response) {
-          const blob = await response.blob();
-          totalSize += blob.size;
-        }
-      }
-
-      return {
-        size: totalSize,
-        count: requests.length,
-      };
-    } catch (error) {
-      console.error('Failed to get cache info:', error);
-      return { size: 0, count: 0 };
-    }
-  }, [cacheStatus.isSupported]);
-
-  const formatBytes = useCallback((bytes: number): string => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return `${Math.round((bytes / Math.pow(k, i)) * 100) / 100} ${sizes[i]}`;
-  }, []);
-
-  const estimateRemoteSizes = useCallback(async (urls: string[]) => {
-    const uniqueUrls = Array.from(
-      new Set(
-        urls
-          .map((url) => normalizeVideoUrl(url))
-          .filter((url): url is string => Boolean(url)),
-      ),
-    );
-
-    let total = 0;
-    const unknown: string[] = [];
-
-    for (const url of uniqueUrls) {
-      try {
-        const response = await fetch(url, {
-          method: 'HEAD',
-          mode: 'cors',
-        });
-
-        if (!response.ok) {
-          unknown.push(url);
-          continue;
-        }
-
-        const contentLength = response.headers.get('content-length');
-        if (contentLength) {
-          const size = Number(contentLength);
-          if (!Number.isNaN(size)) {
-            total += size;
-          } else {
-            unknown.push(url);
-          }
-        } else {
-          unknown.push(url);
-        }
-      } catch (error) {
-        unknown.push(url);
-      }
-    }
-
-    return { total, unknown };
-  }, []);
-
-  const checkQuotaBeforeCaching = useCallback(
-    async (urls: string[]): Promise<QuotaCheckResult> => {
-      if (
-        typeof navigator === 'undefined' ||
-        !cacheStatus.isSupported ||
-        !navigator.storage?.estimate
-      ) {
-        return {
-          hasSpace: true,
-          required: 0,
-          available: Number.POSITIVE_INFINITY,
-          quota: 0,
-          usage: 0,
-          quotaPercent: 0,
-          unknownUrls: [],
-        };
-      }
-
-      const estimate = await navigator.storage.estimate();
-      const available = (estimate.quota || 0) - (estimate.usage || 0);
-
-      const { total, unknown } = await estimateRemoteSizes(urls);
-
-      const required = total;
-      const hasSpace =
-        !estimate.quota || required === 0 || required <= available;
-
-      return {
-        hasSpace,
-        required,
-        available,
-        quota: estimate.quota || 0,
-        usage: estimate.usage || 0,
-        quotaPercent: estimate.quota
-          ? ((estimate.usage || 0) / estimate.quota) * 100
-          : 0,
-        unknownUrls: unknown,
-      };
-    },
-    [cacheStatus.isSupported, estimateRemoteSizes],
-  );
-
-  const cancelActiveTask = useCallback(
-    async (taskId?: string) => {
-      const activeTaskId = taskId || cacheProgress.taskId;
+  const abortPrefetch = useCallback(
+    (taskId?: string) => {
+      const activeTaskId = taskId ?? latestTaskId.current;
       if (!activeTaskId) return;
-
-      try {
-        await postToServiceWorker({
-          type: 'CANCEL_CACHE_TASK',
-          taskId: activeTaskId,
-        });
-      } catch (error) {
-        console.warn('Failed to cancel cache task', error);
-      }
+      postMessage({ type: MESSAGE_TYPES.abort, taskId: activeTaskId });
     },
-    [cacheProgress.taskId, postToServiceWorker],
+    [postMessage],
   );
+
+  const clearVideoCache = useCallback(() => {
+    postMessage({ type: MESSAGE_TYPES.clear });
+  }, [postMessage]);
+
+  const formatBytes = useCallback((bytes?: number | null) => {
+    if (!bytes || bytes <= 0) return '0 B';
+    const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+    const exponent = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+    const value = bytes / Math.pow(1024, exponent);
+    return `${value.toFixed(value >= 10 ? 0 : 1)} ${units[exponent]}`;
+  }, []);
+
+  const mediaCache = useMemo(() => {
+    if (!summary) return null;
+    return summary.caches.find((cache) => cache.kind === 'media') ?? null;
+  }, [summary]);
 
   return {
-    cacheStatus,
-    cachedVideos,
-    cacheVideo,
-    cacheVideos,
-    cancelActiveTask,
-    cacheProgress,
-    swEvents,
-    isVideoCached,
-    uncacheVideo,
+    isSupported,
+    registration,
+    summary,
+    mediaCache,
+    storageSnapshot,
+    progress,
+    prefetchVideos,
+    abortPrefetch,
     clearVideoCache,
-    updateCachedVideosList,
-    getCacheInfo,
+    requestSummary,
     formatBytes,
-    checkQuotaBeforeCaching,
-    waitForVideoCache,
-  };
+  } as const;
 };

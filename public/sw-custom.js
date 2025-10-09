@@ -1,807 +1,501 @@
-// Custom Service Worker for Video Caching & Offline Support
-// Extends next-pwa's generated worker with QuoVadis-specific behaviour
+// Modernized Service Worker for QuoVadis Sports Training
+// Implements updated caching strategies with Workbox 7 for resilient offline support
 
-importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/6.5.4/workbox-sw.js',
-);
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/7.3.0/workbox-sw.js');
 
-const { registerRoute, setCatchHandler } = workbox.routing;
-const { CacheFirst, StaleWhileRevalidate, NetworkFirst } = workbox.strategies;
-const { ExpirationPlugin } = workbox.expiration;
-const { RangeRequestsPlugin } = workbox.rangeRequests;
-const { CacheableResponsePlugin } = workbox.cacheableResponse;
+if (!self.workbox) {
+  console.warn('Workbox konnte nicht geladen werden. Offline-Funktionen eingeschränkt.');
+}
 
-const CACHE_VERSION = 'v2';
-const VIDEO_CACHE_NAME = 'video-cache-v1';
-const IMAGES_CACHE_NAME = 'images-cache-v2';
-const IMAGE_AVATAR_CACHE_NAME = 'image-avatars-cache-v1';
-const AUDIO_CACHE_NAME = 'audio-cache-v1';
-const STATIC_ASSETS_CACHE_NAME = 'static-assets-cache-v1';
-const GOOGLE_FONTS_CSS_CACHE = 'google-fonts-css-v1';
-const GOOGLE_FONTS_FILES_CACHE = 'google-fonts-files-v1';
-const API_CACHE_NAME = 'api-cache-v1';
-const PAGES_CACHE_VERSION = 'v2';
-const PAGES_CACHE_NAME = `pages-cache-${PAGES_CACHE_VERSION}`;
-const OFFLINE_CACHE_NAME = 'offline-v1';
-const OFFLINE_URL = '/offline/';
-const APP_SHELL_URL = '/';
+const {
+  core,
+  precaching,
+  routing,
+  strategies,
+  expiration,
+  cacheableResponse,
+  broadcastUpdate,
+  recipes,
+  rangeRequests,
+} = self.workbox || {};
 
-const TELEMETRY_ENDPOINT = '/api/telemetry/sw-events';
-const ENABLE_TELEMETRY =
-  typeof self !== 'undefined' &&
-  self.location &&
-  !self.location.hostname.includes('localhost');
-const TELEMETRY_SAMPLE_RATE = 0.2;
-const MAX_RECENT_SW_EVENTS = 50;
+const APP_VERSION = '2025-10-09';
+const CACHE_PREFIX = 'quo-vadis';
+const MEDIA_CACHE = `${CACHE_PREFIX}-media-${APP_VERSION}`;
+const PAGE_CACHE = `${CACHE_PREFIX}-pages-${APP_VERSION}`;
+const STATIC_CACHE = `${CACHE_PREFIX}-static-${APP_VERSION}`;
+const DATA_CACHE = `${CACHE_PREFIX}-data-${APP_VERSION}`;
+const IMAGE_CACHE = `${CACHE_PREFIX}-images-${APP_VERSION}`;
+const FALLBACK_CACHE = `${CACHE_PREFIX}-fallback-${APP_VERSION}`;
 
-const recentSwEvents = [];
-const activeCacheTasks = new Map();
+const RUNTIME_CACHES = new Set([
+  MEDIA_CACHE,
+  PAGE_CACHE,
+  STATIC_CACHE,
+  DATA_CACHE,
+  IMAGE_CACHE,
+  FALLBACK_CACHE,
+]);
 
-const normalizeVideoUrl = (input) => {
-  if (!input) return input;
+const FALLBACK_PAGE = '/offline/';
+const PREFETCHABLE_ROUTES = ['/', '/offline/', '/cache/'];
 
-  try {
-    const url = new URL(input);
-    url.hash = '';
-    return url.toString();
-  } catch (error) {
-    const [withoutHash] = input.split('#');
-    return withoutHash;
+let defaultStaticStrategy = null;
+
+if (core) {
+  core.setCacheNameDetails({ prefix: CACHE_PREFIX, suffix: APP_VERSION });
+  core.skipWaiting();
+  core.clientsClaim();
+  if (core.LOG_LEVELS) {
+    core.setLogLevel(core.LOG_LEVELS.silent);
   }
+  if (strategies && expiration) {
+    const basePlugins = [
+      new expiration.ExpirationPlugin({
+        maxEntries: 80,
+        maxAgeSeconds: 7 * 24 * 60 * 60,
+      }),
+    ];
+    defaultStaticStrategy = new strategies.StaleWhileRevalidate({
+      cacheName: STATIC_CACHE,
+      plugins: basePlugins,
+    });
+    if (routing && defaultStaticStrategy) {
+      routing.setDefaultHandler(defaultStaticStrategy);
+    }
+  }
+  if (core.navigationPreload) {
+    core.navigationPreload.enable();
+  }
+}
+
+if (precaching) {
+  precaching.precacheAndRoute(self.__WB_MANIFEST ?? []);
+}
+
+const { registerRoute, setCatchHandler } = routing || {};
+const { NetworkFirst, StaleWhileRevalidate, CacheFirst } = strategies || {};
+const { ExpirationPlugin } = expiration || {};
+const { CacheableResponsePlugin } = cacheableResponse || {};
+const { BroadcastUpdatePlugin } = broadcastUpdate || {};
+const { RangeRequestsPlugin } = rangeRequests || {};
+const { offlineFallback, warmStrategyCache } = recipes || {};
+
+const navigationStrategy = NetworkFirst
+  ? new NetworkFirst({
+      cacheName: PAGE_CACHE,
+      networkTimeoutSeconds: 8,
+      plugins: [
+        new CacheableResponsePlugin({ statuses: [0, 200] }),
+        new ExpirationPlugin({
+          maxEntries: 80,
+          maxAgeSeconds: 24 * 60 * 60,
+        }),
+      ],
+    })
+  : null;
+
+if (registerRoute && navigationStrategy) {
+  registerRoute(({ request }) => request.mode === 'navigate', navigationStrategy);
+}
+
+if (warmStrategyCache && navigationStrategy) {
+  warmStrategyCache({ urls: PREFETCHABLE_ROUTES, strategy: navigationStrategy });
+}
+
+if (offlineFallback) {
+  offlineFallback({ pageFallback: FALLBACK_PAGE });
+}
+
+if (registerRoute && StaleWhileRevalidate) {
+  const staticRuntimePlugins = [];
+  if (BroadcastUpdatePlugin) {
+    staticRuntimePlugins.push(new BroadcastUpdatePlugin());
+  }
+  if (ExpirationPlugin) {
+    staticRuntimePlugins.push(
+      new ExpirationPlugin({
+        maxEntries: 120,
+        maxAgeSeconds: 7 * 24 * 60 * 60,
+      }),
+    );
+  }
+
+  registerRoute(
+    ({ request }) =>
+      request.destination === 'script' ||
+      request.destination === 'style' ||
+      request.destination === 'worker',
+    new StaleWhileRevalidate({
+      cacheName: STATIC_CACHE,
+      plugins: staticRuntimePlugins,
+    }),
+  );
+
+  registerRoute(
+    ({ request }) => request.destination === 'image',
+    new StaleWhileRevalidate({
+      cacheName: IMAGE_CACHE,
+      plugins: [
+        new CacheableResponsePlugin({ statuses: [0, 200] }),
+        new ExpirationPlugin({
+          maxEntries: 240,
+          maxAgeSeconds: 30 * 24 * 60 * 60,
+        }),
+      ],
+    }),
+  );
+
+  registerRoute(
+    ({ url }) =>
+      url.pathname.startsWith('/api/') ||
+      url.pathname.endsWith('.json') ||
+      url.pathname.includes('/data/'),
+    new NetworkFirst({
+      cacheName: DATA_CACHE,
+      networkTimeoutSeconds: 6,
+      plugins: [
+        new CacheableResponsePlugin({ statuses: [0, 200] }),
+        new ExpirationPlugin({
+          maxEntries: 60,
+          maxAgeSeconds: 5 * 60,
+        }),
+      ],
+    }),
+  );
+
+  registerRoute(
+    ({ request, url }) => {
+      const destination = request.destination;
+      if (destination === 'video' || destination === 'audio') return true;
+      return /\.(mp4|webm|m3u8|mp3|wav|ogg)(\?.*)?$/i.test(url.pathname);
+    },
+    new CacheFirst({
+      cacheName: MEDIA_CACHE,
+      plugins: [
+        new RangeRequestsPlugin(),
+        new CacheableResponsePlugin({ statuses: [0, 200, 206] }),
+        new ExpirationPlugin({
+          maxEntries: 90,
+          maxAgeSeconds: 45 * 24 * 60 * 60,
+          purgeOnQuotaError: true,
+        }),
+      ],
+    }),
+  );
+}
+
+if (setCatchHandler) {
+  setCatchHandler(async ({ request }) => {
+    if (request.destination === 'document') {
+      const cached = await caches.match(FALLBACK_PAGE, {
+        cacheName: FALLBACK_CACHE,
+      });
+      if (cached) return cached;
+      return caches.match(FALLBACK_PAGE) ?? Response.error();
+    }
+
+    if (request.destination === 'image') {
+      return Response.error();
+    }
+
+    return Response.error();
+  });
+}
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    (async () => {
+      const fallbackCache = await caches.open(FALLBACK_CACHE);
+      await fallbackCache.addAll(PREFETCHABLE_ROUTES);
+    })(),
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    (async () => {
+      const keys = await caches.keys();
+      const precacheName = core ? core.cacheNames.precache : null;
+      const runtimeAllowlist = new Set([...RUNTIME_CACHES]);
+      if (precacheName) {
+        runtimeAllowlist.add(precacheName);
+      }
+
+      await Promise.all(
+        keys.map(async (key) => {
+          if (!key.startsWith(CACHE_PREFIX)) return;
+          if (!runtimeAllowlist.has(key)) {
+            await caches.delete(key);
+          }
+        }),
+      );
+
+      const clients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      for (const client of clients) {
+        client.postMessage({ type: 'CACHE_VERSION', payload: { version: APP_VERSION } });
+      }
+    })(),
+  );
+});
+
+const prefetchTasks = new Map();
+
+const uniqueUrls = (urls = []) => {
+  const seen = new Set();
+  const cleaned = [];
+  for (const raw of urls) {
+    if (typeof raw !== 'string') continue;
+    try {
+      const normalized = new URL(raw, self.registration.scope).toString();
+      if (!seen.has(normalized)) {
+        seen.add(normalized);
+        cleaned.push(normalized);
+      }
+    } catch (error) {
+      // ignore invalid URLs
+    }
+  }
+  return cleaned;
 };
 
-const broadcastMessage = async (message) => {
+const notifyClients = async (message) => {
   const clients = await self.clients.matchAll({
     type: 'window',
     includeUncontrolled: true,
   });
-
   for (const client of clients) {
     client.postMessage(message);
   }
 };
 
-const recordEvent = async (eventName, detail = {}) => {
-  const event = {
-    id: `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
-    eventName,
-    detail,
-    timestamp: Date.now(),
-  };
-
-  recentSwEvents.unshift(event);
-  if (recentSwEvents.length > MAX_RECENT_SW_EVENTS) {
-    recentSwEvents.pop();
+const responseSize = async (response) => {
+  const header = response.headers.get('content-length');
+  if (header) {
+    const parsed = Number(header);
+    if (!Number.isNaN(parsed)) return parsed;
   }
+  try {
+    const blob = await response.clone().blob();
+    return blob.size;
+  } catch (error) {
+    return 0;
+  }
+};
 
-  await broadcastMessage({
-    type: 'SW_EVENT',
-    payload: event,
-  });
+const estimateMediaCacheUsage = async (cache, keys) => {
+  let totalBytes = 0;
+  for (const request of keys) {
+    const response = await cache.match(request);
+    if (!response) continue;
+    totalBytes += await responseSize(response);
+  }
+  return { entryCount: keys.length, totalBytes };
+};
 
-  if (ENABLE_TELEMETRY && Math.random() <= TELEMETRY_SAMPLE_RATE) {
-    try {
-      await fetch(TELEMETRY_ENDPOINT, {
-        method: 'POST',
-        body: JSON.stringify(event),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        keepalive: true,
+const sendCacheSummary = async () => {
+  const summary = [];
+  for (const cacheName of RUNTIME_CACHES) {
+    const cache = await caches.open(cacheName);
+    const keys = await cache.keys();
+    let totalBytes = null;
+    if (cacheName === MEDIA_CACHE) {
+      const mediaUsage = await estimateMediaCacheUsage(cache, keys);
+      totalBytes = mediaUsage.totalBytes;
+      summary.push({
+        cacheName,
+        entryCount: mediaUsage.entryCount,
+        totalBytes,
+        kind: 'media',
+        sampleUrls: keys.slice(0, 5).map((request) => request.url),
       });
-    } catch (error) {
-      // Ignore telemetry transport issues to avoid breaking offline flows
+      continue;
     }
-  }
-};
 
-const sendTaskUpdate = async (payload) => {
-  await broadcastMessage({
-    type: 'CACHE_TASK_UPDATE',
-    payload,
+    summary.push({
+      cacheName,
+      entryCount: keys.length,
+      totalBytes,
+      kind: cacheName.includes('pages')
+        ? 'pages'
+        : cacheName.includes('static')
+          ? 'static'
+          : cacheName.includes('data')
+            ? 'data'
+            : cacheName.includes('image')
+              ? 'images'
+              : 'fallback',
+      sampleUrls: keys.slice(0, 5).map((request) => request.url),
+    });
+  }
+
+  await notifyClients({
+    type: 'CACHE_SUMMARY',
+    payload: {
+      generatedAt: Date.now(),
+      caches: summary,
+    },
   });
 };
 
-const cacheVideoBatch = async ({ taskId, urls, label }) => {
-  const uniqueUrls = Array.from(
-    new Set(
-      (urls || [])
-        .map((url) => normalizeVideoUrl(url))
-        .filter((url) => Boolean(url)),
-    ),
-  );
-
-  if (!uniqueUrls.length) {
-    const summary = {
-      taskId,
-      label,
-      status: 'completed',
-      total: 0,
-      completed: 0,
-      failed: 0,
-    };
-    await sendTaskUpdate(summary);
-    await recordEvent('cache-task-empty', { taskId, label });
-    return summary;
+const runPrefetchTask = async ({ taskId, urls, label }) => {
+  const list = uniqueUrls(urls);
+  if (!list.length) {
+    await notifyClients({
+      type: 'PREFETCH_VIDEOS_UPDATE',
+      payload: {
+        taskId,
+        label,
+        status: 'idle',
+        total: 0,
+        completed: 0,
+        failed: 0,
+      },
+    });
+    return;
   }
 
-  const task = {
-    id: taskId,
-    label,
-    total: uniqueUrls.length,
-    completed: 0,
-    failed: 0,
-    aborted: false,
-    controller: new AbortController(),
-  };
+  const controller = new AbortController();
+  const cache = await caches.open(MEDIA_CACHE);
 
-  activeCacheTasks.set(taskId, task);
-
-  await recordEvent('cache-task-start', {
-    taskId,
-    label,
-    total: task.total,
-  });
-
-  await sendTaskUpdate({
+  const state = {
     taskId,
     label,
     status: 'running',
-    total: task.total,
-    completed: task.completed,
-    failed: task.failed,
-  });
+    total: list.length,
+    completed: 0,
+    failed: 0,
+    bytesDownloaded: 0,
+    startedAt: Date.now(),
+    controller,
+  };
 
-  const cache = await caches.open(VIDEO_CACHE_NAME);
+  prefetchTasks.set(taskId, state);
 
-  for (const url of uniqueUrls) {
-    if (task.aborted) break;
+  await notifyClients({ type: 'PREFETCH_VIDEOS_UPDATE', payload: state });
+
+  for (const url of list) {
+    if (state.controller.signal.aborted) break;
 
     try {
-      const existing = await cache.match(url);
-      if (existing) {
-        task.completed += 1;
-        await sendTaskUpdate({
-          taskId,
-          label,
-          status: 'running',
-          total: task.total,
-          completed: task.completed,
-          failed: task.failed,
-          currentUrl: url,
-          note: 'already-cached',
-        });
-        continue;
-      }
-
-      await sendTaskUpdate({
-        taskId,
-        label,
-        status: 'running',
-        total: task.total,
-        completed: task.completed,
-        failed: task.failed,
-        currentUrl: url,
-      });
-
       const response = await fetch(url, {
         mode: 'cors',
         credentials: 'omit',
-        signal: task.controller.signal,
+        signal: controller.signal,
       });
 
-      if (!(response.ok || response.status === 206)) {
-        throw new Error(`Unexpected response ${response.status} for ${url}`);
+      if (!response.ok && response.status !== 206) {
+        throw new Error(`Unerwarteter Status ${response.status}`);
       }
 
-      const blob = await response.blob();
+      const cachedResponse = response.clone();
+      await cache.put(url, cachedResponse);
+      const size = await responseSize(response);
+      state.bytesDownloaded += size;
+      state.completed += 1;
 
-      await cache.put(
-        url,
-        new Response(blob, {
-          status: 200,
-          statusText: 'OK',
-          headers: {
-            'Content-Type': response.headers.get('Content-Type') || 'video/mp4',
-            'Content-Length': blob.size.toString(),
-            'Cache-Control': 'public, max-age=31536000',
-          },
-        }),
-      );
-
-      task.completed += 1;
-
-      await recordEvent('video-cached', {
-        taskId,
-        label,
-        url,
-        sizeBytes: blob.size,
-      });
-
-      await sendTaskUpdate({
-        taskId,
-        label,
-        status: 'running',
-        total: task.total,
-        completed: task.completed,
-        failed: task.failed,
-        currentUrl: url,
+      await notifyClients({
+        type: 'PREFETCH_VIDEOS_UPDATE',
+        payload: {
+          ...state,
+          currentUrl: url,
+        },
       });
     } catch (error) {
-      if (error.name === 'AbortError') {
-        task.aborted = true;
+      if (controller.signal.aborted) {
         break;
       }
 
-      task.failed += 1;
-
-      const isQuotaError =
-        error.name === 'QuotaExceededError' ||
-        (typeof error.message === 'string' &&
-          error.message.toLowerCase().includes('quota'));
-
-      await recordEvent(
-        isQuotaError ? 'cache-task-quota-error' : 'cache-task-error',
-        {
-          taskId,
-          label,
-          url,
-          message: error.message,
+      state.failed += 1;
+      await notifyClients({
+        type: 'PREFETCH_VIDEOS_UPDATE',
+        payload: {
+          ...state,
+          error: error?.message ?? 'Unbekannter Fehler',
+          currentUrl: url,
         },
-      );
-
-      await sendTaskUpdate({
-        taskId,
-        label,
-        status: 'running',
-        total: task.total,
-        completed: task.completed,
-        failed: task.failed,
-        currentUrl: url,
-        error: error.message,
       });
-
-      if (isQuotaError) {
-        task.aborted = true;
-        break;
-      }
     }
   }
 
-  const status = task.aborted
-    ? 'aborted'
-    : task.failed > 0
-      ? 'error'
-      : 'completed';
+  if (controller.signal.aborted) {
+    state.status = 'aborted';
+  } else if (state.failed > 0) {
+    state.status = 'error';
+  } else {
+    state.status = 'completed';
+  }
 
-  const summary = {
-    taskId,
-    label,
-    status,
-    total: task.total,
-    completed: task.completed,
-    failed: task.failed,
-  };
+  state.finishedAt = Date.now();
+  prefetchTasks.delete(taskId);
 
-  await sendTaskUpdate(summary);
-  await recordEvent('cache-task-complete', summary);
-
-  activeCacheTasks.delete(taskId);
-  return summary;
+  await notifyClients({ type: 'PREFETCH_VIDEOS_UPDATE', payload: state });
+  await sendCacheSummary();
 };
 
-// Skip waiting and claim clients immediately
-self.skipWaiting();
-workbox.core.clientsClaim();
-
-// Precache static assets (handled by next-pwa)
-workbox.precaching.precacheAndRoute(self.__WB_MANIFEST || []);
-
-// ============================================
-// VIDEO CACHING STRATEGY
-// ============================================
-const videoCacheStrategy = new CacheFirst({
-  cacheName: VIDEO_CACHE_NAME,
-  plugins: [
-    new RangeRequestsPlugin(),
-    new CacheableResponsePlugin({
-      statuses: [0, 200, 206],
-    }),
-    new ExpirationPlugin({
-      maxEntries: 50,
-      maxAgeSeconds: 30 * 24 * 60 * 60,
-      purgeOnQuotaError: true,
-    }),
-  ],
-});
-
-registerRoute(
-  ({ request, url }) =>
-    request.destination === 'video' ||
-    url.pathname.endsWith('.mp4') ||
-    url.hostname.includes('digitaloceanspaces.com') ||
-    url.hostname.includes('r2.dev'),
-  videoCacheStrategy,
-);
-
-// ============================================
-// IMAGES CACHING (separate avatar cache)
-// ============================================
-registerRoute(
-  ({ request, url }) =>
-    request.destination === 'image' &&
-    url.pathname.includes('/assets/images/spieler-avatars/'),
-  new CacheFirst({
-    cacheName: IMAGE_AVATAR_CACHE_NAME,
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      new ExpirationPlugin({
-        maxEntries: 150,
-        maxAgeSeconds: 60 * 24 * 60 * 60, // 60 days
-      }),
-    ],
-  }),
-);
-
-registerRoute(
-  ({ request }) => request.destination === 'image',
-  new StaleWhileRevalidate({
-    cacheName: IMAGES_CACHE_NAME,
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      new ExpirationPlugin({
-        maxEntries: 300,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
-      }),
-    ],
-  }),
-);
-
-// ============================================
-// AUDIO CACHING (for soundboard)
-// ============================================
-registerRoute(
-  ({ request, url }) =>
-    request.destination === 'audio' ||
-    url.pathname.endsWith('.mp3') ||
-    url.pathname.endsWith('.wav') ||
-    url.pathname.endsWith('.ogg'),
-  new CacheFirst({
-    cacheName: AUDIO_CACHE_NAME,
-    plugins: [
-      new RangeRequestsPlugin(),
-      new CacheableResponsePlugin({
-        statuses: [0, 200, 206],
-      }),
-      new ExpirationPlugin({
-        maxEntries: 30,
-        maxAgeSeconds: 30 * 24 * 60 * 60,
-      }),
-    ],
-  }),
-);
-
-// ============================================
-// GOOGLE FONTS CACHING
-// ============================================
-registerRoute(
-  ({ url }) => url.origin === 'https://fonts.googleapis.com',
-  new StaleWhileRevalidate({
-    cacheName: GOOGLE_FONTS_CSS_CACHE,
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      new ExpirationPlugin({
-        maxEntries: 10,
-        maxAgeSeconds: 7 * 24 * 60 * 60, // refresh CSS weekly
-      }),
-    ],
-  }),
-);
-
-registerRoute(
-  ({ url }) => url.origin === 'https://fonts.gstatic.com',
-  new CacheFirst({
-    cacheName: GOOGLE_FONTS_FILES_CACHE,
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      new ExpirationPlugin({
-        maxEntries: 20,
-        maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year for static font binaries
-      }),
-    ],
-  }),
-);
-
-// ============================================
-// API RESPONSES (JSON data)
-// ============================================
-const apiFallbackNotifier = {
-  async fetchDidFail({ request }) {
-    await recordEvent('api-network-fallback', { url: request.url });
-    await broadcastMessage({
-      type: 'SW_TOAST',
-      payload: {
-        kind: 'warning',
-        message: 'Zwischengespeicherte Daten werden angezeigt.',
-        description: 'Verbindung zur API aktuell nicht verfügbar.',
-        url: request.url,
-      },
-    });
-  },
-};
-
-registerRoute(
-  ({ url }) =>
-    url.pathname.startsWith('/api/') ||
-    url.pathname.endsWith('.json') ||
-    url.pathname.includes('/data/'),
-  new NetworkFirst({
-    cacheName: API_CACHE_NAME,
-    networkTimeoutSeconds: 4,
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      new ExpirationPlugin({
-        maxEntries: 50,
-        maxAgeSeconds: 5 * 60,
-      }),
-      apiFallbackNotifier,
-    ],
-  }),
-);
-
-// ============================================
-// STATIC ASSETS (CSS, JS)
-// ============================================
-registerRoute(
-  ({ request }) =>
-    request.destination === 'style' ||
-    request.destination === 'script' ||
-    request.destination === 'worker',
-  new StaleWhileRevalidate({
-    cacheName: STATIC_ASSETS_CACHE_NAME,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 100,
-        maxAgeSeconds: 7 * 24 * 60 * 60,
-      }),
-    ],
-  }),
-);
-
-// ============================================
-// NAVIGATION (HTML pages)
-// ============================================
-registerRoute(
-  ({ request }) => request.mode === 'navigate',
-  new StaleWhileRevalidate({
-    cacheName: PAGES_CACHE_NAME,
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      new ExpirationPlugin({
-        maxEntries: 75,
-        maxAgeSeconds: 24 * 60 * 60,
-      }),
-    ],
-  }),
-);
-
-// ============================================
-// INSTALL EVENT
-// ============================================
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    (async () => {
-      await recordEvent('sw-install-start', { version: CACHE_VERSION });
-
-      try {
-        const pagesCache = await caches.open(PAGES_CACHE_NAME);
-        const offlineCache = await caches.open(OFFLINE_CACHE_NAME);
-        const assetsCache = await caches.open(STATIC_ASSETS_CACHE_NAME);
-
-        const criticalPages = [
-          '/',
-          '/cache/',
-          '/offline/',
-          '/dashboard/',
-          '/fifa-11-plus/',
-          '/video-player/',
-          '/junioren/',
-          '/interval-timer/',
-          '/muscle-diagram/',
-          '/ranking/',
-          '/soundboard/',
-          '/yo-yo/',
-          '/data-combined/',
-          '/performance-charts/',
-          '/fortschritt/',
-        ];
-
-        const staticAssets = [
-          '/manifest.json',
-          '/assets/icons/android/icon-144.png',
-          '/assets/icons/favicon.ico',
-          '/assets/icons/favicon-32x32.png',
-          '/assets/icons/favicon-16x16.png',
-          '/assets/svg/FIFA_Logo.svg',
-        ];
-
-        for (const page of criticalPages) {
-          try {
-            await pagesCache.add(page);
-          } catch (error) {
-            await recordEvent('install-cache-miss', {
-              page,
-              message: error.message,
-            });
-          }
-        }
-
-        try {
-          await offlineCache.addAll([OFFLINE_URL, '/manifest.json']);
-        } catch (error) {
-          await recordEvent('install-offline-cache-miss', {
-            message: error.message,
-          });
-        }
-
-        for (const asset of staticAssets) {
-          try {
-            await assetsCache.add(asset);
-          } catch (error) {
-            await recordEvent('install-asset-cache-miss', {
-              asset,
-              message: error.message,
-            });
-          }
-        }
-
-        await recordEvent('sw-install-success', {
-          version: CACHE_VERSION,
-          cachedPages: criticalPages.length,
-          cachedAssets: staticAssets.length,
-        });
-      } catch (error) {
-        await recordEvent('sw-install-failed', {
-          version: CACHE_VERSION,
-          message: error.message,
-        });
-        throw error;
-      }
-    })(),
-  );
-
-  self.skipWaiting();
-});
-
-// ============================================
-// OFFLINE FALLBACK FOR NAVIGATION
-// ============================================
-setCatchHandler(async ({ event }) => {
-  if (event.request.mode === 'navigate') {
-    const pagesCache = await caches.open(PAGES_CACHE_NAME);
-    const appShell = await pagesCache.match(APP_SHELL_URL);
-    if (appShell) {
-      await recordEvent('navigation-app-shell-fallback', {
-        url: event.request.url,
-      });
-      return appShell;
-    }
-
-    const offlineCache = await caches.open(OFFLINE_CACHE_NAME);
-    const offlineResponse = await offlineCache.match(OFFLINE_URL);
-    if (offlineResponse) {
-      await recordEvent('navigation-offline-fallback', {
-        url: event.request.url,
-      });
-      return offlineResponse;
-    }
-
-    await recordEvent('navigation-generic-fallback', {
-      url: event.request.url,
-    });
-
-    return new Response(
-      '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Offline</title></head><body><h1>Offline</h1><p>Keine Verbindung verfügbar.</p></body></html>',
-      {
-        status: 503,
-        statusText: 'Service Unavailable',
-        headers: { 'Content-Type': 'text/html; charset=utf-8' },
-      },
-    );
-  }
-
-  const cachedResponse = await caches.match(event.request);
-  if (cachedResponse) {
-    await recordEvent('asset-fallback', { url: event.request.url });
-    return cachedResponse;
-  }
-
-  await recordEvent('asset-miss', { url: event.request.url });
-  return new Response('Network request failed and no cache available', {
-    status: 503,
-    statusText: 'Service Unavailable',
+const abortPrefetchTask = async (taskId) => {
+  const task = prefetchTasks.get(taskId);
+  if (!task) return;
+  task.controller.abort();
+  prefetchTasks.delete(taskId);
+  await notifyClients({
+    type: 'PREFETCH_VIDEOS_UPDATE',
+    payload: {
+      taskId,
+      label: task.label,
+      status: 'aborted',
+      total: task.total,
+      completed: task.completed,
+      failed: task.failed,
+      bytesDownloaded: task.bytesDownloaded,
+      finishedAt: Date.now(),
+    },
   });
-});
+};
 
-// ============================================
-// ACTIVATION EVENT
-// ============================================
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    (async () => {
-      const purged = [];
-
-      try {
-        if (self.registration.navigationPreload) {
-          await self.registration.navigationPreload.enable();
-          await recordEvent('navigation-preload-enabled');
-        }
-
-        const cacheWhitelist = [
-          VIDEO_CACHE_NAME,
-          IMAGES_CACHE_NAME,
-          IMAGE_AVATAR_CACHE_NAME,
-          AUDIO_CACHE_NAME,
-          GOOGLE_FONTS_CSS_CACHE,
-          GOOGLE_FONTS_FILES_CACHE,
-          API_CACHE_NAME,
-          STATIC_ASSETS_CACHE_NAME,
-          PAGES_CACHE_NAME,
-          OFFLINE_CACHE_NAME,
-        ];
-
-        const cacheNames = await caches.keys();
-        await Promise.all(
-          cacheNames.map(async (cacheName) => {
-            if (!cacheWhitelist.includes(cacheName)) {
-              await caches.delete(cacheName);
-              purged.push(cacheName);
-              await recordEvent('cache-purged', { cacheName });
-            }
-          }),
-        );
-
-        await self.clients.claim();
-        await recordEvent('sw-activate-success', {
-          version: CACHE_VERSION,
-          purged,
-        });
-      } catch (error) {
-        await recordEvent('sw-activate-failed', {
-          version: CACHE_VERSION,
-          message: error.message,
-        });
-      }
-    })(),
-  );
-});
-
-// ============================================
-// MESSAGE HANDLING
-// ============================================
 self.addEventListener('message', (event) => {
   const data = event.data;
   if (!data || typeof data !== 'object') return;
 
-  if (data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-    return;
-  }
-
-  if (data.type === 'CACHE_VIDEO_URLS') {
-    const taskId =
-      data.taskId ||
-      `cache-${Date.now()}-${Math.random().toString(16).slice(2, 6)}`;
-    event.waitUntil(
-      (async () => {
-        const summary = await cacheVideoBatch({
-          taskId,
-          urls: data.urls,
-          label: data.label,
-        });
-
-        if (event.source && 'postMessage' in event.source) {
-          event.source.postMessage({
-            type: 'CACHE_TASK_RESULT',
-            payload: summary,
+  switch (data.type) {
+    case 'REQUEST_CACHE_SUMMARY': {
+      event.waitUntil(sendCacheSummary());
+      break;
+    }
+    case 'PREFETCH_VIDEOS': {
+      const taskId =
+        data.taskId || `prefetch-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+      const payload = {
+        taskId,
+        urls: Array.isArray(data.urls) ? data.urls : [],
+        label: data.label ?? 'videos',
+      };
+      event.waitUntil(runPrefetchTask(payload));
+      break;
+    }
+    case 'ABORT_PREFETCH': {
+      if (data.taskId) {
+        event.waitUntil(abortPrefetchTask(data.taskId));
+      }
+      break;
+    }
+    case 'CLEAR_MEDIA_CACHE': {
+      event.waitUntil(
+        (async () => {
+          await caches.delete(MEDIA_CACHE);
+          await sendCacheSummary();
+          await notifyClients({
+            type: 'CACHE_CLEARED',
+            payload: { cacheName: MEDIA_CACHE, clearedAt: Date.now() },
           });
-        }
-      })(),
-    );
-    return;
-  }
-
-  if (data.type === 'CACHE_VIDEO') {
-    const url = normalizeVideoUrl(data.url);
-    if (!url) return;
-
-    const taskId =
-      data.taskId ||
-      `cache-single-${Date.now()}-${Math.random().toString(16).slice(2, 6)}`;
-
-    event.waitUntil(
-      (async () => {
-        const summary = await cacheVideoBatch({
-          taskId,
-          urls: [url],
-          label: data.label || 'single-video',
-        });
-
-        if (event.source && 'postMessage' in event.source) {
-          event.source.postMessage({
-            type: 'CACHE_TASK_RESULT',
-            payload: summary,
-          });
-        }
-      })(),
-    );
-    return;
-  }
-
-  if (data.type === 'CANCEL_CACHE_TASK') {
-    const taskId = data.taskId;
-    if (!taskId) return;
-
-    event.waitUntil(
-      (async () => {
-        const task = activeCacheTasks.get(taskId);
-        if (task) {
-          task.aborted = true;
-          task.controller.abort();
-          activeCacheTasks.delete(taskId);
-          await recordEvent('cache-task-cancelled', {
-            taskId,
-            label: task.label,
-          });
-          await sendTaskUpdate({
-            taskId,
-            label: task.label,
-            status: 'aborted',
-            total: task.total,
-            completed: task.completed,
-            failed: task.failed,
-          });
-        }
-      })(),
-    );
-    return;
-  }
-
-  if (data.type === 'CLEAR_CACHE') {
-    const cacheName = data.cacheName || VIDEO_CACHE_NAME;
-    event.waitUntil(
-      (async () => {
-        const deleted = await caches.delete(cacheName);
-        await recordEvent('cache-cleared', { cacheName, deleted });
-        await broadcastMessage({
-          type: 'CACHE_CLEARED',
-          payload: { cacheName, deleted },
-        });
-      })(),
-    );
-    return;
-  }
-
-  if (data.type === 'REQUEST_EVENT_LOG') {
-    if (event.source && 'postMessage' in event.source) {
-      event.source.postMessage({
-        type: 'SW_EVENT_LOG',
-        payload: recentSwEvents.slice(0, MAX_RECENT_SW_EVENTS),
-      });
+        })(),
+      );
+      break;
+    }
+    default: {
+      break;
     }
   }
 });
 
-console.log(`🎥 Custom Service Worker loaded (cache version ${CACHE_VERSION})`);
+console.log(`⚽️ QuoVadis Service Worker aktiv – Version ${APP_VERSION}`);
