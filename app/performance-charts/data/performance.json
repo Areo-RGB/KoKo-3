@@ -151,6 +151,54 @@
       "value": 160,
       "date": "2025-09-12",
       "team": null
+    },
+    {
+      "name": "Lion",
+      "value": 360,
+      "level": 13.2,
+      "date": "2025-10-10",
+      "team": "U12"
+    },
+    {
+      "name": "Metin",
+      "value": 400,
+      "level": 13.3,
+      "date": "2025-10-10",
+      "team": "U12"
+    },
+    {
+      "name": "Berat",
+      "value": 560,
+      "level": 14.3,
+      "date": "2025-10-10",
+      "team": "U12"
+    },
+    {
+      "name": "Paul",
+      "value": 400,
+      "level": 13.3,
+      "date": "2025-10-10",
+      "team": "U11"
+    },
+    {
+      "name": "Lasse",
+      "value": 600,
+      "level": 14.4,
+      "date": "2025-10-10",
+      "team": null
+    },
+    {
+      "name": "Levi",
+      "value": 600,
+      "level": 14.4,
+      "date": "2025-10-10",
+      "team": "U13"
+    },
+    {
+      "name": "Jakob",
+      "value": 720,
+      "date": "2025-10-10",
+      "team": "U12"
     }
   ]
 }
