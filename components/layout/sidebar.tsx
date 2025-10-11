@@ -98,7 +98,11 @@ export default function AppSidebar({ ...props }: AppSidebarProps) {
   );
 
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar
+      collapsible="icon"
+      className="[&_div[data-slot=sidebar-inner]]:bg-gradient-to-b [&_div[data-slot=sidebar-inner]]:from-[#0b2a55] [&_div[data-slot=sidebar-inner]]:via-[#052040]/95 [&_div[data-slot=sidebar-inner]]:to-[#010915] [&_div[data-slot=sidebar-inner]]:text-sky-100 [&_div[data-slot=sidebar-inner]]:border-r-transparent"
+      {...props}
+    >
       <SidebarHeader>
         <div className="flex items-center justify-between px-2 py-1.5">
           <Logo />
