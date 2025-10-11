@@ -7,8 +7,9 @@
     "build:clean": "node -e \"try{require('fs').rmSync('.next',{recursive:true,force:true})}catch(e){}try{require('fs').rmSync('out',{recursive:true,force:true})}catch(e){}\" && next build",
     "clean:dev": "node -e \"try{require('fs').rmSync('.next',{recursive:true,force:true})}catch(e){}\"",
     "build:export": "next build",
-    "dev": "next dev --turbopack",
-    "dev:webpack": "next dev",
+    "dev": "pnpm exec kill-port --port 3000 --port 9229 --port 9230 && cross-env NODE_OPTIONS=--inspect next dev",
+    "dev:webpack": "pnpm exec kill-port --port 3000 && next dev",
+    "dev:turbopack": "pnpm exec kill-port --port 3000 --port 9229 --port 9230 && concurrently --kill-others-on-fail \"cross-env NODE_OPTIONS=--inspect next dev --turbopack\" \"pnpm exec wait-on http://localhost:3000 && node scripts/open-incognito.js http://localhost:3000\"",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "next lint --strict",
@@ -63,9 +64,12 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
     "eslint-config-next": "^15.4.7",
     "jest": "^30.0.5",
+    "kill-port": "^2.0.1",
     "knip": "^5.63.0",
     "postcss": "^8.5",
     "prettier": "3.6.2",
@@ -75,6 +79,7 @@
     "sharp": "^0.34.4",
     "tailwindcss": "^4.1.12",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wait-on": "^9.0.1"
   }
 }

@@ -187,6 +187,414 @@ const allVideoData: HierarchicalVideoData = {
       name: 'Fussball',
       subcategories: [
         {
+          name: 'Torwart',
+          videos: [
+            {
+              id: 'torwart-teil-1-koordination',
+              title: 'Torwart Teil 1: Koordination',
+              description:
+                'Spezialisierte Torwartübungen für Jugendtorhüterinnen und -torhüter.',
+              type: 'playlist',
+              playlistTitle: 'Torwart Teil 1: Koordination',
+              videoUrl:
+                'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-abwurftechnik.mp4',
+              chapters: [
+                {
+                  id: 'teil-1-koordination-abwurftechnik',
+                  title: 'Abwurftechnik',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-abwurftechnik.mp4',
+                },
+                {
+                  id: 'teil-1-koordination-blickfeld',
+                  title: 'Blickfeld',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-blickfeld.mp4',
+                },
+                {
+                  id: 'teil-1-koordination-prellen-mit-2-baellen',
+                  title: 'Prellen Mit 2 Baellen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-prellen-mit-2-baellen.mp4',
+                },
+                {
+                  id: 'teil-1-koordination-prellen-mit-schritttechniken',
+                  title: 'Prellen Mit Schritttechniken',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-prellen-mit-schritttechniken.mp4',
+                },
+                {
+                  id: 'teil-1-koordination-prellen-mit-verschiedenen-uebergaengen-1',
+                  title: 'Prellen Mit Verschiedenen Uebergaengen 1',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-prellen-mit-verschiedenen-uebergaengen-1.mp4',
+                },
+                {
+                  id: 'teil-1-koordination-prellen-mit-verschiedenen-uebergaengen-2',
+                  title: 'Prellen Mit Verschiedenen Uebergaengen 2',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-prellen-mit-verschiedenen-uebergaengen-2.mp4',
+                },
+                {
+                  id: 'teil-1-koordination-prellen-mit-wahrnehmung',
+                  title: 'Prellen Mit Wahrnehmung',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-prellen-mit-wahrnehmung.mp4',
+                },
+                {
+                  id: 'teil-1-koordination-prellen',
+                  title: 'Prellen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-prellen.mp4',
+                },
+                {
+                  id: 'teil-1-koordination-schritttechniken',
+                  title: 'Schritttechniken',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-schritttechniken.mp4',
+                },
+                {
+                  id: 'teil-1-koordination-spielnahe-bewegungen-im-handlungsraum',
+                  title: 'Spielnahe Bewegungen Im Handlungsraum',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-spielnahe-bewegungen-im-handlungsraum.mp4',
+                },
+                {
+                  id: 'teil-1-koordination-visuelle-signale-wahrnehmen-und-umsetzen-1',
+                  title: 'Visuelle Signale Wahrnehmen Und Umsetzen 1',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-visuelle-signale-wahrnehmen-und-umsetzen-1.mp4',
+                },
+                {
+                  id: 'teil-1-koordination-visuelle-signale-wahrnehmen-und-umsetzen-2',
+                  title: 'Visuelle Signale Wahrnehmen Und Umsetzen 2',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-1-koordination/teil-1-koordination-visuelle-signale-wahrnehmen-und-umsetzen-2.mp4',
+                },
+              ],
+            },
+            {
+              id: 'torwart-teil-2-gymnastik',
+              title: 'Torwart Teil 2: Gymnastik',
+              description:
+                'Spezialisierte Torwartübungen für Jugendtorhüterinnen und -torhüter.',
+              type: 'playlist',
+              playlistTitle: 'Torwart Teil 2: Gymnastik',
+              videoUrl:
+                'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-2-gymnastik/teil-2-gymnastik-achterkreise.mp4',
+              chapters: [
+                {
+                  id: 'teil-2-gymnastik-achterkreise',
+                  title: 'Achterkreise',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-2-gymnastik/teil-2-gymnastik-achterkreise.mp4',
+                },
+                {
+                  id: 'teil-2-gymnastik-ball-hinter-dem-ruecken-aufnehmen',
+                  title: 'Ball Hinter Dem Ruecken Aufnehmen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-2-gymnastik/teil-2-gymnastik-ball-hinter-dem-ruecken-aufnehmen.mp4',
+                },
+                {
+                  id: 'teil-2-gymnastik-coaching-grundstellung',
+                  title: 'Coaching Grundstellung',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-2-gymnastik/teil-2-gymnastik-coaching-grundstellung.mp4',
+                },
+                {
+                  id: 'teil-2-gymnastik-coaching-schrittbreite',
+                  title: 'Coaching Schrittbreite',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-2-gymnastik/teil-2-gymnastik-coaching-schrittbreite.mp4',
+                },
+                {
+                  id: 'teil-2-gymnastik-grundstellung-kevin-trapp',
+                  title: 'Grundstellung Kevin Trapp',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-2-gymnastik/teil-2-gymnastik-grundstellung-kevin-trapp.mp4',
+                },
+                {
+                  id: 'teil-2-gymnastik-ueber-dem-koerper',
+                  title: 'Ueber Dem Koerper',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-2-gymnastik/teil-2-gymnastik-ueber-dem-koerper.mp4',
+                },
+              ],
+            },
+            {
+              id: 'torwart-teil-3-fussballtechnik',
+              title: 'Torwart Teil 3: Fussballtechnik',
+              description:
+                'Spezialisierte Torwartübungen für Jugendtorhüterinnen und -torhüter.',
+              type: 'playlist',
+              playlistTitle: 'Torwart Teil 3: Fussballtechnik',
+              videoUrl:
+                'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-3-fussballtechnik/teil-3-fussballtechnik-ballgewoehnung-dropkick-pass-flach.mp4',
+              chapters: [
+                {
+                  id: 'teil-3-fussballtechnik-ballgewoehnung-dropkick-pass-flach',
+                  title: 'Ballgewoehnung Dropkick Pass Flach',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-3-fussballtechnik/teil-3-fussballtechnik-ballgewoehnung-dropkick-pass-flach.mp4',
+                },
+                {
+                  id: 'teil-3-fussballtechnik-ballgewoehnung-dropkick-pass-halbhoch',
+                  title: 'Ballgewoehnung Dropkick Pass Halbhoch',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-3-fussballtechnik/teil-3-fussballtechnik-ballgewoehnung-dropkick-pass-halbhoch.mp4',
+                },
+                {
+                  id: 'teil-3-fussballtechnik-ballgewoehnung-dropkick-flach-ueber-den-winkel',
+                  title: 'Ballgewoehnung Dropkick Flach Ueber Den Winkel',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-3-fussballtechnik/teil-3-fussballtechnik-ballgewoehnung-dropkick-flach-ueber-den-winkel.mp4',
+                },
+                {
+                  id: 'teil-3-fussballtechnik-ballgewoehnung-erster-kontakt',
+                  title: 'Ballgewoehnung Erster Kontakt',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-3-fussballtechnik/teil-3-fussballtechnik-ballgewoehnung-erster-kontakt.mp4',
+                },
+                {
+                  id: 'teil-3-fussballtechnik-ballgewoehnung-halbhohes-rueckspiel',
+                  title: 'Ballgewoehnung Halbhohes Rueckspiel',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-3-fussballtechnik/teil-3-fussballtechnik-ballgewoehnung-halbhohes-rueckspiel.mp4',
+                },
+                {
+                  id: 'teil-3-fussballtechnik-chipball',
+                  title: 'Chipball',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-3-fussballtechnik/teil-3-fussballtechnik-chipball.mp4',
+                },
+                {
+                  id: 'teil-3-fussballtechnik-chipball-kevin-trapp',
+                  title: 'Chipball Kevin Trapp',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-3-fussballtechnik/teil-3-fussballtechnik-chipball-kevin-trapp.mp4',
+                },
+                {
+                  id: 'teil-3-fussballtechnik-coaching-ballsicherheit-am-fuss-1',
+                  title: 'Coaching Ballsicherheit Am Fuss 1',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-3-fussballtechnik/teil-3-fussballtechnik-coaching-ballsicherheit-am-fuss-1.mp4',
+                },
+                {
+                  id: 'teil-3-fussballtechnik-coaching-ballsicherheit-am-fuss-2',
+                  title: 'Coaching Ballsicherheit Am Fuss 2',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-3-fussballtechnik/teil-3-fussballtechnik-coaching-ballsicherheit-am-fuss-2.mp4',
+                },
+                {
+                  id: 'teil-3-fussballtechnik-wahrnehmen-von-passoptionen',
+                  title: 'Wahrnehmen Von Passoptionen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-3-fussballtechnik/teil-3-fussballtechnik-wahrnehmen-von-passoptionen.mp4',
+                },
+              ],
+            },
+            {
+              id: 'torwart-teil-4-grundtechniken-der-torhueterinnen',
+              title: 'Torwart Teil 4: Grundtechniken Der Torhueterinnen',
+              description:
+                'Spezialisierte Torwartübungen für Jugendtorhüterinnen und -torhüter.',
+              type: 'playlist',
+              playlistTitle: 'Torwart Teil 4: Grundtechniken',
+              videoUrl:
+                'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-abkippen.mp4',
+              chapters: [
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-abkippen',
+                  title: 'Abkippen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-abkippen.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-abkippen-oder-abdruck',
+                  title: 'Abkippen Oder Abdruck',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-abkippen-oder-abdruck.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-abtauchen',
+                  title: 'Abtauchen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-abtauchen.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-abtauchen-mit-zeitdruck',
+                  title: 'Abtauchen Mit Zeitdruck',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-abtauchen-mit-zeitdruck.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-abtauchen-und-fallen',
+                  title: 'Abtauchen Und Fallen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-abtauchen-und-fallen.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-aufnahme-flach-und-aufsetzer-zentral',
+                  title: 'Aufnahme Flach Und Aufsetzer Zentral',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-aufnahme-flach-&-aufsetzer-zentral.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-coaching',
+                  title: 'Coaching',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-coaching.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-coaching-stellungsspiel',
+                  title: 'Coaching Stellungsspiel',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-coaching-stellungsspiel.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-coaching-zum-abtauchen-und-fallen',
+                  title: 'Coaching Zum Abtauchen Und Fallen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-coaching-zum-abtauchen-und-fallen.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-coaching-zur-korbtechnik',
+                  title: 'Coaching Zur Korbtechnik',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-coaching-zur-korbtechnik.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-demo-trainingsform',
+                  title: 'Demo Trainingsform',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-demo-trainingsform.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-eigentraining-voruebung-abdruck-aus-dem-stand',
+                  title: 'Eigentraining Voruebung Abdruck Aus Dem Stand',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-eigentraining-voruebung-abdruck-aus-dem-stand.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-eigentraining-voruebung-abdruck-nach-kurzer-absetzbewegung',
+                  title:
+                    'Eigentraining Voruebung Abdruck Nach Kurzer Absetzbewegung',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-eigentraining-voruebung-abdruck-nach-kurzer-absetzbewegung.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-einbeinknie',
+                  title: 'Einbeinknie',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-einbeinknie.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-erklaerung',
+                  title: 'Erklaerung',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-erklaerung.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-fallen-mit-zeitdruck-und-absetzbewegung',
+                  title: 'Fallen Mit Zeitdruck Und Absetzbewegung',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-fallen-mit-zeitdruck-und-absetzbewegung.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-fangen-halbhoch',
+                  title: 'Fangen Halbhoch',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-fangen-halbhoch.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-fangen-mit-koordinativer-aufgabe',
+                  title: 'Fangen Mit Koordinativer Aufgabe',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-fangen-mit-koordinativer-aufgabe.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-fangen-oben-drop-kick',
+                  title: 'Fangen Oben Drop Kick',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-fangen-oben-drop-kick.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-fangen-oben-volley',
+                  title: 'Fangen Oben Volley',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-fangen-oben-volley.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-fangen-oben-vom-boden',
+                  title: 'Fangen Oben Vom Boden',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-fangen-oben-vom-boden.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-hauptuebung-abkippen-oder-abdruck',
+                  title: 'Hauptuebung Abkippen Oder Abdruck',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-hauptuebung-abkippen-oder-abdruck.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-hauptuebung-abtauchen-und-fallen',
+                  title: 'Hauptuebung Abtauchen Und Fallen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-hauptuebung-abtauchen-und-fallen.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-korbtechnik',
+                  title: 'Korbtechnik',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-korbtechnik.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-langsitz-mit-offenem-tor',
+                  title: 'Langsitz Mit Offenem Tor',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-langsitz-mit-offenem-tor.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-seitsitz-flach-und-halbhoch',
+                  title: 'Seitsitz Flach & Halbhoch',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-seitsitz-flach-&-halbhoch.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-seitsitz-flach',
+                  title: 'Seitsitz Flach',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-seitsitz-flach.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-serie-von-links',
+                  title: 'Serie Von Links',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-serie-von-links.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-trainingsgespraech-mit-kevin-trapp',
+                  title: 'Trainingsgespraech Mit Kevin Trapp',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-trainingsgespraech-mit-kevin-trapp.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-voruebung-abdruck',
+                  title: 'Voruebung Abdruck',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-voruebung-abdruck.mp4',
+                },
+                {
+                  id: 'teil-4-grundtechniken-der-torhueterinnen-voruebung-abkippen',
+                  title: 'Voruebung Abkippen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/_torwart/Teil-4-grundtechniken-der-torhueterinnen/teil-4-grundtechniken-der-torhueterinnen-voruebung-abkippen.mp4',
+                },
+              ],
+            },
+          ],
+        },
+        {
           name: 'Ball Control & Dribbling',
           videos: [
             {

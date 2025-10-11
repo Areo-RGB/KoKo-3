@@ -58,7 +58,7 @@ export default function VideoPlayer({
 
   const currentItem = currentPlaylist[currentVideoIndex];
   const currentVideo = currentItem ? getVideoById(currentItem.videoId) : null;
-  const videoUrl = currentItem?.videoUrl || currentVideo?.videoUrl || '';
+  const baseVideoUrl = currentItem?.videoUrl ?? currentVideo?.videoUrl ?? null;
 
   // Load video through Service Worker cache
   const {
@@ -66,7 +66,7 @@ export default function VideoPlayer({
     isLoading: isVideoLoading,
     error: videoError,
     isCached,
-  } = useCachedVideo(videoUrl);
+  } = useCachedVideo(baseVideoUrl);
 
   // --- EFFECT FOR MANAGING PLAYBACK ---
   useEffect(() => {
@@ -286,8 +286,9 @@ export default function VideoPlayer({
   }, [handleKeyDown, controlsTimeout]);
 
   const currentProgress = duration > 0 ? (currentTime / duration) * 100 : 0;
+  const videoSrc = blobUrl ?? baseVideoUrl ?? undefined;
 
-  if (!videoUrl || !currentItem) {
+  if (!currentItem || !baseVideoUrl) {
     return (
       <div className="flex h-full items-center justify-center bg-black text-white">
         <div className="text-center">
@@ -295,25 +296,6 @@ export default function VideoPlayer({
           <p className="text-gray-400">
             Bitte wählen Sie ein Video aus der Wiedergabeliste.
           </p>
-        </div>
-      </div>
-    );
-  }
-
-  // Show error state
-  if (videoError) {
-    return (
-      <div className="flex h-full items-center justify-center bg-black text-white">
-        <div className="text-center">
-          <h2 className="mb-2 text-xl font-bold text-red-500">
-            Fehler beim Laden
-          </h2>
-          <p className="mb-4 text-gray-400">{videoError}</p>
-          {onClose && (
-            <Button onClick={onClose} variant="outline">
-              Schließen
-            </Button>
-          )}
         </div>
       </div>
     );
@@ -369,8 +351,8 @@ export default function VideoPlayer({
           )}
           <video
             ref={videoRef}
-            key={blobUrl}
-            src={blobUrl || ''}
+            key={blobUrl ?? baseVideoUrl ?? 'video'}
+            src={videoSrc}
             onTimeUpdate={handleTimeUpdate}
             onLoadedMetadata={handleLoadedMetadata}
             onEnded={handleVideoEnd}

@@ -4,7 +4,7 @@ const withPWA = createNextPWA({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: false,
+  disable: process.env.NODE_ENV === 'development',
   buildExcludes: [/middleware-manifest\.json$/],
   // Use custom service worker with advanced video caching
   // Note: When using swSrc, runtimeCaching should NOT be defined here
