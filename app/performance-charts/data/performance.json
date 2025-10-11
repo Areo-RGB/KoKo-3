@@ -199,6 +199,30 @@
       "value": 720,
       "date": "2025-10-10",
       "team": "U12"
+    },
+    {
+      "name": "Arvid",
+      "value": 1120,
+      "date": "2025-10-10",
+      "team": "U12"
+    },
+    {
+      "name": "Eray",
+      "value": 680,
+      "date": "2025-10-10",
+      "team": null
+    },
+    {
+      "name": "Erik",
+      "value": 960,
+      "date": "2025-10-10",
+      "team": null
+    },
+    {
+      "name": "Finley",
+      "value": 1040,
+      "date": "2025-10-10",
+      "team": "U12"
     }
   ]
 }

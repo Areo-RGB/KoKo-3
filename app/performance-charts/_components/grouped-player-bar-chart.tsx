@@ -47,38 +47,50 @@ export default function GroupedPlayerBarChart({
   const accentBg = isDark ? 'rgba(59,130,246,0.8)' : 'rgba(37,99,235,0.7)';
   const accentBorder = isDark ? 'rgba(96,165,250,1)' : 'rgba(37,99,235,1)';
 
-  const datasets = useMemo(() => {
+  // Compute filtered labels and datasets so hidden players are completely removed
+  const { filteredLabels, datasets } = useMemo(() => {
+    const visibleIdx: number[] = [];
+    for (let i = 0; i < players.length; i++) {
+      if (!hiddenPlayers.has(i)) visibleIdx.push(i);
+    }
+
+    const filteredLabels = visibleIdx.map((i) => players[i]);
+
     const [a, b] = series;
-    const dataA = a.values.map((v, idx) => (hiddenPlayers.has(idx) ? null : v));
-    const dataB = b.values.map((v, idx) => (hiddenPlayers.has(idx) ? null : v));
-    return [
-      {
-        label: a.label,
-        data: dataA,
-        backgroundColor: a.backgroundColor ?? greyBg,
-        borderColor: a.borderColor ?? greyBorder,
-        borderWidth: 1,
-        barThickness: 'flex' as const,
-        borderRadius: 0,
-      },
-      {
-        label: b.label,
-        data: dataB,
-        backgroundColor: b.backgroundColor ?? accentBg,
-        borderColor: b.borderColor ?? accentBorder,
-        borderWidth: 1,
-        barThickness: 'flex' as const,
-        borderRadius: 0,
-      },
-    ];
-  }, [series, hiddenPlayers, isDark]);
+    const dataA = visibleIdx.map((i) => a.values[i] ?? null);
+    const dataB = visibleIdx.map((i) => b.values[i] ?? null);
+
+    return {
+      filteredLabels,
+      datasets: [
+        {
+          label: a.label,
+          data: dataA,
+          backgroundColor: a.backgroundColor ?? greyBg,
+          borderColor: a.borderColor ?? greyBorder,
+          borderWidth: 1,
+          barThickness: 'flex' as const,
+          borderRadius: 0,
+        },
+        {
+          label: b.label,
+          data: dataB,
+          backgroundColor: b.backgroundColor ?? accentBg,
+          borderColor: b.borderColor ?? accentBorder,
+          borderWidth: 1,
+          barThickness: 'flex' as const,
+          borderRadius: 0,
+        },
+      ],
+    };
+  }, [players, series, hiddenPlayers, isDark]);
 
   const data = useMemo(
     () => ({
-      labels: players,
+      labels: filteredLabels,
       datasets,
     }),
-    [players, datasets],
+    [filteredLabels, datasets],
   );
 
   const options = useMemo<ChartOptions<'bar'>>(
