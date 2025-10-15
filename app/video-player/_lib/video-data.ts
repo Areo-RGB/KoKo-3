@@ -595,6 +595,355 @@ const allVideoData: HierarchicalVideoData = {
           ],
         },
         {
+          name: 'Nachwuchstraining',
+          videos: [
+            {
+              id: 'nachwuchstraining-mehrere-felder',
+              title: 'Nachwuchstraining - Mehrere Felder',
+              type: 'playlist',
+              playlistTitle: 'Nachwuchstraining - Mehrere Felder',
+              videoUrl:
+                'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Mehrere_Felder/Mehrere_Felder_-_2_%2B_1_vs_2_%2B_1_und_2_%2B_1_vs_3_und_2_vs_2.mp4',
+              chapters: [
+                {
+                  id: 'mehrere-felder-2-plus-1-vs-2-plus-1-und-2-plus-1-vs-3-und-2-vs-2',
+                  title:
+                    'Mehrere Felder - 2 + 1 vs 2 + 1 und 2 + 1 vs 3 und 2 vs 2',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Mehrere_Felder/Mehrere_Felder_-_2_%2B_1_vs_2_%2B_1_und_2_%2B_1_vs_3_und_2_vs_2.mp4',
+                },
+                {
+                  id: 'mehrere-felder-3-vs-3-plus-torhuter-auf-hybridfeldern',
+                  title:
+                    'Mehrere Felder - 3 vs 3 + Torhüter auf Hybridfeldern',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Mehrere_Felder/Mehrere_Felder_-_3_vs_3_%2B_Torhuter_auf_Hybridfeldern.mp4',
+                },
+                {
+                  id: 'mehrere-felder-3-vs-3-mit-drehendem-angriffsrecht-und-dribbellinie-auf-vier-feldern',
+                  title:
+                    'Mehrere Felder - 3 vs 3 mit drehendem Angriffsrecht und Dribbellinie auf vier Feldern',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Mehrere_Felder/Mehrere_Felder_-_3_vs_3_mit_drehendem_Angriffsrecht_und_Dribbellinie_auf_vier_Feldern.mp4',
+                },
+                {
+                  id: 'mehrere-felder-3-vs-3-und-2-vs-2-mit-passtoren',
+                  title: 'Mehrere Felder - 3 vs 3 und 2 vs 2 mit Passtoren',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Mehrere_Felder/Mehrere_Felder_-_3_vs_3_und_2_vs_2_mit_Passtoren.mp4',
+                },
+                {
+                  id: 'mehrere-felder-4-plus-2-vs-4-plus-2-im-sechseck-und-4-vs-4-mit-drehendem-angriffsrecht',
+                  title:
+                    'Mehrere Felder - 4 + 2 vs 4 + 2 im Sechseck und 4 vs 4 mit drehendem Angriffsrecht',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Mehrere_Felder/Mehrere_Felder_-_4_%2B_2_vs_4_%2B_2_im_Sechseck_und_4_vs_4_mit_drehendem_Angriffsrecht.mp4',
+                },
+                {
+                  id: 'mehrere-felder-4-plus-2-vs-4-plus-2-im-sechseck-und-5-vs-5-mit-torhutern',
+                  title:
+                    'Mehrere Felder - 4 + 2 vs 4 + 2 im Sechseck und 5 vs 5 mit Torhütern',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Mehrere_Felder/Mehrere_Felder_-_4_%2B_2_vs_4_%2B_2_im_Sechseck_und_5_vs_5_mit_Torhutern.mp4',
+                },
+                {
+                  id: 'mehrere-felder-4-vs-4-linie-bespielen-und-4-vs-4-plus-1-nur-direkte-tore-zahlen',
+                  title:
+                    'Mehrere Felder - 4 vs 4 Linie bespielen und 4 vs 4 + 1 nur direkte Tore zahlen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Mehrere_Felder/Mehrere_Felder_-_4_vs_4_Linie_bespielen_und_4_vs_4_%2B_1_nur_direkte_Tore_zahlen.mp4',
+                },
+                {
+                  id: 'trainingsphilosophie-deutschland-8-felder-7-aktiv',
+                  title: 'Trainingsphilosophie Deutschland - 8 Felder - 7 aktiv',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Mehrere_Felder/Trainingsphilosophie_Deutschland_-_8_Felder_-_7_aktiv.mp4',
+                },
+              ],
+            },
+            {
+              id: 'nachwuchstraining-uber-unterzahlspiele',
+              title: 'Nachwuchstraining - Über-/Unterzahlspiele',
+              type: 'playlist',
+              playlistTitle: 'Nachwuchstraining - Über-/Unterzahlspiele',
+              videoUrl:
+                'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Uberzahl-_Unterzahlspiele/Uber_Unterzahlspiele_-_2_vs_2_mit_fliegdenen_Torhutern.mp4',
+              chapters: [
+                {
+                  id: 'uber-unterzahlspiele-2-vs-2-mit-fliegenden-torhutern',
+                  title:
+                    'Über-/Unterzahlspiele - 2 vs 2 mit fliegenden Torhütern',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Uberzahl-_Unterzahlspiele/Uber_Unterzahlspiele_-_2_vs_2_mit_fliegdenen_Torhutern.mp4',
+                },
+                {
+                  id: 'uber-unterzahlspiele-3-vs-3-mit-uberzahlspieler-auf-minifeld-mit-direktem-abschluss',
+                  title:
+                    'Über-/Unterzahlspiele - 3 vs 3 mit Überzahlspieler auf Minifeld mit direktem Abschluss',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Uberzahl-_Unterzahlspiele/Uber_Unterzahlspiele_-_3_vs_3_mit_Uberzahlspieler_auf_Minifeld_mit_direktem_Abschluss.mp4',
+                },
+                {
+                  id: 'uber-unterzahlspiele-4-vs-4-plus-uberzahlspieler-mit-direkten-abschlussen',
+                  title:
+                    'Über-/Unterzahlspiele - 4 vs 4 + Überzahlspieler mit direkten Abschlüssen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Uberzahl-_Unterzahlspiele/Uber_Unterzahlspiele_-_4_vs_4_%2B_Uberzahlspieler_mit_direkten_Abschlussen.mp4',
+                },
+                {
+                  id: 'uber-unterzahlspiele-4-vs-4-mit-2-uberzahlspielern-und-direktem-abschluss',
+                  title:
+                    'Über-/Unterzahlspiele - 4 vs 4 mit 2 Überzahlspielern und direktem Abschluss',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Uberzahl-_Unterzahlspiele/Uber_Unterzahlspiele_-_4_vs_4_mit_2_Uberzahlspielern_und_direktem_Abschluss.mp4',
+                },
+                {
+                  id: 'uber-unterzahlspiele-4-vs-4-mit-uberzahlspieler-und-kontaktvorgabe',
+                  title:
+                    'Über-/Unterzahlspiele - 4 vs 4 mit Überzahlspieler und Kontaktvorgabe',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Uberzahl-_Unterzahlspiele/Uber_Unterzahlspiele_-_4_vs_4_mit_Uberzahlspieler_und_Kontaktvorgabe.mp4',
+                },
+              ],
+            },
+            {
+              id: 'nachwuchstraining-linie-bespielen-verteidigen',
+              title: 'Nachwuchstraining - Linie bespielen/verteidigen',
+              type: 'playlist',
+              playlistTitle: 'Nachwuchstraining - Linie bespielen/verteidigen',
+              videoUrl:
+                'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Linie_bespielen_verteidigen/Linie_bespielen_-_3_vs_3_auf_Minifeld.mp4',
+              chapters: [
+                {
+                  id: 'linie-bespielen-3-vs-3-auf-minifeld',
+                  title: 'Linie bespielen - 3 vs 3 auf Minifeld',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Linie_bespielen_verteidigen/Linie_bespielen_-_3_vs_3_auf_Minifeld.mp4',
+                },
+                {
+                  id: 'linie-bespielen-4-plus-1-vs-4-plus-1-auf-linie',
+                  title: 'Linie bespielen - 4 + 1 vs 4 + 1 auf Linie',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Linie_bespielen_verteidigen/Linie_bespielen_-_4_+_1_vs_4_+_1_auf_Linie.mp4',
+                },
+                {
+                  id: 'linie-bespielen-4-vs-4-mit-torhutern-variante-1',
+                  title: 'Linie bespielen - 4 vs 4 mit Torhütern Variante 1',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Linie_bespielen_verteidigen/Linie_bespielen_-_4_vs_4_mit_Torhutern_Variante_1.mp4',
+                },
+                {
+                  id: 'linie-bespielen-4-vs-4-mit-torhutern-variante-2',
+                  title: 'Linie bespielen - 4 vs 4 mit Torhütern Variante 2',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Linie_bespielen_verteidigen/Linie_bespielen_-_4_vs_4_mit_Torhutern_Variante_2.mp4',
+                },
+                {
+                  id: 'linie-bespielen-4-vs-4-mit-torhutern-auf-engem-raum',
+                  title: 'Linie bespielen - 4 vs 4 mit Torhütern auf engem Raum',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Linie_bespielen_verteidigen/Linie_bespielen_-_4_vs_4_mit_Torhutern_auf_engem_Raum.mp4',
+                },
+                {
+                  id: 'linie-bespielen-verteidigen-bei-4-plus-tw-vs-4',
+                  title: 'Linie bespielen - verteidigen bei 4 + TW vs. 4',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Linie_bespielen_verteidigen/Linie_bespielen_-_verteidigen_bei_4_+_TW_vs._4.mp4',
+                },
+                {
+                  id: 'mehrere-felder-4-vs-4-linie-bespielen-und-4-vs-4-plus-1-nur-direkte-tore-zahlen-kombi',
+                  title:
+                    'Mehrere Felder - 4 vs 4 Linie bespielen und 4 vs 4 + 1 nur direkte Tore zählen',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Linie_bespielen_verteidigen/Mehrere_Felder_-_4_vs_4_Linie_bespielen_und_4_vs_4_+_1_nur_direkte_Tore_zahlen.mp4',
+                },
+              ],
+            },
+            {
+              id: 'nachwuchstraining-gleichzahlspiele-mit-anspielern',
+              title: 'Nachwuchstraining - Gleichzahlspiele mit Anspielern',
+              type: 'playlist',
+              playlistTitle: 'Nachwuchstraining - Gleichzahlspiele mit Anspielern',
+              videoUrl:
+                'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahl_-_nur_nach_vorne_passen_tiefe_Anspieler_bei_3_%2B_TW_vs._3.mp4',
+              chapters: [
+                {
+                  id: 'gleichzahl-nur-nach-vorne-passen-tiefe-anspieler-bei-3-plus-tw-vs-3',
+                  title:
+                    'Gleichzahl - nur nach vorne passen tiefe Anspieler bei 3 + TW vs. 3',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahl_-_nur_nach_vorne_passen_tiefe_Anspieler_bei_3_%2B_TW_vs._3.mp4',
+                },
+                {
+                  id: 'gleichzahl-mit-anspieler-3-plus-tw-vs-3-mit-drehendem-angriffsrecht',
+                  title:
+                    'Gleichzahl mit Anspieler - 3 + TW vs. 3 mit drehendem Angriffsrecht',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahl_mit_Anspieler_-_3_%2B_TW_vs._3_mit_drehendem_Angriffsrecht.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-3-vs-3-mit-anspieler-torhuter-zentrumslinie-und-drehendem-angriffsrecht',
+                  title:
+                    'Gleichzahlspiele - 3 vs 3 mit Anspieler Torhüter Zentrumslinie und drehendem Angriffsrecht',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahlspiele_-_3_vs_3_mit_Anspieler_Torhuter_Zentrumslinie_und_drehendem_Angriffsrecht.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-3-vs-3-plus-2-tiefe-anspieler-im-minifeld',
+                  title:
+                    'Gleichzahlspiele - 3 vs 3 plus 2 tiefe Anspieler im Minifeld',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahlspiele_-_3_vs_3_plus_2_tiefe_Anspieler_im_Minifeld.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-3-vs-3-plus-3-anspieler-mit-drehendem-angriffsrecht',
+                  title:
+                    'Gleichzahlspiele - 3 vs 3 plus 3 Anspieler mit drehendem Angriffsrecht',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahlspiele_-_3_vs_3_plus_3_Anspieler_mit_drehendem_Angriffsrecht.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-3-vs-3-plus-4-anspieler-und-torhuter-im-sechseck',
+                  title:
+                    'Gleichzahlspiele - 3 vs 3 plus 4 Anspieler und Torhüter im Sechseck',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahlspiele_-_3_vs_3_plus_4_Anspieler_und_Torhuter_im_Sechseck.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-3-vs-3-plus-anspieler-torhuter-und-drehendem-angriffsrecht',
+                  title:
+                    'Gleichzahlspiele - 3 vs 3 plus Anspieler Torhüter und drehendem Angriffsrecht',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahlspiele_-_3_vs_3_plus_Anspieler_Torhuter_und_drehendem_Angriffsrecht.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-4-vs-4-flankenspiel-plus-4-anspieler-und-torhuter',
+                  title:
+                    'Gleichzahlspiele - 4 vs 4 Flankenspiel plus 4 Anspieler und Torhüter',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahlspiele_-_4_vs_4_Flankenspiel_plus_4_Anspieler_und_Torhuter.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-4-vs-4-plus-2-anspieler-seitlich',
+                  title: 'Gleichzahlspiele - 4 vs 4 plus 2 Anspieler seitlich',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahlspiele_-_4_vs_4_plus_2_Anspieler_seitlich.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-4-vs-4-plus-4-anspieler-neben-dem-tor-im-sechseck',
+                  title:
+                    'Gleichzahlspiele - 4 vs 4 plus 4 Anspieler neben dem Tor im Sechseck',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahlspiele_-_4_vs_4_plus_4_Anspieler_neben_dem_Tor_im_Sechseck.mp4',
+                },
+              ],
+            },
+            {
+              id: 'nachwuchstraining-gleichzahlspiele',
+              title: 'Nachwuchstraining - Gleichzahlspiele',
+              type: 'playlist',
+              playlistTitle: 'Nachwuchstraining - Gleichzahlspiele',
+              videoUrl:
+                'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahl_-_nur_nach_vorne_passen_tiefe_Anspieler_bei_3_%2B_TW_vs._3.mp4',
+              chapters: [
+                {
+                  id: 'gleichzahl-nur-nach-vorne-passen-tiefe-anspieler-bei-3-plus-tw-vs-3',
+                  title:
+                    'Gleichzahl - nur nach vorne passen tiefe Anspieler bei 3 + TW vs. 3',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahl_-_nur_nach_vorne_passen_tiefe_Anspieler_bei_3_%2B_TW_vs._3.mp4',
+                },
+                {
+                  id: 'gleichzahl-mit-anspieler-3-plus-tw-vs-3-mit-drehendem-angriffsrecht',
+                  title:
+                    'Gleichzahl mit Anspieler - 3 + TW vs. 3 mit drehendem Angriffsrecht',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahl_mit_Anspieler_-_3_%2B_TW_vs._3_mit_drehendem_Angriffsrecht.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-2-vs-2-mit-8s-zeit',
+                  title: 'Gleichzahlspiele - 2 vs 2 mit 8s Zeit',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_2_vs_2_mit_8s_Zeit.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-3-plus-1-vs-3-auf-hybridfeld',
+                  title: 'Gleichzahlspiele - 3 + 1 vs 3 auf Hybridfeld',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_3_%2B_1_vs_3_auf_Hybridfeld.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-3-vs-3-auf-minispielfeld-mit-shotclock',
+                  title: 'Gleichzahlspiele - 3 vs 3 auf Minispielfeld mit Shotclock',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_3_vs_3_auf_Minispielfeld_mit_Shotclock.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-3-vs-3-mit-dribbellinie-und-drehendem-angriffsrecht',
+                  title:
+                    'Gleichzahlspiele - 3 vs 3 mit Dribbellinie und drehendem Angriffsrecht',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_3_vs_3_mit_Dribbellinie_und_drehendem_Angriffsrecht.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-4-plus-tw-vs-4-mit-drehendem-angriffsrecht',
+                  title:
+                    'Gleichzahlspiele - 4 + TW vs. 4 mit drehendem Angriffsrecht',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_4_%2B_TW_vs._4_mit_drehendem_Angriffsrecht.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-4-plus-torwart-vs-4-plus-torwart',
+                  title: 'Gleichzahlspiele - 4 + Torwart vs 4 + Torwart',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_4_%2B_Torwart_vs_4_%2B_Torwart.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-4-vs-4-mit-torhuter-und-flanken',
+                  title: 'Gleichzahlspiele - 4 vs 4 mit Torhüter und Flanken',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_4_vs_4_mit_Torhuter_und_Flanken.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-start-flanke-bei-4-plus-tw-vs-4',
+                  title:
+                    'Gleichzahlspiele - Start Flanke bei 4 + TW vs. 4',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_Start_Flanke_bei_4_%2B_TW_vs._4.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-start-flanke-schnell-bei-4-plus-tw-vs-4',
+                  title:
+                    'Gleichzahlspiele - Start Flanke schnell bei 4 + TW vs. 4',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_Start_Flanke_schnell_bei_4_%2B_TW_vs._4.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-start-flugball-beim-4-plus-tw-vs-4',
+                  title:
+                    'Gleichzahlspiele - Start Flugball beim 4 + TW vs. 4',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_Start_Flugball_beim_4_%2B_TW_vs._4.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-nur-nach-vorne-passen-bei-4-plus-tw-vs-4',
+                  title:
+                    'Gleichzahlspiele - nur nach vorne passen bei 4 + TW vs. 4',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_nur_nach_vorne_passen_bei_4_%2B_TW_vs._4.mp4',
+                },
+                {
+                  id: 'gleichzahlspiele-vom-2-vs-2-plus-torhuter-zum-4-vs-4-plus-torhuter',
+                  title:
+                    'Gleichzahlspiele - vom 2 vs 2 + Torhüter zum 4 vs 4 + Torhüter',
+                  videoUrl:
+                    'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_vom_2_vs_2_%2B_Torhuter_zum_4_vs_4_%2B_Torhuter.mp4',
+                },
+              ],
+            },
+          ],
+        },
+        {
           name: 'Ball Control & Dribbling',
           videos: [
             {

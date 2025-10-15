@@ -32,7 +32,7 @@ export function useCachedVideo(
   const loadVideo = useCallback(async (url: string) => {
     // Cancel any in-flight requests
     if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
+      abortControllerRef.current.abort('New video load initiated');
     }
 
     const controller = new AbortController();
@@ -167,7 +167,7 @@ export function useCachedVideo(
       }
 
       if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
+        abortControllerRef.current.abort('Component unmounting');
       }
     };
   }, []);
