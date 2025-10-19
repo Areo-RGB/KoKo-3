@@ -43,6 +43,12 @@
   scrollbar-width: none;
 }
 
+@utility transition-height {
+  transition-property: height;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
 /* Vertical scrolling animation for comet cards */
 @keyframes scroll-vertical {
   0% {

@@ -1,46 +1,89 @@
-# Suggested Commands for Koko Project
+# Essential Development Commands
 
-## Development Commands
-- `pnpm dev` - Start development server with Turbopack
-- `pnpm dev:webpack` - Start development server with webpack
-- `pnpm build` - Build for production (includes post-build scripts)
-- `pnpm build:clean` - Clean build (removes .next and out directories)
-- `pnpm build:export` - Build and export static files
-- `pnpm start` - Start production server
-- `pnpm serve` - Serve static export on port 3001
+## Development Server
+```bash
+# Primary development (Turbopack + debugging + incognito)
+pnpm dev:turbopack
+
+# Fallback development (Webpack)
+pnpm dev:webpack
+
+# Clean development environment
+pnpm clean:dev
+```
+
+## Build & Production
+```bash
+# Clean build directory
+pnpm build:clean
+
+# Build for static export
+pnpm build:export
+
+# Serve built site locally
+pnpm serve
+```
 
 ## Code Quality
-- `pnpm lint` - Run ESLint with strict mode
-- `pnpm format` - Format code with Prettier
-- `pnpm format:check` - Check code formatting without changes
-- `pnpm test` - Run Jest tests
-- `pnpm test:watch` - Run Jest in watch mode
+```bash
+# Lint with strict mode
+pnpm lint
 
-## Data Generation
-- `pnpm generate:warmups` - Generate warm-up data JSON
-- `pnpm generate:sessions` - Generate sessions data JSON
-- `pnpm postbuild` - Run all post-build data generation scripts
+# Format code with Prettier
+pnpm format
 
-## AI Assistant Commands
-- `pnpm claude` - Start Claude Code CLI (skip permissions)
-- `pnpm qwen` - Start Qwen CLI
+# Check formatting without fixing
+pnpm format:check
+```
 
-## Windows System Commands
-- `dir` - List directory contents (Windows)
-- `type` - Display file contents (Windows equivalent of cat)
-- `findstr` - Search text in files (Windows equivalent of grep)
-- `powershell` - Start PowerShell
-- `cmd` - Start Command Prompt
+## Testing
+```bash
+# Run tests
+pnpm test
+```
 
-## Git Commands
-- `git status` - Check repository status
-- `git add .` - Stage all changes
-- `git commit -m "message"` - Commit with message
-- `git push` - Push changes to remote
-- `git pull` - Pull changes from remote
+## System Utilities (Windows/WSL)
+```bash
+# Git operations
+git status
+git add .
+git commit -m "message"
+git push
+
+# File operations
+ls -la          # List files
+cd directory    # Change directory
+grep pattern    # Search in files
+find . -name    # Find files
+
+# Windows-specific via WSL
+kill-port 3000  # Kill processes on port
+```
 
 ## Package Management
-- `pnpm install` - Install dependencies
-- `pnpm add <package>` - Add new dependency
-- `pnpm add -D <package>` - Add development dependency
-- `pnpm remove <package>` - Remove dependency
+```bash
+# Install dependencies
+pnpm install
+
+# Add dependency
+pnpm add package-name
+
+# Add dev dependency
+pnpm add -D package-name
+```
+
+## Next.js Specific
+```bash
+# Generate static routes (if needed)
+npx next build
+
+# TypeScript checking
+npx tsc --noEmit
+```
+
+## Development Workflow
+1. Start with `pnpm dev:turbopack`
+2. Make changes and test
+3. Run `pnpm lint` and `pnpm format` before commits
+4. Use `pnpm build:clean` to verify production build
+5. Test with `pnpm serve` locally if needed

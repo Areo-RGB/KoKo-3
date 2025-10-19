@@ -1,51 +1,66 @@
 # Task Completion Checklist
 
-## Pre-Development
-1. Understand the existing code structure and conventions
-2. Check for existing similar implementations
-3. Review the feature's README.md if available
-4. Identify required dependencies and ensure they're available
+## Pre-Completion Requirements
+- [ ] Code follows project conventions (check `code_style_conventions.md`)
+- [ ] All imports are correct and organized
+- [ ] TypeScript types are properly defined
+- [ ] Components use proper Server/Client component patterns
+- [ ] TailwindCSS classes follow mobile-first responsive design
+- [ ] Accessibility requirements are met (semantic HTML, ARIA labels)
 
-## During Development
-1. Follow existing code patterns and conventions
-2. Use TypeScript strict typing
-3. Implement proper error handling
-4. Add appropriate JSDoc comments for complex functions
-5. Ensure responsive design with Tailwind CSS
-6. Use existing UI components from shadcn/ui when possible
+## Code Quality Checks
+- [ ] Run `pnpm lint` - no errors or warnings
+- [ ] Run `pnpm format` - code properly formatted
+- [ ] Run `pnpm build:clean` - builds successfully
+- [ ] Test functionality in development server
+- [ ] Check console for errors/warnings
+- [ ] Verify responsive design on different screen sizes
 
-## Code Quality Checks (MANDATORY)
-After completing any coding task, run these commands in order:
+## File Organization
+- [ ] Files follow naming conventions (lowercase-with-dashes)
+- [ ] Components use default exports
+- [ ] Route-specific logic in `_components/` or `_lib/`
+- [ ] Global components in `/components`
+- [ ] Proper path aliases (`@/`) used consistently
 
-1. **Format Code**: `pnpm format` - Fix code formatting
-2. **Lint Check**: `pnpm lint` - Check for code quality issues
-3. **Type Check**: Implicit in Next.js build, but can run `npx tsc --noEmit`
-4. **Build Test**: `pnpm build` - Ensure the project builds successfully
+## TypeScript & Type Safety
+- [ ] All props have explicit types
+- [ ] Function signatures are typed
+- [ ] No `any` types unless absolutely necessary
+- [ ] Strict TypeScript settings respected
+- [ ] Type imports used where appropriate
 
-## Testing
-1. **Unit Tests**: `pnpm test` - Run Jest tests if applicable
-2. **Manual Testing**: Test the feature in development mode
-3. **Cross-browser Testing**: Verify functionality works across browsers
-4. **Responsive Testing**: Check mobile and desktop layouts
+## Performance & Best Practices
+- [ ] Images use Next.js `<Image>` component
+- [ ] Heavy components use dynamic imports
+- [ ] Client components are minimal and focused
+- [ ] State is properly managed
+- [ ] No memory leaks in useEffect hooks
 
-## Post-Development
-1. **Documentation**: Update or create README.md for the feature
-2. **Performance**: Check for performance implications
-3. **Accessibility**: Ensure proper ARIA labels and keyboard navigation
-4. **Data Generation**: Run `pnpm generate:sessions` or `pnpm generate:warmups` if data files were modified
+## Testing & Verification
+- [ ] Functionality works as expected
+- [ ] Edge cases are handled
+- [ ] Error states are managed
+- [ ] Loading states are provided
+- [ ] Offline functionality (if applicable) works
 
-## Pre-Commit Checklist
-- [ ] Code formatted with Prettier
-- [ ] ESLint passes without errors
-- [ ] TypeScript compiles without errors
-- [ ] Project builds successfully
-- [ ] All tests pass
-- [ ] Feature works as expected in development
-- [ ] Documentation updated if necessary
+## Final Checks
+- [ ] Documentation updated if needed
+- [ ] README files updated for new features
+- [ ] Git commit ready with descriptive message
+- [ ] No console errors in production build
+- [ ] PWA features (if applicable) function correctly
 
-## Notes for AI Agents
-- NEVER commit changes unless explicitly requested
-- Always run the code quality commands after making changes
-- Pay attention to the existing component structure in each feature
-- Use the appropriate data types from `_lib/types.ts` files
-- Follow the import restrictions for client vs server components
+## AI Agent Specific
+- [ ] Code generation didn't introduce TODOs or placeholders
+- [ ] All required functionality is implemented
+- [ ] Code is DRY (Don't Repeat Yourself)
+- [ ] Early returns used to reduce nesting
+- [ ] Boolean variables use auxiliary verbs (`isLoading`, `hasError`)
+
+## Static Export Requirements (Critical)
+- [ ] No server-side API routes used at runtime
+- [ ] All data is statically available or fetched client-side
+- [ ] Dynamic routes have `generateStaticParams` if needed
+- [ ] Images use `unoptimized: true` for static export
+- [ ] Build generates static files successfully

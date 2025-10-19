@@ -1,5 +1,10 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 Always refer to the `.vscode/project-structure.md` file for the most up-to-date project structure before suggesting file creations or modifications.
 
+Always use the Desktop Commander MCP tools if fit for task
 ---
 
 ### AI Developer Persona & Core Principles
@@ -21,6 +26,37 @@ You are building for a project using the following technologies:
 - **Language:** TypeScript
 - **Styling:** TailwindCSS
 - **UI Components:** Shadcn UI & Radix UI
+
+### Development Commands
+
+This is a static site with PWA capabilities. Use these commands for development:
+
+```bash
+# Development with Turbopack (recommended)
+pnpm dev:turbopack
+
+# Development with Webpack (fallback)
+pnpm dev:webpack
+
+# Build for production
+pnpm build:export
+
+# Clean build directory
+pnpm build:clean
+
+# Linting and formatting
+pnpm lint
+pnpm format
+
+# Run tests
+pnpm test
+```
+
+**Important Development Notes:**
+- The app uses `output: 'export'` for static site generation
+- All routes must be statically renderable
+- Images use `unoptimized: true` for static export compatibility
+- PWA functionality includes offline support and video caching
 
 ### Code Implementation Guidelines
 
@@ -105,6 +141,41 @@ Contains globally shared custom React hooks, such as `use-is-mobile.ts`.
 #### `public/`
 
 For static assets that need to be served directly from the root of the domain, such as images, fonts, and SVGs.
+
+---
+
+## Application Architecture
+
+### PWA Features
+This application is a Progressive Web App with comprehensive offline capabilities:
+
+- **Service Worker**: Custom service worker with advanced caching strategies
+- **Offline Support**: Custom offline page at `/offline/`
+- **Video Caching**: Training videos can be pre-cached for offline viewing
+- **Cache Management**: Users can manage cached content at `/cache/`
+- **Audio Caching**: Soundboard audio files cached for offline use
+
+### Key Features
+- **Football Training**: FIFA 11+ training programs and exercises
+- **Video Player**: Advanced video player with offline support
+- **Soundboard**: Training sounds and audio cues
+- **Performance Charts**: Athlete performance tracking and visualization
+- **Reaction Training**: Cognitive training exercises
+- **Interval Timer**: Customizable interval training timer
+
+### Static Export Considerations
+Since this app uses `output: 'export'`, all pages must be statically renderable:
+- No server-side API routes can be used at runtime
+- All data fetching must be done at build time or client-side
+- Dynamic routes must have `generateStaticParams` implemented
+- Client-side data fetching should use SWR or React Query for caching
+
+### Service Worker Architecture
+The app uses a sophisticated caching strategy:
+- Videos: CacheFirst with range request support
+- Images: StaleWhileRevalidate for optimal performance
+- API responses: NetworkFirst with offline fallback
+- Pages: StaleWhileRevalidate for instant navigation
 
 ---
 

@@ -1,60 +1,48 @@
-# Code Style and Conventions
+# Code Style & Conventions Guide
 
-## TypeScript Configuration
-- **Target**: ES6
-- **Module**: ESNext with bundler resolution
-- **Strict Mode**: Enabled
-- **Path Mapping**: `@/*` points to project root
+## File Structure & Organization
+- **Naming**: `lowercase-with-dashes` for all files and directories
+- **Component Exports**: Default exports only (`export default function ComponentName()`)
+- **File Layout**: Main component → sub-components → helpers → type definitions
+- **Colocation**: Route-specific logic in `_components/` and `_lib/` directories
 
-## Prettier Configuration
-- **Semicolons**: Always required
-- **Quotes**: Single quotes preferred
-- **Trailing Commas**: Always (for stable diffs)
-- **Tab Width**: 2 spaces
-- **Print Width**: 80 characters
-- **Bracket Spacing**: Enabled
-- **Arrow Parens**: Always explicit
-- **End of Line**: LF (Unix-style)
-- **Plugins**: Tailwind CSS plugin for class sorting
+## Code Patterns
+- **Functional Components Only**: No classes, use functional patterns with hooks
+- **Early Returns**: Reduce nesting, improve readability
+- **Server Components First**: Use RSCs by default, add `'use client'` only when necessary
+- **Encapsulate Interactivity**: Keep client components small and focused
 
-## ESLint Rules
-### Error Level (Site-breaking)
-- `no-undef`: Error
-- `react-hooks/rules-of-hooks`: Error
-
-### Warning Level (Important but not breaking)
-- `@typescript-eslint/no-unused-vars`: Warning
-- `@typescript-eslint/no-explicit-any`: Warning
-- `react-hooks/exhaustive-deps`: Warning
-- `prefer-const`: Warning
-
-### Disabled Rules
-- Explicit function return types (inferred types preferred)
-- Object shorthand enforcement
-- Template literal enforcement
-
-## File Organization
-- Feature-based structure in `/app/[feature]`
-- Components in `_components/` subdirectories
-- Business logic in `_lib/` subdirectories  
-- Types in `_lib/types.ts` or dedicated `types/` directory
-- Data files in `_data/` subdirectories
-
-## Component Conventions
-- Use `'use client'` directive for client components
-- Functional components with hooks
-- JSX preserved (not compiled)
-- Props typing with TypeScript interfaces
-- Component export as default
-
-## Import Restrictions
-Client components cannot import:
-- Node.js modules (fs, path, child_process, os)
-- Server-only modules
-- Data processing modules from other features
+## TypeScript Conventions
+- **Explicit Types**: Provide types for props, state, and function signatures
+- **Type Aliases**: Use `type` over `interface` for object shapes
+- **No Enums**: Prefer `const` objects with `as const` assertion
+- **Path Mapping**: Use `@/` alias for clean imports
 
 ## Naming Conventions
-- PascalCase for components and interfaces
-- camelCase for variables and functions
-- kebab-case for file names
-- SCREAMING_SNAKE_CASE for constants
+- **Components**: PascalCase (e.g., `TrainingCard`, `VideoPlayer`)
+- **Variables**: camelCase with descriptive names
+- **Booleans**: Prefix with auxiliary verbs (`isLoading`, `hasError`, `canSubmit`)
+- **Event Handlers**: Prefix with `handle` (`handleClick`, `handleSubmit`)
+- **Files**: lowercase-with-dashes (`training-session.tsx`, `use-cache-manager.ts`)
+
+## Styling Guidelines
+- **TailwindCSS Only**: No plain CSS files or inline styles
+- **Mobile-First**: Base styles for mobile, responsive breakpoints for larger screens
+- **Utility Classes**: Use Tailwind's utility classes consistently
+- **Component Library**: Leverage Shadcn UI and Radix UI components
+
+## Import Organization
+- **Auto-organized**: Prettier plugin handles import organization
+- **Path Aliases**: Use `@/components`, `@/lib`, `@/hooks` consistently
+- **Type Imports**: Use `import type` for type-only imports when beneficial
+
+## ESLint Configuration
+- **AI-Friendly**: Non-critical rules disabled for flexibility
+- **Error-Only**: Only build/runtime breaking rules as errors
+- **Client/Server Separation**: Prevents Node.js imports in client components
+
+## Prettier Configuration
+- **Consistent Formatting**: 2 spaces, 80 character line width
+- **Trailing Commas**: All trailing commas for stable diffs
+- **Arrow Parentheses**: Always for explicit syntax
+- **Semicolons**: Always for ASI clarity

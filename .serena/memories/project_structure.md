@@ -1,68 +1,63 @@
-# Project Structure
+# Project Structure Guide
 
-## Root Directory
-```
-Koko/
-├── app/                    # Next.js App Router pages
-├── components/             # Shared UI components
-├── hooks/                  # Custom React hooks
-├── lib/                    # Shared utilities
-├── types/                  # Global type definitions
-├── util/                   # Utility functions
-├── public/                 # Static assets
-├── scripts/                # Build and data generation scripts
-└── .vscode/, .cursor/      # Editor configurations
-```
+## Top-Level Directories
 
-## App Directory Structure
-Each feature follows this pattern:
-```
-app/[feature]/
-├── page.tsx               # Main page component
-├── README.md              # Feature documentation
-├── _components/           # Feature-specific components
-│   ├── component-1.tsx
-│   └── index.ts          # Component exports
-├── _lib/                  # Business logic and utilities
-│   ├── types.ts          # Feature-specific types
-│   ├── constants.ts      # Feature constants
-│   └── data.ts           # Data processing
-└── _data/                 # Static data files (JSON)
-    └── feature-data.json
-```
+### `/app` - Next.js App Router Pages
+- **Root**: `app/page.tsx` - Main entry point (redirects to dashboard)
+- **Layout**: `app/layout.tsx` - Root layout with theme provider
+- **Routes**: Various training modules and features
+  - `junioren/` - Junior training management (complex client component)
+  - `fifa-11-plus/` - FIFA training programs
+  - `video-player/` - Advanced video player with offline support
+  - `performance-charts/` - Athlete performance visualization
+  - `reaction/` - Cognitive training exercises
+  - `interval-timer/` - Custom interval training timer
+  - `soundboard/` - Training audio cues
+  - `dashboard/` - Main dashboard navigation
 
-## Main Features
-- **dashboard/**: Landing page with navigation
-- **junioren/**: Junior training management (most complex)
-- **yo-yo-ir1-timeline/**: Performance visualization
-- **yo-yo-ir1_test/**: Interactive performance testing
-- **muscle-diagram/**: Exercise mapping
-- **video-player/**: Training video management
-- **data-table-demo/**: Performance analytics
-- **fifa-cards/**: Interactive player cards
-- **ranking/**: Performance rankings
+### `/components` - Global Shared Components
+- **layout/**: Site structure components (sidebar, main layout)
+- **theme/**: Theme provider and theme toggle
+- **ui/**: Shadcn UI primitives (Button, Card, Input, etc.)
 
-## Components Directory
+### `/lib` - Global Shared Logic
+- **utils.ts**: `cn` utility for Tailwind class merging
+- **data.ts**: Shared data sources and type definitions
+
+### `/hooks` - Custom React Hooks
+- **use-is-mobile.ts**: Mobile detection hook
+- **use-outside-click.ts**: Click outside detection
+
+### `/public` - Static Assets
+- **assets/**: Images, fonts, SVGs served from root
+- **junioren/**: Training session data JSON files
+- **training-directories/**: Additional training resources
+
+### `/util` - Helper Functions
+- **sports-utils.ts**: Sport-specific utility functions
+- **muscle-name-helper.ts**: Muscle-related helpers
+
+## Route Organization Pattern
 ```
-components/
-├── ui/                    # shadcn/ui components
-├── theme/                 # Theme management
-├── layout/                # Layout components
-├── animate-ui/            # Animation components
-└── orgin-ui/              # Custom UI components
+app/
+├── route-name/
+│   ├── page.tsx              # Main page component
+│   ├── _components/          # Route-specific components (non-routable)
+│   ├── _hooks/              # Route-specific hooks
+│   ├── _lib/                # Route-specific utilities
+│   └── README.md            # Documentation
 ```
 
-## Configuration Files
-- **next.config.mjs**: Next.js configuration
-- **tsconfig.json**: TypeScript configuration
-- **components.json**: shadcn/ui configuration
-- **prettier.config.js**: Code formatting rules
-- **.eslintrc.json**: Code quality rules
-- **package.json**: Dependencies and scripts
+## Import Path Aliases
+```typescript
+@/components/*     → components/
+@/lib/*           → lib/
+@/hooks/*         → hooks/
+@/utils/*         → util/
+```
 
-## Data Flow
-1. Static data in `_data/` directories
-2. Processing logic in `_lib/` directories  
-3. Type definitions in `_lib/types.ts`
-4. Components consume processed data
-5. State management via React hooks + localStorage
+## Static Export Considerations
+- All data must be statically available or fetched client-side
+- No server-side API routes at runtime
+- Dynamic routes need `generateStaticParams`
+- Client-side data fetching recommended (SWR/React Query)
