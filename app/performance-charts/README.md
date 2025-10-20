@@ -9,7 +9,6 @@ Leistungsübersicht für Yo-Yo IR1 und Jonglieren mit verschiedenen Visualisieru
 1. **Jonglieren** - Vertikales Balkendiagramm der Jonglier-Bestwerte
 2. **Yo-Yo IR1** - Vertikales Balkendiagramm der zurückgelegten Distanzen
 3. **Heatmap** - Kombinierte Visualisierung beider Metriken
-4. **Fortschritt** - Timeline des Spielerfortschritts
 
 ### Heatmap Tab
 
@@ -39,7 +38,6 @@ Nur Spieler mit **beiden** Metriken werden angezeigt.
 
 - `performance-heatmap.tsx` - Heatmap-Visualisierung mit chartjs-chart-matrix
 - `vertical-bar-chart.tsx` - Vertikale Balkendiagramme
-- `fortschritt-timeline.tsx` - Fortschritts-Timeline
 - `chart-data-table.tsx` - Datentabellen-Ansicht
 
 ### Abhängigkeiten

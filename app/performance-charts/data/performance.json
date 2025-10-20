@@ -1,228 +1,138 @@
 {
   "jonglieren": [
     {
-      "name": "Lion",
-      "value": 100,
-      "date": "2025-09-15",
-      "team": "U12"
+      "name": "Erik",
+      "value": 100
     },
     {
-      "name": "Erik",
-      "value": 96,
-      "date": "2025-09-15",
-      "team": null
+      "name": "Lion",
+      "value": 100
     },
     {
       "name": "Berat",
-      "value": 54,
-      "date": "2025-09-24",
-      "team": "U12"
+      "value": 64
     },
     {
       "name": "Jakob",
-      "value": 26,
-      "date": "2025-09-15",
-      "team": "U12"
+      "value": 26
     },
     {
       "name": "Metin",
-      "value": 25,
-      "date": "2025-09-15",
-      "team": "U12"
+      "value": 25
+    },
+        {
+      "name": "Bent",
+      "value": 100
     },
     {
       "name": "Silas",
-      "value": 24,
-      "date": "2025-09-15",
-      "team": null
+      "value": 24
     },
     {
       "name": "Arvid",
-      "value": 18,
-      "date": "2025-09-15",
-      "team": "U12"
+      "value": 18
     },
     {
       "name": "Lennox",
-      "value": 16,
-      "date": "2025-09-15",
-      "team": null
+      "value": 16
     },
     {
       "name": "Finley",
-      "value": 15,
-      "date": "2025-09-15",
-      "team": "U12"
+      "value": 15
     },
     {
       "name": "Eray",
-      "value": 13,
-      "date": "2025-09-15",
-      "team": null
+      "value": 13
     },
     {
       "name": "Paul",
-      "value": 13,
-      "date": "2025-09-15",
-      "team": "U11"
+      "value": 13
     },
     {
       "name": "Lasse",
-      "value": 6,
-      "date": "2025-09-15",
-      "team": null
+      "value": 6
     },
     {
       "name": "Levi",
-      "value": 5,
-      "date": "2025-09-15",
-      "team": "U13"
+      "value": 5
     }
   ],
   "yoyoIr1": [
     {
-      "name": "Erik",
-      "value": 920,
-      "date": "2025-09-12",
-      "team": null
+      "name": "Arvid",
+      "value": 1120
     },
     {
       "name": "Finley",
-      "value": 840,
-      "date": "2025-09-12",
-      "team": "U12"
+      "value": 1040
     },
     {
-      "name": "Levi",
-      "value": 600,
-      "date": "2025-09-12",
-      "team": "U13"
-    },
-    {
-      "name": "Jakob",
-      "value": 400,
-      "date": "2025-09-12",
-      "team": "U12"
-    },
-    {
-      "name": "Arvid",
-      "value": 400,
-      "date": "2025-09-12",
-      "team": "U12"
-    },
-    {
-      "name": "Silas",
-      "value": 360,
-      "date": "2025-09-12",
-      "team": null
+      "name": "Erik",
+      "value": 960
     },
     {
       "name": "Berat",
-      "value": 360,
-      "date": "2025-09-12",
-      "team": "U12"
+      "value": 560
     },
     {
       "name": "Lasse",
-      "value": 280,
-      "date": "2025-09-12",
-      "team": null
+      "value": 600
     },
     {
-      "name": "Metin",
-      "value": 280,
-      "date": "2025-09-12",
-      "team": "U12"
+      "name": "Levi",
+      "value": 600
     },
     {
-      "name": "Lion",
-      "value": 200,
-      "date": "2025-09-12",
-      "team": "U12"
-    },
-    {
-      "name": "Malik",
-      "value": 200,
-      "date": "2025-09-12",
-      "team": null
+      "name": "Jakob",
+      "value": 720
     },
     {
       "name": "Eray",
-      "value": 160,
-      "date": "2025-09-12",
-      "team": null
+      "value": 680
     },
     {
       "name": "Lion",
-      "value": 360,
-      "level": 13.2,
-      "date": "2025-10-10",
-      "team": "U12"
+      "value": 360
     },
     {
       "name": "Metin",
-      "value": 400,
-      "level": 13.3,
-      "date": "2025-10-10",
-      "team": "U12"
-    },
-    {
-      "name": "Berat",
-      "value": 560,
-      "level": 14.3,
-      "date": "2025-10-10",
-      "team": "U12"
+      "value": 400
     },
     {
       "name": "Paul",
-      "value": 400,
-      "level": 13.3,
-      "date": "2025-10-10",
-      "team": "U11"
+      "value": 400
     },
     {
-      "name": "Lasse",
-      "value": 600,
-      "level": 14.4,
-      "date": "2025-10-10",
-      "team": null
+      "name": "Bent",
+      "value": 360
     },
     {
-      "name": "Levi",
-      "value": 600,
-      "level": 14.4,
-      "date": "2025-10-10",
-      "team": "U13"
+      "name": "Silas",
+      "value": 360
+    }
+  ],
+  "springseil": [
+    {
+      "name": "Bent",
+      "value": 97
     },
     {
-      "name": "Jakob",
-      "value": 720,
-      "date": "2025-10-10",
-      "team": "U12"
+      "name": "Berat",
+      "value": 54
+    }
+  ],
+  "prellwand": [
+    {
+      "name": "Lion",
+      "value": 40
     },
     {
-      "name": "Arvid",
-      "value": 1120,
-      "date": "2025-10-10",
-      "team": "U12"
+      "name": "Berat",
+      "value": 39
     },
     {
-      "name": "Eray",
-      "value": 680,
-      "date": "2025-10-10",
-      "team": null
-    },
-    {
-      "name": "Erik",
-      "value": 960,
-      "date": "2025-10-10",
-      "team": null
-    },
-    {
-      "name": "Finley",
-      "value": 1040,
-      "date": "2025-10-10",
-      "team": "U12"
+      "name": "Bent",
+      "value": 37
     }
   ]
 }

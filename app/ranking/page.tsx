@@ -58,7 +58,7 @@ export default function HomePage() {
     }
   };
 
-  // Avatar image URLs mirrored from the Fortschritt page
+  // Avatar image URLs mirrored from the Performance Charts view
   const nameToAvatarUrl: Record<string, string> = {
     Behrat: '/assets/images/spieler-avatars/avatars-256/behrat.webp',
     Bent: '/assets/images/spieler-avatars/avatars-256/bent.webp',
