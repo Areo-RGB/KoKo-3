@@ -16,19 +16,10 @@
       ]
     },
     "chrome-devtools": {
-      "command": "cmd.exe",
+      "command": "npx",
       "args": [
-        "/c",
-        "npx",
         "-y",
-        "chrome-devtools-mcp@latest",
-        "--headless",
-        "--viewport",
-        "1280x720",
-        "--chrome-arg",
-        "--no-sandbox",
-        "--chrome-arg",
-        "--disable-setuid-sandbox"
+        "chrome-devtools-mcp@latest"
       ]
     },
     "playwright": {
@@ -74,10 +65,16 @@
         "mcp"
       ]
     },
-    
     "cloudinary-asset-mgmt": {
       "command": "npx",
-      "args": ["-y", "--package", "@cloudinary/asset-management", "--", "mcp", "start"],
+      "args": [
+        "-y",
+        "--package",
+        "@cloudinary/asset-management",
+        "--",
+        "mcp",
+        "start"
+      ],
       "env": {
         "CLOUDINARY_CLOUD_NAME": "dg8zbx8ja",
         "CLOUDINARY_API_KEY": "195935627435494",
@@ -93,6 +90,22 @@
         "start-mcp-server",
         "--context",
         "ide-assistant"
+      ]
+    },
+    "markitdown": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "markitdown-mcp:latest"
+      ]
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
       ]
     }
   }

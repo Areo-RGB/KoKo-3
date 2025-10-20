@@ -14,7 +14,8 @@
     "format:check": "prettier --check .",
     "lint": "next lint --strict",
     "serve": "serve out -p 3001",
-    "claude": "claude --dangerously-skip-permissions"
+    "claude": "claude --dangerously-skip-permissions",
+    "plugin": "npx claude-code-templates@latest --plugins"
   },
   "engines": {
     "node": ">=20"
@@ -64,6 +65,8 @@
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.906.0",
+    "@eslint/js": "^9.38.0",
+    "@next/eslint-plugin-next": "^15.5.6",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/node": "^22",
     "@types/react": "^19",
@@ -71,7 +74,10 @@
     "concurrently": "^9.2.1",
     "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
+    "eslint": "^9.35.0",
     "eslint-config-next": "^15.4.7",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.0",
     "jest": "^30.0.5",
     "kill-port": "^2.0.1",
     "knip": "^5.63.0",
@@ -85,6 +91,7 @@
     "tailwindcss": "^4.1.12",
     "ts-node": "^10.9.2",
     "typescript": "^5",
+    "typescript-eslint": "^8.46.1",
     "wait-on": "^9.0.1"
   }
 }

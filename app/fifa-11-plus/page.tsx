@@ -36,8 +36,8 @@ const FifaProgramView: React.FC<FifaProgramViewProps> = ({
   const currentVideoId = useMemo(() => currentVideo?.id ?? '', [currentVideo]);
 
   return (
-    <div className="space-y-6">
-      <div ref={videoPlayerContainerRef} className="w-full scroll-mt-20">
+    <div className="space-y-4 sm:space-y-6">
+      <div ref={videoPlayerContainerRef} className="w-full scroll-mt-16 sm:scroll-mt-20">
         {currentVideo ? (
           <VideoPlayer
             key={currentVideo.id}
@@ -46,13 +46,13 @@ const FifaProgramView: React.FC<FifaProgramViewProps> = ({
           />
         ) : (
           <div className="bg-muted flex aspect-video items-center justify-center rounded-lg">
-            <div className="p-4 text-center">
+            <div className="p-3 sm:p-4 text-center">
               <img
                 src="/assets/svg/FIFA_Logo.svg"
                 alt="FIFA Logo"
-                className="mx-auto mb-4 h-auto w-48 opacity-80"
+                className="mx-auto mb-3 sm:mb-4 h-auto w-32 sm:w-48 opacity-80"
               />
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-sm sm:text-base">
                 Wählen Sie ein Video-Kapitel zum Abspielen.
               </p>
             </div>
@@ -60,12 +60,12 @@ const FifaProgramView: React.FC<FifaProgramViewProps> = ({
         )}
       </div>
       <Card>
-        <CardContent className="p-4 md:p-6">
-          <div className="mb-6">
-            <h3 className="mb-2 text-lg font-semibold">
+        <CardContent className="p-4 sm:p-6">
+          <div className="mb-4 sm:mb-6">
+            <h3 className="mb-2 text-base font-semibold sm:text-lg">
               FIFA 11+ Komplettes Programm
             </h3>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-xs sm:text-sm">
               Das komplette FIFA 11+ Verletzungspräventionsprogramm mit Laufen,
               Kraft, Plyometrie und Gleichgewichtsübungen.
             </p>
@@ -100,24 +100,24 @@ export default function Fifa11PlusPage() {
   ];
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-8">
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold tracking-tight">FIFA 11+ Programm</h1>
-        <p className="text-muted-foreground mt-2">
+    <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">
+      <div className="mb-6 sm:mb-8 text-center">
+        <h1 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">FIFA 11+ Programm</h1>
+        <p className="text-muted-foreground mt-2 text-sm sm:text-base">
           Interaktiver Video-Player für die FIFA 11+
           Verletzungspräventionsprogramme.
         </p>
       </div>
       <Tabs defaultValue={tabs[0].id} className="w-full">
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="grid w-full grid-cols-2 h-10">
           {tabs.map((tab) => (
-            <TabsTrigger key={tab.id} value={tab.id}>
+            <TabsTrigger key={tab.id} value={tab.id} className="text-xs sm:text-sm px-3 py-2">
               {tab.label}
             </TabsTrigger>
           ))}
         </TabsList>
         {tabs.map((tab) => (
-          <TabsContent key={tab.id} value={tab.id} className="mt-6">
+          <TabsContent key={tab.id} value={tab.id} className="mt-4 sm:mt-6">
             {tab.content}
           </TabsContent>
         ))}

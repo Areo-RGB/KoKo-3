@@ -67,7 +67,6 @@ export default function VideoPlayerControls({
   showPlaylist = false,
 }: VideoPlayerControlsProps) {
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
 
   const formatTime = (timeInSeconds: number): string => {
     const minutes = Math.floor(timeInSeconds / 60);
@@ -121,8 +120,6 @@ export default function VideoPlayerControls({
         <Slider
           value={[progressPercentage]}
           onValueChange={handleProgressChange}
-          onPointerDown={() => setIsDragging(true)}
-          onPointerUp={() => setIsDragging(false)}
           max={100}
           step={0.1}
           className={cn(

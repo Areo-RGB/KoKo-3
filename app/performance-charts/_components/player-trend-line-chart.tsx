@@ -1,17 +1,9 @@
 'use client';
 
-import {
-  CategoryScale,
-  Chart as ChartJS,
-  ChartOptions,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Tooltip,
-} from 'chart.js';
+import type { ChartOptions } from 'chart.js';
+import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js';
 import { useTheme } from 'next-themes';
-import { useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -41,7 +33,7 @@ export default function PlayerTrendLineChart({
 }: PlayerTrendLineChartProps) {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === 'dark';
-  const chartRef = useRef<any>(null);
+  const chartRef = useRef<ChartJS<'line'> | null>(null);
   const [hidden, setHidden] = useState<Set<number>>(new Set());
 
   const axisColor = isDark ? '#e5e7eb' : '#0f172a';
@@ -50,10 +42,13 @@ export default function PlayerTrendLineChart({
     : 'rgba(148, 163, 184, 0.15)';
 
   // Deterministic HSL palette for many players
-  function colorForIndex(i: number, alpha = 0.8) {
-    const hue = (i * 43) % 360; // spread across wheel
-    return `hsla(${hue}, 70%, ${isDark ? 60 : 45}%, ${alpha})`;
-  }
+  const colorForIndex = useCallback(
+    (i: number, alpha = 0.8) => {
+      const hue = (i * 43) % 360; // spread across wheel
+      return `hsla(${hue}, 70%, ${isDark ? 60 : 45}%, ${alpha})`;
+    },
+    [isDark],
+  );
 
   const datasets = useMemo(
     () =>
@@ -70,7 +65,7 @@ export default function PlayerTrendLineChart({
         tension: 0.35,
         spanGaps: true,
       })),
-    [series, isDark],
+    [series, colorForIndex],
   );
 
   const data = useMemo(

@@ -1,16 +1,7 @@
 'use client';
 
-import {
-  Chart as ChartJS,
-  ChartOptions,
-  Filler,
-  Legend,
-  LineElement,
-  Plugin,
-  PointElement,
-  RadialLinearScale,
-  Tooltip,
-} from 'chart.js';
+import type { ChartOptions } from 'chart.js';
+import { Chart as ChartJS, Filler, Legend, LineElement, PointElement, RadialLinearScale, Tooltip } from 'chart.js';
 import { useTheme } from 'next-themes';
 import { useMemo } from 'react';
 import { Radar } from 'react-chartjs-2';

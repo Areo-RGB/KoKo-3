@@ -1,14 +1,7 @@
 'use client';
 
-import {
-  BarElement,
-  CategoryScale,
-  Chart as ChartJS,
-  ChartOptions,
-  Legend,
-  LinearScale,
-  Tooltip,
-} from 'chart.js';
+import type { ChartOptions } from 'chart.js';
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from 'chart.js';
 import { useTheme } from 'next-themes';
 import { useMemo, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
@@ -83,7 +76,7 @@ export default function GroupedPlayerBarChart({
         },
       ],
     };
-  }, [players, series, hiddenPlayers, isDark]);
+  }, [players, series, hiddenPlayers, accentBg, accentBorder, greyBg, greyBorder]);
 
   const data = useMemo(
     () => ({

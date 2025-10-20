@@ -11,15 +11,15 @@ export default function IntervalTimerPage() {
   const { state, controls, audio } = useIntervalTimer();
 
   return (
-    <div className="container mx-auto max-w-2xl px-4 py-8">
-      <div className="mb-8 text-center">
-        <h1 className="text-4xl font-bold tracking-tight">Interval Timer</h1>
-        <p className="text-muted-foreground mt-2 text-lg">
+    <div className="container mx-auto max-w-2xl px-4 py-6 sm:py-8">
+      <div className="mb-6 sm:mb-8 text-center">
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">Interval Timer</h1>
+        <p className="text-muted-foreground mt-2 text-sm sm:text-base lg:text-lg">
           Customizable timer for workouts and drills.
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {!state.selectedPreset ? (
           <PresetSelector
             selectedPreset={state.selectedPreset}
@@ -43,7 +43,7 @@ export default function IntervalTimerPage() {
               onToggleMute={audio.toggleMute}
               onVolumeChange={audio.setVolume}
             />
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
               <ProgressIndicator state={state} />
               <ExerciseVideoCard phase={state.activePhase} />
             </div>

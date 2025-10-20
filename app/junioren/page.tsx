@@ -112,9 +112,14 @@ function JuniorenTrainingPageContent() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = (await res.json()) as TrainingSession[];
         if (!cancelled) setSessions(data);
-      } catch (e: any) {
-        if (!cancelled)
-          setLoadError(e?.message || 'Konnte Trainingsdaten nicht laden');
+      } catch (error: unknown) {
+        if (!cancelled) {
+          const message =
+            error instanceof Error && error.message
+              ? error.message
+              : 'Konnte Trainingsdaten nicht laden';
+          setLoadError(message);
+        }
       } finally {
         if (!cancelled) setIsLoading(false);
       }
@@ -172,9 +177,14 @@ function JuniorenTrainingPageContent() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const map = (await res.json()) as WarmupMap;
         if (!cancelled) setWarmupMap(map);
-      } catch (e: any) {
-        if (!cancelled)
-          setWarmupsError(e?.message || 'Konnte AufwÃ¤rmen-Links nicht laden');
+      } catch (error: unknown) {
+        if (!cancelled) {
+          const message =
+            error instanceof Error && error.message
+              ? error.message
+              : 'Konnte Aufwärmen-Links nicht laden';
+          setWarmupsError(message);
+        }
       } finally {
         if (!cancelled) setWarmupsLoading(false);
       }
@@ -393,12 +403,12 @@ function JuniorenTrainingPageContent() {
   );
 
   return (
-    <div className="container mx-auto max-w-7xl px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-foreground mb-2 text-4xl font-bold">
+    <div className="container mx-auto max-w-7xl px-4 py-6 sm:py-8">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-foreground mb-2 text-2xl font-bold sm:text-3xl lg:text-4xl">
           Junioren Training
         </h1>
-        <p className="text-muted-foreground text-lg">
+        <p className="text-muted-foreground text-sm sm:text-base lg:text-lg">
           Trainingssammlung fÃ¼r Aâ€“E Junioren
           {!isWarmupSelected && totalCount > 0
             ? ` â€” ${totalCount} Einheiten`
@@ -406,37 +416,38 @@ function JuniorenTrainingPageContent() {
         </p>
       </div>
 
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Search className="h-5 w-5" />
+      <Card className="mb-4 sm:mb-6">
+        <CardHeader className="px-4 py-4 sm:px-6 sm:py-6">
+          <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+            <Search className="h-4 w-4 sm:h-5 sm:w-5" />
             Suche und Filter
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-sm sm:text-base">
             Nach Altersklasse, Kategorie und Titel filtern
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 px-4 py-4 sm:px-6 sm:py-6">
           {/* Search */}
           <div className="relative">
-            <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+            <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 sm:h-4 sm:w-4" />
             <Input
               placeholder="Trainingseinheiten durchsuchen..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
+              className="pl-10 h-10 text-sm sm:h-10 sm:text-base"
             />
           </div>
 
           {/* Age group filter */}
           <div className="flex flex-wrap gap-2">
-            <span className="text-muted-foreground self-center text-sm font-medium">
+            <span className="text-muted-foreground self-center text-sm font-medium sm:text-sm">
               Altersklasse:
             </span>
             <Button
               variant={selectedAgeGroup === null ? 'default' : 'outline'}
               size="sm"
               onClick={() => setSelectedAgeGroup(null)}
+              className="h-8 px-3 text-xs sm:h-9 sm:px-4 sm:text-sm"
             >
               Alle
             </Button>
@@ -446,6 +457,7 @@ function JuniorenTrainingPageContent() {
                 variant={selectedAgeGroup === age ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedAgeGroup(age)}
+                className="h-8 px-3 text-xs sm:h-9 sm:px-4 sm:text-sm"
               >
                 {age}
               </Button>
@@ -454,13 +466,14 @@ function JuniorenTrainingPageContent() {
 
           {/* Category filter */}
           <div className="flex flex-wrap gap-2">
-            <span className="text-muted-foreground self-center text-sm font-medium">
+            <span className="text-muted-foreground self-center text-sm font-medium sm:text-sm">
               Kategorie:
             </span>
             <Button
               variant={selectedCategory === null ? 'default' : 'outline'}
               size="sm"
               onClick={() => setSelectedCategory(null)}
+              className="h-8 px-3 text-xs sm:h-9 sm:px-4 sm:text-sm"
             >
               Alle
             </Button>
@@ -471,10 +484,12 @@ function JuniorenTrainingPageContent() {
                 }
                 size="sm"
                 onClick={() => setSelectedCategory('Favoriten')}
-                className="flex items-center gap-1"
+                className="flex items-center gap-1 h-8 px-3 text-xs sm:h-9 sm:px-4 sm:text-sm"
               >
                 <Heart className="h-3 w-3" />
-                Favoriten ({favorites.size})
+                <span className="hidden sm:inline">Favoriten</span>
+                <span className="sm:hidden">Fav</span>
+                ({favorites.size})
               </Button>
             )}
             {allCategories.map((category) => (
@@ -483,6 +498,7 @@ function JuniorenTrainingPageContent() {
                 variant={selectedCategory === category ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedCategory(category)}
+                className="h-8 px-3 text-xs sm:h-9 sm:px-4 sm:text-sm"
               >
                 {category}
               </Button>
@@ -492,7 +508,7 @@ function JuniorenTrainingPageContent() {
       </Card>
 
       {/* Cache Control Component */}
-      <div className="mb-6">
+      <div className="mb-4 sm:mb-6">
         <CacheControl
           selectedAgeGroup={selectedAgeGroup}
           allSessions={sessions}
@@ -537,8 +553,8 @@ function JuniorenTrainingPageContent() {
                         key={item.url}
                         className="bg-card hover:bg-muted/50 flex items-center justify-between rounded-lg border p-3 transition-colors"
                       >
-                        <div className="flex flex-col">
-                          <span className="font-medium">{item.title}</span>
+                        <div className="flex flex-col min-w-0 flex-1 mr-3">
+                          <span className="font-medium text-sm truncate">{item.title}</span>
                           <span className="text-muted-foreground text-xs">
                             {item.group}
                           </span>
@@ -546,12 +562,12 @@ function JuniorenTrainingPageContent() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="h-8"
+                          className="h-8 px-2 sm:px-3 flex-shrink-0"
                           onClick={() => window.open(item.url, '_blank')}
                           title="Ã–ffnen"
                         >
-                          <ExternalLink className="mr-1 h-3 w-3" />
-                          Ã–ffnen
+                          <ExternalLink className="h-3 w-3 sm:mr-1" />
+                          <span className="hidden sm:inline">Ã–ffnen</span>
                         </Button>
                       </div>
                     );

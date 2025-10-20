@@ -33,16 +33,45 @@ export async function cacheTrainingMaterials(
   sessions: unknown[],
   onProgress?: (p: CacheProgress) => void,
 ): Promise<CacheResult> {
-  const filteredSessions = sessions.filter((session): session is any => {
-    return (
-      typeof session === 'object' &&
-      session !== null &&
-      'ageGroup' in session &&
-      (session as any).ageGroup === ageGroup &&
-      (('htmlPath' in session && (session as any).htmlPath !== 'null') ||
-        ('pdfPath' in session && (session as any).pdfPath !== 'null'))
-    );
-  });
+  type SessionWithPaths = {
+    ageGroup: string;
+    htmlPath?: string;
+    pdfPath?: string;
+  };
+
+  const filteredSessions = sessions
+    .map((session): SessionWithPaths | null => {
+      if (!session || typeof session !== 'object') {
+        return null;
+      }
+
+      const record = session as Record<string, unknown>;
+      const sessionAgeGroup =
+        typeof record.ageGroup === 'string' ? record.ageGroup : null;
+      if (sessionAgeGroup !== ageGroup) {
+        return null;
+      }
+
+      const htmlPath =
+        typeof record.htmlPath === 'string' && record.htmlPath !== 'null'
+          ? record.htmlPath
+          : undefined;
+      const pdfPath =
+        typeof record.pdfPath === 'string' && record.pdfPath !== 'null'
+          ? record.pdfPath
+          : undefined;
+
+      if (!htmlPath && !pdfPath) {
+        return null;
+      }
+
+      return {
+        ageGroup: sessionAgeGroup,
+        htmlPath,
+        pdfPath,
+      };
+    })
+    .filter((session): session is SessionWithPaths => session !== null);
 
   const cacheName = `${TRAINING_CACHE_PREFIX}${ageGroup.toLowerCase()}`;
   const cache = await caches.open(cacheName);
@@ -61,7 +90,7 @@ export async function cacheTrainingMaterials(
   };
 
   for (let i = 0; i < filteredSessions.length; i++) {
-    const session: any = filteredSessions[i];
+    const session = filteredSessions[i];
     const progress = Math.round(((i + 1) / filteredSessions.length) * 100);
 
     if (session.htmlPath && session.htmlPath !== 'null') {
@@ -73,11 +102,14 @@ export async function cacheTrainingMaterials(
         } else {
           throw new Error(`HTML fetch failed: ${htmlResponse.status}`);
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         results.failedFiles++;
         results.errors.push({
           file: session.htmlPath,
-          error: error?.message ?? String(error),
+          error:
+            error instanceof Error && error.message
+              ? error.message
+              : String(error),
           type: 'HTML',
         });
       }
@@ -92,11 +124,14 @@ export async function cacheTrainingMaterials(
         } else {
           throw new Error(`PDF fetch failed: ${pdfResponse.status}`);
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         results.failedFiles++;
         results.errors.push({
           file: session.pdfPath,
-          error: error?.message ?? String(error),
+          error:
+            error instanceof Error && error.message
+              ? error.message
+              : String(error),
           type: 'PDF',
         });
       }

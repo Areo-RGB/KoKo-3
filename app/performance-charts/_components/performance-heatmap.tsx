@@ -1,14 +1,12 @@
 'use client';
 
-import {
-  CategoryScale,
-  Chart as ChartJS,
+import type {
   ChartOptions,
-  Legend,
-  LinearScale,
   Plugin,
-  Tooltip,
+  ScriptableContext,
+  TooltipItem,
 } from 'chart.js';
+import { CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from 'chart.js';
 import { MatrixController, MatrixElement } from 'chartjs-chart-matrix';
 import { useTheme } from 'next-themes';
 import { useMemo } from 'react';
@@ -29,6 +27,16 @@ interface HeatmapData {
   jonglieren: number;
 }
 
+interface MatrixDatum {
+  x: string;
+  y: string;
+  v: number;
+  raw: {
+    yoyo: number;
+    jonglieren: number;
+  };
+}
+
 interface PerformanceHeatmapProps {
   data: HeatmapData[];
 }
@@ -43,13 +51,13 @@ export default function PerformanceHeatmap({ data }: PerformanceHeatmapProps) {
     : 'rgba(148, 163, 184, 0.1)';
 
   // Prepare matrix data
-  const matrixData = useMemo(() => {
+  const matrixData = useMemo<MatrixDatum[]>(() => {
     // Calculate max values for normalization
     const maxYoyo = Math.max(...data.map((d) => d.yoyo));
     const maxJonglieren = Math.max(...data.map((d) => d.jonglieren));
 
     // Map and calculate combined scores
-    const withScores = data.map((player) => {
+      const withScores = data.map<MatrixDatum>((player) => {
       const normalizedYoyo = (player.yoyo / maxYoyo) * 100;
       const normalizedJonglieren = (player.jonglieren / maxJonglieren) * 100;
       const combinedScore = (normalizedYoyo + normalizedJonglieren) / 2;
@@ -80,8 +88,9 @@ export default function PerformanceHeatmap({ data }: PerformanceHeatmapProps) {
         {
           label: 'Gesamtleistung',
           data: matrixData,
-          backgroundColor(context: any) {
-            const value = context.dataset.data[context.dataIndex]?.v || 0;
+          backgroundColor({ dataIndex }: ScriptableContext<'matrix'>) {
+            const datum = matrixData[dataIndex];
+            const value = datum?.v ?? 0;
 
             // Color gradient from red (low) to yellow to green (high)
             if (value >= 75) {
@@ -114,19 +123,21 @@ export default function PerformanceHeatmap({ data }: PerformanceHeatmapProps) {
             ? 'rgba(255, 255, 255, 0.2)'
             : 'rgba(0, 0, 0, 0.1)',
           borderWidth: 1,
-          width: ({ chart }: any) => {
-            const { width } = chart.chartArea || { width: 0 };
+          width: ({ chart }: ScriptableContext<'matrix'>) => {
+            const chartArea = chart.chartArea;
+            const width = chartArea?.width ?? 0;
             return Math.max(width * 0.8, 40);
           },
-          height: ({ chart }: any) => {
-            const { height } = chart.chartArea || { height: 0 };
+          height: ({ chart }: ScriptableContext<'matrix'>) => {
+            const chartArea = chart.chartArea;
+            const height = chartArea?.height ?? 0;
             const barCount = playerNames.length || 1;
             return Math.max((height * 0.8) / barCount, 20);
           },
         },
       ],
     }),
-    [matrixData, isDark, playerNames.length],
+    [matrixData, isDark, playerNames],
   );
 
   const options = useMemo<ChartOptions<'matrix'>>(
@@ -174,12 +185,12 @@ export default function PerformanceHeatmap({ data }: PerformanceHeatmapProps) {
           padding: 12,
           displayColors: false,
           callbacks: {
-            title(context: any) {
-              const dataPoint = context[0]?.raw;
-              return dataPoint?.y || '';
+            title(context: TooltipItem<'matrix'>[]) {
+              const dataPoint = context[0]?.raw as MatrixDatum | undefined;
+              return dataPoint?.y ?? '';
             },
-            label(context: any) {
-              const dataPoint = context.raw;
+            label(context: TooltipItem<'matrix'>) {
+              const dataPoint = context.raw as MatrixDatum | undefined;
               if (!dataPoint?.raw) return '';
 
               return [
@@ -211,11 +222,12 @@ export default function PerformanceHeatmap({ data }: PerformanceHeatmapProps) {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        meta.data.forEach((element: any, index: number) => {
+        meta.data.forEach((element, index) => {
           const dataPoint = matrixData[index];
           if (!dataPoint?.raw) return;
 
-          const { x, y } = element.getCenterPoint();
+          const matrixElement = element as MatrixElement;
+          const { x, y } = matrixElement.getCenterPoint();
 
           // Draw text with shadow for better readability
           const value = dataPoint.v;

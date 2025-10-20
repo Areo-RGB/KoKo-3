@@ -11,6 +11,7 @@ import {
   getVideoForPlayer,
   hasVideo,
 } from '@/util/sports-utils';
+import type Plyr from 'plyr';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 export default function HomePage() {
@@ -40,10 +41,10 @@ export default function HomePage() {
   } | null>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const [currentPlaybackRate, setCurrentPlaybackRate] = useState<number>(1);
-  const [showRateIndicator, setShowRateIndicator] = useState<boolean>(false);
+  const [, setShowRateIndicator] = useState<boolean>(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const plyrRef = useRef<any>(null);
+  const plyrRef = useRef<Plyr | null>(null);
   const touchStartY = useRef<number>(0);
   const isSwiping = useRef<boolean>(false);
 
@@ -242,13 +243,13 @@ export default function HomePage() {
   }, [playingVideo]);
 
   return (
-    <div className="mx-auto w-full px-4 py-8">
-      <div className="mb-6">
+    <div className="mx-auto w-full px-4 py-6 sm:py-8">
+      <div className="mb-4 sm:mb-6">
         <SelectNative
           id="exercise-select"
           value={selectedExercise}
           onChange={(e) => setSelectedExercise(e.target.value)}
-          className="max-w-md"
+          className="w-full max-w-md sm:max-w-lg"
         >
           {sportsDataWithRanks.map((sport) => (
             <option key={sport.name} value={sport.name}>
@@ -259,20 +260,20 @@ export default function HomePage() {
       </div>
 
       {selectedSport && (
-        <Card className="relative mx-auto max-w-2xl overflow-hidden p-0">
-          <CardHeader className="from-muted to-accent rounded-t-xl border-b bg-gradient-to-r px-6 py-6">
-            <div className="flex items-center">
+        <Card className="relative mx-auto w-full max-w-2xl overflow-hidden p-0 sm:max-w-3xl lg:max-w-4xl">
+          <CardHeader className="from-muted to-accent rounded-t-xl border-b bg-gradient-to-r px-4 py-4 sm:px-6 sm:py-6">
+            <div className="flex items-center gap-3 sm:gap-4">
               <img
                 src="/assets/svg/DFB-Logo.svg"
                 alt="DFB Logo"
-                className="h-8 w-auto"
+                className="h-6 w-auto sm:h-8"
               />
-              <CardTitle className="text-foreground flex-grow text-center text-2xl font-semibold">
+              <CardTitle className="text-foreground flex-grow text-center text-lg font-semibold sm:text-2xl">
                 {selectedSport.name}
               </CardTitle>
             </div>
           </CardHeader>
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="space-y-2">
               {selectedParticipants.map((participant) => {
                 const videoAvailable = playerHasVideo(
@@ -292,7 +293,7 @@ export default function HomePage() {
                       containerClassName={`w-full h-auto ${
                         videoAvailable ? 'cursor-pointer' : ''
                       }`}
-                      className={`flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-200 ${
+                      className={`flex items-center justify-between rounded-lg px-3 py-2 sm:px-4 sm:py-3 transition-all duration-200 ${
                         videoAvailable
                           ? 'bg-muted hover:bg-accent cursor-pointer'
                           : 'bg-muted hover:bg-accent'
@@ -301,32 +302,32 @@ export default function HomePage() {
                       duration={3000}
                       borderClassName="bg-[radial-gradient(hsl(var(--primary))_40%,transparent_60%)] opacity-[0.8]"
                     >
-                      <div className="flex items-center gap-4">
-                        <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold">
+                      <div className="flex items-center gap-2 sm:gap-4">
+                        <div className="bg-primary text-primary-foreground flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-full text-xs font-semibold sm:text-sm">
                           {participant.rank}
                         </div>
-                        <Avatar className="h-8 w-8">
+                        <Avatar className="h-6 w-6 sm:h-8 sm:w-8">
                           <AvatarImage
                             src={getAvatarForName(participant.name)}
                             alt={participant.name}
                           />
-                          <AvatarFallback>
+                          <AvatarFallback className="text-xs sm:text-sm">
                             {getInitials(participant.name)}
                           </AvatarFallback>
                         </Avatar>
-                        <span className="text-foreground font-medium">
+                        <span className="text-foreground font-medium text-sm sm:text-base">
                           {participant.name}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-foreground font-medium">
+                      <div className="flex items-center gap-1 sm:gap-2">
+                        <span className="text-foreground font-medium text-sm sm:text-base">
                           {participant.score}
                         </span>
                         {videoAvailable && (
                           <img
                             src="/assets/images/play.svg"
                             alt="Video abspielen"
-                            className="h-5 w-5"
+                            className="h-4 w-4 sm:h-5 sm:w-5"
                           />
                         )}
                       </div>
@@ -339,38 +340,38 @@ export default function HomePage() {
                       onClick={() =>
                         handlePlayerClick(participant.name, selectedSport.name)
                       }
-                      className={`flex items-center justify-between rounded-lg border px-4 py-3 transition-all duration-200 ${
+                      className={`flex items-center justify-between rounded-lg border px-3 py-2 sm:px-4 sm:py-3 transition-all duration-200 ${
                         videoAvailable
                           ? 'border-border bg-muted hover:border-primary hover:bg-accent cursor-pointer'
                           : 'border-border bg-muted hover:border-primary hover:bg-accent'
                       }`}
                     >
-                      <div className="flex items-center gap-4">
-                        <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold">
+                      <div className="flex items-center gap-2 sm:gap-4">
+                        <div className="bg-primary text-primary-foreground flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-full text-xs font-semibold sm:text-sm">
                           {participant.rank}
                         </div>
-                        <Avatar className="h-8 w-8">
+                        <Avatar className="h-6 w-6 sm:h-8 sm:w-8">
                           <AvatarImage
                             src={getAvatarForName(participant.name)}
                             alt={participant.name}
                           />
-                          <AvatarFallback>
+                          <AvatarFallback className="text-xs sm:text-sm">
                             {getInitials(participant.name)}
                           </AvatarFallback>
                         </Avatar>
-                        <span className="text-foreground font-medium">
+                        <span className="text-foreground font-medium text-sm sm:text-base">
                           {participant.name}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-foreground font-medium">
+                      <div className="flex items-center gap-1 sm:gap-2">
+                        <span className="text-foreground font-medium text-sm sm:text-base">
                           {participant.score}
                         </span>
                         {videoAvailable && (
                           <img
                             src="/assets/images/play.svg"
                             alt="Video abspielen"
-                            className="h-5 w-5"
+                            className="h-4 w-4 sm:h-5 sm:w-5"
                           />
                         )}
                       </div>

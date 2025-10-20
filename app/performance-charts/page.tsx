@@ -20,21 +20,21 @@ export default function PerformanceChartsPage() {
   const [tab, setTab] = useState(TABS[0].key);
 
   return (
-    <div className="container mx-auto space-y-8 p-8">
+    <div className="container mx-auto space-y-6 p-4 sm:p-6 lg:p-8">
       <div className="space-y-2">
-        <h1 className="text-4xl font-bold tracking-tight">
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
           Leistungsübersicht
         </h1>
-        <p className="text-muted-foreground text-lg">
+        <p className="text-muted-foreground text-sm sm:text-base lg:text-lg">
           Vergleichbare Visualisierung der Jonglier- und Yo-Yo-IR1-Ergebnisse
           mittels Chart.js.
         </p>
       </div>
 
       <Tabs value={tab} onValueChange={(value) => setTab(value as typeof tab)}>
-        <TabsList className="grid w-full grid-cols-5 md:w-fit">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:w-fit min-w-fit">
           {TABS.map((item) => (
-            <TabsTrigger key={item.key} value={item.key} className="px-6 py-2">
+            <TabsTrigger key={item.key} value={item.key} className="px-3 py-2 text-xs sm:px-4 sm:py-2 sm:text-sm">
               {item.title}
             </TabsTrigger>
           ))}
@@ -90,15 +90,17 @@ export default function PerformanceChartsPage() {
             return (
               <TabsContent key={item.key} value={item.key} className="mt-6">
                 <Card>
-                  <CardHeader>
-                    <CardTitle>{item.title}</CardTitle>
-                    <CardDescription>{item.description}</CardDescription>
+                  <CardHeader className="px-4 py-4 sm:px-6 sm:py-6">
+                    <CardTitle className="text-lg sm:text-xl">{item.title}</CardTitle>
+                    <CardDescription className="text-sm sm:text-base">{item.description}</CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <PerformanceHeatmap
-                      data={heatmapData}
-                    />
-                    <div className="text-muted-foreground mt-6 space-y-3 text-sm">
+                  <CardContent className="px-4 py-4 sm:px-6 sm:py-6">
+                    <div className="w-full overflow-x-auto">
+                      <PerformanceHeatmap
+                        data={heatmapData}
+                      />
+                    </div>
+                    <div className="text-muted-foreground mt-4 sm:mt-6 space-y-2 sm:space-y-3 text-xs sm:text-sm">
                       <p className="font-semibold">
                         Wie werden die Werte verglichen?
                       </p>
@@ -162,23 +164,27 @@ export default function PerformanceChartsPage() {
           return (
             <TabsContent key={item.key} value={item.key} className="mt-6">
               <Card>
-                <CardHeader>
-                  <CardTitle>{item.title}</CardTitle>
-                  <CardDescription>{item.description}</CardDescription>
+                <CardHeader className="px-4 py-4 sm:px-6 sm:py-6">
+                  <CardTitle className="text-lg sm:text-xl">{item.title}</CardTitle>
+                  <CardDescription className="text-sm sm:text-base">{item.description}</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <VerticalBarChart
-                    labels={labels}
-                    values={values}
-                    datasetLabel={`${item.title} (${item.unit})`}
-                    variant={item.variant}
-                  />
-                  <ChartDataTable
-                    rows={sorted}
-                    valueKey={'value'}
-                    title={item.key === 'jonglieren' ? '' : item.title}
-                    unit={item.unit}
-                  />
+                <CardContent className="px-4 py-4 sm:px-6 sm:py-6">
+                  <div className="w-full overflow-x-auto">
+                    <VerticalBarChart
+                      labels={labels}
+                      values={values}
+                      datasetLabel={`${item.title} (${item.unit})`}
+                      variant={item.variant}
+                    />
+                  </div>
+                  <div className="mt-6 w-full overflow-x-auto">
+                    <ChartDataTable
+                      rows={sorted}
+                      valueKey={'value'}
+                      title={item.key === 'jonglieren' ? '' : item.title}
+                      unit={item.unit}
+                    />
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>

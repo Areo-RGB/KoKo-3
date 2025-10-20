@@ -30,15 +30,32 @@ const TESTS: { key: string; name: string; format: (v: number) => string }[] = [
   },
 ];
 
+interface PlayerResultEntry {
+  value?: number | null;
+}
+
+interface UnifiedPlayer {
+  name: string;
+  results?: Record<string, PlayerResultEntry[]>;
+}
+
+const unifiedPlayers: UnifiedPlayer[] = Array.isArray(unified.players)
+  ? (unified.players as UnifiedPlayer[])
+  : [];
+
 export const sportsData: SportData[] = TESTS.map((t) => ({
   name: t.name,
-  data: (unified.players as any[])
-    .map((p) => {
-      const arr = (p.results?.[t.key] || []) as { value?: number | null }[];
-      if (!arr.length) return null;
-      const latest = arr[arr.length - 1];
+  data: unifiedPlayers
+    .map((player) => {
+      const entries = player.results?.[t.key] ?? [];
+      if (entries.length === 0) return null;
+
+      const latest = entries[entries.length - 1];
       if (latest?.value == null) return null;
-      return { name: p.name, score: t.format(latest.value) };
+
+      return { name: player.name, score: t.format(latest.value) };
     })
-    .filter(Boolean) as any,
+    .filter(
+      (record): record is { name: string; score: string } => record !== null,
+    ),
 }));

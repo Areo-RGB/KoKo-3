@@ -136,11 +136,11 @@ export default function VideoPlayerPage() {
     <>
       <div className="container max-w-7xl px-4 py-6 sm:p-6">
         {/* Header */}
-        <div className="mb-6 sm:mb-8">
-          <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
+        <div className="mb-4 sm:mb-6 lg:mb-8">
+          <h1 className="mb-2 text-xl font-bold sm:text-2xl lg:text-3xl">
             Fußball‑Trainingsvideos
           </h1>
-          <p className="text-muted-foreground text-sm sm:text-base">
+          <p className="text-muted-foreground text-xs sm:text-sm lg:text-base">
             Professionelle Trainingsinhalte zur Fähigkeitsentwicklung und
             Leistungssteigerung
           </p>
@@ -153,7 +153,7 @@ export default function VideoPlayerPage() {
               value={selectedCategory}
               onValueChange={handleCategoryChange}
             >
-              <SelectTrigger className="w-full sm:w-64">
+              <SelectTrigger className="w-full h-10 text-sm sm:h-10 sm:text-base sm:w-64">
                 <SelectValue placeholder="Kategorie auswählen" />
               </SelectTrigger>
               <SelectContent>
@@ -189,7 +189,7 @@ export default function VideoPlayerPage() {
         )}
 
         {/* Video Grid */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
           {filteredVideos.map((video) => {
             const videoForThumbnail: VideoData = {
               ...video,
@@ -206,17 +206,17 @@ export default function VideoPlayerPage() {
                   video={videoForThumbnail}
                   className="rounded-t-lg"
                 />
-                <CardHeader className="pb-3 sm:pb-3">
-                  <div className="flex items-start justify-between">
+                <CardHeader className="pb-2 px-3 pt-3 sm:pb-3 sm:px-4 sm:pt-4">
+                  <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0 flex-1">
-                      <h3 className="group-hover:text-primary mb-1 line-clamp-2 text-base font-semibold transition-colors sm:text-lg">
+                      <h3 className="group-hover:text-primary mb-1 line-clamp-2 text-sm font-semibold transition-colors sm:text-base lg:text-lg">
                         {video.title}
                       </h3>
-                      <div className="mb-2 flex flex-wrap items-center gap-2">
-                        <Badge variant="secondary" className="text-xs">
+                      <div className="mb-2 flex flex-wrap items-center gap-1">
+                        <Badge variant="secondary" className="text-xs px-1.5 py-0.5">
                           {selectedCategory}
                         </Badge>
-                        <Badge variant="secondary" className="text-xs">
+                        <Badge variant="secondary" className="text-xs px-1.5 py-0.5">
                           {selectedSubcategory}
                         </Badge>
                       </div>
@@ -224,12 +224,12 @@ export default function VideoPlayerPage() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="ml-2 touch-manipulation p-2 opacity-60 transition-opacity group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+                      className="ml-1 touch-manipulation p-1.5 opacity-60 transition-opacity group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100 h-7 w-7 sm:h-8 sm:w-8"
                     >
-                      <Play className="h-4 w-4" />
+                      <Play className="h-3 w-3 sm:h-4 sm:w-4" />
                     </Button>
                   </div>
-                  <p className="text-muted-foreground text-xs sm:text-sm">
+                  <p className="text-muted-foreground text-xs">
                     {video.chapters.length} Kapitel
                   </p>
                 </CardHeader>

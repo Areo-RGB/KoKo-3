@@ -2,6 +2,7 @@
 
 import { FullscreenToggle } from '@/components/layout/fullscreen-toggle';
 import MainLayout from '@/components/layout/main-layout';
+import { MobileFooterNav } from '@/components/layout/mobile-footer-nav';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 import { TimerOverlay, TimerToggle } from '@/components/timer';
@@ -63,18 +64,19 @@ export default function ClientAppShell({ children }: Props) {
 
   const header = (
     <header
-      className="bg-background sticky top-0 z-40 flex min-h-[4rem] shrink-0 items-center justify-between border-b pr-4 pb-3 pl-0"
+      className="bg-background sticky top-0 z-40 flex min-h-[3.5rem] shrink-0 items-center justify-between border-b px-2 sm:px-4 sm:min-h-[4rem]"
       style={{
-        paddingTop: 'max(env(safe-area-inset-top, 0px), 0.75rem)',
+        paddingTop: 'max(env(safe-area-inset-top, 0px), 0.5rem)',
+        paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 0.5rem)',
       }}
     >
-      <div className="flex items-center gap-2">
-        <SidebarTrigger className="ml-2" />
+      <div className="flex items-center gap-1 sm:gap-2">
+        <SidebarTrigger className="h-8 w-8 sm:h-9 sm:w-9" />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2">
         <TimerToggle onClick={() => setIsTimerOpen(true)} />
-        <FullscreenToggle />
-        <ThemeToggle />
+        <FullscreenToggle className="h-8 w-8 sm:h-9 sm:w-9" />
+        <ThemeToggle className="h-8 w-8 sm:h-9 sm:w-9" />
       </div>
     </header>
   );
@@ -86,7 +88,12 @@ export default function ClientAppShell({ children }: Props) {
       enableSystem
       disableTransitionOnChange
     >
-      <MainLayout header={header}>{children}</MainLayout>
+      <MainLayout header={header}>
+        <div className="pb-16 md:pb-0">
+          {children}
+        </div>
+      </MainLayout>
+      <MobileFooterNav />
       <Toaster />
       {/* Timer overlay */}
       <TimerOverlay

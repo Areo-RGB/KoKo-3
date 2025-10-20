@@ -44,7 +44,7 @@ export default function VideoPlayer({
   const [playbackRate, setPlaybackRate] = useState(1);
 
   // Playlist state
-  const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistItem[]>(
+  const [currentPlaylist] = useState<PlaylistItem[]>(
     initialPlaylist || (initialVideo ? generatePlaylist(initialVideo) : []),
   );
   const [currentVideoIndex, setCurrentVideoIndex] = useState(initialVideoIndex);
@@ -347,6 +347,14 @@ export default function VideoPlayer({
               <p className="text-sm text-white">
                 {isCached ? 'Lade aus Cache...' : 'Lade Video...'}
               </p>
+            </div>
+          )}
+          {videoError && (
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 px-6 text-center">
+              <p className="text-base font-semibold text-white">
+                Video konnte nicht geladen werden.
+              </p>
+              <p className="text-sm text-white/80">{videoError}</p>
             </div>
           )}
           <video

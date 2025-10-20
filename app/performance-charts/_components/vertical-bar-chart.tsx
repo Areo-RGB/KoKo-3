@@ -1,15 +1,7 @@
 'use client';
 
-import {
-  BarElement,
-  CategoryScale,
-  Chart as ChartJS,
-  ChartOptions,
-  Legend,
-  LinearScale,
-  Plugin,
-  Tooltip,
-} from 'chart.js';
+import type { ChartOptions, Plugin } from 'chart.js';
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from 'chart.js';
 import { useTheme } from 'next-themes';
 import { useMemo } from 'react';
 import { Bar } from 'react-chartjs-2';
@@ -163,7 +155,7 @@ export default function VerticalBarChart({
         },
       },
     }),
-    [axisColor, gridColorX, gridColorY, isDark, datasets.length],
+    [axisColor, gridColorX, gridColorY, isDark, datasets],
   );
 
   // Draw values at the end inside each bar
@@ -189,7 +181,8 @@ export default function VerticalBarChart({
               : 'rgba(255, 255, 255, 0.95)';
         ctx.textBaseline = 'middle';
 
-        lastMeta.data.forEach((bar: any, index: number) => {
+        lastMeta.data.forEach((element, index) => {
+          const bar = element as BarElement;
           // Sum stacked values for the label position
           let sum = 0;
           for (let d = 0; d < dsCount; d++) {
@@ -203,8 +196,8 @@ export default function VerticalBarChart({
             ? String(sum)
             : sum.toLocaleString();
 
-          const x = bar.x as number;
-          const y = bar.y as number;
+          const x = bar.x;
+          const y = bar.y;
           const offset = 6;
           let xPos = x - offset;
           ctx.textAlign = 'right';
