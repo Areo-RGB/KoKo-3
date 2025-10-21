@@ -5,6 +5,15 @@ export interface TimerConfig {
   note?: string;
 }
 
+export interface Drill {
+  id: number;
+  name: string;
+  videoUrl: string;
+  videoFile: string;
+  description: string;
+  level?: '1' | '2' | '3';
+}
+
 export interface Video {
   id: string;
   title: string;

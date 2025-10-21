@@ -1,4 +1,4 @@
-import type { Drill } from '@/components/fifa-11-plus/types';
+import type { Drill } from './types';
 
 // Cloudinary video URLs from warmup_playlist_cloudinary.json
 const CLOUDINARY_VIDEO_URLS: Record<string, string> = {
