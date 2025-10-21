@@ -121,13 +121,6 @@ const trainingToolsLinks: SidebarLink[] = [
     showOnMobile: true,
   },
   {
-    title: 'FIFA 11+ Poster',
-    url: '/fifa-11-plus/warmup-poster',
-    icon: FileImage,
-    mobileLabel: 'Poster',
-    showOnMobile: true,
-  },
-  {
     title: 'Stabi-Training',
     url: '/muscle-diagram',
     icon: Dumbbell,

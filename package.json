@@ -9,7 +9,7 @@
     "build:export": "next build",
     "dev": "pnpm exec kill-port --port 3000 --port 9229 --port 9230 && cross-env NODE_OPTIONS=--inspect next dev",
     "dev:webpack": "pnpm exec kill-port --port 3000 && next dev",
-    "dev:turbopack": "pnpm exec kill-port --port 3000 --port 9229 --port 9230 && concurrently --kill-others-on-fail \"cross-env NODE_OPTIONS=--inspect next dev --turbopack\" \"pnpm exec wait-on http://localhost:3000 && node scripts/open-incognito.js http://localhost:3000\"",
+    "dev:turbopack": "next dev --turbopack",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "next lint --strict",

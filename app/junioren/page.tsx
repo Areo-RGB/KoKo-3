@@ -4,12 +4,15 @@ import { Suspense } from 'react'
 import { CacheControl } from '@/app/junioren/_components/cache-control'
 import { JuniorenFilters } from '@/app/junioren/_components/junioren-filters'
 import { TrainingList } from '@/app/junioren/_components/training-list'
+import { MobileTrainingList } from '@/app/junioren/_components/mobile-training-card'
+import { MobileFooterNavEnhanced } from '@/components/layout/mobile-footer-nav-enhanced'
 import { useJuniorenData } from '@/app/junioren/_hooks/use-junioren-data'
 import { useJuniorenFavorites } from '@/app/junioren/_hooks/use-junioren-favorites'
 import { useJuniorenFilters } from '@/app/junioren/_hooks/use-junioren-filters'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { AlertCircle, RefreshCw } from 'lucide-react'
+import '@/app/mobile-styles.css'
 
 function JuniorenTrainingPageContent() {
   const { sessions, isLoading, loadError, refreshSessions } = useJuniorenData()
@@ -41,44 +44,93 @@ function JuniorenTrainingPageContent() {
   }
 
   return (
-    <div className="container mx-auto max-w-7xl px-4 py-6 sm:py-8">
-      {/* Header */}
-      <div className="mb-6 sm:mb-8">
-        <h1 className="text-foreground mb-2 text-2xl font-bold sm:text-3xl lg:text-4xl">
-          Junioren Training
-        </h1>
-        <p className="text-muted-foreground text-sm sm:text-base lg:text-lg">
-          Trainingssammlung für A–E Junioren
-        </p>
+    <>
+      {/* Mobile Version */}
+      <div className="md:hidden">
+        <div className="container mx-auto max-w-md px-4 py-6 pb-20">
+          {/* Mobile Header */}
+          <div className="mb-6">
+            <h1 className="text-foreground mb-2 text-2xl font-bold">
+              Junioren Training
+            </h1>
+            <p className="text-muted-foreground text-sm">
+              {filters.totalCount} Trainingseinheiten gefunden
+            </p>
+          </div>
+
+          {/* Cache Control */}
+          <CacheControl
+            selectedAgeGroup={filters.selectedAgeGroup}
+            allSessions={sessions}
+          />
+
+          {/* Mobile Training List */}
+          {isLoading ? (
+            <div className="text-center py-12">
+              <div className="mobile-skeleton h-8 w-8 rounded-full mx-auto mb-4" />
+              <p className="text-muted-foreground">Lade Trainingseinheiten...</p>
+            </div>
+          ) : (
+            <MobileTrainingList
+              sessions={filters.filteredAndGrouped ? Object.values(filters.filteredAndGrouped).flat() : []}
+              favorites={favorites.favorites}
+              onToggleFavorite={favorites.toggleFavorite}
+              onStartTraining={(session) => {
+                // Handle training start - could navigate to training page or open modal
+                if (session.htmlPath) {
+                  window.open(session.htmlPath, '_blank')
+                }
+              }}
+            />
+          )}
+        </div>
+
+        {/* Mobile Navigation */}
+        <MobileFooterNavEnhanced />
       </div>
 
-      {/* Cache Control */}
-      <CacheControl
-        selectedAgeGroup={filters.selectedAgeGroup}
-        allSessions={sessions}
-      />
+      {/* Desktop Version */}
+      <div className="hidden md:block">
+        <div className="container mx-auto max-w-7xl px-4 py-6 sm:py-8">
+          {/* Header */}
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-foreground mb-2 text-2xl font-bold sm:text-3xl lg:text-4xl">
+              Junioren Training
+            </h1>
+            <p className="text-muted-foreground text-sm sm:text-base lg:text-lg">
+              Trainingssammlung für A–E Junioren
+            </p>
+          </div>
 
-      {/* Filters */}
-      <Card className="mb-4 sm:mb-6">
-        <CardContent className="p-4 sm:p-6">
-          <JuniorenFilters filters={filters} totalCount={filters.totalCount} />
-        </CardContent>
-      </Card>
+          {/* Cache Control */}
+          <CacheControl
+            selectedAgeGroup={filters.selectedAgeGroup}
+            allSessions={sessions}
+          />
 
-      {/* Training List */}
-      {isLoading ? (
-        <div className="text-center py-8">
-          <RefreshCw className="mx-auto h-8 w-8 animate-spin text-muted-foreground" />
-          <p className="mt-2 text-muted-foreground">Lade Trainingseinheiten...</p>
+          {/* Filters */}
+          <Card className="mb-4 sm:mb-6">
+            <CardContent className="p-4 sm:p-6">
+              <JuniorenFilters filters={filters} totalCount={filters.totalCount} />
+            </CardContent>
+          </Card>
+
+          {/* Training List */}
+          {isLoading ? (
+            <div className="text-center py-8">
+              <RefreshCw className="mx-auto h-8 w-8 animate-spin text-muted-foreground" />
+              <p className="mt-2 text-muted-foreground">Lade Trainingseinheiten...</p>
+            </div>
+          ) : (
+            <TrainingList
+              filteredAndGrouped={filters.filteredAndGrouped}
+              filters={filters}
+              favorites={favorites}
+            />
+          )}
         </div>
-      ) : (
-        <TrainingList
-          filteredAndGrouped={filters.filteredAndGrouped}
-          filters={filters}
-          favorites={favorites}
-        />
-      )}
-    </div>
+      </div>
+    </>
   )
 }
 

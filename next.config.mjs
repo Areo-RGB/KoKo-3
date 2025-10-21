@@ -1,17 +1,3 @@
-import createNextPWA from 'next-pwa';
-
-const withPWA = createNextPWA({
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development',
-  buildExcludes: [/middleware-manifest\.json$/],
-  // Use custom service worker with advanced video caching
-  // Note: When using swSrc, runtimeCaching should NOT be defined here
-  // All caching strategies are configured in the custom sw-custom.js file
-  swSrc: 'public/sw-custom.js',
-});
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Enable static export mode for deployment to static hosting services
@@ -65,4 +51,4 @@ const nextConfig = {
   },
 };
 
-export default withPWA(nextConfig);
+export default nextConfig;
