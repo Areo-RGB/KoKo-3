@@ -3,8 +3,11 @@ import {
   Database,
   Download,
   Dumbbell,
+  FileImage,
   GraduationCap,
   Home,
+  Images,
+  Layers,
   LayoutDashboard,
   PlayCircle,
   Target,
@@ -79,6 +82,20 @@ const toolsLinks: SidebarLink[] = [
     mobileLabel: 'Offline',
     showOnMobile: false,
   },
+  {
+    title: 'Carousel Demo',
+    url: '/carousel',
+    icon: Images,
+    mobileLabel: 'Carousel',
+    showOnMobile: false,
+  },
+  {
+    title: 'Expandable Cards',
+    url: '/expandable-card-demo',
+    icon: Layers,
+    mobileLabel: 'Cards',
+    showOnMobile: false,
+  },
 ];
 
 const trainingToolsLinks: SidebarLink[] = [
@@ -94,7 +111,7 @@ const trainingToolsLinks: SidebarLink[] = [
     url: '/soundboard',
     icon: PlayCircle,
     mobileLabel: 'Sounds',
-    showOnMobile: false,
+    showOnMobile: true,
   },
   {
     title: 'FIFA 11+',
@@ -104,23 +121,32 @@ const trainingToolsLinks: SidebarLink[] = [
     showOnMobile: true,
   },
   {
+    title: 'FIFA 11+ Poster',
+    url: '/fifa-11-plus/warmup-poster',
+    icon: FileImage,
+    mobileLabel: 'Poster',
+    showOnMobile: true,
+  },
+  {
     title: 'Stabi-Training',
     url: '/muscle-diagram',
     icon: Dumbbell,
+    mobileLabel: 'Stabi',
+    showOnMobile: true,
   },
   {
     title: 'Interval Timer',
     url: '/interval-timer',
     icon: Timer,
     mobileLabel: 'Timer',
-    showOnMobile: false,
+    showOnMobile: true,
   },
   {
     title: 'Yo-Yo Ranking',
     url: '/yo-yo',
     icon: Trophy,
     mobileLabel: 'Ranking',
-    showOnMobile: false,
+    showOnMobile: true,
   },
   {
     title: 'Reaktion',
@@ -137,7 +163,7 @@ const juniorLinks: SidebarLink[] = [
     url: '/junioren',
     icon: GraduationCap,
     mobileLabel: 'Junioren',
-    showOnMobile: false,
+    showOnMobile: true,
   },
 ];
 
