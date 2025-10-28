@@ -128,12 +128,20 @@ export function AthleteTracking({
                     <div className="font-medium">{athlete.name}</div>
                     <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                       {getStatusBadge(athlete.status)}
-                      {athlete.dropOutShuttle && (
+                      {athlete.dropOutShuttle ? (
                         <span>
                           Shuttle {athlete.dropOutShuttle} ({athlete.estimatedDistance}
                           m)
                         </span>
-                      )}
+                      ) : athlete.status === 'active' || athlete.status === 'warned' ? (
+                        <span>
+                          Nächster Shuttle: {currentShuttle + 1} ({athlete.estimatedDistance}m geschafft)
+                        </span>
+                      ) : athlete.estimatedDistance > 0 ? (
+                        <span>
+                          ({athlete.estimatedDistance}m)
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                 </div>

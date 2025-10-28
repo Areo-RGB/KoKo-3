@@ -148,3 +148,5 @@ dev-debug.log
 # Task files
 # tasks.json
 # tasks/ 
+__tests__/firebase-integration.test.ts
+__tests__/firebase-service.test.ts

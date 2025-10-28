@@ -34,11 +34,14 @@ import { TimerDisplay } from './_components/timer-display';
 import { TimerControls } from './_components/timer-controls';
 import { AthleteSelection } from './_components/athlete-selection';
 import { AthleteTracking } from './_components/athlete-tracking';
+import { HistoricalResults } from './_components/historical-results';
+import { TestVideo } from './_components/test-video';
 import { formatDistance } from '@/lib/utils';
 
 // Import existing types and data
 import { AthleteResult, TestSession } from './_lib/yoyo-protocol';
 import { players as availablePlayers } from './_lib/players';
+import { FirebaseYoYoService } from '@/lib/firebase-service';
 
 type RankingMap = Record<string, number>;
 
@@ -64,6 +67,7 @@ export default function YoYoRankingPage() {
     shuttleIndex,
     testSession,
     athletes,
+    isVideoPlaying,
     startTest,
     pauseTest,
     resumeTest,
@@ -74,6 +78,7 @@ export default function YoYoRankingPage() {
     playAudioSignal,
     enableAudio,
     setEnableAudio,
+    handleVideoEnd,
   } = useYoYoTimer();
 
   // Legacy state for manual distance entry (keeping existing functionality)
@@ -88,6 +93,8 @@ export default function YoYoRankingPage() {
   const [rankings, setRankings] = useState<RankingMap>({});
   const [activeTab, setActiveTab] = useState<string>('test-admin');
   const [selectedAthletes, setSelectedAthletes] = useState<string[]>(() => availablePlayers.map(player => player.id));
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   // Load existing rankings from localStorage
   React.useEffect(() => {
@@ -228,6 +235,80 @@ export default function YoYoRankingPage() {
     }
   };
 
+  // Finish test and save results to database
+  const handleFinishTest = async () => {
+    if (!testSession || testSession.results.length === 0) {
+      setSaveError('Keine Testergebnisse zum Speichern vorhanden');
+      return;
+    }
+
+    if (!confirm('Möchten Sie den Test beenden und die Ergebnisse in der Datenbank speichern?')) {
+      return;
+    }
+
+    setIsSaving(true);
+    setSaveError(null);
+
+    try {
+      // Convert athletes to AthleteResult format for Firebase with all required properties
+      const athleteResults = testSession.results.map((result) => {
+        // For active and warned athletes, mark them as completed with their current distance
+        if (result.status === 'active' || result.status === 'warned') {
+          return {
+            id: result.id,
+            name: result.name,
+            estimatedDistance: result.estimatedDistance || 0,
+            status: 'completed' as const,
+            dropOutShuttle: null, // They didn't drop out, they completed
+            dropOutTime: null, // They didn't drop out, they completed
+            completed: true,
+            warnings: result.warnings || 0,
+          };
+        }
+
+        // For athletes who already dropped out or completed, keep their original status
+        return {
+          id: result.id,
+          name: result.name,
+          estimatedDistance: result.estimatedDistance || 0,
+          status: result.status || 'active',
+          dropOutShuttle: result.dropOutShuttle !== undefined ? result.dropOutShuttle : null,
+          dropOutTime: result.dropOutTime !== undefined ? result.dropOutTime : null,
+          completed: result.completed || (result.status === 'completed'),
+          warnings: result.warnings || 0,
+        };
+      });
+
+      // Convert TestSession to match the expected format for Firebase
+      const testSessionData = {
+        id: testSession.id,
+        date: testSession.date instanceof Date ? testSession.date.toISOString() : testSession.date,
+        participants: testSession.participants || [],
+        status: 'completed' as const, // Mark the test as completed
+        results: athleteResults, // Use the updated athlete results
+        currentShuttle: testSession.currentShuttle || 0,
+        startTime: testSession.startTime,
+        elapsedTime: testSession.elapsedTime || 0,
+      };
+
+      // Save to Firebase
+      const sessionId = await FirebaseYoYoService.saveTestSession(testSessionData, athleteResults);
+
+      // Reset test after successful save
+      resetTest();
+
+      // Show success message and switch to historical tab
+      alert('Testergebnisse erfolgreich gespeichert!');
+      setActiveTab('historical');
+
+    } catch (error) {
+      console.error('Error saving test results:', error);
+      setSaveError('Fehler beim Speichern der Testergebnisse. Bitte versuchen Sie es erneut.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-10">
       <header className="space-y-2">
@@ -239,7 +320,7 @@ export default function YoYoRankingPage() {
       </header>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="test-admin" className="flex items-center">
             <Timer className="mr-2 h-4 w-4" />
             Test-Administration
@@ -248,9 +329,35 @@ export default function YoYoRankingPage() {
             <Trophy className="mr-2 h-4 w-4" />
             Ergebnisse & Ranking
           </TabsTrigger>
+          <TabsTrigger value="historical" className="flex items-center">
+            <History className="mr-2 h-4 w-4" />
+            Historie
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="test-admin" className="space-y-6">
+          {/* Test Video - For UI Testing */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <div className="mr-2 h-5 w-5">📹</div>
+                Test-Video (UI-Updates)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+                <TestVideo
+                  isPlaying={isVideoPlaying}
+                  onVideoEnd={handleVideoEnd}
+                  className="w-full h-full"
+                />
+              </div>
+              <div className="mt-2 text-sm text-muted-foreground">
+                Das Video startet automatisch beim Testbeginn und hilft zu prüfen, ob die UI korrekt aktualisiert wird.
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Timer Display */}
           <TimerDisplay
             elapsedTime={elapsedTime}
@@ -293,8 +400,55 @@ export default function YoYoRankingPage() {
             disabled={!isRunning}
           />
 
+          {/* Finish Test Button - Show when test has results but is still running */}
+          {testSession && testSession.results && testSession.results.length > 0 && testSession.status !== 'completed' && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <div className="mr-2 h-5 w-5">🏁</div>
+                  Test Beenden
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-muted-foreground">
+                      Der Test kann jederzeit beendet werden. Die bisherigen Ergebnisse werden gespeichert.
+                    </p>
+                    <p className="text-sm font-medium mt-1">
+                      {testSession.results.length} Teilnehmer haben Ergebnisse erzielt.
+                    </p>
+                  </div>
+                  <Button
+                    onClick={handleFinishTest}
+                    disabled={isSaving}
+                    variant="default"
+                    size="lg"
+                  >
+                    {isSaving ? (
+                      <>
+                        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                        Speichern...
+                      </>
+                    ) : (
+                      <>
+                        <div className="mr-2 h-4 w-4">💾</div>
+                        Test beenden & Speichern
+                      </>
+                    )}
+                  </Button>
+                </div>
+                {saveError && (
+                  <div className="mt-4 p-3 rounded-md border border-destructive bg-destructive/10">
+                    <div className="text-sm text-destructive">{saveError}</div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
           {/* Test Results */}
-          {testSession && testSession.status === 'completed' && (
+          {testSession && (testSession.status === 'completed' || (testSession.results && testSession.results.length > 0)) && (
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -302,13 +456,39 @@ export default function YoYoRankingPage() {
                     <BarChart3 className="mr-2 h-5 w-5" />
                     Testergebnisse
                   </CardTitle>
-                  <Button onClick={handleExportResults} variant="outline">
-                    <Download className="mr-2 h-4 w-4" />
-                    Exportieren
-                  </Button>
+                  <div className="flex items-center space-x-2">
+                    {testSession.status !== 'completed' && (
+                      <Button
+                        onClick={handleFinishTest}
+                        disabled={isSaving || testSession.results.length === 0}
+                        variant="default"
+                      >
+                        {isSaving ? (
+                          <>
+                            <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                            Speichern...
+                          </>
+                        ) : (
+                          <>
+                            <div className="mr-2 h-4 w-4" />
+                            Test beenden & Speichern
+                          </>
+                        )}
+                      </Button>
+                    )}
+                    <Button onClick={handleExportResults} variant="outline" disabled={testSession.results.length === 0}>
+                      <Download className="mr-2 h-4 w-4" />
+                      Exportieren
+                    </Button>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent>
+                {saveError && (
+                  <div className="mb-4 p-3 rounded-md border border-destructive bg-destructive/10">
+                    <div className="text-sm text-destructive">{saveError}</div>
+                  </div>
+                )}
                 <div className="space-y-4">
                   {testSession.results
                     .sort((a, b) => b.estimatedDistance - a.estimatedDistance)
@@ -431,6 +611,10 @@ export default function YoYoRankingPage() {
               )}
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="historical" className="space-y-6">
+          <HistoricalResults />
         </TabsContent>
       </Tabs>
 

@@ -10,6 +10,7 @@ import {
   getCurrentShuttle,
   getNextShuttle,
 } from '../_lib/yoyo-protocol';
+import { FirebaseYoYoService } from '@/lib/firebase-service';
 
 export interface UseYoYoTimerReturn {
   // Timer state
@@ -29,6 +30,9 @@ export interface UseYoYoTimerReturn {
   testSession: TestSession | null;
   athletes: AthleteResult[];
 
+  // Video state
+  isVideoPlaying: boolean;
+
   // Timer controls
   startTest: () => void;
   pauseTest: () => void;
@@ -47,6 +51,9 @@ export interface UseYoYoTimerReturn {
   playAudioSignal: () => void;
   enableAudio: boolean;
   setEnableAudio: (enabled: boolean) => void;
+
+  // Video controls
+  handleVideoEnd: () => void;
 }
 
 export function useYoYoTimer(): UseYoYoTimerReturn {
@@ -57,6 +64,7 @@ export function useYoYoTimer(): UseYoYoTimerReturn {
   const [testSession, setTestSession] = useState<TestSession | null>(null);
   const [athletes, setAthletes] = useState<AthleteResult[]>([]);
   const [enableAudio, setEnableAudio] = useState<boolean>(true);
+  const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const startTimeRef = useRef<number>(0);
@@ -87,31 +95,51 @@ export function useYoYoTimer(): UseYoYoTimerReturn {
   const pauseTest = useCallback(() => {
     if (isRunning && !isPaused) {
       setIsPaused(true);
+      setIsVideoPlaying(false); // Pause video
       pausedTimeRef.current = elapsedTime;
       setTestSession((prev) => (prev ? { ...prev, status: 'paused' } : null));
     }
   }, [isRunning, isPaused, elapsedTime]);
 
-  const completeTest = useCallback(() => {
+  const completeTest = useCallback(async () => {
     setIsRunning(false);
-    setAthletes((prev) =>
-      prev.map((athlete) =>
-        athlete.status === 'active' || athlete.status === 'warned'
-          ? { ...athlete, status: 'completed' as const, completed: true }
-          : athlete,
-      ),
-    );
-    setTestSession((prev) => {
-      if (!prev) return null;
-      // Use a fresh reference of athletes state for the final results
-      const finalAthletes = prev.results.map((athlete) =>
-        athlete.status === 'active' || athlete.status === 'warned'
-          ? { ...athlete, status: 'completed' as const, completed: true }
-          : athlete,
-      );
-      return { ...prev, status: 'completed', results: finalAthletes };
+    setIsVideoPlaying(false); // Stop video
+
+    // Get the final distance for all athletes based on the last completed shuttle
+    const finalDistance = shuttleIndex >= 0 ? YOYO_IR1_PROTOCOL[shuttleIndex]?.distance || 0 : 0;
+
+    const finalAthletes = athletes.map((athlete) => {
+      if (athlete.status === 'active' || athlete.status === 'warned') {
+        return {
+          ...athlete,
+          status: 'completed' as const,
+          completed: true,
+          estimatedDistance: finalDistance
+        };
+      }
+      return athlete;
     });
-  }, []);
+
+    setAthletes(finalAthletes);
+
+    const completedSession = testSession ? {
+      ...testSession,
+      status: 'completed' as const,
+      results: finalAthletes,
+    } : null;
+
+    setTestSession(completedSession);
+
+    // Save results to Firebase when test is completed
+    if (completedSession && finalAthletes.length > 0) {
+      try {
+        await FirebaseYoYoService.saveTestSession(completedSession, finalAthletes);
+        console.log('Test results saved to Firebase successfully');
+      } catch (error) {
+        console.error('Error saving test results to Firebase:', error);
+      }
+    }
+  }, [athletes, testSession, shuttleIndex]);
 
   const playBeep = useCallback(
     (type: 'short' | 'long' | 'finish' = 'short') => {
@@ -271,6 +299,7 @@ export function useYoYoTimer(): UseYoYoTimerReturn {
     setShuttleIndex(-1);
     setIsRunning(true);
     setIsPaused(false);
+    setIsVideoPlaying(true); // Start video playback
     startTimeRef.current = Date.now();
     pausedTimeRef.current = 0;
     lastShuttleIndexRef.current = -1;
@@ -280,6 +309,7 @@ export function useYoYoTimer(): UseYoYoTimerReturn {
   const resumeTest = useCallback(() => {
     if (isRunning && isPaused) {
       setIsPaused(false);
+      setIsVideoPlaying(true); // Resume video
       startTimeRef.current = Date.now();
       setTestSession((prev) =>
         prev ? { ...prev, status: 'in-progress' } : null,
@@ -290,6 +320,7 @@ export function useYoYoTimer(): UseYoYoTimerReturn {
   const resetTest = useCallback(() => {
     setIsRunning(false);
     setIsPaused(false);
+    setIsVideoPlaying(false); // Stop video
     setElapsedTime(0);
     setShuttleIndex(-1);
     setTestSession(null);
@@ -353,8 +384,8 @@ export function useYoYoTimer(): UseYoYoTimerReturn {
         );
       } else if (athlete.status === 'warned') {
         // Second failure, drop out
-        const currentShuttleIndex = shuttleIndex >= 0 ? shuttleIndex : 0;
-        const lastCompletedShuttleIndex = currentShuttleIndex - 1;
+        // Use the last completed shuttle distance, not the current one
+        const lastCompletedShuttleIndex = shuttleIndex >= 0 ? shuttleIndex - 1 : -1;
         const estimatedDistance =
           lastCompletedShuttleIndex >= 0
             ? YOYO_IR1_PROTOCOL[lastCompletedShuttleIndex].distance
@@ -363,7 +394,7 @@ export function useYoYoTimer(): UseYoYoTimerReturn {
         const updatedAthlete = {
           ...athlete,
           status: 'dropped-out' as const,
-          dropOutShuttle: currentShuttleIndex + 1,
+          dropOutShuttle: shuttleIndex + 1, // The shuttle they failed at
           dropOutTime: elapsedTime,
           estimatedDistance,
           completed: false,
@@ -408,9 +439,68 @@ export function useYoYoTimer(): UseYoYoTimerReturn {
     [],
   );
 
+  // Update athlete distances dynamically during test (only when shuttle completes)
+  useEffect(() => {
+    if (isRunning && !isPaused && shuttleIndex >= 0) {
+      // Use the PREVIOUS completed shuttle distance, not the current one
+      // Athletes only get credit for shuttles they've completed
+      const completedShuttleIndex = shuttleIndex - 1;
+      const completedDistance = completedShuttleIndex >= 0
+        ? YOYO_IR1_PROTOCOL[completedShuttleIndex]?.distance || 0
+        : 0;
+
+      setAthletes((prevAthletes) =>
+        prevAthletes.map((athlete) => {
+          // Only update distance for active, warned, or completed athletes
+          // but not for those who have already dropped out
+          if (
+            athlete.status === 'active' ||
+            athlete.status === 'warned' ||
+            (athlete.status === 'completed' && !athlete.dropOutShuttle)
+          ) {
+            return {
+              ...athlete,
+              estimatedDistance: completedDistance,
+            };
+          }
+          return athlete;
+        }),
+      );
+
+      // Update test session results as well
+      setTestSession((prevSession) =>
+        prevSession
+          ? {
+              ...prevSession,
+              results: prevSession.results.map((result) => {
+                if (
+                  result.status === 'active' ||
+                  result.status === 'warned' ||
+                  (result.status === 'completed' && !result.dropOutShuttle)
+                ) {
+                  return {
+                    ...result,
+                    estimatedDistance: completedDistance,
+                  };
+                }
+                return result;
+              }),
+            }
+          : null,
+      );
+    }
+  }, [isRunning, isPaused, shuttleIndex]);
+
   const playAudioSignal = useCallback(() => {
     playBeep();
   }, [playBeep]);
+
+  const handleVideoEnd = useCallback(() => {
+    setIsVideoPlaying(false);
+    // Optionally, you can pause the test when video ends
+    // or let the test continue independently
+    console.log('Video playback ended');
+  }, []);
 
   return {
     elapsedTime,
@@ -424,6 +514,7 @@ export function useYoYoTimer(): UseYoYoTimerReturn {
     shuttleIndex,
     testSession,
     athletes,
+    isVideoPlaying,
     startTest,
     pauseTest,
     resumeTest,
@@ -434,5 +525,6 @@ export function useYoYoTimer(): UseYoYoTimerReturn {
     playAudioSignal,
     enableAudio,
     setEnableAudio,
+    handleVideoEnd,
   };
 }

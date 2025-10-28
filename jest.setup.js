@@ -95,3 +95,22 @@ const sessionStorageMock = {
   clear: jest.fn(),
 }
 global.sessionStorage = sessionStorageMock
+
+// Mock Firebase for testing - we'll test against the real database
+// but this allows tests to run in CI environments
+jest.mock('@/lib/firebase', () => {
+  // Only mock in CI environment, use real Firebase in development
+  const isCI = process.env.CI === 'true';
+
+  if (isCI) {
+    return {
+      database: {
+        ref: jest.fn(),
+      },
+      analytics: jest.fn(),
+    };
+  }
+
+  // Return empty mock to allow real Firebase usage
+  return {};
+})
