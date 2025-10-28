@@ -1,23 +1,24 @@
 {
   "compilerOptions": {
     // Language and library features
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "target": "ES2020", // Modern target for better type inference
     "allowJs": true,
-    "jsx": "preserve",
-
+    "jsx": "react-jsx",
     // Module resolution - optimized for AI understanding
     "module": "esnext",
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-
     // Type checking - stricter for AI safety
     "strict": true,
     "noEmit": true,
     "skipLibCheck": true, // Skip lib checks for performance
-
     // AI-friendly features
     "forceConsistentCasingInFileNames": true, // Prevent casing errors
     "noFallthroughCasesInSwitch": true, // Catch switch fallthrough bugs
@@ -25,16 +26,15 @@
     "noUnusedParameters": false, // Allow unused params during development
     "noImplicitReturns": false, // Flexible for AI generation
     "noUncheckedIndexedAccess": false, // Allow array access flexibility
-
     // Path mapping for clean imports
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
-
     // Performance and incremental builds
     "incremental": true,
-
     // Next.js plugin for AI-aware type support
     "plugins": [
       {
@@ -48,7 +48,12 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".archive/archive/ab-junior-data.ts",
-    ".archive/public/training-directories/e-junior-data.ts"
+    ".archive/public/training-directories/e-junior-data.ts",
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules", ".archive", "scripts/**"]
+  "exclude": [
+    "node_modules",
+    ".archive",
+    "scripts/**"
+  ]
 }

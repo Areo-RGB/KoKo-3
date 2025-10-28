@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 // Removed Google Fonts to avoid build-time network fetch
 import 'plyr/dist/plyr.css';
 import React from 'react';
+import Script from 'next/script';
 import './globals.css';
 
 // Using default system fonts; no next/font
@@ -103,6 +104,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0f172a" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        {/* React Grab - Development only */}
+        {process.env.NODE_ENV === 'development' && (
+          <Script
+            src="//unpkg.com/react-grab/dist/index.global.js"
+            crossOrigin="anonymous"
+            strategy="beforeInteractive"
+            data-enabled="true"
+          />
+        )}
       </head>
       <body>
         <ClientAppShell>{children}</ClientAppShell>
