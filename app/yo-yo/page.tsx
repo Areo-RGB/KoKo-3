@@ -87,7 +87,7 @@ export default function YoYoRankingPage() {
   const [inputError, setInputError] = useState<string | null>(null);
   const [rankings, setRankings] = useState<RankingMap>({});
   const [activeTab, setActiveTab] = useState<string>('test-admin');
-  const [selectedAthletes, setSelectedAthletes] = useState<string[]>([]);
+  const [selectedAthletes, setSelectedAthletes] = useState<string[]>(() => availablePlayers.map(player => player.id));
 
   // Load existing rankings from localStorage
   React.useEffect(() => {
