@@ -129,3 +129,22 @@ public/16991-Elf-Plus-Plakat.html
 16991-Elf-Plus-Plakat.html
 data/warmup_playlist_cloudinary.json
 .playwright-mcp/EPCNNFBJFCGPHGDMGGKAMKMGOJDAGDNN-25-5-0-0.crx
+
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev-debug.log
+# Dependency directories
+# Environment variables
+# Editor directories and files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# OS specific
+
+# Task files
+# tasks.json
+# tasks/ 

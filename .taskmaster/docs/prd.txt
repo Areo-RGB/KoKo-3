@@ -1,0 +1,167 @@
+# Yo-Yo IR1 Fitness Test Administration UI
+
+## Overview
+The Yo-Yo IR1 test is a standardized aerobic fitness test used in sports training to assess an athlete's endurance capacity. The current implementation only allows for manual entry of test results after completion. This project aims to expand the Yo-Yo test page into a comprehensive test administration interface that includes a global timer, real-time test progression tracking, and dynamic updates based on test duration.
+
+## Core Features
+
+### 1. Global Test Timer
+- Display a prominent, easily visible timer showing elapsed test time
+- Timer should follow the official Yo-Yo IR1 test protocol with appropriate audio signals
+- Visual indicators for shuttle start/stop times
+- Pause/resume functionality for test administration
+
+### 2. Test Progression Display
+- Visual representation of current shuttle/level progression
+- Display of target times for each shuttle
+- Real-time updates showing which shuttle athletes should be on
+- Clear indication of when athletes should start and stop running
+
+### 3. Athlete Management During Test
+- Select athletes participating in the current test session
+- Track which athletes are still active vs. those who have dropped out
+- Mark drop-out points for each athlete (shuttle number)
+- Real-time status updates for each participant
+
+### 4. Results Recording
+- Automatic recording of drop-out points based on shuttle progression
+- Manual override options for special circumstances
+- Immediate calculation of estimated distance covered
+- Comparison with previous test results
+
+### 5. Test History and Analytics
+- Store test sessions with date, participants, and results
+- Visual progress charts showing improvement over time
+- Comparison with normative data for age groups
+- Export functionality for test results
+
+## User Experience
+
+### User Personas
+- **Coach/Test Administrator**: Needs to run the test efficiently while monitoring multiple athletes
+- **Athlete**: Needs clear visual and audio cues during the test
+- **Data Analyst**: Needs access to historical data and performance trends
+
+### Key User Flows
+1. **Test Setup**: Select participants, configure test settings
+2. **Test Execution**: Start timer, monitor progression, track drop-outs
+3. **Results Review**: View individual and group results, compare with historical data
+4. **Data Management**: Export results, update athlete records
+
+### UI/UX Considerations
+- Large, clear timer display visible from a distance
+- Color-coded status indicators for athletes
+- Responsive design for tablets and mobile devices
+- Accessibility features for users with visual impairments
+
+## Technical Architecture
+
+### System Components
+- **Timer Component**: Core timer logic following Yo-Yo IR1 protocol
+- **Progress Tracker**: Manages shuttle progression and timing
+- **Athlete Manager**: Handles participant selection and status tracking
+- **Results Processor**: Calculates and stores test results
+- **Data Persistence**: Local storage for test sessions and results
+
+### Data Models
+```typescript
+interface TestSession {
+  id: string;
+  date: Date;
+  participants: string[];
+  status: 'planned' | 'in-progress' | 'completed';
+  results: TestResult[];
+}
+
+interface TestResult {
+  athleteId: string;
+  dropOutShuttle: number;
+  estimatedDistance: number;
+  completed: boolean;
+}
+
+interface ShuttleInfo {
+  level: number;
+  shuttle: number;
+  speed: number;
+  startTime: number;
+  endTime: number;
+}
+```
+
+### APIs and Integrations
+- Integration with existing player data from `/data/players/players.json`
+- Audio cues for test signals (start/stop beeps)
+- Export functionality for CSV/JSON formats
+
+## Development Roadmap
+
+### MVP Requirements
+1. **Basic Timer Implementation**
+   - Simple timer display with start/pause/reset functionality
+   - Manual shuttle progression tracking
+   - Basic athlete selection interface
+
+2. **Test Protocol Implementation**
+   - Implement official Yo-Yo IR1 timing protocol
+   - Audio signals for shuttle start/stop
+   - Visual indicators for current shuttle
+
+3. **Athlete Tracking**
+   - Select participants for test
+   - Mark drop-out points during test
+   - Calculate estimated distances
+
+### Future Enhancements
+1. **Advanced Analytics**
+   - Performance trend charts
+   - Comparison with normative data
+   - Statistical analysis tools
+
+2. **Multi-Test Support**
+   - Support for other Yo-Yo test variants (IR2, etc.)
+   - Custom test protocol creation
+   - Comparative analysis between test types
+
+3. **Integration Features**
+   - Sync with cloud storage
+   - Mobile app companion
+   - Video recording integration
+
+## Logical Dependency Chain
+
+1. **Foundation**: Timer component and basic UI structure
+2. **Core Functionality**: Test protocol implementation and athlete tracking
+3. **Data Management**: Results storage and retrieval
+4. **Enhanced Features**: Analytics and historical comparisons
+5. **Advanced Features**: Multi-test support and integrations
+
+## Risks and Mitigations
+
+### Technical Challenges
+- **Precise Timing**: Ensuring accurate timing for test protocol
+  - Mitigation: Use high-resolution timers and test extensively
+- **Audio Synchronization**: Coordinating audio cues with visual indicators
+  - Mitigation: Implement audio preloading and buffering
+
+### MVP Definition
+- **Risk**: Scope creep adding too many features to initial release
+  - Mitigation: Focus on core timer and athlete tracking functionality first
+
+### Resource Constraints
+- **Development Time**: Limited time for implementation
+  - Mitigation: Prioritize features based on user impact and technical complexity
+
+## Appendix
+
+### Yo-Yo IR1 Test Protocol
+- Test consists of 20m shuttles with progressively shorter recovery times
+- Speed increases at specific levels (Level 1: 10-13 shuttles, Level 2: 8-11 shuttles, etc.)
+- Audio signals indicate when to start and stop each shuttle
+- Test ends when athlete fails to reach the line twice in a row
+
+### Technical Specifications
+- Timer precision: 100ms
+- Audio format: MP3 or WebM
+- Data storage: Local storage with optional cloud sync
+- Responsive breakpoints: Mobile (320px+), Tablet (768px+), Desktop (1024px+)
