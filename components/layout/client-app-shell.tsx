@@ -2,7 +2,6 @@
 
 import { FullscreenToggle } from '@/components/layout/fullscreen-toggle';
 import MainLayout from '@/components/layout/main-layout';
-import { MobileFooterNav } from '@/components/layout/mobile-footer-nav';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 import { TimerOverlay, TimerToggle } from '@/components/timer';
@@ -89,11 +88,10 @@ export default function ClientAppShell({ children }: Props) {
       disableTransitionOnChange
     >
       <MainLayout header={header}>
-        <div className="pb-16 md:pb-0">
+        <div className="pb-0 md:pb-0">
           {children}
         </div>
       </MainLayout>
-      <MobileFooterNav />
       <Toaster />
       {/* Timer overlay */}
       <TimerOverlay

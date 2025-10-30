@@ -1,8 +1,17 @@
 /** @type {import('next').NextConfig} */
+import { fileURLToPath } from 'url';
+
+// Get current directory in ES module
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
 const nextConfig = {
   // Enable static export mode for deployment to static hosting services
   output: 'export',
   trailingSlash: true,
+  // Specify turbopack root directory to prevent lock file detection issues
+  turbopack: {
+    root: __dirname,
+  },
   typescript: {
     ignoreBuildErrors: false,
   },

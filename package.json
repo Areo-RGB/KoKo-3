@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "next dev",
     "dev:webpack": "next dev",
-    "dev:turbopack": "next dev --turbopack"
+    "dev:turbopack": "next dev --turbopack",
+    "build:export": "next build",
+    "build:clean": "rm -rf .next && rm -rf dist",
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
   "engines": {
     "node": ">=20"
