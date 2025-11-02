@@ -131,7 +131,16 @@ export function useCachedVideo(
       setIsLoading(false);
     } catch (err: any) {
       if (err.name === 'AbortError') {
-        // Request was cancelled, ignore
+        // Request was cancelled, which is expected on unmount or URL change.
+        return;
+      }
+
+      // Fallback for environments where the error name might not be 'AbortError'.
+      // Check for our custom abort reasons to ensure these expected cancellations are ignored.
+      if (
+        err.message === 'Component unmounting' ||
+        err.message === 'New video load initiated'
+      ) {
         return;
       }
 

@@ -614,8 +614,7 @@ const allVideoData: HierarchicalVideoData = {
                 },
                 {
                   id: 'mehrere-felder-3-vs-3-plus-torhuter-auf-hybridfeldern',
-                  title:
-                    'Mehrere Felder - 3 vs 3 + Torhüter auf Hybridfeldern',
+                  title: 'Mehrere Felder - 3 vs 3 + Torhüter auf Hybridfeldern',
                   videoUrl:
                     'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Mehrere_Felder/Mehrere_Felder_-_3_vs_3_%2B_Torhuter_auf_Hybridfeldern.mp4',
                 },
@@ -655,7 +654,8 @@ const allVideoData: HierarchicalVideoData = {
                 },
                 {
                   id: 'trainingsphilosophie-deutschland-8-felder-7-aktiv',
-                  title: 'Trainingsphilosophie Deutschland - 8 Felder - 7 aktiv',
+                  title:
+                    'Trainingsphilosophie Deutschland - 8 Felder - 7 aktiv',
                   videoUrl:
                     'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Mehrere_Felder/Trainingsphilosophie_Deutschland_-_8_Felder_-_7_aktiv.mp4',
                 },
@@ -740,7 +740,8 @@ const allVideoData: HierarchicalVideoData = {
                 },
                 {
                   id: 'linie-bespielen-4-vs-4-mit-torhutern-auf-engem-raum',
-                  title: 'Linie bespielen - 4 vs 4 mit Torhütern auf engem Raum',
+                  title:
+                    'Linie bespielen - 4 vs 4 mit Torhütern auf engem Raum',
                   videoUrl:
                     'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Linie_bespielen_verteidigen/Linie_bespielen_-_4_vs_4_mit_Torhutern_auf_engem_Raum.mp4',
                 },
@@ -763,7 +764,8 @@ const allVideoData: HierarchicalVideoData = {
               id: 'nachwuchstraining-gleichzahlspiele-mit-anspielern',
               title: 'Nachwuchstraining - Gleichzahlspiele mit Anspielern',
               type: 'playlist',
-              playlistTitle: 'Nachwuchstraining - Gleichzahlspiele mit Anspielern',
+              playlistTitle:
+                'Nachwuchstraining - Gleichzahlspiele mit Anspielern',
               videoUrl:
                 'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele_mit_Anspielern/Gleichzahl_-_nur_nach_vorne_passen_tiefe_Anspieler_bei_3_%2B_TW_vs._3.mp4',
               chapters: [
@@ -874,7 +876,8 @@ const allVideoData: HierarchicalVideoData = {
                 },
                 {
                   id: 'gleichzahlspiele-3-vs-3-auf-minispielfeld-mit-shotclock',
-                  title: 'Gleichzahlspiele - 3 vs 3 auf Minispielfeld mit Shotclock',
+                  title:
+                    'Gleichzahlspiele - 3 vs 3 auf Minispielfeld mit Shotclock',
                   videoUrl:
                     'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_3_vs_3_auf_Minispielfeld_mit_Shotclock.mp4',
                 },
@@ -906,8 +909,7 @@ const allVideoData: HierarchicalVideoData = {
                 },
                 {
                   id: 'gleichzahlspiele-start-flanke-bei-4-plus-tw-vs-4',
-                  title:
-                    'Gleichzahlspiele - Start Flanke bei 4 + TW vs. 4',
+                  title: 'Gleichzahlspiele - Start Flanke bei 4 + TW vs. 4',
                   videoUrl:
                     'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_Start_Flanke_bei_4_%2B_TW_vs._4.mp4',
                 },
@@ -920,8 +922,7 @@ const allVideoData: HierarchicalVideoData = {
                 },
                 {
                   id: 'gleichzahlspiele-start-flugball-beim-4-plus-tw-vs-4',
-                  title:
-                    'Gleichzahlspiele - Start Flugball beim 4 + TW vs. 4',
+                  title: 'Gleichzahlspiele - Start Flugball beim 4 + TW vs. 4',
                   videoUrl:
                     'https://pub-deed098848fd4b7ea64955bcfb956394.r2.dev/video/Nachwuchstraining/Nachwuchstraining_-_Gleichzahlspiele/Gleichzahlspiele_-_Start_Flugball_beim_4_%2B_TW_vs._4.mp4',
                 },
@@ -1494,6 +1495,101 @@ const allVideoData: HierarchicalVideoData = {
                   title: 'Criss-Cross Applesauce Stretch (Right Leg Under)',
                   startTime: 1808,
                   endTime: 1877,
+                },
+              ],
+            },
+            {
+              id: 'mobility-tests',
+              title: 'Mobility Tests',
+              description:
+                'Six essential mobility tests to assess flexibility and range of motion',
+              type: 'playlist',
+              playlistTitle: 'Mobility Tests',
+              chapters: [
+                {
+                  id: 'test1-sit-on-heels',
+                  title: 'Test 1: Can you sit on your heels?',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test1_SitOnHeels.mp4',
+                  duration: 77,
+                },
+                {
+                  id: 'test1-sit-on-heels-advanced',
+                  title: 'Test 1 Advanced: Sit on heels advanced version',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test1_SitOnHeels_Advanced.mp4',
+                  duration: 35,
+                },
+                {
+                  id: 'test2-squat-deep',
+                  title: 'Test 2: Can you squat deep?',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test2_SquatDeep.mp4',
+                  duration: 74,
+                },
+                {
+                  id: 'test2-squat-deep-advanced',
+                  title: 'Test 2 Advanced: Deep squat advanced version',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test2_SquatDeep_Advanced.mp4',
+                  duration: 27,
+                },
+                {
+                  id: 'test3-touch-toes',
+                  title: 'Test 3: Can you touch your toes?',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test3_TouchToes.mp4',
+                  duration: 71,
+                },
+                {
+                  id: 'test3-touch-toes-advanced',
+                  title: 'Test 3 Advanced: Touch toes advanced version',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test3_TouchToes_Advanced.mp4',
+                  duration: 11,
+                },
+                {
+                  id: 'test4-apley-scratch',
+                  title: 'Test 4: The Apley Scratch Test',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test4_ApleyScratch.mp4',
+                  duration: 62,
+                },
+                {
+                  id: 'test4-apley-scratch-advanced',
+                  title: 'Test 4 Advanced: Apley Scratch advanced version',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test4_ApleyScratch_Advanced.mp4',
+                  duration: 12,
+                },
+                {
+                  id: 'test5-wall-shoulder-flexion',
+                  title: 'Test 5: The Wall Shoulder Flexion Test',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test5_WallShoulderFlexion.mp4',
+                  duration: 42,
+                },
+                {
+                  id: 'test5-wall-shoulder-flexion-advanced',
+                  title:
+                    'Test 5 Advanced: Wall Shoulder Flexion advanced version',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test5_WallShoulderFlexion_Advanced.mp4',
+                  duration: 14,
+                },
+                {
+                  id: 'test6-thoracic-rotation',
+                  title: 'Test 6: The Thoracic Rotation Test',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test6_ThoracicRotation.mp4',
+                  duration: 55,
+                },
+                {
+                  id: 'test6-thoracic-rotation-advanced',
+                  title: 'Test 6 Advanced: Thoracic Rotation advanced version',
+                  videoUrl:
+                    'https://video-idea.fra1.cdn.digitaloceanspaces.com/mobility-tests/Test6_ThoracicRotation_Advanced.mp4',
+                  duration: 10,
                 },
               ],
             },
