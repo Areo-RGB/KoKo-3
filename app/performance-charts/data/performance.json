@@ -9,23 +9,27 @@
       "value": 100
     },
     {
-      "name": "Berat",
-      "value": 64
-    },
-    {
-      "name": "Jakob",
-      "value": 26
-    },
-    {
-      "name": "Metin",
-      "value": 25
-    },
-        {
       "name": "Bent",
       "value": 100
     },
     {
-      "name": "Silas",
+      "name": "Berat",
+      "value": 64
+    },
+    {
+      "name": "Eray",
+      "value": 47
+    },
+    {
+      "name": "Metin",
+      "value": 41
+    },
+    {
+      "name": "Finley",
+      "value": 26
+    },
+    {
+      "name": "Jakob",
       "value": 24
     },
     {
@@ -37,24 +41,20 @@
       "value": 16
     },
     {
-      "name": "Finley",
+      "name": "Levi",
       "value": 15
     },
     {
-      "name": "Eray",
-      "value": 13
+      "name": "Lasse",
+      "value": 14
     },
     {
       "name": "Paul",
       "value": 13
     },
     {
-      "name": "Lasse",
-      "value": 6
-    },
-    {
-      "name": "Levi",
-      "value": 5
+      "name": "Silas",
+      "value": 12
     }
   ],
   "yoyoIr1": [
@@ -71,18 +71,6 @@
       "value": 960
     },
     {
-      "name": "Berat",
-      "value": 560
-    },
-    {
-      "name": "Lasse",
-      "value": 600
-    },
-    {
-      "name": "Levi",
-      "value": 600
-    },
-    {
       "name": "Jakob",
       "value": 720
     },
@@ -91,8 +79,16 @@
       "value": 680
     },
     {
-      "name": "Lion",
-      "value": 360
+      "name": "Levi",
+      "value": 600
+    },
+    {
+      "name": "Lasse",
+      "value": 600
+    },
+    {
+      "name": "Berat",
+      "value": 560
     },
     {
       "name": "Metin",
@@ -103,25 +99,85 @@
       "value": 400
     },
     {
-      "name": "Bent",
+      "name": "Lion",
       "value": 360
+    },
+    {
+      "name": "Bent",
+      "value": 800
     },
     {
       "name": "Silas",
       "value": 360
+    },
+    {
+      "name": "Lennox",
+      "value": 320
     }
   ],
   "springseil": [
     {
       "name": "Bent",
-      "value": 97
+      "value": 109
+    },
+    {
+      "name": "Erik",
+      "value": 96
+    },
+    {
+      "name": "Finley",
+      "value": 74
+    },
+    {
+      "name": "Eray",
+      "value": 54
     },
     {
       "name": "Berat",
       "value": 54
+    },
+    {
+      "name": "Metin",
+      "value": 53
+    },
+    {
+      "name": "Lion",
+      "value": 50
+    },
+    {
+      "name": "Silas",
+      "value": 48
+    },
+    {
+      "name": "Arvid",
+      "value": 45
+    },
+    {
+      "name": "Jakob",
+      "value": 42
+    },
+    {
+      "name": "Paul",
+      "value": 40
+    },
+    {
+      "name": "Lennox",
+      "value": 38
+    },
+    {
+      "name": "Levi",
+      "value": 35
+    },
+    {
+      "name": "Lasse",
+      "value": 32
     }
   ],
   "prellwand": [
+    {
+      "name": "Erik",
+      "value": 45
+    },
     {
       "name": "Lion",
       "value": 40
@@ -133,6 +189,46 @@
     {
       "name": "Bent",
       "value": 37
+    },
+    {
+      "name": "Finley",
+      "value": 32
+    },
+    {
+      "name": "Metin",
+      "value": 31
+    },
+    {
+      "name": "Eray",
+      "value": 30
+    },
+    {
+      "name": "Silas",
+      "value": 28
+    },
+    {
+      "name": "Arvid",
+      "value": 25
+    },
+    {
+      "name": "Jakob",
+      "value": 22
+    },
+    {
+      "name": "Paul",
+      "value": 20
+    },
+    {
+      "name": "Lennox",
+      "value": 18
+    },
+    {
+      "name": "Levi",
+      "value": 15
+    },
+    {
+      "name": "Lasse",
+      "value": 12
     }
   ]
 }

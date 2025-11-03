@@ -36,6 +36,7 @@
     "@tanstack/react-table": "^8.21.3",
     "chart.js": "^4.5.0",
     "chartjs-chart-matrix": "^3.0.0",
+    "chartjs-plugin-annotation": "^3.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-auto-height": "^8.6.0",

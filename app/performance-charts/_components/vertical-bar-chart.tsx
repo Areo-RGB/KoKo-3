@@ -2,12 +2,13 @@
 
 import type { ChartOptions, Plugin } from 'chart.js';
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
 import { useTheme } from 'next-themes';
 import { useMemo } from 'react';
 import { Bar } from 'react-chartjs-2';
 import type { Variant } from '../_lib/types';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, annotationPlugin);
 
 interface StackedSeries {
   label: string;
@@ -114,6 +115,13 @@ export default function VerticalBarChart({
     [labels, datasets],
   );
 
+  // Calculate average for annotation
+  const average = useMemo(() => {
+    if (!values || values.length === 0) return 0;
+    const sum = values.reduce((acc, val) => acc + val, 0);
+    return sum / values.length;
+  }, [values]);
+
   const options = useMemo<ChartOptions<'bar'>>(
     () => ({
       responsive: true,
@@ -153,9 +161,33 @@ export default function VerticalBarChart({
             },
           },
         },
+        annotation: {
+          annotations: {
+            averageLine: {
+              type: 'line',
+              borderColor: isDark ? 'rgba(239, 68, 68, 0.8)' : 'rgba(220, 38, 38, 0.8)',
+              borderDash: [5, 5],
+              borderWidth: 2,
+              scaleID: 'x',
+              value: average,
+              label: {
+                display: true,
+                backgroundColor: isDark ? 'rgba(239, 68, 68, 0.9)' : 'rgba(220, 38, 38, 0.9)',
+                color: isDark ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+                font: {
+                  weight: 'bold',
+                  size: 12
+                },
+                content: `Ø ${Number.isInteger(average) ? average : average.toFixed(1)}`,
+                position: 'start',
+                yAdjust: -10
+              }
+            }
+          }
+        }
       },
     }),
-    [axisColor, gridColorX, gridColorY, isDark, datasets],
+    [axisColor, gridColorX, gridColorY, isDark, datasets, average],
   );
 
   // Draw values at the end inside each bar

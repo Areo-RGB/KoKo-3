@@ -8,16 +8,20 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { useState } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import ChartDataTable from './_components/chart-data-table';
 import PerformanceHeatmap from './_components/performance-heatmap';
+import PerformanceOverviewTable from './_components/performance-overview-table';
 import VerticalBarChart from './_components/vertical-bar-chart';
 import { TABS } from './_lib/config';
 import { sortDescending } from './_lib/utils';
 import performanceData from './data/performance.json';
 
 export default function PerformanceChartsPage() {
-  const [tab, setTab] = useState(TABS[0].key);
+  const [tab, setTab] = useState('overview');
+  const [isHeatmapOpen, setIsHeatmapOpen] = useState(false);
 
   return (
     <div className="container mx-auto space-y-6 p-4 sm:p-6 lg:p-8">
@@ -58,14 +62,20 @@ export default function PerformanceChartsPage() {
             const heatmapData = players.map(player => {
               const jonglierenData = performanceData.jonglieren || [];
               const yoyoData = performanceData.yoyoIr1 || [];
+              const springseilData = performanceData.springseil || [];
+              const prellwandData = performanceData.prellwand || [];
               
               const jonglierenEntry = jonglierenData.find(entry => entry.name === player);
               const yoyoEntry = yoyoData.find(entry => entry.name === player);
+              const springseilEntry = springseilData.find(entry => entry.name === player);
+              const prellwandEntry = prellwandData.find(entry => entry.name === player);
 
               return {
                 name: player,
                 jonglieren: jonglierenEntry ? jonglierenEntry.value : 0,
                 yoyo: yoyoEntry ? yoyoEntry.value : 0,
+                springseil: springseilEntry ? springseilEntry.value : 0,
+                prellwand: prellwandEntry ? prellwandEntry.value : 0,
               };
             });
 
@@ -90,41 +100,60 @@ export default function PerformanceChartsPage() {
             return (
               <TabsContent key={item.key} value={item.key} className="mt-6">
                 <Card>
-                  <CardHeader className="px-4 py-4 sm:px-6 sm:py-6">
-                    <CardTitle className="text-lg sm:text-xl">{item.title}</CardTitle>
-                    <CardDescription className="text-sm sm:text-base">{item.description}</CardDescription>
-                  </CardHeader>
                   <CardContent className="px-4 py-4 sm:px-6 sm:py-6">
                     <div className="w-full overflow-x-auto">
-                      <PerformanceHeatmap
+                      <h3 className="text-lg font-semibold mb-4">Leistungsübersicht Tabelle</h3>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        Detaillierte Ergebnisse aller Spieler in den verschiedenen Übungen. Klicken Sie auf die Spaltenüberschriften zum Sortieren.
+                      </p>
+                      <PerformanceOverviewTable
                         data={heatmapData}
                       />
                     </div>
-                    <div className="text-muted-foreground mt-4 sm:mt-6 space-y-2 sm:space-y-3 text-xs sm:text-sm">
-                      <p className="font-semibold">
-                        Wie werden die Werte verglichen?
-                      </p>
-                      <p>
-                        Die Heatmap zeigt die Leistung jedes Spielers in allen Übungen:
-                      </p>
-                      <ul className="ml-4 list-disc space-y-1">
-                        <li>
-                          <strong>Jonglieren:</strong> Balljonglage in Wiederholungen
-                        </li>
-                        <li>
-                          <strong>Yo-Yo IR1:</strong> Zurückgelegte Distanz in Metern
-                        </li>
-                        <li>
-                          <strong>Springseil:</strong> Wiederholungen
-                        </li>
-                        <li>
-                          <strong>Prellwand:</strong> Wiederholungen
-                        </li>
-                      </ul>
-                      <p className="pt-2">
-                        <strong>Farbcodierung:</strong> 🟢 Grün ≥75% | 🟡 Gelb
-                        50-74% | 🟠 Orange 25-49% | 🔴 Rot 25%
-                      </p>
+                    <div className="w-full overflow-x-auto mt-6">
+                      <Collapsible open={isHeatmapOpen} onOpenChange={setIsHeatmapOpen}>
+                        <CollapsibleTrigger asChild>
+                          <div className="flex items-center justify-between cursor-pointer p-2 rounded-md hover:bg-muted/50 transition-colors">
+                            <h3 className="text-lg font-semibold">Leistungsübersicht Heatmap</h3>
+                            {isHeatmapOpen ? (
+                              <ChevronUp className="h-5 w-5" />
+                            ) : (
+                              <ChevronDown className="h-5 w-5" />
+                            )}
+                          </div>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="mt-4">
+                          <div className="text-muted-foreground mb-4 space-y-2 text-sm">
+                            <p className="font-semibold">
+                              Wie werden die Werte verglichen?
+                            </p>
+                            <p>
+                              Die Heatmap zeigt die Leistung jedes Spielers in allen Übungen:
+                            </p>
+                            <ul className="ml-4 list-disc space-y-1">
+                              <li>
+                                <strong>Jonglieren:</strong> Balljonglage in Wiederholungen
+                              </li>
+                              <li>
+                                <strong>Yo-Yo IR1:</strong> Zurückgelegte Distanz in Metern
+                              </li>
+                              <li>
+                                <strong>Springseil:</strong> Wiederholungen
+                              </li>
+                              <li>
+                                <strong>Prellwand:</strong> Wiederholungen
+                              </li>
+                            </ul>
+                            <p className="pt-2">
+                              <strong>Farbcodierung:</strong> 🟢 Grün ≥75% | 🟡 Gelb
+                              50-74% | 🟠 Orange 25-49% | 🔴 Rot 25%
+                            </p>
+                          </div>
+                          <PerformanceHeatmap
+                            data={heatmapData}
+                          />
+                        </CollapsibleContent>
+                      </Collapsible>
                     </div>
                   </CardContent>
                 </Card>
