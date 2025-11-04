@@ -10,17 +10,6 @@
         "chrome-devtools-mcp@latest"
       ]
     },
-    "serena": {
-      "command": "C:\\Users\\Anwender\\.local\\bin\\uvx.exe",
-      "args": [
-        "--from",
-        "git+https://github.com/oraios/serena",
-        "serena",
-        "start-mcp-server",
-        "--context",
-        "ide-assistant"
-      ]
-    },
     "task-master-ai": {
       "command": "npx",
       "args": [
@@ -46,15 +35,6 @@
         "shadcn@latest",
         "mcp"
       ]
-    },
-    "elevenlabs": {
-      "command": "C:\\Users\\Anwender\\.local\\bin\\uvx.exe",
-      "args": [
-        "elevenlabs-mcp"
-      ],
-      "env": {
-        "ELEVENLABS_API_KEY": "sk_e4ea4d2aff534a9aad236ae352f922d2f165e7334bd4a87d"
-      }
     }
   }
 }

@@ -15,12 +15,6 @@ import {
 } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import {
-  MAIN_VIDEO_URL,
-  PLAYLIST,
-  WS_PLAYLIST,
-  WS_VIDEO_URL,
-} from '@/app/fifa-11-plus/_lib/data';
 import { hierarchicalVideoData } from '@/app/video-player/_lib/video-data';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -55,18 +49,6 @@ const openChromeSettings = () => {
 
 const collectVideoUrls = (): string[] => {
   const urls = new Set<string>();
-
-  PLAYLIST.videos.forEach((video) => {
-    if (!video.isHeader) {
-      urls.add(MAIN_VIDEO_URL);
-    }
-  });
-
-  WS_PLAYLIST.videos.forEach((video) => {
-    if (!video.isHeader) {
-      urls.add(WS_VIDEO_URL);
-    }
-  });
 
   hierarchicalVideoData.categories.forEach((category) => {
     category.subcategories.forEach((subcategory) => {

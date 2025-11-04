@@ -65,8 +65,8 @@ export class FirebaseYoYoService {
         athleteName: participant.name,
         distance: participant.estimatedDistance,
         status: participant.status,
-        dropOutShuttle: participant.dropOutShuttle || null,
-        dropOutTime: participant.dropOutTime || null,
+        dropOutShuttle: participant.dropOutShuttle,
+        dropOutTime: participant.dropOutTime,
         sessionId
       }));
 

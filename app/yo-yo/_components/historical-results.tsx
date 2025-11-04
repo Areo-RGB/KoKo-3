@@ -372,7 +372,7 @@ export function HistoricalResults({ onRefresh }: HistoricalResultsProps) {
                             {new Date(session.timestamp).toLocaleDateString('de-DE')} {new Date(session.timestamp).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            {session.participants ? session.participants.length : 0} Teilnehmer • Status: {session.status}
+                            {session.participants ? session.participants.length : 0} Teilnehmer
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">

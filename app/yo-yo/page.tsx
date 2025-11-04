@@ -259,8 +259,8 @@ export default function YoYoRankingPage() {
             name: result.name,
             estimatedDistance: result.estimatedDistance || 0,
             status: 'completed' as const,
-            dropOutShuttle: null, // They didn't drop out, they completed
-            dropOutTime: null, // They didn't drop out, they completed
+            dropOutShuttle: undefined, // They didn't drop out, they completed
+            dropOutTime: undefined, // They didn't drop out, they completed
             completed: true,
             warnings: result.warnings || 0,
           };
@@ -272,8 +272,8 @@ export default function YoYoRankingPage() {
           name: result.name,
           estimatedDistance: result.estimatedDistance || 0,
           status: result.status || 'active',
-          dropOutShuttle: result.dropOutShuttle !== undefined ? result.dropOutShuttle : null,
-          dropOutTime: result.dropOutTime !== undefined ? result.dropOutTime : null,
+          dropOutShuttle: result.dropOutShuttle,
+          dropOutTime: result.dropOutTime,
           completed: result.completed || (result.status === 'completed'),
           warnings: result.warnings || 0,
         };
@@ -282,7 +282,7 @@ export default function YoYoRankingPage() {
       // Convert TestSession to match the expected format for Firebase
       const testSessionData = {
         id: testSession.id,
-        date: testSession.date instanceof Date ? testSession.date.toISOString() : testSession.date,
+        date: testSession.date instanceof Date ? testSession.date : new Date(testSession.date),
         participants: testSession.participants || [],
         status: 'completed' as const, // Mark the test as completed
         results: athleteResults, // Use the updated athlete results

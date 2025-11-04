@@ -11,7 +11,6 @@ import {
   LayoutDashboard,
   PlayCircle,
   Target,
-  Timer,
   Trophy,
   WifiOff,
 } from 'lucide-react';
@@ -48,14 +47,7 @@ const navigationLinks: SidebarLink[] = [
 ];
 
 const datenLinks: SidebarLink[] = [
-  {
-    title: 'Video DFB Tests',
-    url: '/ranking',
-    icon: Trophy,
-    mobileLabel: 'Ranking',
-    showOnMobile: false,
-  },
-  {
+    {
     title: 'Daten & Normwerte',
     url: '/data-combined',
     icon: Database,
@@ -82,14 +74,7 @@ const toolsLinks: SidebarLink[] = [
     mobileLabel: 'Offline',
     showOnMobile: false,
   },
-  {
-    title: 'Carousel Demo',
-    url: '/carousel',
-    icon: Images,
-    mobileLabel: 'Carousel',
-    showOnMobile: false,
-  },
-  {
+    {
     title: 'Expandable Cards',
     url: '/expandable-card-demo',
     icon: Layers,
@@ -113,28 +98,14 @@ const trainingToolsLinks: SidebarLink[] = [
     mobileLabel: 'Sounds',
     showOnMobile: true,
   },
-  {
-    title: 'FIFA 11+',
-    url: '/fifa-11-plus',
-    icon: PlayCircle,
-    mobileLabel: 'FIFA 11+',
-    showOnMobile: true,
-  },
-  {
+    {
     title: 'Stabi-Training',
     url: '/muscle-diagram',
     icon: Dumbbell,
     mobileLabel: 'Stabi',
     showOnMobile: true,
   },
-  {
-    title: 'Interval Timer',
-    url: '/interval-timer',
-    icon: Timer,
-    mobileLabel: 'Timer',
-    showOnMobile: true,
-  },
-  {
+    {
     title: 'Yo-Yo Ranking',
     url: '/yo-yo',
     icon: Trophy,

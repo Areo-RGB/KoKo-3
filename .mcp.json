@@ -29,7 +29,7 @@
         "--extension"
       ],
       "env": {
-        "PLAYWRIGHT_MCP_EXTENSION_TOKEN": "P9TlEO4afaRfqqWGrXq_OkBEZcbkqXPtNN1iqMLSdXI"
+        "PLAYWRIGHT_MCP_EXTENSION_TOKEN": "7h-QTOrW7nDypPd7AV0WT3e2MXHAVZuDnYCTaXm6cg4"
       }
     },
     "desktop-commander": {
